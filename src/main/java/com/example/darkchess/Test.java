@@ -51,7 +51,7 @@ class Square{
     }
 }
 enum Color{
-    RED,BLACK
+    Red,Black
 }
 enum moveKind{
     Capture, Move

@@ -13,7 +13,7 @@ public class Test {
 }
 interface Chess{
     boolean turnOver();
-    void move(Square square) throws Exception;
+    moveKind move(Square square) throws Exception;
     void occupied();
 }
 abstract class AbstractChess implements Chess{
@@ -28,8 +28,8 @@ abstract class AbstractChess implements Chess{
     }
 
     @Override
-    public void move(Square square) throws Exception{
-
+    public moveKind move(Square square) throws Exception{
+        return moveKind.Move;
     }
     @Override
     public void occupied(){
@@ -53,6 +53,8 @@ class Square{
 enum Color{
     RED,BLACK
 }
-
+enum moveKind{
+    Capture, Move
+}
 
 

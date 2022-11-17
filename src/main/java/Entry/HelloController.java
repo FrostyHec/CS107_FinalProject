@@ -1,4 +1,4 @@
-package com.example.darkchess;
+package Entry;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

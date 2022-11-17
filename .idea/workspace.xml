@@ -5,8 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bea79dc5-57f0-48e7-b850-a9fcd65d4f0c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/darkchess/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/darkchess/Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/darkchess/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Entry/GameArea.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/darkchess/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Entry/HelloController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/darkchess/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GameLogic/Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/darkchess/hello-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Entry/hello-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,6 +45,27 @@
     &quot;last_opened_file_path&quot;: &quot;D:/ComputerScience/Java/javaFX/DarkChess&quot;
   }
 }</component>
+  <component name="RunManager">
+    <configuration name="com.example.darkchess in DarkChess" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="DarkChess" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="GameLogic.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.example.darkchess" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.com.example.darkchess in DarkChess" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">

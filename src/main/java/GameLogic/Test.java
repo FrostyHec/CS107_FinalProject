@@ -1,4 +1,4 @@
-package com.example.darkchess;
+package GameLogic;
 
 public class Test {
     public static void main(String[] args) {
@@ -36,6 +36,7 @@ abstract class AbstractChess implements Chess{
 
     }
 }
+
 class Square{
     private int positionX,positionY;
     public Square(int positionX,int positionY){

@@ -2,7 +2,7 @@ package GameLogic;
 
 public class Chessboard {
     private Square[][] chessboard;
-    void getSquare(int x,int y){
-
+    public Square getSquare(int x,int y){
+        return chessboard[x][y];
     }
 }

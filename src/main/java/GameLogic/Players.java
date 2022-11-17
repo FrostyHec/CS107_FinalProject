@@ -5,10 +5,16 @@ import java.util.List;
 public class Players {
     private List<Player> players;
     private int nowPlay;
-    public void next(){
+
+    public Players(List<Player> players) {
+        this.players = players;
+    }
+
+    public void next() {
 
     }
-    Player nowPlay(){
+
+    public Player nowPlay() {
         return players.get(nowPlay);
     }
 }

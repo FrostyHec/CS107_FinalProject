@@ -5,8 +5,12 @@ public interface Chess {
 
     moveKind move(Square square) throws Exception;
 
-    void occupied();
+    int occupied();
+
+    Color getColor();
+
 }
-enum moveKind{
+
+enum moveKind {
     Capture, Move
 }

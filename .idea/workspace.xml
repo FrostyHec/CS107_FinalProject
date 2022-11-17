@@ -4,7 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bea79dc5-57f0-48e7-b850-a9fcd65d4f0c" name="Changes" comment="" />
+    <list default="true" id="bea79dc5-57f0-48e7-b850-a9fcd65d4f0c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/Entry/GameState.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/GameLogic/ComputerPlayer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/GameLogic/PlayerState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Entry/GameArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Entry/GameArea.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/GameLogic/AbstractChess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GameLogic/AbstractChess.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/GameLogic/Chess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GameLogic/Chess.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/GameLogic/Chessboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GameLogic/Chessboard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/GameLogic/HumanPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GameLogic/HumanPlayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/GameLogic/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GameLogic/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/GameLogic/Players.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GameLogic/Players.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -15,6 +27,7 @@
       <list>
         <option value="Interface" />
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>

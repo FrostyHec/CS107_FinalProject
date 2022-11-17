@@ -5,7 +5,11 @@ public class HumanPlayer extends Player{
     public boolean isColorMatch(Color color){
         return false;
     }
-}
-enum PlayerState{
-    choosing,moving
+    public PlayerState getPlayerState(){
+        return playerState;
+    }
+
+    public void setPlayerState(PlayerState playerState) {
+        this.playerState = playerState;
+    }
 }

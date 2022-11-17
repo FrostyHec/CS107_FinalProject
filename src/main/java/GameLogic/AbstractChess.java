@@ -4,7 +4,6 @@ public abstract class AbstractChess implements Chess {
     private Color color;
     private boolean usable;
     private boolean turnOver;
-    private int positionX, positionY;
     private int rank;
 
     @Override
@@ -18,7 +17,11 @@ public abstract class AbstractChess implements Chess {
     }
 
     @Override
-    public void occupied() {
+    public int occupied() {
+        return rank;
+    }
 
+    public Color getColor() {
+        return color;
     }
 }

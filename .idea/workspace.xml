@@ -4,13 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bea79dc5-57f0-48e7-b850-a9fcd65d4f0c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Entry/Game.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Entry/GameArea.fxml" afterDir="false" />
+    <list default="true" id="bea79dc5-57f0-48e7-b850-a9fcd65d4f0c" name="Changes" comment="大概学会面板控制力">
+      <change afterPath="$PROJECT_DIR$/src/main/java/GameLogic/AbstractChess.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/GameLogic/Chess.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/GameLogic/Chessboard.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/GameLogic/Color.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/GameLogic/HumanPlayer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/GameLogic/Player.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/GameLogic/Players.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/GameLogic/Square.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Entry/GameArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Entry/GameArea.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Entry/HelloController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Entry/hello-view.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/GameLogic/Test.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Entry/GameArea.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Entry/GameArea.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,6 +26,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -103,5 +110,20 @@
       <updated>1668425092482</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="大概学会面板控制力" />
+    <option name="LAST_COMMIT_MESSAGE" value="大概学会面板控制力" />
   </component>
 </project>

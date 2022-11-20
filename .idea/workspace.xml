@@ -5,17 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bea79dc5-57f0-48e7-b850-a9fcd65d4f0c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Entry/GameState.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/GameLogic/ComputerPlayer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/GameLogic/PlayerState.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Entry/GameArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Entry/GameArea.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/GameLogic/AbstractChess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GameLogic/AbstractChess.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/GameLogic/Chess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GameLogic/Chess.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/GameLogic/Chessboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GameLogic/Chessboard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/GameLogic/HumanPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GameLogic/HumanPlayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/GameLogic/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GameLogic/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/GameLogic/Players.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GameLogic/Players.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Entry/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Entry/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Entry/GameArea.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Entry/GameArea.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,15 +35,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/ComputerScience/Java/javaFX/DarkChess&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "last_opened_file_path": "D:/ComputerScience/Java/javaFX/DarkChess",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
-}</component>
-  <component name="RunManager" selected="Application.GameArea">
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\ComputerScience\Java\javaFX\DarkChess\src\main\resources" />
+      <recent name="D:\ComputerScience\Java\javaFX\DarkChess\src\main\resources\Entry" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.Game">
     <configuration name="Game" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Entry.Game" />
       <module name="DarkChess" />
@@ -94,7 +93,6 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.GameArea" />
         <item itemvalue="Application.Game" />
         <item itemvalue="JUnit.com.example.darkchess in DarkChess" />
       </list>

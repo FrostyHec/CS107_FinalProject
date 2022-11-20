@@ -1,0 +1,9 @@
+.root {
+    -fx-background-color: green;
+    }
+
+
+#CvsChessBoard {
+    -fx-background-color: blue;
+    -fx-background-image: url(.../images/Chessboard001.png);
+}

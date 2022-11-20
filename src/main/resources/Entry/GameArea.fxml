@@ -15,7 +15,7 @@
            <center>
                <Pane prefHeight="861.0" prefWidth="601.0" BorderPane.alignment="CENTER">
                <children>
-                  <Canvas fx:id="Canvas_chessBoard" height="650.0" layoutX="78.0" layoutY="25.0" onMouseClicked="#chessMove" width="330.0" />
+                  <Canvas fx:id="CvsChessBoard" height="650.0" layoutX="78.0" layoutY="25.0" onMouseClicked="#chessMove" width="330.0" />
                </children>
                </Pane>
            </center>

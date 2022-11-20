@@ -1,5 +1,5 @@
 package GameLogic;
 
-public enum Color {
-    Red, Black
+enum Color{
+    RED,BLACK,UNKNOWN
 }

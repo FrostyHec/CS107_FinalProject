@@ -1,21 +1,21 @@
 package GameLogic;
 
 
-public class Chess {
+public class Chess {//小心chess为null时会出的bug
     private static boolean click = false;
-    void initClick(){
+    protected void initClick(){
         click = false;
     }
 
     private int rank;//等级
-    void setRank(int x){
+    protected void setRank(int x){
         rank = x;
     }
     public int getRank(){return rank;}
 
 
     //该棋子移动的可能性
-    int[][] possibleMove(Chess[][] chess,int x,int y){
+    public int[][] possibleMove(Chess[][] chess,int x,int y){
         int[][] p = new int[4][2];
 
         //需要按照规则行棋（考虑颜色）
@@ -33,7 +33,7 @@ public class Chess {
             }
         }
 
-        else {//除了炮以外其他棋的走法//有bug:null.getRank()会报错
+        else {//除了炮以外其他棋的走法
             if (x + 1 < chess.length) {p[0][0] = x + 1;p[0][1] = y;}
             if (y + 1 < chess[0].length) {p[1][1] = y + 1;p[1][0] = x;}
             if (x - 1 > -1) {p[2][0] = x - 1;p[2][1] = y;}
@@ -43,21 +43,23 @@ public class Chess {
             if (rank == 1) {//兵只能吃将或兵
                 int i = 0;
                 for (int[] a : p) {
-                    if(chess[a[0]][a[1]].getRank()==7 || chess[a[0]][a[1]]==null || chess[a[0]][a[1]].getRank()==1);
+                    if(chess[a[0]][a[1]]==null || chess[a[0]][a[1]].getRank()==7 || chess[a[0]][a[1]].getRank()==1);
                     else p[i][0] = (p[i][1] = -1);
                     i++;
                 }
             } else if (rank == 7) {//将不能吃兵
                 int i = 0;
                 for (int[] a : p) {
-                    if (chess[a[0]][a[1]].getRank() == 1)
+                    if(chess[a[0]][a[1]]==null);
+                    else if (chess[a[0]][a[1]].getRank() == 1)
                         p[i][0] = (p[i][1] = -1);
                     i++;
                 }
             } else {//其他子不能吃比自己大的棋子
                 int i = 0;
                 for (int[] a : p) {
-                    if (chess[a[0]][a[1]].getRank() > rank)
+                    if(chess[a[0]][a[1]]==null);
+                    else if (chess[a[0]][a[1]].getRank() > rank)
                         p[i][0] = (p[i][1] = -1);
                     i++;
                 }
@@ -67,8 +69,8 @@ public class Chess {
             int i = 0;
             for(int[] a:p){
                 if (a[0] != -1){
-                    if(chess[a[0]][a[1]].getColor() == color || !chess[a[0]][a[1]].isTurnOver())
-                        p[i][0] = (p[i][1] = -1);
+                    if(chess[a[0]][a[1]]==null||chess[a[0]][a[1]].getColor()==color||!chess[a[0]][a[1]].isTurnOver());
+                    else p[i][0] = (p[i][1] = -1);
                 }
                 i++;
             }
@@ -82,7 +84,7 @@ public class Chess {
     //which camp
     private Color color;
 
-    void setColor(Color color){
+    protected void setColor(Color color){
         this.color = color;
     }
     Color getColor(){
@@ -91,7 +93,7 @@ public class Chess {
 
 
     private int score;//分数
-    public void setScore(int x){
+    protected void setScore(int x){
         score = x;
     }
     public int getScore(){
@@ -100,7 +102,7 @@ public class Chess {
 
 
     private boolean turnOver = false;
-    public boolean TurnOver(Player player1, Player player2){
+    protected boolean TurnOver(Player player1, Player player2){
         if(!click){
             click = true;
             player1.setColor(this.color);
@@ -122,14 +124,6 @@ public class Chess {
     }
 
 
-    //if it is alive
-    private boolean usable = true;
-    public boolean canUse(){
-        return usable;
-    }
-    public void occupied(){
-        this.usable = false;
-    }
 
     private int[][] line(Chess[][] chess,int x,int y){
         int[][]a = new int[4][2];

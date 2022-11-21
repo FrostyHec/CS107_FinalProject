@@ -187,7 +187,7 @@ public class Chess {//小心chess为null时会出的bug
                         break;
                     }
                 }
-                if (i == 3) a[2][0] = (a[2][1] = -1);
+                if (i == 4) a[2][0] = (a[2][1] = -1);
                 else {
                     a[2][0] = x;
                     a[2][1] = i;
@@ -206,7 +206,7 @@ public class Chess {//小心chess为null时会出的bug
                         i--;
                         break;
                     }
-                if (i == 0) a[3][0] = (a[3][1] = -1);
+                if (i == -1) a[3][0] = (a[3][1] = -1);
                 else {
                     a[3][0] = x;
                     a[3][1] = i;

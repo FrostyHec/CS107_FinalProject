@@ -24,7 +24,7 @@ public class game {
     private int X,Y;
 
 
-    int Click(Player player,int x,int y){//点击
+    public int Click(Player player,int x,int y){//点击
 
         if(chess[x][y] == null) return 401;//error code 401:点击了空格子
 

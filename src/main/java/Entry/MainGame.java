@@ -4,11 +4,10 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
-public class Game extends Application {
+public class MainGame extends Application {
     @Override
     public void init() throws Exception {
         super.init();
@@ -22,7 +21,7 @@ public class Game extends Application {
 
         //加载fxml
         Application.setUserAgentStylesheet(getClass().getResource("surface.css").toExternalForm());
-        FXMLLoader fxmlLoader = new FXMLLoader(Game.class.getResource("GameArea.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(MainGame.class.getResource("GameArea.fxml"));
         stage.setScene(new Scene(fxmlLoader.load(), 600, 800));
         stage.show();
     }
@@ -36,4 +35,5 @@ public class Game extends Application {
     public static void main(String[] args) {
         launch();
     }
+
 }

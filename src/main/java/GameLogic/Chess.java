@@ -11,7 +11,7 @@ public class Chess {
     void setRank(int x){
         rank = x;
     }
-    int getRank(){return rank;}
+    public int getRank(){return rank;}
 
 
     //该棋子移动的可能性
@@ -94,7 +94,7 @@ public class Chess {
     public void setScore(int x){
         score = x;
     }
-    int getScore(){
+    public int getScore(){
         return score;
     }
 

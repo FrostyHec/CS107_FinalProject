@@ -2,7 +2,7 @@ package GameLogic;
 
 import java.util.*;
 
-public class game {
+public class Game {
     Player p1 = new Player(),p2 = new Player();
     Chess[][] chess = new Chess[8][4];
 
@@ -10,7 +10,7 @@ public class game {
     private int X,Y;
 
 
-    int Click(Player player,int x,int y){//点击
+    public int Click(Player player,int x,int y){//点击
         if(isFirst){//是第一次点击
             if(chess[x][y].TurnOver(p1,p2)){
                 p1.changeStatus();p2.changeStatus();
@@ -89,12 +89,12 @@ public class game {
     }
 
 
-    Chess getChess(int x,int y){
+    public Chess getChess(int x,int y){
         return chess[x][y];
     }
 
 
-    Player nowPlay(){
+    public Player nowPlay(){
         if(p1.getStatus())return p1;
         else return p2;
     }

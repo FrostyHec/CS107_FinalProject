@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.canvas.*?>
 <?import java.lang.*?>
 <?import javafx.geometry.*?>
@@ -15,12 +16,52 @@
            <center>
                <Pane prefHeight="861.0" prefWidth="601.0" BorderPane.alignment="CENTER">
                <children>
-                  <Canvas fx:id="CvsChessBoard" height="650.0" layoutX="78.0" layoutY="25.0" onMouseClicked="#chessMove" width="330.0" />
+                  <Pane id="Chessboardimg" layoutX="68.0" layoutY="19.0" onMouseClicked="#chessMove" prefHeight="670.0" prefWidth="384.3">
+                     <children>
+                        <Pane fx:id="Chessboard" id="Chessboard" layoutX="20.0" layoutY="16.0" onMouseClicked="#chessMove" prefHeight="640.0" prefWidth="320.0">
+                           <children>
+                              <Circle id="a" layoutX="40.0" layoutY="40.0" radius="40.0" strokeType="INSIDE" />
+                              <Circle id="a" layoutX="120.0" layoutY="40.0" radius="40.0" strokeType="INSIDE" />
+                              <Circle fill="DODGERBLUE" layoutX="200.0" layoutY="40.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Circle fill="DODGERBLUE" layoutX="280.0" layoutY="40.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Circle fill="DODGERBLUE" layoutX="280.0" layoutY="440.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Circle fill="DODGERBLUE" layoutX="200.0" layoutY="440.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Circle fill="DODGERBLUE" layoutX="120.0" layoutY="440.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Circle fill="DODGERBLUE" layoutX="40.0" layoutY="440.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Circle fill="DODGERBLUE" layoutX="280.0" layoutY="520.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Circle fill="DODGERBLUE" layoutX="200.0" layoutY="520.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Circle fill="DODGERBLUE" layoutX="120.0" layoutY="520.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Circle fill="DODGERBLUE" layoutX="40.0" layoutY="520.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Circle fill="DODGERBLUE" layoutX="280.0" layoutY="600.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Circle fill="DODGERBLUE" layoutX="200.0" layoutY="600.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Circle fill="DODGERBLUE" layoutX="120.0" layoutY="600.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Circle fill="DODGERBLUE" layoutX="40.0" layoutY="600.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Circle fill="DODGERBLUE" layoutX="280.0" layoutY="280.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Circle fill="DODGERBLUE" layoutX="200.0" layoutY="280.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Circle fill="DODGERBLUE" layoutX="120.0" layoutY="280.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Circle fill="DODGERBLUE" layoutX="40.0" layoutY="280.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Circle fill="DODGERBLUE" layoutX="280.0" layoutY="360.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Circle fill="DODGERBLUE" layoutX="200.0" layoutY="360.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Circle fill="DODGERBLUE" layoutX="120.0" layoutY="360.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Circle fill="DODGERBLUE" layoutX="40.0" layoutY="360.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Circle fill="DODGERBLUE" layoutX="280.0" layoutY="200.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Circle fill="DODGERBLUE" layoutX="200.0" layoutY="200.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Circle fill="DODGERBLUE" layoutX="120.0" layoutY="200.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Circle fill="DODGERBLUE" layoutX="40.0" layoutY="200.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Circle fill="DODGERBLUE" layoutX="280.0" layoutY="120.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Circle fill="DODGERBLUE" layoutX="200.0" layoutY="120.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Circle fill="DODGERBLUE" layoutX="120.0" layoutY="120.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Circle fill="DODGERBLUE" layoutX="40.0" layoutY="120.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
+                           </children></Pane>
+                     </children></Pane>
                </children>
                </Pane>
            </center>
            <top>
-             <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+             <HBox prefHeight="72.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button mnemonicParsing="false" text="Button" />
+               </children></HBox>
            </top>
            <right>
              <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER" />

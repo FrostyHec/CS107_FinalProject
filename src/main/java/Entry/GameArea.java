@@ -1,85 +1,126 @@
 package Entry;
 
-import GameLogic.*;
-
-import javafx.fxml.FXML;
+import GameLogic.Chess;
+import GameLogic.Color;
 import javafx.scene.input.MouseEvent;
+import GameLogic.Game;
+import javafx.scene.layout.Pane;
+import javafx.scene.shape.Circle;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.concurrent.Callable;
 
 public class GameArea {
-    GameState gameState;
-    Chessboard chessboard;
-    int score;
-    Players players;
+    private final int bound = 0, size = 80, chessRadius=30;
+    public Pane Chessboard;
+    Game game;
 
-    public void Initialize() {
-
-        //棋盘初始化
-        chessboard = new Chessboard();
-
-        //分数初始化
-        score = 0;
-
-        //玩家初始化
-        List<Player> p = new ArrayList<>();
-        p.add(new HumanPlayer());
-        p.add(new ComputerPlayer());
-        players = new Players(p);
-        //游戏状态初始化
+    public GameArea() {
+        game = new Game();
+        game.init();
     }
 
-
-
-    /*-------------------chessMove模块---------------------------*/
-    Chess pick;
-    Square pickSquare;
-    @FXML
     public void chessMove(MouseEvent event) {
-        final int bound = 5, size = 80;
-        int x = (int) (event.getX() - bound) / size;
         int y = (int) (event.getX() - bound) / size;
+        int x = (int) (event.getY() - bound) / size;//一些问题
 
-        HumanPlayer nowPlay;
-        Square square = chessboard.getSquare(x, y);
-
-        if (players.nowPlay() instanceof HumanPlayer) {//判定是否为玩家
-            nowPlay = (HumanPlayer) players.nowPlay();
-        } else {
-            return;
+        //还是不敢hardcode
+        int res = game.Click(game.nowPlay(), x, y);
+        ClickResult clickResult = ClickResult.Uninitialized;
+        for (ClickResult re : ClickResult.values()) {
+            if (re.getCode() == res) {
+                clickResult = re;
+            }
         }
-        if (nowPlay.getPlayerState() == PlayerState.choosing) {
-            pick = square.getChess();
-            if(pick==null){
-                return;
+        switch (clickResult) {
+            case Finished -> {
             }
-            if (pick.turnOver()) {
-                //do something!
-                nowPlay.setColor(pick.getColor());
-                players.next();
-                return;
+            case Continue -> {
             }
-            if (nowPlay.isColorMatch(pick.getColor())) {
-                pickSquare = square;
-                nowPlay.setPlayerState(PlayerState.moving);
+            case ChoosingOthers -> {
             }
-        } else if (nowPlay.getPlayerState() == PlayerState.moving) {
-            try {
-                pick.move(square);
-            } catch (Exception e) {
-                //do something
+            case SelfCapture -> {
             }
-            scoreHandler(square.getChess().occupied());
-            square.setChess(pick);
-            pickSquare.setChess(null);
+            case UnturnedCapture -> {
+            }
+            case LargerCapture -> {
+            }
+            case KingCaptureSolider -> {
+            }
+            case UnknownError -> {
+            }
         }
-
 
     }
 
-    void scoreHandler(int score) {
-        this.score += score;
-        //do Something
+    public void refresher() {
+        for (int column = 0; column < 7; column++) {
+            int x = column * size + size/2;
+            for (int row = 0; row < 4; row++) {
+
+                int y = row * size + size/2;
+                Circle c = new Circle(x,y,chessRadius);
+
+                Chess thisChess = game.getChess(column,row);
+                //有很多，先判断是不是空，再判断是否翻开来，再判断颜色，最后判断棋子种类
+                if(thisChess.isTurnOver()){}
+
+                    StringBuilder sb = new StringBuilder();
+//                if(){
+//
+//                }else if(){
+//
+//                }else {
+//
+//                }
+//
+//                for (ChessKind ck: ChessKind.values()) {
+//                    if(){
+//
+//                    }
+//                }
+//
+//                switch ()
+//                c.setId("General");
+//                Chessboard.getChildren().add();
+            }
+        }
+    }
+}
+enum ChessKind{
+    General(7),
+    Advisor(6),
+    Minister(5),
+    Chariot(4),
+    Horse(3),
+    Cannon(2),
+    Soldier(1);
+    private final int rank;
+    ChessKind(int rank){
+        this.rank=rank;
+    }
+
+    public int getRank() {
+        return rank;
+    }
+}
+
+enum ClickResult {
+    Finished(0),
+    Continue(-1),
+    ChoosingOthers(1),
+    SelfCapture(2),
+    UnturnedCapture(3),
+    LargerCapture(4),
+    KingCaptureSolider(5),
+    UnknownError(404),
+    Uninitialized(114514);
+    private final int code;
+
+    ClickResult(int code) {
+        this.code = code;
+    }
+
+    public int getCode() {
+        return code;
     }
 }

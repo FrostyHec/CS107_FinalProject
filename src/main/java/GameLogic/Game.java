@@ -10,7 +10,7 @@ public class Game {
     private int X,Y;
 
 
-    int Click(Player player,int x,int y){//点击
+    public int Click(Player player, int x, int y){//点击
         if(isFirst){//是第一次点击
             if(chess[x][y].TurnOver(p1,p2)){
                 p1.changeStatus();p2.changeStatus();
@@ -94,7 +94,7 @@ public class Game {
     }
 
 
-    Player nowPlay(){
+    public Player nowPlay(){
         if(p1.getStatus())return p1;
         else return p2;
     }

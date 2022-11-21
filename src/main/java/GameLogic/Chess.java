@@ -69,8 +69,9 @@ public class Chess {//小心chess为null时会出的bug
             int i = 0;
             for(int[] a:p){
                 if (a[0] != -1){
-                    if(chess[a[0]][a[1]]==null||chess[a[0]][a[1]].getColor()==color||!chess[a[0]][a[1]].isTurnOver());
-                    else p[i][0] = (p[i][1] = -1);
+                    if(chess[a[0]][a[1]]==null);
+                    else if(chess[a[0]][a[1]].getColor()==color && chess[a[0]][a[1]].isTurnOver())
+                    p[i][0] = (p[i][1] = -1);
                 }
                 i++;
             }
@@ -87,7 +88,7 @@ public class Chess {//小心chess为null时会出的bug
     protected void setColor(Color color){
         this.color = color;
     }
-    public Color getColor(){
+    Color getColor(){
         return color;
     }
 

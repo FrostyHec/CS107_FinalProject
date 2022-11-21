@@ -46,7 +46,8 @@ int[][] getDiedChess()
 
 Player类：
 先通过game.nowPlay()找到对应的棋手，再调用以下方法：
-暂无
+.getScore()
+返回Player当前得分
 
 
 有其他需求就通过微信提出来

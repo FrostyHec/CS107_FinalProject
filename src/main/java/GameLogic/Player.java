@@ -5,7 +5,7 @@ public class Player {
     protected void setColor(Color c){
         this.color = c ;
     }
-    public Color getColor(){
+    Color getColor(){
         return color;
     }
 

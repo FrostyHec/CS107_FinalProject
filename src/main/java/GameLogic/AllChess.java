@@ -58,4 +58,3 @@ enum AllChess {
     int getScore(){return score;}
 
 }
-

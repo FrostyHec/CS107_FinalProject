@@ -6,7 +6,7 @@ public class test {
     static Scanner in = new Scanner(System.in);
 
     public static void main(String[] args) {
-        Game game = new Game();
+        game game = new game();
 
         game.init();
 
@@ -30,6 +30,14 @@ public class test {
             System.out.println();
             System.out.println("It's "+game.nowPlay().getColor()+"'s turn");
             int x = in.nextInt(),y = in.nextInt();
+            int[][] mmm = game.chess[x][y].possibleMove(game.chess, x,y);
+            for(int[] i : mmm){
+                for(int in : i){
+                    System.out.print(in+" ");
+                }
+                System.out.println();
+            }
+
             code = game.Click(game.nowPlay(), x, y);
 
             if(code == -1) {

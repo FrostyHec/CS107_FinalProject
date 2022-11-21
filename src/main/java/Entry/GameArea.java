@@ -2,35 +2,51 @@ package Entry;
 
 import GameLogic.Chess;
 import GameLogic.Color;
+import javafx.fxml.FXML;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import GameLogic.Game;
 import javafx.scene.layout.Pane;
-import javafx.scene.shape.Circle;
-
-import java.util.concurrent.Callable;
 
 public class GameArea {
-    private final int bound = 0, size = 80, chessRadius=30;
+    private final int bound = 0, size = 80, chessSize = 70;
     public Pane Chessboard;
     Game game;
 
     public GameArea() {
         game = new Game();
-        game.init();
     }
 
+    @FXML
+    public void initialize() {
+        game.init();
+        refresher();
+    }
+
+    long count = 0L;
+
     public void chessMove(MouseEvent event) {
+        //我也不知道为什么鼠标侦听器会听两次，属于是大无语了
+        count++;
+        if (count % 2 == 0) {
+            return;
+        }
+
+
         int y = (int) (event.getX() - bound) / size;
         int x = (int) (event.getY() - bound) / size;//一些问题
-
+        if (x > 7 || y > 3) {
+            return;
+        }
         //还是不敢hardcode
         int res = game.Click(game.nowPlay(), x, y);
-        ClickResult clickResult = ClickResult.Uninitialized;
-        for (ClickResult re : ClickResult.values()) {
-            if (re.getCode() == res) {
-                clickResult = re;
-            }
-        }
+        ClickResult clickResult = ClickResult.getClickResult(res);
+
+        //临时用的
+        System.out.println("now:"+game.nowPlay().getColor().toString()+" "+game.nowPlay().getScore());
+
+
+
         switch (clickResult) {
             case Finished -> {
             }
@@ -49,58 +65,83 @@ public class GameArea {
             case UnknownError -> {
             }
         }
-
+        refresher();
     }
 
     public void refresher() {
-        for (int column = 0; column < 7; column++) {
-            int x = column * size + size/2;
+
+        Chessboard.getChildren().clear();//移除所有棋子
+        for (int column = 0; column < 8; column++) {
+            int y = column * size + (size - chessSize) / 2;
             for (int row = 0; row < 4; row++) {
 
-                int y = row * size + size/2;
-                Circle c = new Circle(x,y,chessRadius);
+                //获取棋子
+                int x = row * size + (size - chessSize) / 2;
+                ImageView c = new ImageView();
+                c.setX(x);
+                c.setY(y);
+                c.setFitHeight(chessSize);
+                c.setFitWidth(chessSize);
+                Chess thisChess = game.getChess(column, row);
 
-                Chess thisChess = game.getChess(column,row);
                 //有很多，先判断是不是空，再判断是否翻开来，再判断颜色，最后判断棋子种类
-                if(thisChess.isTurnOver()){}
+                if (thisChess == null) {//空
+                    continue;
+                }
 
-                    StringBuilder sb = new StringBuilder();
-//                if(){
-//
-//                }else if(){
-//
-//                }else {
-//
-//                }
-//
-//                for (ChessKind ck: ChessKind.values()) {
-//                    if(){
-//
-//                    }
-//                }
-//
-//                switch ()
-//                c.setId("General");
-//                Chessboard.getChildren().add();
+                if (!thisChess.isTurnOver()) {//没翻开
+                    c.setId("UnTurnedChess");
+                    Chessboard.getChildren().add(c);
+                    continue;
+                }
+
+                //命名规范: R/B+General/Advisor/Minister/Chariot/Horse/Cannon/Soldier+Chess
+                StringBuilder sb = new StringBuilder();
+                if (thisChess.getColor().equals(Color.RED)) {
+                    sb.append("R");
+                } else if (thisChess.getColor().equals(Color.BLACK)) {
+                    sb.append("B");
+                }
+
+                //我还是不hardcode了
+                ChessKind thisChessKind = ChessKind.getKind(thisChess.getRank());
+
+                sb.append(thisChessKind);
+                sb.append("Chess");
+                c.setId(sb.toString());
+                Chessboard.getChildren().add(c);
             }
         }
     }
 }
-enum ChessKind{
+
+enum ChessKind {
     General(7),
     Advisor(6),
     Minister(5),
     Chariot(4),
     Horse(3),
     Cannon(2),
-    Soldier(1);
+    Soldier(1),
+    Error(-114514);
+
     private final int rank;
-    ChessKind(int rank){
-        this.rank=rank;
+
+    ChessKind(int rank) {
+        this.rank = rank;
     }
 
-    public int getRank() {
+    private int getRank() {
         return rank;
+    }
+
+    public static ChessKind getKind(int rank) {
+        for (ChessKind ck : ChessKind.values()) {
+            if (ck.getRank() == rank) {
+                return ck;
+            }
+        }
+        return Error;
     }
 }
 
@@ -120,7 +161,16 @@ enum ClickResult {
         this.code = code;
     }
 
-    public int getCode() {
+    private int getCode() {
         return code;
+    }
+
+    public static ClickResult getClickResult(int res) {
+        for (ClickResult re : ClickResult.values()) {
+            if (re.getCode() == res) {
+                return re;
+            }
+        }
+        return Uninitialized;
     }
 }

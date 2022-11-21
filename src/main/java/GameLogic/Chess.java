@@ -87,7 +87,7 @@ public class Chess {//小心chess为null时会出的bug
     protected void setColor(Color color){
         this.color = color;
     }
-    Color getColor(){
+    public Color getColor(){
         return color;
     }
 

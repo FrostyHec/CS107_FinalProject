@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.canvas.*?>
 <?import java.lang.*?>
@@ -18,41 +19,7 @@
                <children>
                   <Pane id="Chessboardimg" layoutX="68.0" layoutY="19.0" onMouseClicked="#chessMove" prefHeight="670.0" prefWidth="384.3">
                      <children>
-                        <Pane fx:id="Chessboard" id="Chessboard" layoutX="20.0" layoutY="16.0" onMouseClicked="#chessMove" prefHeight="640.0" prefWidth="320.0">
-                           <children>
-                              <Circle id="a" layoutX="40.0" layoutY="40.0" radius="40.0" strokeType="INSIDE" />
-                              <Circle id="a" layoutX="120.0" layoutY="40.0" radius="40.0" strokeType="INSIDE" />
-                              <Circle fill="DODGERBLUE" layoutX="200.0" layoutY="40.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fill="DODGERBLUE" layoutX="280.0" layoutY="40.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fill="DODGERBLUE" layoutX="280.0" layoutY="440.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fill="DODGERBLUE" layoutX="200.0" layoutY="440.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fill="DODGERBLUE" layoutX="120.0" layoutY="440.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fill="DODGERBLUE" layoutX="40.0" layoutY="440.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fill="DODGERBLUE" layoutX="280.0" layoutY="520.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fill="DODGERBLUE" layoutX="200.0" layoutY="520.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fill="DODGERBLUE" layoutX="120.0" layoutY="520.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fill="DODGERBLUE" layoutX="40.0" layoutY="520.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fill="DODGERBLUE" layoutX="280.0" layoutY="600.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fill="DODGERBLUE" layoutX="200.0" layoutY="600.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fill="DODGERBLUE" layoutX="120.0" layoutY="600.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fill="DODGERBLUE" layoutX="40.0" layoutY="600.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fill="DODGERBLUE" layoutX="280.0" layoutY="280.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fill="DODGERBLUE" layoutX="200.0" layoutY="280.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fill="DODGERBLUE" layoutX="120.0" layoutY="280.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fill="DODGERBLUE" layoutX="40.0" layoutY="280.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fill="DODGERBLUE" layoutX="280.0" layoutY="360.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fill="DODGERBLUE" layoutX="200.0" layoutY="360.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fill="DODGERBLUE" layoutX="120.0" layoutY="360.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fill="DODGERBLUE" layoutX="40.0" layoutY="360.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fill="DODGERBLUE" layoutX="280.0" layoutY="200.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fill="DODGERBLUE" layoutX="200.0" layoutY="200.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fill="DODGERBLUE" layoutX="120.0" layoutY="200.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fill="DODGERBLUE" layoutX="40.0" layoutY="200.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fill="DODGERBLUE" layoutX="280.0" layoutY="120.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fill="DODGERBLUE" layoutX="200.0" layoutY="120.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fill="DODGERBLUE" layoutX="120.0" layoutY="120.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fill="DODGERBLUE" layoutX="40.0" layoutY="120.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
-                           </children></Pane>
+                        <Pane id="Chessboard" fx:id="Chessboard" layoutX="20.0" layoutY="16.0" onMouseClicked="#chessMove" prefHeight="640.0" prefWidth="320.0" />
                      </children></Pane>
                </children>
                </Pane>

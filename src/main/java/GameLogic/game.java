@@ -5,12 +5,23 @@ import java.util.*;
 public class game {
     Player p1 = new Player(),p2 = new Player();
     Chess[][] chess = new Chess[8][4];
+    private int[][] diedChess = new int[2][7];
+    //第一个代表死去棋子的颜色，RED为0
+    //第二个代表死去棋子的rank-1
+    //比如：diedChess[0][1]的值代表死掉红炮的个数
+
+    public int[][] getDiedChess(){
+        return diedChess;
+    }
 
     static boolean isFirst = true;
     private int X,Y;
 
 
     int Click(Player player,int x,int y){//点击
+
+        if(chess[x][y] == null) return 401;//error code 401:点击了空格子
+
         if(isFirst){//是第一次点击
             if(chess[x][y].TurnOver(p1,p2)){
                 p1.changeStatus();p2.changeStatus();
@@ -30,11 +41,23 @@ public class game {
             isFirst = true;
             for(int[] coordinate : chess[X][Y].possibleMove(chess,X,Y)) {
                 if (x == coordinate[0] && y == coordinate[1]) {
-                    player.addScore(chess[x][y].getScore());
+                    if(chess[x][y] != null){
+
+                        if(chess[x][y].getColor()==Color.RED)diedChess[0][chess[x][y].getRank()-1]++;
+                        else diedChess[1][chess[x][y].getRank()-1]++;
+
+                        if(player.getColor()==chess[x][y].getColor())
+                            player.addScore(chess[x][y].getScore());
+                        else
+                            other(player.getColor()).addScore(chess[x][y].getScore());
+                    }
                     chess[x][y] = chess[X][Y];
                     chess[X][Y] = null;
                     p1.changeStatus();
                     p2.changeStatus();
+                    //顺便在这里判断一下有没有哪一方赢了的
+                    if(p1.isWin())return 101;//code 101:先手那位赢了
+                    if(p2.isWin())return 102;//code 102:后手那位赢了
                     return 0;
                 }
             }
@@ -52,7 +75,7 @@ public class game {
             else if(chess[x][y].getRank()==7 && chess[X][Y].getRank()==1)
                 return 5;//error code 5: 将不能吃兵
 
-            else return 6;//error code 6: 其他类型错误
+            else return 404;//error code 404: 其他类型错误
         }
 
     }
@@ -89,13 +112,17 @@ public class game {
     }
 
 
-    Chess getChess(int x,int y){
+    public Chess getChess(int x,int y){
         return chess[x][y];
     }
 
 
-    Player nowPlay(){
+    public Player nowPlay(){
         if(p1.getStatus())return p1;
         else return p2;
+    }
+    private Player other(Color color){
+        if(p1.getColor()==color)return p2;
+        else return p1;
     }
 }

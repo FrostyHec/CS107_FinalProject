@@ -2,7 +2,7 @@ package GameLogic;
 
 public class Player {
     private Color color = Color.UNKNOWN;
-    void setColor(Color c){
+    protected void setColor(Color c){
         this.color = c ;
     }
     Color getColor(){
@@ -10,25 +10,25 @@ public class Player {
     }
 
     private int score = 0;
-    void setScore(int i){
+    protected void setScore(int i){
         this.score = i;
     }
-    void addScore(int i){
+    protected void addScore(int i){
         this.score += i;
     }
-    int getScore(){
+    public int getScore(){
         return score;
     }
-    boolean isWin(){
+    public boolean isWin(){
         if(score >= 60)return true;
         else return false;
     }
 
     private boolean status = false;//是否走棋
-    void changeStatus(){
+    protected void changeStatus(){
         status = !status ;
     }
-    boolean getStatus(){
+    public boolean getStatus(){
         return status;
     }//true代表轮到他走棋了
 }

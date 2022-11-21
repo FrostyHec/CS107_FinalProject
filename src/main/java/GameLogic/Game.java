@@ -89,7 +89,7 @@ public class Game {
     }
 
 
-    Chess getChess(int x,int y){
+    public Chess getChess(int x, int y){
         return chess[x][y];
     }
 

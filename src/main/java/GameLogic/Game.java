@@ -26,9 +26,8 @@ public class Game {
 
     public int Click(Player player,int x,int y){//点击
 
-        if(chess[x][y] == null) return 401;//error code 401:点击了空格子
-
         if(isFirst){//是第一次点击
+            if(chess[x][y] == null) return 401;//error code 401:点击了空格子
             if(chess[x][y].TurnOver(p1,p2)){
                 p1.changeStatus();p2.changeStatus();
                 isFirst = true;
@@ -55,7 +54,7 @@ public class Game {
                         if(chess[x][y].getColor()==Color.RED)diedChess[0][chess[x][y].getRank()-1]++;
                         else diedChess[1][chess[x][y].getRank()-1]++;
 
-                        if(player.getColor()==chess[x][y].getColor())
+                        if(player.getColor()!=chess[x][y].getColor())
                             player.addScore(chess[x][y].getScore());
                         else
                             other(player.getColor()).addScore(chess[x][y].getScore());
@@ -76,7 +75,10 @@ public class Game {
             }
 
             //如果不能走，错误类型判断
-            if(chess[x][y].getColor() == chess[X][Y].getColor())
+            if(chess[x][y] == null)
+                return 6;//妄图移动炮
+
+            else if(chess[x][y].getColor() == chess[X][Y].getColor())
                 return 2;//error code 2: 妄图覆盖自己的棋子
 
             else if(!chess[x][y].isTurnOver())
@@ -87,6 +89,7 @@ public class Game {
 
             else if(chess[x][y].getRank()==7 && chess[X][Y].getRank()==1)
                 return 5;//error code 5: 将不能吃兵
+
 
             else return 404;//error code 404: 其他类型错误
         }

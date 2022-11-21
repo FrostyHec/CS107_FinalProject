@@ -7,7 +7,6 @@ public class test {
 
     public static void main(String[] args) {
         Game game = new Game();
-
         game.init();
 
         int code = 0;

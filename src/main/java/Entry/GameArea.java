@@ -43,10 +43,10 @@ public class GameArea {
         ClickResult clickResult = ClickResult.getClickResult(res);
 
         //临时用的
+        System.out.println(clickResult);
         System.out.println("now:"+game.nowPlay().getColor().toString()+" "+game.nowPlay().getScore());
 
 
-        System.out.println(clickResult);
         switch (clickResult) {
             case Finished -> {
             }
@@ -153,7 +153,7 @@ enum ClickResult {
     UnturnedCapture(3),
     LargerCapture(4),
     KingCaptureSolider(5),
-    UnknownError(404),
+    UnknownError(6),
     Uninitialized(114514);
     private final int code;
 

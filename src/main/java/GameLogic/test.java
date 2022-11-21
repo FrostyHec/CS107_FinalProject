@@ -6,7 +6,7 @@ public class test {
     static Scanner in = new Scanner(System.in);
 
     public static void main(String[] args) {
-        game game = new game();
+        Game game = new Game();
 
         game.init();
 

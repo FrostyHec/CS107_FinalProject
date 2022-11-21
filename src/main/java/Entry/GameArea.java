@@ -9,7 +9,7 @@ import GameLogic.Game;
 import javafx.scene.layout.Pane;
 
 public class GameArea {
-    private final int bound = 0, size = 80, chessSize = 70;
+    private final int  size = 80, chessSize = 70;
     public Pane Chessboard;
     Game game;
 
@@ -33,8 +33,8 @@ public class GameArea {
         }
 
 
-        int y = (int) (event.getX() - bound) / size;
-        int x = (int) (event.getY() - bound) / size;//一些问题
+        int y = (int) event.getX() / size;
+        int x = (int) event.getY() / size;//一些问题
         if (x > 7 || y > 3) {
             return;
         }
@@ -46,7 +46,7 @@ public class GameArea {
         System.out.println("now:"+game.nowPlay().getColor().toString()+" "+game.nowPlay().getScore());
 
 
-
+        System.out.println(clickResult);
         switch (clickResult) {
             case Finished -> {
             }

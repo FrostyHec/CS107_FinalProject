@@ -5,27 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bea79dc5-57f0-48e7-b850-a9fcd65d4f0c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/Chess/BlackChess/Advisor.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/Chess/BlackChess/Cannon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/Chess/BlackChess/Chariot.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/Chess/BlackChess/General.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/Chess/BlackChess/Horse.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/Chess/BlackChess/Minister.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/Chess/BlackChess/Soldier.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/Chess/RedChess/Advisor.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/Chess/RedChess/Cannon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/Chess/RedChess/Chariot.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/Chess/RedChess/General.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/Chess/RedChess/Horse.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/Chess/RedChess/Minister.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/Chess/RedChess/Soldier.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/Chess/Unturned.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Entry/GameArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Entry/GameArea.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/GameLogic/Chess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GameLogic/Chess.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/GameLogic/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GameLogic/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Entry/GameArea.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Entry/GameArea.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Entry/surface.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Entry/surface.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -198,12 +179,7 @@
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/Entry/GameArea.java</url>
           <line>49</line>
-          <option name="timeStamp" value="29" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/GameLogic/Game.java</url>
-          <line>31</line>
-          <option name="timeStamp" value="30" />
+          <option name="timeStamp" value="31" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -14,7 +14,13 @@ public class game {
         return diedChess;
     }
 
-    static boolean isFirst = true;
+    private List <int[][]> moves = new ArrayList<>();
+
+    public List<int[][]> getMoves() {
+        return moves;
+    }
+
+    private boolean isFirst = true;
     private int X,Y;
 
 
@@ -26,6 +32,9 @@ public class game {
             if(chess[x][y].TurnOver(p1,p2)){
                 p1.changeStatus();p2.changeStatus();
                 isFirst = true;
+                int[][] move = new int[1][2];
+                move[0][0] = x;move[0][1] = y;
+                moves.add(move);
                 return 0;
             }//未被翻开
             else{
@@ -55,6 +64,10 @@ public class game {
                     chess[X][Y] = null;
                     p1.changeStatus();
                     p2.changeStatus();
+                    int[][] move = new int[2][2];
+                    move[0][0] = X;move[0][1] = Y;
+                    move[1][0] = x;move[1][1] = y;
+                    moves.add(move);
                     //顺便在这里判断一下有没有哪一方赢了的
                     if(p1.isWin())return 101;//code 101:先手那位赢了
                     if(p2.isWin())return 102;//code 102:后手那位赢了
@@ -106,6 +119,7 @@ public class game {
         //初始化player
         p1.setColor(Color.UNKNOWN);p2.setColor(Color.UNKNOWN);
         p1.setScore(0);p2.setScore(0);
+        isFirst = true;
 
         //p1开始行动
         p1.changeStatus();

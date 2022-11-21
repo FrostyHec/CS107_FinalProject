@@ -36,6 +36,12 @@ color为Color类，对棋子来说只有Color.RED和Color.BLACK
 返回值为int[4][2],返回（x，y）处棋子的可能走法
 其中可能有（-1，-1），为淘汰掉的可能
 
+int[][] getDiedChess()
+返回值为int[2][7],可以表示死去的棋子的种类及其个数
+第一个[]代表死去棋子的颜色，0为RED，1为BLACK
+第二个[]代表死去棋子的rank-1(因为rank是从1开始的而这个是从0开始的)
+比如：diedChess[0][1]的值代表死掉红炮的个数
+
 
 
 Player类：

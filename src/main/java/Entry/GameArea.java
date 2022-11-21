@@ -9,7 +9,7 @@ import javafx.scene.shape.Circle;
 
 import java.util.concurrent.Callable;
 
-public class GameArea {//doing
+public class GameArea {
     private final int bound = 0, size = 80, chessRadius=30;
     public Pane Chessboard;
     Game game;

@@ -21,7 +21,9 @@ public class Chess {//小心chess为null时会出的bug
         //需要按照规则行棋（考虑颜色）
         if(rank == 2){//炮的走法
             //需要隔山打牛，不能直接移动
-            p = line(chess,x,y);
+
+            p = line(chess,x,y);//现在炮还不能横着打，原因不明
+
             //不能自相残杀,可以吃未翻开的棋子（有可能是自己的）
             int i = 0;
             for(int[] a:p){
@@ -70,8 +72,9 @@ public class Chess {//小心chess为null时会出的bug
             for(int[] a:p){
                 if (a[0] != -1){
                     if(chess[a[0]][a[1]]==null);
-                    else if(chess[a[0]][a[1]].getColor()==color && chess[a[0]][a[1]].isTurnOver())
-                    p[i][0] = (p[i][1] = -1);
+                    else if(chess[a[0]][a[1]].getColor()==color || !chess[a[0]][a[1]].isTurnOver()){
+                        p[i][0] = (p[i][1] = -1);
+                    }
                 }
                 i++;
             }
@@ -138,8 +141,11 @@ public class Chess {//小心chess为null时会出的bug
             else {
                 i++;
                 for (; chess[i][y] == null; i++)
-                    if (i == 7) break;
-                if (i == 7) a[0][1] = (a[0][0] = -1);
+                    if (i == 7) {
+                        i++;
+                        break;
+                    }
+                if (i == 8) a[0][1] = (a[0][0] = -1);
                 else {
                     a[0][0] = i;
                     a[0][1] = y;
@@ -155,8 +161,11 @@ public class Chess {//小心chess为null时会出的bug
             else {
                 i--;
                 for (; chess[i][y] == null; i--)
-                    if (i == 0) break;
-                if (i == 0) a[1][0] = (a[1][1] = -1);
+                    if (i == 0) {
+                        i--;
+                        break;
+                    }
+                if (i == -1) a[1][0] = (a[1][1] = -1);
                 else {
                     a[1][0] = i;
                     a[1][1] = y;
@@ -173,14 +182,17 @@ public class Chess {//小心chess为null时会出的bug
             else {
                 i++;
                 for (; chess[x][i] == null; i++)
-                    if (i == 3) break;
-                if (i == 3) a[2][0] = (a[2][1] = -1);
+                    if (i == 3) {
+                        i++;
+                        break;
+                    }
+                }
+                if (i == 4) a[2][0] = (a[2][1] = -1);
                 else {
                     a[2][0] = x;
                     a[2][1] = i;
                 }
             }
-        }
         i = y-1;
         if(i<=0)a[3][0] = (a[3][1] = -1);
         else {
@@ -190,8 +202,11 @@ public class Chess {//小心chess为null时会出的bug
             else {
                 i--;
                 for (; chess[x][i] == null; i--)
-                    if (i == 0) break;
-                if (i == 0) a[3][0] = (a[3][1] = -1);
+                    if (i == 0) {
+                        i--;
+                        break;
+                    }
+                if (i == -1) a[3][0] = (a[3][1] = -1);
                 else {
                     a[3][0] = x;
                     a[3][1] = i;

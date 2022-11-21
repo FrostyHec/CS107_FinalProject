@@ -6,19 +6,19 @@ public class test {
     static Scanner in = new Scanner(System.in);
 
     public static void main(String[] args) {
-        Game game = new Game();
-        game.init();
+        Game Game = new Game();
+        Game.init();
 
         int code = 0;
         while(code == 0){
-            for(int m=0;m<game.chess.length;m++){
-                for(int n=0;n<game.chess[m].length;n++){
-                    if(game.chess[m][n] == null) System.out.print("null");
+            for(int m=0;m<Game.chess.length;m++){
+                for(int n=0;n<Game.chess[m].length;n++){
+                    if(Game.chess[m][n] == null) System.out.println("null");
                     else {
-                        if (game.chess[m][n].isTurnOver()) {
-                            System.out.print(game.chess[m][n].getColor());
+                        if (Game.chess[m][n].isTurnOver()) {
+                            System.out.print(Game.chess[m][n].getColor());
                             System.out.print("  ");
-                            System.out.println(game.chess[m][n].getRank());
+                            System.out.println(Game.chess[m][n].getRank());
                         } else {
                             System.out.println(Color.UNKNOWN);
                         }
@@ -27,9 +27,9 @@ public class test {
                 System.out.println();
             }
             System.out.println();
-            System.out.println("It's "+game.nowPlay().getColor()+"'s turn");
+            System.out.println("It's "+Game.nowPlay().getColor()+"'s turn");
             int x = in.nextInt(),y = in.nextInt();
-            int[][] mmm = game.chess[x][y].possibleMove(game.chess, x,y);
+            int[][] mmm = Game.chess[x][y].possibleMove(Game.chess, x,y);
             for(int[] i : mmm){
                 for(int in : i){
                     System.out.print(in+" ");
@@ -37,11 +37,11 @@ public class test {
                 System.out.println();
             }
 
-            code = game.Click(game.nowPlay(), x, y);
+            code = Game.Click(Game.nowPlay(), x, y);
 
             if(code == -1) {
                 int m = in.nextInt(),n = in.nextInt();
-                code = game.Click(game.nowPlay(), m, n);
+                code = Game.Click(Game.nowPlay(), m, n);
                 //switch code
                 switch (code) {
                     case 2 :

@@ -36,6 +36,9 @@ public class Chess {//小心chess为null时会出的bug
         }
 
         else {//除了炮以外其他棋的走法
+            for(int i = 0;i<p.length;i++){
+                p[i][0] = (p[i][1] = -1);
+            }
             if (x + 1 < chess.length) {p[0][0] = x + 1;p[0][1] = y;}
             if (y + 1 < chess[0].length) {p[1][1] = y + 1;p[1][0] = x;}
             if (x - 1 > -1) {p[2][0] = x - 1;p[2][1] = y;}
@@ -45,6 +48,7 @@ public class Chess {//小心chess为null时会出的bug
             if (rank == 1) {//兵只能吃将或兵
                 int i = 0;
                 for (int[] a : p) {
+                    if(a[0] == -1)continue;
                     if(chess[a[0]][a[1]]==null || chess[a[0]][a[1]].getRank()==7 || chess[a[0]][a[1]].getRank()==1);
                     else p[i][0] = (p[i][1] = -1);
                     i++;
@@ -52,6 +56,7 @@ public class Chess {//小心chess为null时会出的bug
             } else if (rank == 7) {//将不能吃兵
                 int i = 0;
                 for (int[] a : p) {
+                    if(a[0] == -1)continue;
                     if(chess[a[0]][a[1]]==null);
                     else if (chess[a[0]][a[1]].getRank() == 1)
                         p[i][0] = (p[i][1] = -1);
@@ -60,6 +65,7 @@ public class Chess {//小心chess为null时会出的bug
             } else {//其他子不能吃比自己大的棋子
                 int i = 0;
                 for (int[] a : p) {
+                    if(a[0] == -1)continue;
                     if(chess[a[0]][a[1]]==null);
                     else if (chess[a[0]][a[1]].getRank() > rank)
                         p[i][0] = (p[i][1] = -1);

@@ -78,24 +78,23 @@ public class GameArea {
             Chessboard.getChildren().add(p);
 
         }
-        private void showPossibleMove(int x,int y){
+        private void showPossibleMove(int row,int column){
             List<int[]> possibleMove =new ArrayList<>();
-            int[][] temp=game.getChess(row,column).possibleMove(new Chess[1][]/*要改*/,row,column);
+            int[][] temp=game.getChess(row,column).possibleMove(game.getChess(),row,column);
             for (int[] position:temp){
                 if(!(position[0]==-1&&position[1]==-1)){
                     possibleMove.add(position);
                 }
             }
-
-
-
-            ImageView p=new ImageView();
-            p.setX(handler.getGraphicX(column,selectedSize));
-            p.setY(handler.getGraphicY(row,selectedSize));
-            p.setFitHeight(selectedSize);
-            p.setFitWidth(selectedSize);
-            p.setId("Selected");
-            Chessboard.getChildren().add(p);
+            for (int[] position: possibleMove) {
+                ImageView p=new ImageView();
+                p.setX(handler.getGraphicX(position[1],selectedSize));
+                p.setY(handler.getGraphicY(position[0],selectedSize));
+                p.setFitHeight(selectedSize);
+                p.setFitWidth(selectedSize);
+                p.setId("PossibleMove");
+                Chessboard.getChildren().add(p);
+            }
 
         }
 
@@ -106,6 +105,7 @@ public class GameArea {
                 }
                 case Continue -> {
                     showSelectedChess(row,column);
+                    showPossibleMove(row,column);
                 }
                 case ChoosingOthers -> {
                 }

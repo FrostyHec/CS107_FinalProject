@@ -4,6 +4,14 @@ import java.util.*;
 
 public class Game {
     Player p1 = new Player(),p2 = new Player();
+
+    public Player getPlayer1(){
+        return p1;
+    }
+
+    public Player getPlayer2(){
+        return p2;
+    }
     Chess[][] chess = new Chess[8][4];
 
     public Chess[][] getChess(){

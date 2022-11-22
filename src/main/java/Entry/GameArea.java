@@ -8,10 +8,15 @@ import javafx.scene.input.MouseEvent;
 import GameLogic.Game;
 import javafx.scene.layout.Pane;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class GameArea {
-    private final int  size = 80, chessSize = 70;
+    private final int squareSize = 80;
+    private final int chessSize = 70;
     public Pane Chessboard;
-    Game game;
+    private Game game;
+    private final Handler handler = new Handler();
 
     public GameArea() {
         game = new Game();
@@ -20,99 +25,156 @@ public class GameArea {
     @FXML
     public void initialize() {
         game.init();
-        refresher();
+        handler.refresher();
     }
-
-    long count = 0L;
 
     public void chessMove(MouseEvent event) {
-        //我也不知道为什么鼠标侦听器会听两次，属于是大无语了
-        count++;
-        if (count % 2 == 0) {
-            return;
-        }
-
-
-        int y = (int) event.getX() / size;
-        int x = (int) event.getY() / size;//一些问题
-        if (x > 7 || y > 3) {
-            return;
-        }
-        //还是不敢hardcode
-        int res = game.Click(game.nowPlay(), x, y);
-        ClickResult clickResult = ClickResult.getClickResult(res);
-
-        //临时用的
-        System.out.println(clickResult);
-        System.out.println("now:"+game.nowPlay().getColor().toString()+" "+game.nowPlay().getScore());
-
-
-        switch (clickResult) {
-            case Finished -> {
-            }
-            case Continue -> {
-            }
-            case ChoosingOthers -> {
-            }
-            case SelfCapture -> {
-            }
-            case UnturnedCapture -> {
-            }
-            case LargerCapture -> {
-            }
-            case KingCaptureSolider -> {
-            }
-            case UnknownError -> {
-            }
-        }
-        refresher();
+        new chessMove().invoke(event);
     }
+    private long count = 0L;
+    class chessMove {
+        private final int selectedSize= squareSize-8;
+        private int column;
+        private int row;
+        private boolean generateRowAndColumn(double x,double y){
+            column = (int) x / squareSize;
+            row = (int) y / squareSize;
+            return row <= 7 && column <= 3;//可以进一步限制
+        }
 
-    public void refresher() {
+        public void invoke(MouseEvent event) {
+            //我也不知道为什么鼠标侦听器会听两次，属于是大无语了
+            count++;
+            if (count % 2 == 0) {
+                return;
+            }
 
-        Chessboard.getChildren().clear();//移除所有棋子
-        for (int column = 0; column < 8; column++) {
-            int y = column * size + (size - chessSize) / 2;
-            for (int row = 0; row < 4; row++) {
+            //获取坐标
+            if(!generateRowAndColumn(event.getX(),event.getY())){
+                return;
+            }
 
-                //获取棋子
-                int x = row * size + (size - chessSize) / 2;
-                ImageView c = new ImageView();
-                c.setX(x);
-                c.setY(y);
-                c.setFitHeight(chessSize);
-                c.setFitWidth(chessSize);
-                Chess thisChess = game.getChess(column, row);
+            int res = game.Click(game.nowPlay(), row, column);//完成点击
 
-                //有很多，先判断是不是空，再判断是否翻开来，再判断颜色，最后判断棋子种类
-                if (thisChess == null) {//空
-                    continue;
+            ClickResult clickResult = ClickResult.getClickResult(res);
+
+
+            //临时用的
+            System.out.println(clickResult);
+            System.out.println("now:" + game.nowPlay().getColor().toString() + " " + game.nowPlay().getScore());
+
+            analyzeClickResult(clickResult);
+        }
+
+        private void showSelectedChess(int row,int column){
+
+
+            ImageView p=new ImageView();
+            p.setX(handler.getGraphicX(column,selectedSize));
+            p.setY(handler.getGraphicY(row,selectedSize));
+            p.setFitHeight(selectedSize);
+            p.setFitWidth(selectedSize);
+            p.setId("Selected");
+            Chessboard.getChildren().add(p);
+
+        }
+        private void showPossibleMove(int x,int y){
+            List<int[]> possibleMove =new ArrayList<>();
+            int[][] temp=game.getChess(row,column).possibleMove(new Chess[1][]/*要改*/,row,column);
+            for (int[] position:temp){
+                if(!(position[0]==-1&&position[1]==-1)){
+                    possibleMove.add(position);
                 }
+            }
 
-                if (!thisChess.isTurnOver()) {//没翻开
-                    c.setId("UnTurnedChess");
+
+
+            ImageView p=new ImageView();
+            p.setX(handler.getGraphicX(column,selectedSize));
+            p.setY(handler.getGraphicY(row,selectedSize));
+            p.setFitHeight(selectedSize);
+            p.setFitWidth(selectedSize);
+            p.setId("Selected");
+            Chessboard.getChildren().add(p);
+
+        }
+
+        private void analyzeClickResult(ClickResult clickResult){
+            handler.refresher();
+            switch (clickResult) {
+                case Finished -> {
+                }
+                case Continue -> {
+                    showSelectedChess(row,column);
+                }
+                case ChoosingOthers -> {
+                }
+                case SelfCapture -> {
+                }
+                case UnturnedCapture -> {
+                }
+                case LargerCapture -> {
+                }
+                case KingCaptureSolider -> {
+                }
+                case UnknownError -> {
+                }
+            }
+        }
+
+
+    }//浅浅分离一下
+
+    class Handler {
+        public int getGraphicX(int column, int size){
+            return column * squareSize + (squareSize - size) / 2;
+        }
+        public int getGraphicY(int row,int size){
+            return row * squareSize + (squareSize - size) / 2;
+        }
+        public void refresher() {
+            Chessboard.getChildren().clear();//移除所有棋子
+            for (int row = 0; row < 8; row++) {
+                for (int column = 0; column < 4; column++) {
+
+                    //获取棋子
+                    ImageView c = new ImageView();
+                    c.setX(getGraphicX(column,chessSize));
+                    c.setY(getGraphicY(row,chessSize));
+                    c.setFitHeight(chessSize);
+                    c.setFitWidth(chessSize);
+                    Chess thisChess = game.getChess(row, column);
+
+                    //有很多，先判断是不是空，再判断是否翻开来，再判断颜色，最后判断棋子种类
+                    if (thisChess == null) {//空
+                        continue;
+                    }
+
+                    if (!thisChess.isTurnOver()) {//没翻开
+                        c.setId("UnTurnedChess");
+                        Chessboard.getChildren().add(c);
+                        continue;
+                    }
+
+                    //命名规范: R/B+General/Advisor/Minister/Chariot/Horse/Cannon/Soldier+Chess
+                    StringBuilder sb = new StringBuilder();
+                    if (thisChess.getColor().equals(Color.RED)) {
+                        sb.append("R");
+                    } else if (thisChess.getColor().equals(Color.BLACK)) {
+                        sb.append("B");
+                    }
+
+                    //我还是不hardcode了
+                    ChessKind thisChessKind = ChessKind.getKind(thisChess.getRank());
+
+                    sb.append(thisChessKind);
+                    sb.append("Chess");
+                    c.setId(sb.toString());
                     Chessboard.getChildren().add(c);
-                    continue;
                 }
-
-                //命名规范: R/B+General/Advisor/Minister/Chariot/Horse/Cannon/Soldier+Chess
-                StringBuilder sb = new StringBuilder();
-                if (thisChess.getColor().equals(Color.RED)) {
-                    sb.append("R");
-                } else if (thisChess.getColor().equals(Color.BLACK)) {
-                    sb.append("B");
-                }
-
-                //我还是不hardcode了
-                ChessKind thisChessKind = ChessKind.getKind(thisChess.getRank());
-
-                sb.append(thisChessKind);
-                sb.append("Chess");
-                c.setId(sb.toString());
-                Chessboard.getChildren().add(c);
             }
         }
-    }
+    }//浅浅分离一下
 }
 
 enum ChessKind {
@@ -154,6 +216,8 @@ enum ClickResult {
     LargerCapture(4),
     KingCaptureSolider(5),
     UnknownError(6),
+    UnknownError2(404),
+    EmptyClick(401),
     Uninitialized(114514);
     private final int code;
 

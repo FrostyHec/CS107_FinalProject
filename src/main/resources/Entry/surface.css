@@ -5,7 +5,9 @@
 .button:hover {
     -fx-background-color: blue;
 }
-
+.imageView{
+-fx-size: 100% 100%;
+}
 
 #Chessboardimg {
     -fx-background-image: url(../images/Chessboard001.png);
@@ -72,4 +74,13 @@
 #BCannonChess{
 -fx-image: url(../images/Chess/BlackChess/Cannon.png);
     -fx-size: 100% 100%;
+}
+
+//选择框
+#PossibleMove{
+-fx-image: url(../images/Select/PossibleMove.png);
+
+}
+#Selected{
+-fx-image: url(../images/Select/Selected.png);
 }

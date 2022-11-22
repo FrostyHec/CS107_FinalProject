@@ -3,8 +3,8 @@ module com.example.darkchess {
     requires javafx.fxml;
 
 
-    opens Entry to javafx.fxml;
-    exports Entry;
+    opens GameArea to javafx.fxml;
+    exports GameArea;
     exports GameLogic;
     opens GameLogic to javafx.fxml;
 }

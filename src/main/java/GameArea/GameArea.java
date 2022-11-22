@@ -1,8 +1,11 @@
-package Entry;
+package GameArea;
 
 import GameLogic.Chess;
 import GameLogic.Color;
+import GameLogic.Player;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import GameLogic.Game;
@@ -10,6 +13,8 @@ import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class GameArea {
     private final int squareSize = 80;
@@ -17,6 +22,7 @@ public class GameArea {
     public Pane Chessboard;
     private Game game;
     private final Handler handler = new Handler();
+    private final TextHandler textHandler = new TextHandler();
 
     public GameArea() {
         game = new Game();
@@ -25,18 +31,21 @@ public class GameArea {
     @FXML
     public void initialize() {
         game.init();
-        handler.refresher();
+        handler.refreshChessboard();
     }
 
     public void chessMove(MouseEvent event) {
         new chessMove().invoke(event);
     }
+
     private long count = 0L;
+
     class chessMove {
-        private final int selectedSize= squareSize-8;
+        private final int selectedSize = squareSize - 8;
         private int column;
         private int row;
-        private boolean generateRowAndColumn(double x,double y){
+
+        private boolean generateRowAndColumn(double x, double y) {
             column = (int) x / squareSize;
             row = (int) y / squareSize;
             return row <= 7 && column <= 3;//可以进一步限制
@@ -50,7 +59,7 @@ public class GameArea {
             }
 
             //获取坐标
-            if(!generateRowAndColumn(event.getX(),event.getY())){
+            if (!generateRowAndColumn(event.getX(), event.getY())) {
                 return;
             }
 
@@ -63,33 +72,35 @@ public class GameArea {
             System.out.println(clickResult);
             System.out.println("now:" + game.nowPlay().getColor().toString() + " " + game.nowPlay().getScore());
 
+
             analyzeClickResult(clickResult);
         }
 
-        private void showSelectedChess(int row,int column){
+        private void showSelectedChess(int row, int column) {
 
 
-            ImageView p=new ImageView();
-            p.setX(handler.getGraphicX(column,selectedSize));
-            p.setY(handler.getGraphicY(row,selectedSize));
+            ImageView p = new ImageView();
+            p.setX(handler.getGraphicX(column, selectedSize));
+            p.setY(handler.getGraphicY(row, selectedSize));
             p.setFitHeight(selectedSize);
             p.setFitWidth(selectedSize);
             p.setId("Selected");
             Chessboard.getChildren().add(p);
 
         }
-        private void showPossibleMove(int row,int column){
-            List<int[]> possibleMove =new ArrayList<>();
-            int[][] temp=game.getChess(row,column).possibleMove(game.getChess(),row,column);
-            for (int[] position:temp){
-                if(!(position[0]==-1&&position[1]==-1)){
+
+        private void showPossibleMove(int row, int column) {
+            List<int[]> possibleMove = new ArrayList<>();
+            int[][] temp = game.getChess(row, column).possibleMove(game.getChess(), row, column);
+            for (int[] position : temp) {
+                if (!(position[0] == -1 && position[1] == -1)) {
                     possibleMove.add(position);
                 }
             }
-            for (int[] position: possibleMove) {
-                ImageView p=new ImageView();
-                p.setX(handler.getGraphicX(position[1],selectedSize));
-                p.setY(handler.getGraphicY(position[0],selectedSize));
+            for (int[] position : possibleMove) {
+                ImageView p = new ImageView();
+                p.setX(handler.getGraphicX(position[1], selectedSize));
+                p.setY(handler.getGraphicY(position[0], selectedSize));
                 p.setFitHeight(selectedSize);
                 p.setFitWidth(selectedSize);
                 p.setId("PossibleMove");
@@ -98,14 +109,20 @@ public class GameArea {
 
         }
 
-        private void analyzeClickResult(ClickResult clickResult){
-            handler.refresher();
+        private void analyzeClickResult(ClickResult clickResult) {
+            handler.refreshChessboard();
             switch (clickResult) {
+                case Player1Win -> {
+                    handler.gameOver(1);
+                }
+                case Player2Win -> {
+                    handler.gameOver(2);
+                }
                 case Finished -> {
                 }
                 case Continue -> {
-                    showSelectedChess(row,column);
-                    showPossibleMove(row,column);
+                    showSelectedChess(row, column);
+                    showPossibleMove(row, column);
                 }
                 case ChoosingOthers -> {
                 }
@@ -123,24 +140,26 @@ public class GameArea {
         }
 
 
-    }//浅浅分离一下
+    }
 
     class Handler {
-        public int getGraphicX(int column, int size){
+        public int getGraphicX(int column, int size) {
             return column * squareSize + (squareSize - size) / 2;
         }
-        public int getGraphicY(int row,int size){
+
+        public int getGraphicY(int row, int size) {
             return row * squareSize + (squareSize - size) / 2;
         }
-        public void refresher() {
+
+        public void refreshChessboard() {
             Chessboard.getChildren().clear();//移除所有棋子
             for (int row = 0; row < 8; row++) {
                 for (int column = 0; column < 4; column++) {
 
                     //获取棋子
                     ImageView c = new ImageView();
-                    c.setX(getGraphicX(column,chessSize));
-                    c.setY(getGraphicY(row,chessSize));
+                    c.setX(getGraphicX(column, chessSize));
+                    c.setY(getGraphicY(row, chessSize));
                     c.setFitHeight(chessSize);
                     c.setFitWidth(chessSize);
                     Chess thisChess = game.getChess(row, column);
@@ -173,8 +192,49 @@ public class GameArea {
                     Chessboard.getChildren().add(c);
                 }
             }
+        }//refreshChessboard 用来刷新整个棋盘画面
+
+        public void gameOver(int playerNumber) {
+            textHandler.getWinner(playerNumber);
+            exit();
         }
-    }//浅浅分离一下
+
+        private void exit() {
+            Platform.exit();
+        }
+    }
+
+    class TextHandler {
+        Locale locale = Locale.getDefault();//后面可以改
+        ResourceBundle t = ResourceBundle.getBundle("GameArea/GameAreaLanguage", locale);
+
+        public void getWinner(int playerNum) {
+            //生成赢家信息
+            StringBuilder headerText = new StringBuilder();
+            headerText.append(t.getString("GameState.gameOver.headerText.1"));
+            if (playerNum == 1) {
+                headerText.append(t.getString("GameState.gameOver.headerText.1.1"));
+            } else if (playerNum == 2) {
+                headerText.append(t.getString("GameState.gameOver.headerText.1.2"));
+            }
+            headerText.append(t.getString("GameState.gameOver.headerText.2"));
+
+            //生成弹窗
+            showAlert(Alert.AlertType.INFORMATION,
+                    t.getString("GameState.gameOver.title"),
+                    headerText.toString(),
+                    t.getString("GameState.gameOver.contentText")
+            );
+        }
+
+        private void showAlert(Alert.AlertType alertType, String title, String headerText, String contentText) {
+            Alert alert = new Alert(alertType);
+            alert.setTitle(title);
+            alert.setContentText(contentText);
+            alert.setHeaderText(headerText);
+            alert.showAndWait();
+        }
+    }
 }
 
 enum ChessKind {
@@ -207,34 +267,3 @@ enum ChessKind {
     }
 }
 
-enum ClickResult {
-    Finished(0),
-    Continue(-1),
-    ChoosingOthers(1),
-    SelfCapture(2),
-    UnturnedCapture(3),
-    LargerCapture(4),
-    KingCaptureSolider(5),
-    UnknownError(6),
-    UnknownError2(404),
-    EmptyClick(401),
-    Uninitialized(114514);
-    private final int code;
-
-    ClickResult(int code) {
-        this.code = code;
-    }
-
-    private int getCode() {
-        return code;
-    }
-
-    public static ClickResult getClickResult(int res) {
-        for (ClickResult re : ClickResult.values()) {
-            if (re.getCode() == res) {
-                return re;
-            }
-        }
-        return Uninitialized;
-    }
-}

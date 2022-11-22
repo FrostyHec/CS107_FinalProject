@@ -1,4 +1,4 @@
-package Entry;
+package GameArea;
 
 public enum GameState {
 

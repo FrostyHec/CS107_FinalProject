@@ -30,6 +30,7 @@ public class GameArea {
 
     @FXML
     public void initialize() {
+
         game.init();
         handler.refreshChessboard();
     }
@@ -38,9 +39,10 @@ public class GameArea {
         new chessMove().invoke(event);
     }
 
-    private long count = 0L;
+
 
     class chessMove {
+        static private long count = 0L;
         private final int selectedSize = squareSize - 8;
         private int column;
         private int row;
@@ -210,20 +212,21 @@ public class GameArea {
 
         public void getWinner(int playerNum) {
             //生成赢家信息
-            StringBuilder headerText = new StringBuilder();
-            headerText.append(t.getString("GameState.gameOver.headerText.1"));
+            StringBuilder contentText = new StringBuilder();
+            contentText.append(t.getString("GameState.gameOver.contentText.1"));
             if (playerNum == 1) {
-                headerText.append(t.getString("GameState.gameOver.headerText.1.1"));
+                contentText.append(t.getString("GameState.gameOver.contentText.1.1"));
             } else if (playerNum == 2) {
-                headerText.append(t.getString("GameState.gameOver.headerText.1.2"));
+                contentText.append(t.getString("GameState.gameOver.contentText.1.2"));
             }
-            headerText.append(t.getString("GameState.gameOver.headerText.2"));
+            contentText.append(t.getString("GameState.gameOver.contentText.2"));
 
             //生成弹窗
             showAlert(Alert.AlertType.INFORMATION,
                     t.getString("GameState.gameOver.title"),
-                    headerText.toString(),
-                    t.getString("GameState.gameOver.contentText")
+                    t.getString("GameState.gameOver.headerText"),
+                    contentText.toString()
+
             );
         }
 
@@ -233,7 +236,7 @@ public class GameArea {
             alert.setContentText(contentText);
             alert.setHeaderText(headerText);
             alert.showAndWait();
-        }
+        }//晚点再美化这个界面
     }
 }
 

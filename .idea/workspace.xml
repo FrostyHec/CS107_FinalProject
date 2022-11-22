@@ -5,19 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bea79dc5-57f0-48e7-b850-a9fcd65d4f0c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/GameArea/ClickResult.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/GameArea/GameAreaLanguage.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/GameArea/GameAreaLanguage_en_US.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/GameArea/GameAreaLanguage_zh_CN.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Entry/GameArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GameArea/GameArea.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Entry/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GameArea/GameState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Entry/MainGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GameArea/MainGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Entry/GameArea.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/GameArea/GameArea.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Entry/surface.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/GameArea/surface.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/GameArea/GameArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GameArea/GameArea.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/GameArea/GameAreaLanguage_zh_CN.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/GameArea/GameAreaLanguage_zh_CN.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/GameArea/surface.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/GameArea/surface.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,18 +36,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "D:/ComputerScience/Java/javaFX/DarkChess/src/main/resources/GameArea/Language",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "File.Encoding"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/ComputerScience/Java/javaFX/DarkChess/src/main/resources/GameArea/Language&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;File.Encoding&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\ComputerScience\Java\javaFX\DarkChess\src\main\resources\GameArea\Language" />

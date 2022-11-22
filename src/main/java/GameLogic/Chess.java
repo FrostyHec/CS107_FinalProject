@@ -22,7 +22,7 @@ public class Chess {//小心chess为null时会出的bug
         if(rank == 2){//炮的走法
             //需要隔山打牛，不能直接移动
 
-            p = line(chess,x,y);//现在炮还不能横着打，原因不明
+            p = line(chess,x,y);
 
             //不能自相残杀,可以吃未翻开的棋子（有可能是自己的）
             int i = 0;
@@ -48,7 +48,10 @@ public class Chess {//小心chess为null时会出的bug
             if (rank == 1) {//兵只能吃将或兵
                 int i = 0;
                 for (int[] a : p) {
-                    if(a[0] == -1)continue;
+                    if(a[0] == -1){
+                        i++;
+                        continue;
+                    }
                     if(chess[a[0]][a[1]]==null || chess[a[0]][a[1]].getRank()==7 || chess[a[0]][a[1]].getRank()==1);
                     else p[i][0] = (p[i][1] = -1);
                     i++;
@@ -56,7 +59,10 @@ public class Chess {//小心chess为null时会出的bug
             } else if (rank == 7) {//将不能吃兵
                 int i = 0;
                 for (int[] a : p) {
-                    if(a[0] == -1)continue;
+                    if(a[0] == -1){
+                        i++;
+                        continue;
+                    }
                     if(chess[a[0]][a[1]]==null);
                     else if (chess[a[0]][a[1]].getRank() == 1)
                         p[i][0] = (p[i][1] = -1);
@@ -65,7 +71,10 @@ public class Chess {//小心chess为null时会出的bug
             } else {//其他子不能吃比自己大的棋子
                 int i = 0;
                 for (int[] a : p) {
-                    if(a[0] == -1)continue;
+                    if(a[0] == -1){
+                        i++;
+                        continue;
+                    }
                     if(chess[a[0]][a[1]]==null);
                     else if (chess[a[0]][a[1]].getRank() > rank)
                         p[i][0] = (p[i][1] = -1);

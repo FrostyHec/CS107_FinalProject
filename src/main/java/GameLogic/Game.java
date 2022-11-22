@@ -5,6 +5,12 @@ import java.util.*;
 public class Game {
     Player p1 = new Player(),p2 = new Player();
     Chess[][] chess = new Chess[8][4];
+
+    public Chess[][] getChess(){
+        return chess;
+    }
+
+
     private int[][] diedChess = new int[2][7];
     //第一个代表死去棋子的颜色，RED为0
     //第二个代表死去棋子的rank-1

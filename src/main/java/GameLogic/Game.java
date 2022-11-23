@@ -156,4 +156,5 @@ public class Game {
         if(p1.getColor()==color)return p2;
         else return p1;
     }
+
 }

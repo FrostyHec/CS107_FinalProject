@@ -84,3 +84,11 @@
 #Selected{
 -fx-image: url(../images/Select/Selected.png);
 }
+
+//用户颜色
+#PlayerColorRED{
+-fx-background-image: url(../images/PlayerColor/RED.png);
+}
+#PlayerColorBLACK{
+-fx-background-image: url(../images/PlayerColor/BLACK.png);
+}

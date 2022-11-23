@@ -3,16 +3,18 @@ package GameArea;
 import GameLogic.Chess;
 import GameLogic.Color;
 import javafx.application.Platform;
-import javafx.beans.binding.Bindings;
-import javafx.beans.property.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.effect.ImageInput;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import GameLogic.Game;
 import javafx.scene.layout.Pane;
 
+import java.io.FileInputStream;
+import java.net.URL;
 import java.util.*;
 
 public class GameArea {
@@ -20,11 +22,18 @@ public class GameArea {
     private final int squareSize = 80;
     private final int chessSize = 70;
 
-    //控件模块
+    //控件模块8
+
     public Pane Chessboard;
     public Label player1Score;
     public Label player2Score;
     public Label gameStates;
+    public Label firstHand;
+    public Label secondHand;
+    public ImageView player1Icon;
+    public ImageView player2Icon;
+    public Pane player1Color;
+    public Pane player2Color;
     private Game game;
     private final Handler handler = new Handler();
     private final TextHandler textHandler = new TextHandler();
@@ -36,15 +45,17 @@ public class GameArea {
     @FXML
     public void initialize() {
         game.init();
-        handler.refresh();
+        handler.initialize();
+        ChessMove.resetCount();
+        textHandler.initialize();
     }
 
     public void chessMove(MouseEvent event) {
-        new chessMove().invoke(event);
+        new ChessMove().invoke(event);
     }
 
 
-    class chessMove {
+    class ChessMove {
         static private long count = 0L;
         private final int selectedSize = squareSize - 8;
         private int column;
@@ -57,7 +68,7 @@ public class GameArea {
         }
 
         public void invoke(MouseEvent event) {
-            //我也不知道为什么鼠标侦听器会听两次，属于是大无语了
+            //我也不知道为什么鼠标侦听器会调用两次，属于是大无语了
             count++;
             if (count % 2 == 0) {
                 return;
@@ -77,8 +88,11 @@ public class GameArea {
             System.out.println(clickResult);
             System.out.println("now:" + game.nowPlay().getColor().toString() + " " + game.nowPlay().getScore());
 
-
             analyzeClickResult(clickResult);
+
+            if (count == 1) {
+                handler.refreshColor();
+            }
         }
 
         private void showSelectedChess(int row, int column) {
@@ -144,6 +158,9 @@ public class GameArea {
             }
         }
 
+        public static void resetCount() {
+            count = 0;
+        }
 
     }
 
@@ -212,6 +229,25 @@ public class GameArea {
             refreshChessboard();
             textHandler.refreshScore();
         }
+
+        public void refreshColor() {
+            player1Color.setId("PlayerColor" + game.getPlayer1().getColor().toString());
+            player2Color.setId("PlayerColor" + game.getPlayer2().getColor().toString());
+        }
+
+        public void initialize() {
+            refresh();
+            refreshIcon();
+        }
+
+        public void refreshIcon() {//有待扩展
+            try {
+                player1Icon.setImage(new Image(new FileInputStream("src/main/resources/images/UserImage/tempUser.png")));
+                player2Icon.setImage(new Image(new FileInputStream("src/main/resources/images/UserImage/tempUser.png")));
+            } catch (Exception e) {
+                System.out.println("图片加载失败！");
+            }
+        }
     }
 
     class TextHandler {
@@ -246,9 +282,18 @@ public class GameArea {
             alert.showAndWait();
         }//晚点再美化这个界面
 
-        public void refreshScore(){
+        public void refreshScore() {
             player1Score.setText(Integer.toString(game.getPlayer1().getScore()));
             player2Score.setText(Integer.toString(game.getPlayer2().getScore()));
+        }
+
+        public void initialize() {
+            refreshName();
+        }
+
+        private void refreshName() {
+            firstHand.setText(t.getString("Player1"));
+            secondHand.setText(t.getString("Player2"));
         }
 
     }

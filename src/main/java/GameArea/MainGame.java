@@ -1,5 +1,6 @@
 package GameArea;
 
+import GameLogic.Game;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -18,7 +19,6 @@ public class MainGame extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-
         //窗体基本属性
         stage.setTitle("DarkChess");
         stage.setResizable(false);

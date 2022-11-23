@@ -15,24 +15,30 @@
    <children>
        <BorderPane prefHeight="800.0" prefWidth="600.0">
            <center>
-               <Pane prefHeight="861.0" prefWidth="601.0" BorderPane.alignment="CENTER">
+               <Pane BorderPane.alignment="CENTER">
                <children>
-                  <Pane id="Chessboardimg" layoutX="48.0" layoutY="25.0" onMouseClicked="#chessMove" prefHeight="670.0" prefWidth="384.3">
+                  <Pane id="Chessboardimg" layoutX="13.0" layoutY="25.0" onMouseClicked="#chessMove" prefHeight="670.0" prefWidth="384.3">
                      <children>
                         <Pane id="Chessboard" fx:id="Chessboard" layoutX="20.0" layoutY="16.0" onMouseClicked="#chessMove" prefHeight="640.0" prefWidth="320.0" />
                      </children></Pane>
                </children>
                </Pane>
            </center>
-           <top>
-             <HBox prefHeight="80.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
-           </top>
          <right>
-            <Pane prefHeight="728.0" prefWidth="60.0" BorderPane.alignment="CENTER" />
+            <Pane prefWidth="95.0" BorderPane.alignment="CENTER" />
          </right>
          <left>
-            <Pane prefHeight="719.0" prefWidth="60.0" BorderPane.alignment="CENTER" />
+            <Pane prefHeight="719.0" prefWidth="95.0" BorderPane.alignment="CENTER" />
          </left>
+         <top>
+            <Pane prefHeight="90.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label fx:id="player1Score" layoutX="73.0" layoutY="19.0" prefHeight="53.0" prefWidth="96.0" text="玩家1" />
+                  <Label fx:id="player2Score" layoutX="443.0" layoutY="19.0" prefHeight="53.0" prefWidth="96.0" text="玩家2" />
+                  <Label fx:id="gameStates" alignment="CENTER" contentDisplay="CENTER" layoutX="191.0" layoutY="19.0" prefHeight="53.0" prefWidth="219.0" text="游戏状态" />
+               </children>
+            </Pane>
+         </top>
        </BorderPane>
    </children>
 </Pane>

@@ -2,24 +2,29 @@ package GameArea;
 
 import GameLogic.Chess;
 import GameLogic.Color;
-import GameLogic.Player;
 import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import GameLogic.Game;
 import javafx.scene.layout.Pane;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class GameArea {
+    //基本常量
     private final int squareSize = 80;
     private final int chessSize = 70;
+
+    //控件模块
     public Pane Chessboard;
+    public Label player1Score;
+    public Label player2Score;
+    public Label gameStates;
     private Game game;
     private final Handler handler = new Handler();
     private final TextHandler textHandler = new TextHandler();
@@ -30,15 +35,13 @@ public class GameArea {
 
     @FXML
     public void initialize() {
-
         game.init();
-        handler.refreshChessboard();
+        handler.refresh();
     }
 
     public void chessMove(MouseEvent event) {
         new chessMove().invoke(event);
     }
-
 
 
     class chessMove {
@@ -112,7 +115,7 @@ public class GameArea {
         }
 
         private void analyzeClickResult(ClickResult clickResult) {
-            handler.refreshChessboard();
+            handler.refresh();
             switch (clickResult) {
                 case Player1Win -> {
                     handler.gameOver(1);
@@ -204,6 +207,11 @@ public class GameArea {
         private void exit() {
             Platform.exit();
         }
+
+        public void refresh() {
+            refreshChessboard();
+            textHandler.refreshScore();
+        }
     }
 
     class TextHandler {
@@ -237,6 +245,12 @@ public class GameArea {
             alert.setHeaderText(headerText);
             alert.showAndWait();
         }//晚点再美化这个界面
+
+        public void refreshScore(){
+            player1Score.setText(Integer.toString(game.getPlayer1().getScore()));
+            player2Score.setText(Integer.toString(game.getPlayer2().getScore()));
+        }
+
     }
 }
 

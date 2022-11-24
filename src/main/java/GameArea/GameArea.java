@@ -3,10 +3,12 @@ package GameArea;
 import GameLogic.Chess;
 import GameLogic.Color;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.effect.ImageInput;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -14,7 +16,6 @@ import GameLogic.Game;
 import javafx.scene.layout.Pane;
 
 import java.io.FileInputStream;
-import java.net.URL;
 import java.util.*;
 
 public class GameArea {
@@ -34,6 +35,9 @@ public class GameArea {
     public ImageView player2Icon;
     public Pane player1Color;
     public Pane player2Color;
+    public Button ButtonCheat;
+    public ImageView cheatImage;
+    public Label cheatTitle;
     private Game game;
     private final Handler handler = new Handler();
     private final TextHandler textHandler = new TextHandler();
@@ -48,12 +52,58 @@ public class GameArea {
         handler.initialize();
         ChessMove.resetCount();
         textHandler.initialize();
+
     }
 
     public void chessMove(MouseEvent event) {
         new ChessMove().invoke(event);
     }
 
+    public void cheatClick(ActionEvent event) {
+        if (!CheatModel.cheatClick()) {//清空作弊板
+            handler.cleanCheatTable();
+        } else {
+            handler.initializeCheatTable();
+        }
+
+    }
+
+    class CheatModel {
+        static private boolean isStart = false;
+        static private long count = 0L;
+        private int column;
+        private int row;
+
+        private boolean generateRowAndColumn(double x, double y) {
+            column = (int) x / squareSize;
+            row = (int) y / squareSize;
+            return row <= 7 && column <= 3;//可以进一步限制
+        }
+
+        public static boolean cheatClick() {
+            isStart = !isStart;
+            return isStart;
+        }
+
+        class RefreshCheatImage implements EventHandler<MouseEvent> {
+            @Override
+            public void handle(MouseEvent event) {
+                if (!generateRowAndColumn(event.getX(), event.getY())) {
+                    return;
+                }
+                if (!isStart) {
+                    return;
+                }
+                handler.refreshCheatImage(row, column);
+            }
+        }
+        class CleanCheatImage implements EventHandler<MouseEvent>{
+            @Override
+            public void handle(MouseEvent event) {
+                handler.cleanCheatImage();
+            }
+        }
+    }
 
     class ChessMove {
         static private long count = 0L;
@@ -184,6 +234,8 @@ public class GameArea {
                     c.setY(getGraphicY(row, chessSize));
                     c.setFitHeight(chessSize);
                     c.setFitWidth(chessSize);
+                    c.addEventFilter(MouseEvent.MOUSE_ENTERED, event -> new CheatModel().new RefreshCheatImage().handle(event));
+                    c.addEventFilter(MouseEvent.MOUSE_EXITED, event -> new CheatModel().new CleanCheatImage().handle(event));
                     Chess thisChess = game.getChess(row, column);
 
                     //有很多，先判断是不是空，再判断是否翻开来，再判断颜色，最后判断棋子种类
@@ -238,6 +290,7 @@ public class GameArea {
         public void initialize() {
             refresh();
             refreshIcon();
+            cleanCheatTable();
         }
 
         public void refreshIcon() {//有待扩展
@@ -248,6 +301,52 @@ public class GameArea {
                 System.out.println("图片加载失败！");
             }
         }
+
+        public void initializeCheatTable() {
+            cheatTitle.setVisible(true);
+            cheatImage.setVisible(true);
+            ButtonCheat.getStyleClass().add("ButtonOn");
+        }
+
+        public void cleanCheatTable() {
+            cleanCheatImage();
+            cheatTitle.setVisible(false);
+            cheatImage.setVisible(false);
+            ButtonCheat.getStyleClass().add("ButtonOff");
+        }
+
+        public void refreshCheatImage(int row, int column) {
+            //获取棋子
+            Chess thisChess = game.getChess(row, column);
+
+            //有很多，先判断是不是空，再判断是否翻开来，再判断颜色，最后判断棋子种类
+            if (thisChess == null) {//空
+                return;
+            }
+            if (thisChess.isTurnOver()) {//翻开了
+                return;
+            }
+
+            //命名规范: R/B+General/Advisor/Minister/Chariot/Horse/Cannon/Soldier+Chess
+            StringBuilder sb = new StringBuilder();
+            if (thisChess.getColor().equals(Color.RED)) {
+                sb.append("R");
+            } else if (thisChess.getColor().equals(Color.BLACK)) {
+                sb.append("B");
+            }
+
+            //我还是不hardcode了
+            ChessKind thisChessKind = ChessKind.getKind(thisChess.getRank());
+
+            sb.append(thisChessKind);
+            sb.append("Chess");
+            cheatImage.setId(sb.toString());
+        }
+
+        public void cleanCheatImage() {
+            cheatImage.setImage(null);
+        }
+
     }
 
     class TextHandler {

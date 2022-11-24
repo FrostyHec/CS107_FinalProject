@@ -20,13 +20,27 @@
                <children>
                   <Pane id="Chessboardimg" layoutX="13.0" layoutY="25.0" onMouseClicked="#chessMove" prefHeight="670.0" prefWidth="384.3">
                      <children>
-                        <Pane id="Chessboard" fx:id="Chessboard" layoutX="20.0" layoutY="16.0" onMouseClicked="#chessMove" prefHeight="640.0" prefWidth="320.0" />
+                        <Pane id="Chessboard" fx:id="Chessboard" layoutX="20.0" layoutY="16.0" onMouseClicked="#chessMove" onMouseEntered="#getCheatChess" onMouseExited="#exitCheatChess" prefHeight="640.0" prefWidth="320.0" />
                      </children></Pane>
                </children>
                </Pane>
            </center>
          <right>
-            <Pane prefWidth="95.0" BorderPane.alignment="CENTER" />
+            <Pane prefWidth="95.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button layoutY="607.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="95.0" text="Button">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="ButtonCheat" alignment="CENTER" layoutY="562.0" mnemonicParsing="false" onAction="#cheatClick" prefHeight="45.0" prefWidth="95.0" text="开启作弊">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Button>
+                  <ImageView fx:id="cheatImage" fitHeight="80.0" fitWidth="80.0" layoutX="8.0" layoutY="476.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label fx:id="cheatTitle" alignment="CENTER" layoutY="443.0" prefHeight="25.0" prefWidth="95.0" text="此棋子" />
+               </children></Pane>
          </right>
          <left>
             <Pane prefHeight="719.0" prefWidth="95.0" BorderPane.alignment="CENTER" />

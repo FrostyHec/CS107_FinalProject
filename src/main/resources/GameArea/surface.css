@@ -3,7 +3,7 @@
     }
 
 .button:hover {
-    -fx-background-color: blue;
+    -fx-background-color: yellow;
 }
 .imageView{
 -fx-size: 100% 100%;
@@ -91,4 +91,12 @@
 }
 #PlayerColorBLACK{
 -fx-background-image: url(../images/PlayerColor/BLACK.png);
+}
+
+//按钮亮灭
+.ButtonOn{
+    -fx-background-color: green;
+}
+.ButtonOff{
+   -fx-background-color: rgba(255, 255, 255, .1);
 }

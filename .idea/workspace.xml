@@ -7,8 +7,8 @@
     <list default="true" id="bea79dc5-57f0-48e7-b850-a9fcd65d4f0c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/GameArea/GameArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GameArea/GameArea.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/GameArea/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GameArea/GameState.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/GameArea/GameArea.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/GameArea/GameArea.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/GameArea/surface.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/GameArea/surface.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,6 +66,19 @@
     </key>
   </component>
   <component name="RunManager" selected="Application.MainGame">
+    <configuration name="GameArea.test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="GameArea.test" />
+      <module name="DarkChess" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="GameArea.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="GameArea.Main" />
       <module name="DarkChess" />
@@ -118,27 +131,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="com.example.darkchess in DarkChess" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="DarkChess" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="GameLogic.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.example.darkchess" />
-      <option name="TEST_OBJECT" value="package" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.MainGame" />
+        <item itemvalue="Application.GameArea.test" />
         <item itemvalue="Application.Main" />
         <item itemvalue="Application.Try" />
         <item itemvalue="Application.test" />
-        <item itemvalue="JUnit.com.example.darkchess in DarkChess" />
       </list>
     </recent_temporary>
   </component>

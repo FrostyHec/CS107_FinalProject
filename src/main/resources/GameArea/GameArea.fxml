@@ -9,7 +9,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GameArea.GameArea">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#GameAreaKeyPressed" prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GameArea.GameArea">
     <opaqueInsets>
         <Insets />
     </opaqueInsets>
@@ -20,7 +20,7 @@
                <children>
                   <Pane id="Chessboardimg" layoutX="13.0" layoutY="25.0" onMouseClicked="#chessMove" prefHeight="670.0" prefWidth="384.3">
                      <children>
-                        <Pane id="Chessboard" fx:id="Chessboard" layoutX="20.0" layoutY="16.0" onMouseClicked="#chessMove" onMouseEntered="#getCheatChess" onMouseExited="#exitCheatChess" prefHeight="640.0" prefWidth="320.0" />
+                        <Pane id="Chessboard" fx:id="Chessboard" layoutX="20.0" layoutY="16.0" onMouseClicked="#chessMove" prefHeight="640.0" prefWidth="320.0" />
                      </children></Pane>
                </children>
                </Pane>

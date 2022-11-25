@@ -11,6 +11,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import GameLogic.Game;
 import javafx.scene.layout.Pane;
@@ -19,12 +21,15 @@ import java.io.FileInputStream;
 import java.util.*;
 
 public class GameArea {
+    //游戏状态
+    private GameState gameState;
+    private ChangeGameState gameStateHandler;
+
     //基本常量
     private final int squareSize = 80;
     private final int chessSize = 70;
 
     //控件模块8
-
     public Pane Chessboard;
     public Label player1Score;
     public Label player2Score;
@@ -39,7 +44,7 @@ public class GameArea {
     public ImageView cheatImage;
     public Label cheatTitle;
     private Game game;
-    private final Handler handler = new Handler();
+    private final GraphicHandler graphicHandler = new GraphicHandler();
     private final TextHandler textHandler = new TextHandler();
 
     public GameArea() {
@@ -49,23 +54,36 @@ public class GameArea {
     @FXML
     public void initialize() {
         game.init();
-        handler.initialize();
+        graphicHandler.initialize();
         ChessMove.resetCount();
         textHandler.initialize();
 
     }
 
     public void chessMove(MouseEvent event) {
+        if(gameState==GameState.Pause){
+            return;
+        }
         new ChessMove().invoke(event);
     }
 
     public void cheatClick(ActionEvent event) {
+        if(gameState==GameState.Pause){
+            return;
+        }
         if (!CheatModel.cheatClick()) {//清空作弊板
-            handler.cleanCheatTable();
+            graphicHandler.cleanCheatTable();
+
         } else {
-            handler.initializeCheatTable();
+            graphicHandler.initializeCheatTable();
         }
 
+    }
+
+    public void GameAreaKeyPressed(KeyEvent event) {
+        if(event.getCode()== KeyCode.ESCAPE){
+            gameStateHandler.escPressed();
+        }
     }
 
     class CheatModel {
@@ -94,13 +112,14 @@ public class GameArea {
                 if (!isStart) {
                     return;
                 }
-                handler.refreshCheatImage(row, column);
+                graphicHandler.refreshCheatImage(row, column);
             }
         }
-        class CleanCheatImage implements EventHandler<MouseEvent>{
+
+        class CleanCheatImage implements EventHandler<MouseEvent> {
             @Override
             public void handle(MouseEvent event) {
-                handler.cleanCheatImage();
+                graphicHandler.cleanCheatImage();
             }
         }
     }
@@ -123,7 +142,6 @@ public class GameArea {
             if (count % 2 == 0) {
                 return;
             }
-
             //获取坐标
             if (!generateRowAndColumn(event.getX(), event.getY())) {
                 return;
@@ -141,7 +159,7 @@ public class GameArea {
             analyzeClickResult(clickResult);
 
             if (count == 1) {
-                handler.refreshColor();
+                graphicHandler.refreshColor();
             }
         }
 
@@ -149,8 +167,8 @@ public class GameArea {
 
 
             ImageView p = new ImageView();
-            p.setX(handler.getGraphicX(column, selectedSize));
-            p.setY(handler.getGraphicY(row, selectedSize));
+            p.setX(graphicHandler.getGraphicX(column, selectedSize));
+            p.setY(graphicHandler.getGraphicY(row, selectedSize));
             p.setFitHeight(selectedSize);
             p.setFitWidth(selectedSize);
             p.setId("Selected");
@@ -168,8 +186,8 @@ public class GameArea {
             }
             for (int[] position : possibleMove) {
                 ImageView p = new ImageView();
-                p.setX(handler.getGraphicX(position[1], selectedSize));
-                p.setY(handler.getGraphicY(position[0], selectedSize));
+                p.setX(graphicHandler.getGraphicX(position[1], selectedSize));
+                p.setY(graphicHandler.getGraphicY(position[0], selectedSize));
                 p.setFitHeight(selectedSize);
                 p.setFitWidth(selectedSize);
                 p.setId("PossibleMove");
@@ -179,13 +197,13 @@ public class GameArea {
         }
 
         private void analyzeClickResult(ClickResult clickResult) {
-            handler.refresh();
+            graphicHandler.refresh();
             switch (clickResult) {
                 case Player1Win -> {
-                    handler.gameOver(1);
+                    graphicHandler.gameOver(1);
                 }
                 case Player2Win -> {
-                    handler.gameOver(2);
+                    graphicHandler.gameOver(2);
                 }
                 case Finished -> {
                 }
@@ -213,8 +231,29 @@ public class GameArea {
         }
 
     }
+    class ChangeGameState{
+        private boolean firstEsc =false;
+        private GameState previousGameState;
+        private void toPause(){
+            previousGameState=gameState;
+            gameState = GameState.Pause;
+            firstEsc=true;
+        }
+        private void fromPause(){
+            gameState = previousGameState;
+            firstEsc=false;
+        }
 
-    class Handler {
+        public void escPressed() {
+            if(firstEsc){
+                fromPause();
+            }else {
+                toPause();
+            }
+        }
+    }
+
+    class GraphicHandler {
         public int getGraphicX(int column, int size) {
             return column * squareSize + (squareSize - size) / 2;
         }
@@ -305,6 +344,8 @@ public class GameArea {
         public void initializeCheatTable() {
             cheatTitle.setVisible(true);
             cheatImage.setVisible(true);
+            ButtonCheat.getStyleClass().clear();
+            ButtonCheat.getStyleClass().add("button");
             ButtonCheat.getStyleClass().add("ButtonOn");
         }
 
@@ -312,6 +353,8 @@ public class GameArea {
             cleanCheatImage();
             cheatTitle.setVisible(false);
             cheatImage.setVisible(false);
+            ButtonCheat.getStyleClass().clear();
+            ButtonCheat.getStyleClass().add("button");
             ButtonCheat.getStyleClass().add("ButtonOff");
         }
 
@@ -344,7 +387,7 @@ public class GameArea {
         }
 
         public void cleanCheatImage() {
-            cheatImage.setImage(null);
+            cheatImage.setId(null);
         }
 
     }
@@ -393,6 +436,10 @@ public class GameArea {
         private void refreshName() {
             firstHand.setText(t.getString("Player1"));
             secondHand.setText(t.getString("Player2"));
+        }
+
+        public void refreshGameState(){
+
         }
 
     }

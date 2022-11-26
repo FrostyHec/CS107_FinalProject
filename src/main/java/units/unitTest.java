@@ -6,6 +6,6 @@ public class unitTest {
     public static void main(String[] args) {
         Game game = new Game();
         game.init();
-        SaveGame.save(game);
+        SaveGame.save(game,"D:\\files\\game.ser");
     }
 }

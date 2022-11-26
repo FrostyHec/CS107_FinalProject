@@ -2,7 +2,9 @@ package GameLogic;
 
 import java.util.*;
 
-public class Game {
+public class Game implements java.io.Serializable{
+
+
     Player p1 = new Player(),p2 = new Player();
 
     public Player getPlayer1(){
@@ -13,9 +15,13 @@ public class Game {
         return p2;
     }
     Chess[][] chess = new Chess[8][4];
+    Chess[][] chess_init = new Chess[8][4];
 
     public Chess[][] getChess(){
         return chess;
+    }
+    public Chess[][] getChess_init(){
+        return chess_init;
     }
 
 
@@ -128,6 +134,7 @@ public class Game {
         for(int m=0;m<chess.length;m++){
             for(int n=0;n<chess[m].length;n++){
                 chess[m][n] = ch.get(i);
+                chess_init[m][n] = ch.get(i);
                 i++;
             }
         }

@@ -4,10 +4,11 @@ import GameLogic.*;
 import java.io.*;
 
 public class LoadGame {
-    public static void main(String[] args) {
-        Game e = null;
+    Game e = null;
+    public void deserialize(String path) {
+
         try {
-            FileInputStream fileIn = new FileInputStream("D:\\files\\game.ser");
+            FileInputStream fileIn = new FileInputStream(path);
             ObjectInputStream in = new ObjectInputStream(fileIn);
             e = (Game) in.readObject();
             in.close();
@@ -20,12 +21,10 @@ public class LoadGame {
             c.printStackTrace();
             return;
         }
-        System.out.println(e.getMoves());
-        for(Chess[] c : e.getChess()){
-            for(Chess cc : c){
-                System.out.print(cc.getColor());
-                System.out.println(cc.getRank());
-            }
-        }
+        System.out.println("successfully deserialized");
+    }
+
+    public Game getGame(){
+        return e;
     }
 }

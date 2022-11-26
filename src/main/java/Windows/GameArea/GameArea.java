@@ -2,7 +2,9 @@ package Windows.GameArea;
 
 import GameLogic.Chess;
 import GameLogic.Color;
+import Windows.StartMenu.Main;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -15,6 +17,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import GameLogic.Game;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 import java.io.FileInputStream;
 import java.util.*;
@@ -100,6 +103,15 @@ public class GameArea {
 
     public void clickRemake() {
         initialize();
+    }
+
+    public void saveAndExit() {
+        try {
+            new Main().start(new Stage());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        ((Stage)Chessboard.getScene().getWindow()).close();
     }
 
     class CheatModel {
@@ -349,12 +361,9 @@ public class GameArea {
 
         public void gameOver(int playerNumber) {
             textHandler.getWinner(playerNumber);
-            exit();
+            saveAndExit();
         }
 
-        private void exit() {
-            Platform.exit();
-        }
 
         public void refresh() {
             refreshChessboard();

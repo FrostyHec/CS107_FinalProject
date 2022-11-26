@@ -83,7 +83,7 @@
                   <Button fx:id="btnContinue" layoutX="33.0" layoutY="88.0" mnemonicParsing="false" onAction="#btnContinueGame" prefHeight="50.0" prefWidth="125.0" text="继续游戏" />
                   <Button fx:id="btnRemake" layoutX="33.0" layoutY="153.0" mnemonicParsing="false" onAction="#clickRemake" prefHeight="50.0" prefWidth="125.0" text="重新开始" />
                   <Label layoutX="50.0" layoutY="28.0" text="游戏已暂停" />
-                  <Button fx:id="btnQuit" layoutX="33.0" layoutY="216.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="125.0" text="保存并退出" />
+                  <Button fx:id="btnQuit" layoutX="33.0" layoutY="216.0" mnemonicParsing="false" onAction="#saveAndExit" prefHeight="50.0" prefWidth="125.0" text="保存并退出" />
                   <Button fx:id="btnSetup" layoutX="33.0" layoutY="279.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="125.0" text="设置" />
                </children>
             </Pane>

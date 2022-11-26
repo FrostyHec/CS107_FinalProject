@@ -5,15 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bea79dc5-57f0-48e7-b850-a9fcd65d4f0c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Windows/StartMenu/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Windows/SetUp/surface.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Windows/SetUp/GameSettings.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Windows/SetUp/NormalSettings.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Windows/SetUp/StartMenu.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Windows/StartMenu/StartNextPage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Windows/StartMenu/default.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Windows/StartMenu/startNextPage.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Windows/GameArea/GameArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Windows/GameArea/GameArea.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Windows/GameArea/MainGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Windows/GameArea/MainGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Windows/GameArea/SetUp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Windows/SetUp/SetUp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Windows/GameArea/SetUp.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Windows/SetUp/SetUp.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Windows/GameArea/StartMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Windows/StartMenu/StartMenu.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Windows/GameArea/surface.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Windows/GameArea/default.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Windows/SetUp/SetUp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Windows/SetUp/SetUp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Windows/StartMenu/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Windows/StartMenu/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Windows/StartMenu/StartMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Windows/StartMenu/StartMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Windows/GameArea/GameArea.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Windows/GameArea/GameArea.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Windows/SetUp/surface.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Windows/StartMenu/StartMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Windows/StartMenu/StartMenu.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,6 +53,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "last_directory_selection": "D:/ComputerScience/Java/javaFX/DarkChess/src/main/java/Windows/StartMenu",
     "last_opened_file_path": "D:/ComputerScience/Java/javaFX/DarkChess/src/main/resources/Windows/SetUp",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
@@ -63,11 +70,11 @@
       <recent name="D:\ComputerScience\Java\javaFX\DarkChess\src\main\resources\GameArea\Language" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\ComputerScience\Java\javaFX\DarkChess\src\main\resources\Windows\StartMenu" />
       <recent name="D:\ComputerScience\Java\javaFX\DarkChess\src\main\resources\Windows\GameArea" />
       <recent name="D:\ComputerScience\Java\javaFX\DarkChess\src\main\resources\Windows\CssFiles" />
       <recent name="D:\ComputerScience\Java\javaFX\DarkChess\src\main\resources\Windows" />
       <recent name="D:\ComputerScience\Java\javaFX\DarkChess\src\main\resources\Windows\CssFiles\GameSurface" />
-      <recent name="D:\ComputerScience\Java\javaFX\DarkChess\src\main\resources\Windows\StartMenu" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="Windows" />
@@ -75,7 +82,7 @@
       <recent name="GameArea" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.MainGame">
+  <component name="RunManager" selected="Application.SetUp">
     <configuration name="GameArea.test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="GameArea.test" />
       <module name="DarkChess" />
@@ -115,12 +122,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Try" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="GameLogic.Try" />
+    <configuration name="SetUp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Windows.SetUp.SetUp" />
       <module name="DarkChess" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="GameLogic.*" />
+          <option name="PATTERN" value="Windows.SetUp.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -143,11 +150,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.MainGame" />
+        <item itemvalue="Application.SetUp" />
         <item itemvalue="Application.Windows.StartMenu.Main" />
+        <item itemvalue="Application.MainGame" />
         <item itemvalue="Application.GameArea.test" />
         <item itemvalue="Application.Main" />
-        <item itemvalue="Application.Try" />
       </list>
     </recent_temporary>
   </component>

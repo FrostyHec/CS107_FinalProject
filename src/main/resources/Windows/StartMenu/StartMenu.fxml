@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.chart.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="Windows.StartMenu.StartMenu"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<Pane fx:id="paneStartMenu" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Windows.StartMenu.StartMenu">
+   <children>
+      <Button layoutX="63.0" layoutY="200.0" mnemonicParsing="false" text="双人游戏" />
+      <Button layoutX="63.0" layoutY="250.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="96.0" text="积分榜" />
+      <Button layoutX="63.0" layoutY="150.0" mnemonicParsing="false" onAction="#startNextPage" text="开始游戏" />
+      <Button layoutX="481.0" layoutY="350.0" mnemonicParsing="false" text="设置" />
+   </children>
+</Pane>

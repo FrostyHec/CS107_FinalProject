@@ -19,7 +19,7 @@ public class MainGame extends Application {
         stage.setTitle("DarkChess");
         stage.setResizable(false);
         //加载fxml
-        Application.setUserAgentStylesheet(getClass().getResource("surface.css").toExternalForm());
+        Application.setUserAgentStylesheet(getClass().getResource("default.css").toExternalForm());
         FXMLLoader fxmlLoader = new FXMLLoader(MainGame.class.getResource("GameArea.fxml"));
         stage.setScene(new Scene(fxmlLoader.load(), 600, 800));
         stage.show();

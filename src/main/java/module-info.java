@@ -9,4 +9,6 @@ module com.example.darkchess {
     opens GameLogic to javafx.fxml;
     exports Windows.StartMenu;
     opens Windows.StartMenu to javafx.fxml;
+    exports Windows.SetUp;
+    opens Windows.SetUp to javafx.fxml;
 }

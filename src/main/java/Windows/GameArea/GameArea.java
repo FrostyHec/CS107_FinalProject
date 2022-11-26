@@ -1,9 +1,8 @@
-package GameArea;
+package Windows.GameArea;
 
 import GameLogic.Chess;
 import GameLogic.Color;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -376,8 +375,8 @@ public class GameArea {
 
         public void refreshIcon() {//有待扩展
             try {
-                player1Icon.setImage(new Image(new FileInputStream("src/main/resources/images/UserImage/tempUser.png")));
-                player2Icon.setImage(new Image(new FileInputStream("src/main/resources/images/UserImage/tempUser.png")));
+                player1Icon.setImage(new Image(new FileInputStream("src/main/resources/Windows/images/UserImage/tempUser.png")));
+                player2Icon.setImage(new Image(new FileInputStream("src/main/resources/Windows/images/UserImage/tempUser.png")));
             } catch (Exception e) {
                 System.out.println("图片加载失败！");
             }
@@ -447,7 +446,7 @@ public class GameArea {
 
     class TextHandler {
         Locale locale = Locale.getDefault();//后面可以改
-        ResourceBundle t = ResourceBundle.getBundle("GameArea/GameAreaLanguage", locale);
+        ResourceBundle t = ResourceBundle.getBundle("Language/GameAreaLanguage", locale);
 
         public void getWinner(int playerNum) {
             //生成赢家信息

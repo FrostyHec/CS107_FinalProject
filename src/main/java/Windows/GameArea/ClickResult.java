@@ -1,4 +1,4 @@
-package GameArea;
+package Windows.GameArea;
 
 public enum ClickResult {
     Finished(0),

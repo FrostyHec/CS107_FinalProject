@@ -1,15 +1,11 @@
-package GameArea;
+package Windows.GameArea;
 
-import GameLogic.Game;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.Locale;
-import java.util.ResourceBundle;
 
 public class MainGame extends Application {
     @Override
@@ -22,7 +18,6 @@ public class MainGame extends Application {
         //窗体基本属性
         stage.setTitle("DarkChess");
         stage.setResizable(false);
-
         //加载fxml
         Application.setUserAgentStylesheet(getClass().getResource("surface.css").toExternalForm());
         FXMLLoader fxmlLoader = new FXMLLoader(MainGame.class.getResource("GameArea.fxml"));

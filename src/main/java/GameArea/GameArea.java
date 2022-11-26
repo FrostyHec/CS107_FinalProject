@@ -21,9 +21,16 @@ import java.io.FileInputStream;
 import java.util.*;
 
 public class GameArea {
+    //暂停界面
+    public Pane pausePane;
+    public Pane paneChoose;
+    public Button btnContinue;
+    public Button btnQuit;
+    public Button btnSetup;
+    public Button btnRemake;
     //游戏状态
     private GameState gameState;
-    private GameStateHandler gameStateHandler =new GameStateHandler();
+    private GameStateHandler gameStateHandler = new GameStateHandler();
 
     //基本常量
     private final int squareSize = 80;
@@ -62,15 +69,15 @@ public class GameArea {
     }
 
     public void chessMove(MouseEvent event) {
-        if(gameState==GameState.Pause){
+        if (gameState == GameState.Pause) {
             return;
         }
         new ChessMove().invoke(event);
         gameStateHandler.changed();
     }
 
-    public void cheatClick(ActionEvent event) {
-        if(gameState==GameState.Pause){
+    public void cheatClick() {
+        if (gameState == GameState.Pause) {
             return;
         }
         if (!CheatModel.cheatClick()) {//清空作弊板
@@ -83,14 +90,21 @@ public class GameArea {
     }
 
     public void GameAreaKeyPressed(KeyEvent event) {
-        if(event.getCode()== KeyCode.ESCAPE){
+        if (event.getCode() == KeyCode.ESCAPE) {
             gameStateHandler.escPressed();
         }
     }
 
+    public void btnContinueGame() {
+        gameStateHandler.continueGame();
+    }
+
+    public void clickRemake() {
+        initialize();
+    }
+
     class CheatModel {
         static private boolean isStart = false;
-        static private long count = 0L;
         private int column;
         private int row;
 
@@ -108,7 +122,7 @@ public class GameArea {
         class RefreshCheatImage implements EventHandler<MouseEvent> {
             @Override
             public void handle(MouseEvent event) {
-                if(gameState==GameState.Pause){
+                if (gameState == GameState.Pause) {
                     return;
                 }
                 if (!generateRowAndColumn(event.getX(), event.getY())) {
@@ -204,30 +218,18 @@ public class GameArea {
         private void analyzeClickResult(ClickResult clickResult) {
             graphicHandler.refresh();
             switch (clickResult) {
-                case Player1Win -> {
-                    graphicHandler.gameOver(1);
-                }
-                case Player2Win -> {
-                    graphicHandler.gameOver(2);
-                }
+                case Player1Win -> graphicHandler.gameOver(1);
+                case Player2Win -> graphicHandler.gameOver(2);
+
                 case Finished -> {
                 }
                 case Continue -> {
                     showSelectedChess(row, column);
                     showPossibleMove(row, column);
                 }
-                case ChoosingOthers -> {
-                }
-                case SelfCapture -> {
-                }
-                case UnturnedCapture -> {
-                }
-                case LargerCapture -> {
-                }
-                case KingCaptureSolider -> {
-                }
-                case UnknownError -> {
-                }
+                case UnknownError ->
+                        textHandler.showAlert(Alert.AlertType.ERROR, "Wrong Happened!", "null", "ClickResult is Missing");
+
             }
         }
 
@@ -236,48 +238,58 @@ public class GameArea {
         }
 
     }
+
     class GameStateHandler {
-        private boolean firstEsc =false;
         private GameState previousGameState;
-        private void toPause(){
-            previousGameState=gameState;
+
+        private void toPause() {
+            graphicHandler.showPause();
+            previousGameState = gameState;
             gameState = GameState.Pause;
-            firstEsc=true;
             System.out.println("游戏已暂停");
         }
-        private void fromPause(){
+
+        private void fromPause() {
+            graphicHandler.hidePause();
             gameState = previousGameState;
-            firstEsc=false;
             System.out.println("游戏已继续");
         }
 
         public void escPressed() {
-            if(firstEsc){
+            if (gameState == GameState.Pause) {
                 fromPause();
-            }else {
+            } else {
                 toPause();
 
             }
             textHandler.refreshGameState();
         }
-        public void changed(){
-            switch (game.nowPlay().getColor()){
+
+        public void continueGame() {
+            fromPause();
+            textHandler.refreshGameState();
+        }
+
+        @SuppressWarnings("RedundantLabeledSwitchRuleCodeBlock")
+        public void changed() {
+            switch (game.nowPlay().getColor()) {
                 case RED -> {
-                    gameState=GameState.RedTurn;
+                    gameState = GameState.RedTurn;
                 }
                 case BLACK -> {
-                    gameState=GameState.BlackTurn;
+                    gameState = GameState.BlackTurn;
                 }
                 case UNKNOWN -> {
-                    gameState=GameState.FirstHandChoose;
+                    gameState = GameState.FirstHandChoose;
                 }
             }
 
             textHandler.refreshGameState();
         }
 
-        public void initialize(){
-            gameState=GameState.FirstHandChoose;
+        public void initialize() {
+
+            gameState = GameState.FirstHandChoose;
             textHandler.refreshGameState();
         }
     }
@@ -359,6 +371,7 @@ public class GameArea {
             refresh();
             refreshIcon();
             cleanCheatTable();
+            hidePause();
         }
 
         public void refreshIcon() {//有待扩展
@@ -419,6 +432,17 @@ public class GameArea {
             cheatImage.setId(null);
         }
 
+        public void showPause() {
+            pausePane.setVisible(true);
+            pausePane.setDisable(false);
+        }
+
+        public void hidePause() {
+            pausePane.setVisible(false);
+            pausePane.setDisable(true);
+
+        }
+
     }
 
     class TextHandler {
@@ -468,24 +492,21 @@ public class GameArea {
             secondHand.setText(t.getString("Player2"));
         }
 
-        private void refreshCheatModel(){
+        private void refreshCheatModel() {
             cheatButton.setText(t.getString("CheatModel.button"));
             cheatTitle.setText(t.getString("CheatModel.title"));
         }
-        public void refreshGameState(){
-            switch (gameState){
-                case FirstHandChoose -> {
-                    labelGameState.setText(t.getString("GameState.FirstHandChoose"));
-                }
-                case Pause -> {
-                    labelGameState.setText(t.getString("GameState.Pause"));
-                }
-                case RedTurn -> {
-                    labelGameState.setText(t.getString("GameState.RedTurn"));
-                }
-                case BlackTurn -> {
-                    labelGameState.setText(t.getString("GameState.BlackTurn"));
-                }
+
+        public void refreshGameState() {
+            switch (gameState) {
+                case FirstHandChoose -> labelGameState.setText(t.getString("GameState.FirstHandChoose"));
+
+                case Pause -> labelGameState.setText(t.getString("GameState.Pause"));
+
+                case RedTurn -> labelGameState.setText(t.getString("GameState.RedTurn"));
+
+                case BlackTurn -> labelGameState.setText(t.getString("GameState.BlackTurn"));
+
             }
 
         }

@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.canvas.*?>
 <?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#GameAreaKeyPressed" prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GameArea.GameArea">
     <opaqueInsets>
@@ -77,5 +75,19 @@
             </Pane>
          </top>
        </BorderPane>
+      <Pane fx:id="pausePane" prefHeight="800.0" prefWidth="600.0">
+         <children>
+            <ImageView id="pauseGray" fitHeight="800.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true" />
+            <Pane fx:id="paneChoose" layoutX="200.0" layoutY="218.0" prefHeight="355.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="btnContinue" layoutX="33.0" layoutY="88.0" mnemonicParsing="false" onAction="#btnContinueGame" prefHeight="50.0" prefWidth="125.0" text="继续游戏" />
+                  <Button fx:id="btnRemake" layoutX="33.0" layoutY="153.0" mnemonicParsing="false" onAction="#clickRemake" prefHeight="50.0" prefWidth="125.0" text="重新开始" />
+                  <Label layoutX="50.0" layoutY="28.0" text="游戏已暂停" />
+                  <Button fx:id="btnQuit" layoutX="33.0" layoutY="216.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="125.0" text="保存并退出" />
+                  <Button fx:id="btnSetup" layoutX="33.0" layoutY="279.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="125.0" text="设置" />
+               </children>
+            </Pane>
+         </children>
+      </Pane>
    </children>
 </Pane>

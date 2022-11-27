@@ -4,27 +4,27 @@ import GameLogic.*;
 import java.io.*;
 
 public class LoadGame {
-    Game e = null;
-    public void deserialize(String path) {
+    public static Game deserialize(String path) {//看能否做成选择的
+
+        Game game;
 
         try {
             FileInputStream fileIn = new FileInputStream(path);
             ObjectInputStream in = new ObjectInputStream(fileIn);
-            e = (Game) in.readObject();
+            game = (Game) in.readObject();
             in.close();
             fileIn.close();
         } catch (IOException i) {
             i.printStackTrace();
-            return;
+            return null;
         } catch (ClassNotFoundException c) {
             System.out.println("Game class not found");
             c.printStackTrace();
-            return;
+            return null;
         }
-        System.out.println("successfully deserialized");
-    }
+        //如果路径不对或者不是Game类的，直接return null，这里可能需要前端加以判断
 
-    public Game getGame(){
-        return e;
+        System.out.println("successfully deserialized");
+        return game;
     }
 }

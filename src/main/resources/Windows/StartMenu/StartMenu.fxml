@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.chart.*?>
 <?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
@@ -12,6 +9,6 @@
       <Button layoutX="63.0" layoutY="200.0" mnemonicParsing="false" text="双人游戏" />
       <Button layoutX="63.0" layoutY="250.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="96.0" text="积分榜" />
       <Button layoutX="63.0" layoutY="150.0" mnemonicParsing="false" onAction="#startNextPage" text="开始游戏" />
-      <Button layoutX="481.0" layoutY="350.0" mnemonicParsing="false" text="设置" />
+      <Button layoutX="481.0" layoutY="350.0" mnemonicParsing="false" onAction="#openSetUp" text="设置" />
    </children>
 </Pane>

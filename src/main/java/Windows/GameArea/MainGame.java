@@ -26,7 +26,7 @@ public class MainGame extends Application {
         //加载fxml
         Application.setUserAgentStylesheet(getClass().getResource("default.css").toExternalForm());
         FXMLLoader fxmlLoader = new FXMLLoader(MainGame.class.getResource("GameArea.fxml"));
-        stage.setScene(new Scene(fxmlLoader.load(), 600, 800));
+        stage.setScene(new Scene(fxmlLoader.load()));
         stage.show();
 
         stage.setOnCloseRequest(event -> {

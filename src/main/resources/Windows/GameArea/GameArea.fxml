@@ -7,14 +7,14 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#GameAreaKeyPressed" prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Windows.GameArea.GameArea">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#GameAreaKeyPressed" prefHeight="830.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Windows.GameArea.GameArea">
     <opaqueInsets>
         <Insets />
     </opaqueInsets>
    <children>
-       <BorderPane prefHeight="800.0" prefWidth="600.0">
+       <BorderPane prefHeight="830.0" prefWidth="600.0">
            <center>
-               <Pane BorderPane.alignment="CENTER">
+               <Pane prefHeight="791.0" prefWidth="410.0" BorderPane.alignment="CENTER">
                <children>
                   <Pane id="Chessboardimg" layoutX="13.0" layoutY="25.0" onMouseClicked="#chessMove" prefHeight="670.0" prefWidth="384.3">
                      <children>
@@ -24,24 +24,32 @@
                </Pane>
            </center>
          <right>
-            <Pane prefWidth="95.0" BorderPane.alignment="CENTER">
+            <Pane prefHeight="751.0" prefWidth="95.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button layoutY="607.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="95.0" text="Button">
+                  <VBox fx:id="diedChessP2" layoutX="9.0" prefHeight="560.0" prefWidth="80.0" />
+                  <Pane layoutY="570.0" prefHeight="170.0" prefWidth="95.0">
+                     <children>
+                        <Button fx:id="cheatButton" alignment="CENTER" layoutY="111.0" mnemonicParsing="false" onAction="#cheatClick" prefHeight="45.0" prefWidth="95.0" text="开启作弊">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                        </Button>
+                        <ImageView fx:id="cheatImage" fitHeight="73.0" fitWidth="73.0" layoutX="12.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label fx:id="cheatTitle" alignment="CENTER" layoutY="2.0" prefHeight="25.0" prefWidth="95.0" text="此棋子" />
+                     </children>
+                  </Pane>
+               </children></Pane>
+         </right>
+         <left>
+            <Pane prefHeight="719.0" prefWidth="95.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button layoutY="681.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="95.0" text="悔棋">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Button fx:id="cheatButton" alignment="CENTER" layoutY="562.0" mnemonicParsing="false" onAction="#cheatClick" prefHeight="45.0" prefWidth="95.0" text="开启作弊">
-                     <font>
-                        <Font name="System Bold" size="20.0" />
-                     </font>
-                  </Button>
-                  <ImageView fx:id="cheatImage" fitHeight="80.0" fitWidth="80.0" layoutX="8.0" layoutY="476.0" pickOnBounds="true" preserveRatio="true" />
-                  <Label fx:id="cheatTitle" alignment="CENTER" layoutY="443.0" prefHeight="25.0" prefWidth="95.0" text="此棋子" />
+                  <VBox fx:id="diedChessP1" layoutX="8.0" prefHeight="560.0" prefWidth="80.0" />
                </children></Pane>
-         </right>
-         <left>
-            <Pane prefHeight="719.0" prefWidth="95.0" BorderPane.alignment="CENTER" />
          </left>
          <top>
             <Pane prefHeight="90.0" BorderPane.alignment="CENTER">
@@ -75,7 +83,7 @@
             </Pane>
          </top>
        </BorderPane>
-      <Pane fx:id="pausePane" prefHeight="800.0" prefWidth="600.0">
+      <Pane fx:id="pausePane" disable="true" prefHeight="800.0" prefWidth="600.0" visible="false">
          <children>
             <ImageView id="pauseGray" fitHeight="800.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true" />
             <Pane fx:id="paneChoose" layoutX="200.0" layoutY="218.0" prefHeight="355.0" prefWidth="200.0">

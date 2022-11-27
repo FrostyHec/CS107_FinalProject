@@ -19,61 +19,47 @@
 //红子
 #RGeneralChess{
 -fx-image: url(../images/Chess/RedChess/General.png);
-    -fx-size: 100% 100%;
 }
 #RAdvisorChess{
 -fx-image: url(../images/Chess/RedChess/Advisor.png);
-    -fx-size: 100% 100%;
 }
 #RMinisterChess{
 -fx-image: url(../images/Chess/RedChess/Minister.png);
-    -fx-size: 100% 100%;
 }
 #RChariotChess{
 -fx-image: url(../images/Chess/RedChess/Chariot.png);
-    -fx-size: 100% 100%;
 }
 #RHorseChess{
 -fx-image: url(../images/Chess/RedChess/Horse.png);
-    -fx-size: 100% 100%;
 }
 #RSoldierChess{
 -fx-image: url(../images/Chess/RedChess/Soldier.png);
-    -fx-size: 100% 100%;
 }
 #RCannonChess{
 -fx-image: url(../images/Chess/RedChess/Cannon.png);
-    -fx-size: 100% 100%;
 }
 
 //黑子
 #BGeneralChess{
 -fx-image: url(../images/Chess/BlackChess/General.png);
-    -fx-size: 100% 100%;
 }
 #BAdvisorChess{
 -fx-image: url(../images/Chess/BlackChess/Advisor.png);
-    -fx-size: 100% 100%;
 }
 #BMinisterChess{
 -fx-image: url(../images/Chess/BlackChess/Minister.png);
-    -fx-size: 100% 100%;
 }
 #BChariotChess{
 -fx-image: url(../images/Chess/BlackChess/Chariot.png);
-    -fx-size: 100% 100%;
 }
 #BHorseChess{
 -fx-image: url(../images/Chess/BlackChess/Horse.png);
-    -fx-size: 100% 100%;
 }
 #BSoldierChess{
 -fx-image: url(../images/Chess/BlackChess/Soldier.png);
-    -fx-size: 100% 100%;
 }
 #BCannonChess{
 -fx-image: url(../images/Chess/BlackChess/Cannon.png);
-    -fx-size: 100% 100%;
 }
 
 //选择框
@@ -103,4 +89,14 @@
 #pauseGray{
 -fx-image: url(../images/PauseImage/pauseGray.png);
 -fx-opacity: 0.9;
+}
+.ChessOnClick{
+-fx-background-image: url(../images/PlayerColor/BLACK.png);
+-fx-size: 200% 200%;
+}
+
+//死棋，真的一堆啊，绝了
+//红子
+#REDGeneral0{
+-fx-image: url(../images/Chess/RedChess/General.png);
 }

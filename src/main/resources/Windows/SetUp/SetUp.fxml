@@ -6,9 +6,12 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="Windows.SetUp.SetUp"
-            prefHeight="400.0" prefWidth="600.0">
 
-</AnchorPane>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="460.0" prefWidth="370.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefWidth="90.0" text="开始界面" />
+      <Button layoutX="104.0" layoutY="14.0" mnemonicParsing="false" prefWidth="90.0" text="本地游戏" />
+      <Button layoutX="194.0" layoutY="14.0" mnemonicParsing="false" prefWidth="90.0" text="音效" />
+      <Button layoutX="284.0" layoutY="14.0" mnemonicParsing="false" prefWidth="90.0" text="画面" />
+   </children>
+</Pane>

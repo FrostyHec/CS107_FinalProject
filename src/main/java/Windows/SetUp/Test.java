@@ -4,7 +4,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 
-public class SetUp {
+public class Test {
     public static void main(String[] args) {
         NormalSettings settings=new NormalSettings();
         settings.startMenu.setAlwaysPvP(false);
@@ -17,5 +17,4 @@ public class SetUp {
             i.printStackTrace();
         }
     }
-
 }

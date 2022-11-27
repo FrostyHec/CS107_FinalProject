@@ -3,8 +3,6 @@ package Windows.GameArea;
 import GameLogic.Chess;
 import GameLogic.Color;
 import Windows.StartMenu.Main;
-import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -17,6 +15,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import GameLogic.Game;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.FileInputStream;
@@ -30,6 +29,10 @@ public class GameArea {
     public Button btnQuit;
     public Button btnSetup;
     public Button btnRemake;
+    public VBox diedChessP1;
+    public VBox diedChessP2;
+    //死棋子图像
+   
     //游戏状态
     private GameState gameState;
     private GameStateHandler gameStateHandler = new GameStateHandler();
@@ -56,10 +59,9 @@ public class GameArea {
     private final GraphicHandler graphicHandler = new GraphicHandler();
     private final TextHandler textHandler = new TextHandler();
 
-    public GameArea() {
+    public GameArea(){
         game = new Game();
     }
-
     @FXML
     public void initialize() {
         game.init();
@@ -111,7 +113,7 @@ public class GameArea {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        ((Stage)Chessboard.getScene().getWindow()).close();
+        ((Stage) Chessboard.getScene().getWindow()).close();
     }
 
     class CheatModel {
@@ -187,14 +189,9 @@ public class GameArea {
             System.out.println("now:" + game.nowPlay().getColor().toString() + " " + game.nowPlay().getScore());
 
             analyzeClickResult(clickResult);
-
-            if (count == 1) {
-                graphicHandler.refreshColor();
-            }
         }
 
         private void showSelectedChess(int row, int column) {
-
 
             ImageView p = new ImageView();
             p.setX(graphicHandler.getGraphicX(column, selectedSize));
@@ -203,7 +200,6 @@ public class GameArea {
             p.setFitWidth(selectedSize);
             p.setId("Selected");
             Chessboard.getChildren().add(p);
-
         }
 
         private void showPossibleMove(int row, int column) {
@@ -228,6 +224,7 @@ public class GameArea {
 
         private void analyzeClickResult(ClickResult clickResult) {
             graphicHandler.refresh();
+            textHandler.refreshScore();
             switch (clickResult) {
                 case Player1Win -> graphicHandler.gameOver(1);
                 case Player2Win -> graphicHandler.gameOver(2);
@@ -305,6 +302,7 @@ public class GameArea {
         }
     }
 
+    @SuppressWarnings("RedundantLabeledSwitchRuleCodeBlock")
     class GraphicHandler {
         public int getGraphicX(int column, int size) {
             return column * squareSize + (squareSize - size) / 2;
@@ -364,10 +362,10 @@ public class GameArea {
             saveAndExit();
         }
 
-
         public void refresh() {
+            refreshColor();
             refreshChessboard();
-            textHandler.refreshScore();
+            refreshDiedChess();
         }
 
         public void refreshColor() {
@@ -451,6 +449,110 @@ public class GameArea {
 
         }
 
+        //这段写的太tm糟糕了，我都想呕//以及玩家一二在画界面的时候就反了，所以这里实际上又反了一次
+        public void refreshDiedChess() {
+            int[][] arrayDiedChess = game.getDiedChess();
+            //死棋处理
+            if (game.getPlayer1().getColor() == Color.UNKNOWN) {
+                //cleanDiedChess();
+                return;
+            }
+            Map<Color, Map<ChessKind, Integer>> diedChess = new HashMap<>();
+            for (int color = 0; color < arrayDiedChess.length; color++) {
+                Map<ChessKind, Integer> temp = new HashMap<>();
+                for (int rank = 0; rank < arrayDiedChess[color].length; rank++) {
+                    temp.put(ChessKind.getKind(rank + 1), arrayDiedChess[color][rank]);
+                }
+                diedChess.put(Color.getColor(color), temp);
+            }
+
+            //生成玩家1的死棋
+            Color player1Color = game.getPlayer1().getColor();
+            Map<ChessKind, Integer> player1 = diedChess.get(player1Color);
+            for (Map.Entry<ChessKind, Integer> entry : player1.entrySet()) {
+                //setPlayer1DiedChess(player1Color, entry.getKey(), entry.getValue());
+            }
+
+            //生成玩家2的死棋
+            Color player2Color = game.getPlayer2().getColor();
+            Map<ChessKind, Integer> player2 = diedChess.get(player2Color);
+            for (Map.Entry<ChessKind, Integer> entry : player2.entrySet()) {
+                //setPlayer2DiedChess(player2Color, entry.getKey(), entry.getValue());
+            }
+        }
+//        private void cleanDiedChess(){
+//            //1
+//            player1General.setId(null);
+//            player1Advisor.setId(null);
+//            player1Minister.setId(null);
+//            player1Chariot.setId(null);
+//            player1Horse.setId(null);
+//            player1Solider.setId(null);
+//            player1Cannon.setId(null);
+//            //2
+//            player2General.setId(null);
+//            player2Advisor.setId(null);
+//            player2Minister.setId(null);
+//            player2Chariot.setId(null);
+//            player2Horse.setId(null);
+//            player2Solider.setId(null);
+//            player2Cannon.setId(null);
+//        }
+//        private void setPlayer2DiedChess(Color color, ChessKind chessKind, int numbers) {
+//            switch (chessKind) {
+//                case General -> {
+//                    player1General.setId(color.toString() + chessKind + numbers);
+//                }
+//                case Advisor -> {
+//                    player1Advisor.setId(color.toString() + chessKind + numbers);
+//                }
+//                case Minister -> {
+//                    player1Minister.setId(color.toString() + chessKind + numbers);
+//                }
+//                case Chariot -> {
+//                    player1Chariot.setId(color.toString() + chessKind + numbers);
+//                }
+//                case Horse -> {
+//                    player1Horse.setId(color.toString() + chessKind + numbers);
+//                }
+//                case Cannon -> {
+//                    player1Cannon.setId(color.toString() + chessKind + numbers);
+//                }
+//                case Soldier -> {
+//                    player1Solider.setId(color.toString() + chessKind + numbers);
+//                }
+//                default -> throw new IllegalStateException("Unexpected value: " + chessKind);
+//            }
+//        }
+//
+//        private void setPlayer1DiedChess(Color color, ChessKind chessKind, int numbers) {
+//            switch (chessKind) {
+//                case General -> {
+//                    player2General.setId(color.toString() + chessKind + numbers);
+//                }
+//                case Advisor -> {
+//                    player2Advisor.setId(color.toString() + chessKind + numbers);
+//                }
+//                case Minister -> {
+//                    player2Minister.setId(color.toString() + chessKind + numbers);
+//                }
+//                case Chariot -> {
+//                    player2Chariot.setId(color.toString() + chessKind + numbers);
+//                }
+//                case Horse -> {
+//                    player2Horse.setId(color.toString() + chessKind + numbers);
+//                }
+//                case Cannon -> {
+//                    player2Cannon.setId(color.toString() + chessKind + numbers);
+//                }
+//                case Soldier -> {
+//                    player2Solider.setId(color.toString() + chessKind + numbers);
+//                }
+//                default -> throw new IllegalStateException("Unexpected value: " + chessKind);
+//            }
+//        }
+
+
     }
 
     class TextHandler {
@@ -493,6 +595,7 @@ public class GameArea {
         public void initialize() {
             refreshName();
             refreshCheatModel();
+            refreshScore();
         }
 
         private void refreshName() {

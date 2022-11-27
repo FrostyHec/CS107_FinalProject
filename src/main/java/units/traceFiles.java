@@ -3,13 +3,36 @@ package units;
 import java.io.File;
 
 public class traceFiles {
-    String s = "D:\\祝超\\";
 
     public static void main(String[] args) {
-        File file = new File("D:\\files");
+        String path = "D:\\";
+        for(String s : subFiles(path)){
+            System.out.println(s);
+        }
+    }
+
+    String path ;
+
+    public static String[] subFiles(String path){
+        File file = new File(path);
         if(file.isDirectory()) {
-            for (String x : file.list()) {
-                System.out.println(x);
+            return file.list();
+        }
+        return null;
+    }
+
+    public static void Loop(String path){
+        File file = new File(path);
+        System.out.println(path);
+        while(file.isDirectory()){
+            if(subFiles(path) != null){
+                for(String s : subFiles(path)){
+                    path += s;
+                    path += "\\";
+                    System.out.print(" ");
+                    System.out.println(s);
+                    Loop(path);
+                }
             }
         }
     }

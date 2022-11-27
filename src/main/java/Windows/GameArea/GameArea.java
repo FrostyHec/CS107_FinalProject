@@ -15,7 +15,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import GameLogic.Game;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.FileInputStream;
@@ -29,10 +28,10 @@ public class GameArea {
     public Button btnQuit;
     public Button btnSetup;
     public Button btnRemake;
-    public VBox diedChessP1;
-    public VBox diedChessP2;
+    public Pane diedChessP1;
+    public Pane diedChessP2;
     //死棋子图像
-   
+
     //游戏状态
     private GameState gameState;
     private GameStateHandler gameStateHandler = new GameStateHandler();
@@ -59,9 +58,10 @@ public class GameArea {
     private final GraphicHandler graphicHandler = new GraphicHandler();
     private final TextHandler textHandler = new TextHandler();
 
-    public GameArea(){
+    public GameArea() {
         game = new Game();
     }
+
     @FXML
     public void initialize() {
         game.init();
@@ -338,24 +338,43 @@ public class GameArea {
                         continue;
                     }
 
-                    //命名规范: R/B+General/Advisor/Minister/Chariot/Horse/Cannon/Soldier+Chess
-                    StringBuilder sb = new StringBuilder();
-                    if (thisChess.getColor().equals(Color.RED)) {
-                        sb.append("R");
-                    } else if (thisChess.getColor().equals(Color.BLACK)) {
-                        sb.append("B");
-                    }
-
-                    //我还是不hardcode了
-                    ChessKind thisChessKind = ChessKind.getKind(thisChess.getRank());
-
-                    sb.append(thisChessKind);
-                    sb.append("Chess");
-                    c.setId(sb.toString());
+                    c.setId(generateChessID(thisChess));
                     Chessboard.getChildren().add(c);
                 }
             }
         }//refreshChessboard 用来刷新整个棋盘画面
+
+        private String generateChessID(Chess legalChess) {
+            //命名规范: R/B+General/Advisor/Minister/Chariot/Horse/Cannon/Soldier+Chess
+            StringBuilder sb = new StringBuilder();
+            if (legalChess.getColor().equals(Color.RED)) {
+                sb.append("R");
+            } else if (legalChess.getColor().equals(Color.BLACK)) {
+                sb.append("B");
+            }
+
+            //我还是不hardcode了
+            ChessKind thisChessKind = ChessKind.getKind(legalChess.getRank());
+
+            sb.append(thisChessKind);
+            sb.append("Chess");
+            return sb.toString();
+        }
+
+        private String generateChessID(Color color, ChessKind chessKind) {
+            //命名规范: R/B+General/Advisor/Minister/Chariot/Horse/Cannon/Soldier+Chess
+            StringBuilder sb = new StringBuilder();
+            if (color.equals(Color.RED)) {
+                sb.append("R");
+            } else if (color.equals(Color.BLACK)) {
+                sb.append("B");
+            }
+
+            //我还是不hardcode了
+            sb.append(chessKind);
+            sb.append("Chess");
+            return sb.toString();
+        }
 
         public void gameOver(int playerNumber) {
             textHandler.getWinner(playerNumber);
@@ -418,20 +437,7 @@ public class GameArea {
                 return;
             }
 
-            //命名规范: R/B+General/Advisor/Minister/Chariot/Horse/Cannon/Soldier+Chess
-            StringBuilder sb = new StringBuilder();
-            if (thisChess.getColor().equals(Color.RED)) {
-                sb.append("R");
-            } else if (thisChess.getColor().equals(Color.BLACK)) {
-                sb.append("B");
-            }
-
-            //我还是不hardcode了
-            ChessKind thisChessKind = ChessKind.getKind(thisChess.getRank());
-
-            sb.append(thisChessKind);
-            sb.append("Chess");
-            cheatImage.setId(sb.toString());
+            cheatImage.setId(generateChessID(thisChess));
         }
 
         public void cleanCheatImage() {
@@ -452,9 +458,9 @@ public class GameArea {
         //这段写的太tm糟糕了，我都想呕//以及玩家一二在画界面的时候就反了，所以这里实际上又反了一次
         public void refreshDiedChess() {
             int[][] arrayDiedChess = game.getDiedChess();
+            cleanDiedChess();
             //死棋处理
             if (game.getPlayer1().getColor() == Color.UNKNOWN) {
-                //cleanDiedChess();
                 return;
             }
             Map<Color, Map<ChessKind, Integer>> diedChess = new HashMap<>();
@@ -470,88 +476,42 @@ public class GameArea {
             Color player1Color = game.getPlayer1().getColor();
             Map<ChessKind, Integer> player1 = diedChess.get(player1Color);
             for (Map.Entry<ChessKind, Integer> entry : player1.entrySet()) {
-                //setPlayer1DiedChess(player1Color, entry.getKey(), entry.getValue());
+                setPlayerDiedChess(false, diedChessP1, player1Color, entry.getKey(), entry.getValue());
             }
 
             //生成玩家2的死棋
             Color player2Color = game.getPlayer2().getColor();
             Map<ChessKind, Integer> player2 = diedChess.get(player2Color);
             for (Map.Entry<ChessKind, Integer> entry : player2.entrySet()) {
-                //setPlayer2DiedChess(player2Color, entry.getKey(), entry.getValue());
+                setPlayerDiedChess(false, diedChessP2, player2Color, entry.getKey(), entry.getValue());
             }
         }
-//        private void cleanDiedChess(){
-//            //1
-//            player1General.setId(null);
-//            player1Advisor.setId(null);
-//            player1Minister.setId(null);
-//            player1Chariot.setId(null);
-//            player1Horse.setId(null);
-//            player1Solider.setId(null);
-//            player1Cannon.setId(null);
-//            //2
-//            player2General.setId(null);
-//            player2Advisor.setId(null);
-//            player2Minister.setId(null);
-//            player2Chariot.setId(null);
-//            player2Horse.setId(null);
-//            player2Solider.setId(null);
-//            player2Cannon.setId(null);
-//        }
-//        private void setPlayer2DiedChess(Color color, ChessKind chessKind, int numbers) {
-//            switch (chessKind) {
-//                case General -> {
-//                    player1General.setId(color.toString() + chessKind + numbers);
-//                }
-//                case Advisor -> {
-//                    player1Advisor.setId(color.toString() + chessKind + numbers);
-//                }
-//                case Minister -> {
-//                    player1Minister.setId(color.toString() + chessKind + numbers);
-//                }
-//                case Chariot -> {
-//                    player1Chariot.setId(color.toString() + chessKind + numbers);
-//                }
-//                case Horse -> {
-//                    player1Horse.setId(color.toString() + chessKind + numbers);
-//                }
-//                case Cannon -> {
-//                    player1Cannon.setId(color.toString() + chessKind + numbers);
-//                }
-//                case Soldier -> {
-//                    player1Solider.setId(color.toString() + chessKind + numbers);
-//                }
-//                default -> throw new IllegalStateException("Unexpected value: " + chessKind);
-//            }
-//        }
-//
-//        private void setPlayer1DiedChess(Color color, ChessKind chessKind, int numbers) {
-//            switch (chessKind) {
-//                case General -> {
-//                    player2General.setId(color.toString() + chessKind + numbers);
-//                }
-//                case Advisor -> {
-//                    player2Advisor.setId(color.toString() + chessKind + numbers);
-//                }
-//                case Minister -> {
-//                    player2Minister.setId(color.toString() + chessKind + numbers);
-//                }
-//                case Chariot -> {
-//                    player2Chariot.setId(color.toString() + chessKind + numbers);
-//                }
-//                case Horse -> {
-//                    player2Horse.setId(color.toString() + chessKind + numbers);
-//                }
-//                case Cannon -> {
-//                    player2Cannon.setId(color.toString() + chessKind + numbers);
-//                }
-//                case Soldier -> {
-//                    player2Solider.setId(color.toString() + chessKind + numbers);
-//                }
-//                default -> throw new IllegalStateException("Unexpected value: " + chessKind);
-//            }
-//        }
 
+        private void cleanDiedChess() {
+            diedChessP1.getChildren().clear();
+            diedChessP2.getChildren().clear();
+        }
+
+        public int getRowOfDiedList(int row, int size) {
+            return row * squareSize + (squareSize - size) / 2;
+        }
+
+        private void setPlayerDiedChess(Boolean reverse, Pane playerPane, Color playerColor, ChessKind chessKind, Integer number) {
+            double y = getRowOfDiedList(7 - chessKind.getRank(), chessSize);
+            if (reverse) {//mountains of bugs
+                y = playerPane.getPrefHeight() - y;
+            }
+            ImageView c = new ImageView();
+            c.setX(getRowOfDiedList(0, chessSize));
+            c.setY(y);
+            c.setFitHeight(chessSize);
+            c.setFitWidth(chessSize);
+            c.setId(generateChessID(playerColor, chessKind));
+            playerPane.getChildren().add(c);
+
+            //number的图像还没写
+
+        }
 
     }
 
@@ -641,9 +601,9 @@ enum ChessKind {
         this.rank = rank;
     }
 
-    private int getRank() {
+    public int getRank() {
         return rank;
-    }
+    }//死棋显示是通过rank排序的
 
     public static ChessKind getKind(int rank) {
         for (ChessKind ck : ChessKind.values()) {

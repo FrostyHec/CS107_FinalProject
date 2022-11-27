@@ -26,7 +26,6 @@
          <right>
             <Pane prefHeight="751.0" prefWidth="95.0" BorderPane.alignment="CENTER">
                <children>
-                  <VBox fx:id="diedChessP2" layoutX="9.0" prefHeight="560.0" prefWidth="80.0" />
                   <Pane layoutY="570.0" prefHeight="170.0" prefWidth="95.0">
                      <children>
                         <Button fx:id="cheatButton" alignment="CENTER" layoutY="111.0" mnemonicParsing="false" onAction="#cheatClick" prefHeight="45.0" prefWidth="95.0" text="开启作弊">
@@ -38,6 +37,7 @@
                         <Label fx:id="cheatTitle" alignment="CENTER" layoutY="2.0" prefHeight="25.0" prefWidth="95.0" text="此棋子" />
                      </children>
                   </Pane>
+                  <Pane fx:id="diedChessP2" layoutX="8.0" prefHeight="560.0" prefWidth="80.0" />
                </children></Pane>
          </right>
          <left>
@@ -48,7 +48,7 @@
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Button>
-                  <VBox fx:id="diedChessP1" layoutX="8.0" prefHeight="560.0" prefWidth="80.0" />
+                  <Pane fx:id="diedChessP1" layoutX="8.0" prefHeight="560.0" prefWidth="80.0" />
                </children></Pane>
          </left>
          <top>

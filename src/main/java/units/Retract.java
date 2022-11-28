@@ -21,12 +21,11 @@ public class Retract {//悔棋
 
     public Game traceTo(int i){//返回至第i步
         Game g = new Game();
+        g.init();
         Chess[][] chess = game.getChess_init();
         if(i<step && i>0) {
             for (int j = 0; j < i; j++) {
-                if(game.getPlayer1().getStatus()){
 
-                }
             }
             return g;
         }

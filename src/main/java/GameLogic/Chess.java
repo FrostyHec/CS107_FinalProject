@@ -1,7 +1,7 @@
 package GameLogic;
 
 
-public class Chess {//小心chess为null时会出的bug
+public class Chess implements java.io.Serializable{//小心chess为null时会出的bug
     private static boolean click = false;
     protected void initClick(){
         click = false;

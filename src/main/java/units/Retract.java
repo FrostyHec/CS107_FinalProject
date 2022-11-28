@@ -2,34 +2,32 @@ package units;
 
 import GameLogic.*;
 
+import java.util.List;
+
 public class Retract {//悔棋
-    Game game;
-    int step;
 
-    Retract(Game game){
-        this.game = game;
-        this.step = game.getMoves().size();
-    }
-
-    private Game traceBack(int i){//返回i步
-        Game g = new Game();
-        for(int j=0;j<i;j++){
-
-        }
+    public static Game traceBack(Game game){//返回至上一步
+        Game g = game;
+        g.setBack();
+        g.removeLast();
+        g = trace(g);
         return g;
     }
 
-    public Game traceTo(int i){//返回至第i步
-        Game g = new Game();
-        g.init();
-        Chess[][] chess = game.getChess_init();
-        if(i<step && i>0) {
-            for (int j = 0; j < i; j++) {
-
+    public static Game trace(Game game){//从头走一遍
+        Game g = game;
+        List<int[][]> moves = g.getMoves();
+        g.clearMoves();
+        for (int j = 0; j <game.getMoves().size(); j++) {
+            if(moves.get(j).length == 1){
+                g.Click(g.nowPlay(),moves.get(j)[0][0],moves.get(j)[0][1]);
             }
-            return g;
+            else if(moves.get(j).length == 2){
+                g.Click(g.nowPlay(),moves.get(j)[0][0],moves.get(j)[0][1]);
+                g.Click(g.nowPlay(),moves.get(j)[1][0],moves.get(j)[1][1]);
+            }
         }
-        return null;//i的输入值大于走了的步数或者i<0
+        return g;
     }
 
 }

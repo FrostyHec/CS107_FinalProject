@@ -1,6 +1,6 @@
 package GameLogic;
 
-public class Player {
+public class Player implements java.io.Serializable{
     private Color color = Color.UNKNOWN;
     protected void setColor(Color c){
         this.color = c ;

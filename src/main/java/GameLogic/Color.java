@@ -1,7 +1,7 @@
 package GameLogic;
 
 
-public enum Color{
+public enum Color implements java.io.Serializable{
     RED(0),BLACK(1),UNKNOWN(114514);
     private int number;
     Color(int number){

@@ -40,6 +40,14 @@ public class Game implements java.io.Serializable{
         return moves;
     }
 
+    public void removeLast(){
+        moves.remove(moves.size()-1);
+    }
+
+    public void clearMoves(){
+        moves.clear();
+    }
+
     private boolean isFirst = true;
     private int X,Y;
 
@@ -120,6 +128,7 @@ public class Game implements java.io.Serializable{
     public void init() {//初始化，完成后可以开始游戏//已测试
 
         //初始化棋盘
+        moves = new ArrayList<>();
         ArrayList<Chess> ch = new ArrayList<>();
         int i=0;
         for(AllChess x : AllChess.values()){
@@ -146,6 +155,26 @@ public class Game implements java.io.Serializable{
         isFirst = true;
 
         //p1开始行动
+        p1.changeStatus();
+    }
+
+    public void setBack(){
+
+        //将棋盘放回去
+        for(int m=0;m<chess.length;m++){
+            for(int n=0;n<chess[m].length;n++){
+                chess[m][n] = chess_init[m][n];
+            }
+        }
+
+        //初始化player
+        p1 = new Player();
+        p2 = new Player();
+        p1.setColor(Color.UNKNOWN);p2.setColor(Color.UNKNOWN);
+        p1.setScore(0);p2.setScore(0);
+        isFirst = true;
+
+        //从p1开始行动
         p1.changeStatus();
     }
 

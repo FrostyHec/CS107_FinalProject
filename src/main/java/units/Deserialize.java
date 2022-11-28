@@ -4,7 +4,7 @@ import GameLogic.*;
 import java.io.*;
 
 public class Deserialize {
-    public static Game load(String path) throws Exception  {//看能否做成选择的
+    public static Game load(String path) throws Exception  {
 
         Game game;
 

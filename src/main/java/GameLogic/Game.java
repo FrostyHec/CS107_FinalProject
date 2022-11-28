@@ -20,9 +20,6 @@ public class Game implements java.io.Serializable{
     public Chess[][] getChess(){
         return chess;
     }
-    public Chess[][] getChess_init(){
-        return chess_init;
-    }
 
 
     private int[][] diedChess = new int[2][7];
@@ -79,8 +76,10 @@ public class Game implements java.io.Serializable{
                 if (x == coordinate[0] && y == coordinate[1]) {
                     if(chess[x][y] != null){
 
-                        if(chess[x][y].getColor()==Color.RED)diedChess[0][chess[x][y].getRank()-1]++;
-                        else diedChess[1][chess[x][y].getRank()-1]++;
+                        if(chess[x][y].getColor()==Color.RED)
+                            diedChess[0][chess[x][y].getRank()-1]++;
+                        else
+                            diedChess[1][chess[x][y].getRank()-1]++;
 
                         if(player.getColor()!=chess[x][y].getColor())
                             player.addScore(chess[x][y].getScore());

@@ -1,7 +1,7 @@
 package GameLogic;
 
 public class Player implements java.io.Serializable{
-    private Color color = Color.UNKNOWN;
+    Color color = Color.UNKNOWN;
     protected void setColor(Color c){
         this.color = c ;
     }
@@ -9,7 +9,7 @@ public class Player implements java.io.Serializable{
         return color;
     }
 
-    private int score = 0;
+    int score = 0;
     protected void setScore(int i){
         this.score = i;
     }
@@ -24,7 +24,7 @@ public class Player implements java.io.Serializable{
         else return false;
     }
 
-    private boolean status = false;//是否走棋
+    boolean status = false;//是否走棋
     protected void changeStatus(){
         status = !status ;
     }

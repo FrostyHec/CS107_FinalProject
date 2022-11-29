@@ -11,91 +11,117 @@
     <opaqueInsets>
         <Insets />
     </opaqueInsets>
-   <children>
-       <BorderPane prefHeight="830.0" prefWidth="600.0">
-           <center>
-               <Pane prefHeight="791.0" prefWidth="410.0" BorderPane.alignment="CENTER">
-               <children>
-                  <Pane id="Chessboardimg" layoutX="13.0" layoutY="25.0" onMouseClicked="#chessMove" prefHeight="670.0" prefWidth="384.3">
-                     <children>
-                        <Pane id="Chessboard" fx:id="Chessboard" layoutX="20.0" layoutY="16.0" onMouseClicked="#chessMove" prefHeight="640.0" prefWidth="320.0" />
-                     </children></Pane>
-               </children>
-               </Pane>
-           </center>
-         <right>
-            <Pane prefHeight="751.0" prefWidth="95.0" BorderPane.alignment="CENTER">
-               <children>
-                  <Pane layoutY="570.0" prefHeight="170.0" prefWidth="95.0">
-                     <children>
-                        <Button fx:id="cheatButton" alignment="CENTER" layoutY="111.0" mnemonicParsing="false" onAction="#cheatClick" prefHeight="45.0" prefWidth="95.0" text="开启作弊">
-                           <font>
-                              <Font name="System Bold" size="20.0" />
-                           </font>
+    <children>
+        <BorderPane prefHeight="830.0" prefWidth="600.0">
+            <center>
+                <Pane prefHeight="791.0" prefWidth="410.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <Pane id="Chessboardimg" layoutX="13.0" layoutY="25.0" onMouseClicked="#chessMove" prefHeight="670.0" prefWidth="384.3">
+                            <children>
+                                <Pane id="Chessboard" fx:id="Chessboard" layoutX="20.0" layoutY="16.0" onMouseClicked="#chessMove" prefHeight="640.0" prefWidth="320.0" />
+                            </children>
+                        </Pane>
+                    </children>
+                </Pane>
+            </center>
+            <right>
+                <Pane prefHeight="751.0" prefWidth="95.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <Pane layoutY="570.0" prefHeight="170.0" prefWidth="95.0">
+                            <children>
+                                <Button fx:id="cheatButton" alignment="CENTER" layoutY="111.0" mnemonicParsing="false" onAction="#cheatClick" prefHeight="45.0" prefWidth="95.0" text="开启作弊">
+                                    <font>
+                                        <Font name="System Bold" size="20.0" />
+                                    </font>
+                                </Button>
+                                <ImageView fx:id="cheatImage" fitHeight="73.0" fitWidth="73.0" layoutX="12.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
+                                <Label fx:id="cheatTitle" alignment="CENTER" layoutY="2.0" prefHeight="25.0" prefWidth="95.0" text="此棋子" />
+                            </children>
+                        </Pane>
+                        <Pane fx:id="diedChessP2" prefHeight="560.0" prefWidth="95.0">
+                            <children>
+                                <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="28.0" pickOnBounds="true" preserveRatio="true" />
+                                <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="8.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true" />
+                                <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="48.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true" />
+                                <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="8.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true" />
+                                <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="48.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true" />
+                                <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="8.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true" />
+                                <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="48.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true" />
+                            </children>
+                        </Pane>
+                    </children>
+                </Pane>
+            </right>
+            <left>
+                <Pane prefHeight="719.0" prefWidth="95.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <Button layoutY="681.0" mnemonicParsing="false" onAction="#retractOnClick" prefHeight="45.0" prefWidth="95.0" text="悔棋">
+                            <font>
+                                <Font name="System Bold" size="18.0" />
+                            </font>
                         </Button>
-                        <ImageView fx:id="cheatImage" fitHeight="73.0" fitWidth="73.0" layoutX="12.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
-                        <Label fx:id="cheatTitle" alignment="CENTER" layoutY="2.0" prefHeight="25.0" prefWidth="95.0" text="此棋子" />
-                     </children>
-                  </Pane>
-                  <Pane fx:id="diedChessP2" layoutX="8.0" prefHeight="560.0" prefWidth="80.0" />
-               </children></Pane>
-         </right>
-         <left>
-            <Pane prefHeight="719.0" prefWidth="95.0" BorderPane.alignment="CENTER">
-               <children>
-                  <Button layoutY="681.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="95.0" text="悔棋">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                  </Button>
-                  <Pane fx:id="diedChessP1" layoutX="8.0" prefHeight="560.0" prefWidth="80.0" />
-               </children></Pane>
-         </left>
-         <top>
-            <Pane prefHeight="90.0" BorderPane.alignment="CENTER">
-               <children>
-                  <Label fx:id="player1Score" alignment="CENTER" contentDisplay="CENTER" layoutX="134.0" layoutY="41.0" prefHeight="35.0" prefWidth="25.0" text="60">
-                     <font>
-                        <Font name="System Bold Italic" size="18.0" />
-                     </font></Label>
-                  <Label fx:id="labelGameState" alignment="CENTER" contentDisplay="CENTER" layoutX="191.0" layoutY="19.0" prefHeight="53.0" prefWidth="219.0" text="游戏状态">
-                     <font>
-                        <Font name="System Bold Italic" size="18.0" />
-                     </font></Label>
-                  <Label fx:id="firstHand" alignment="CENTER" layoutX="102.0" layoutY="13.0" prefHeight="45.0" prefWidth="89.0" text="玩家1" />
-                  <Label fx:id="secondHand" alignment="CENTER" layoutX="410.0" layoutY="13.0" prefHeight="45.0" prefWidth="89.0" text="玩家2" />
-                  <Pane fx:id="player1Color" layoutX="36.0" layoutY="13.0" prefHeight="66.0" prefWidth="66.0">
-                     <children>
-                        <ImageView fx:id="player1Icon" fitHeight="60.0" fitWidth="60.0" layoutX="3.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true" />
-                     </children>
-                  </Pane>
-                  <Pane fx:id="player2Color" layoutX="499.0" layoutY="13.0" prefHeight="66.0" prefWidth="66.0">
-                     <children>
-                        <ImageView fx:id="player2Icon" fitHeight="60.0" fitWidth="60.0" layoutX="3.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true" />
-                     </children>
-                  </Pane>
-                  <Label fx:id="player2Score" alignment="CENTER" layoutX="442.0" layoutY="41.0" prefHeight="35.0" prefWidth="25.0" text="60">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                  </Label>
-               </children>
-            </Pane>
-         </top>
-       </BorderPane>
-      <Pane fx:id="pausePane" disable="true" prefHeight="800.0" prefWidth="600.0" visible="false">
-         <children>
-            <ImageView id="pauseGray" fitHeight="800.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true" />
-            <Pane fx:id="paneChoose" layoutX="200.0" layoutY="218.0" prefHeight="355.0" prefWidth="200.0">
-               <children>
-                  <Button fx:id="btnContinue" layoutX="33.0" layoutY="88.0" mnemonicParsing="false" onAction="#btnContinueGame" prefHeight="50.0" prefWidth="125.0" text="继续游戏" />
-                  <Button fx:id="btnRemake" layoutX="33.0" layoutY="153.0" mnemonicParsing="false" onAction="#clickRemake" prefHeight="50.0" prefWidth="125.0" text="重新开始" />
-                  <Label layoutX="50.0" layoutY="28.0" text="游戏已暂停" />
-                  <Button fx:id="btnQuit" layoutX="33.0" layoutY="216.0" mnemonicParsing="false" onAction="#saveAndExit" prefHeight="50.0" prefWidth="125.0" text="保存并退出" />
-                  <Button fx:id="btnSetup" layoutX="33.0" layoutY="279.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="125.0" text="设置" />
-               </children>
-            </Pane>
-         </children>
-      </Pane>
-   </children>
+                        <Pane fx:id="diedChessP1" prefHeight="560.0" prefWidth="95.0">
+                            <children>
+                                <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="28.0" pickOnBounds="true" preserveRatio="true" />
+                                <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="6.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true" />
+                                <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="50.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true" />
+                                <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="6.0" layoutY="102.0" pickOnBounds="true" preserveRatio="true" />
+                                <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="50.0" layoutY="102.0" pickOnBounds="true" preserveRatio="true" />
+                                <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="6.0" layoutY="152.0" pickOnBounds="true" preserveRatio="true" />
+                                <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="50.0" layoutY="152.0" pickOnBounds="true" preserveRatio="true" />
+                                <ImageView fitHeight="15.0" fitWidth="15.0" layoutX="28.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true" />
+                            </children>
+                        </Pane>
+                    </children>
+                </Pane>
+            </left>
+            <top>
+                <Pane prefHeight="90.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <Label fx:id="player1Score" alignment="CENTER" contentDisplay="CENTER" layoutX="134.0" layoutY="41.0" prefHeight="35.0" prefWidth="25.0" text="60">
+                            <font>
+                                <Font name="System Bold Italic" size="18.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="labelGameState" alignment="CENTER" contentDisplay="CENTER" layoutX="191.0" layoutY="19.0" prefHeight="53.0" prefWidth="219.0" text="游戏状态">
+                            <font>
+                                <Font name="System Bold Italic" size="18.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="firstHand" alignment="CENTER" layoutX="102.0" layoutY="13.0" prefHeight="45.0" prefWidth="89.0" text="玩家1" />
+                        <Label fx:id="secondHand" alignment="CENTER" layoutX="410.0" layoutY="13.0" prefHeight="45.0" prefWidth="89.0" text="玩家2" />
+                        <Pane fx:id="player1Color" layoutX="36.0" layoutY="13.0" prefHeight="66.0" prefWidth="66.0">
+                            <children>
+                                <ImageView fx:id="player1Icon" fitHeight="60.0" fitWidth="60.0" layoutX="3.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true" />
+                            </children>
+                        </Pane>
+                        <Pane fx:id="player2Color" layoutX="499.0" layoutY="13.0" prefHeight="66.0" prefWidth="66.0">
+                            <children>
+                                <ImageView fx:id="player2Icon" fitHeight="60.0" fitWidth="60.0" layoutX="3.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true" />
+                            </children>
+                        </Pane>
+                        <Label fx:id="player2Score" alignment="CENTER" layoutX="442.0" layoutY="41.0" prefHeight="35.0" prefWidth="25.0" text="60">
+                            <font>
+                                <Font name="System Bold" size="18.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </Pane>
+            </top>
+        </BorderPane>
+        <Pane fx:id="pausePane" disable="true" prefHeight="830.0" prefWidth="600.0" visible="false">
+            <children>
+                <ImageView id="pauseGray" fitHeight="800.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true" />
+                <Pane fx:id="paneChoose" layoutX="200.0" layoutY="218.0" prefHeight="355.0" prefWidth="200.0">
+                    <children>
+                        <Button fx:id="btnContinue" layoutX="33.0" layoutY="88.0" mnemonicParsing="false" onAction="#btnContinueGame" prefHeight="50.0" prefWidth="125.0" text="继续游戏" />
+                        <Button fx:id="btnRemake" layoutX="33.0" layoutY="153.0" mnemonicParsing="false" onAction="#clickRemake" prefHeight="50.0" prefWidth="125.0" text="重新开始" />
+                        <Label layoutX="50.0" layoutY="28.0" text="游戏已暂停" />
+                        <Button fx:id="btnQuit" layoutX="33.0" layoutY="216.0" mnemonicParsing="false" onAction="#saveAndExit" prefHeight="50.0" prefWidth="125.0" text="保存并退出" />
+                        <Button fx:id="btnSetup" layoutX="33.0" layoutY="279.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="125.0" text="设置" />
+                    </children>
+                </Pane>
+            </children>
+        </Pane>
+    </children>
 </Pane>

@@ -3,8 +3,10 @@ package Windows.GameArea;
 import GameLogic.Chess;
 import GameLogic.Color;
 import Windows.StartMenu.Main;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -16,6 +18,7 @@ import javafx.scene.input.MouseEvent;
 import GameLogic.Game;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import units.Retract;
 
 import java.io.FileInputStream;
 import java.util.*;
@@ -30,6 +33,7 @@ public class GameArea {
     public Button btnRemake;
     public Pane diedChessP1;
     public Pane diedChessP2;
+
     //死棋子图像
 
     //游戏状态
@@ -114,6 +118,13 @@ public class GameArea {
             throw new RuntimeException(e);
         }
         ((Stage) Chessboard.getScene().getWindow()).close();
+    }
+
+    public void retractOnClick(ActionEvent event) {//重做！一堆bug！
+        game = Retract.traceBack(game);
+        graphicHandler.refresh();
+        textHandler.refreshScore();
+        gameStateHandler.changed();
     }
 
     class CheatModel {
@@ -455,7 +466,7 @@ public class GameArea {
 
         }
 
-        //这段写的太tm糟糕了，我都想呕//以及玩家一二在画界面的时候就反了，所以这里实际上又反了一次
+
         public void refreshDiedChess() {
             int[][] arrayDiedChess = game.getDiedChess();
             cleanDiedChess();
@@ -476,41 +487,54 @@ public class GameArea {
             Color player1Color = game.getPlayer1().getColor();
             Map<ChessKind, Integer> player1 = diedChess.get(player1Color);
             for (Map.Entry<ChessKind, Integer> entry : player1.entrySet()) {
-                setPlayerDiedChess(false, diedChessP1, player1Color, entry.getKey(), entry.getValue());
+                setPlayerDiedChess(diedChessP1, player1Color, entry.getKey(), entry.getValue());
             }
 
             //生成玩家2的死棋
             Color player2Color = game.getPlayer2().getColor();
             Map<ChessKind, Integer> player2 = diedChess.get(player2Color);
             for (Map.Entry<ChessKind, Integer> entry : player2.entrySet()) {
-                setPlayerDiedChess(false, diedChessP2, player2Color, entry.getKey(), entry.getValue());
+                setPlayerDiedChess(diedChessP2, player2Color, entry.getKey(), entry.getValue());
             }
         }
 
         private void cleanDiedChess() {
-            diedChessP1.getChildren().clear();
-            diedChessP2.getChildren().clear();
-        }
-
-        public int getRowOfDiedList(int row, int size) {
-            return row * squareSize + (squareSize - size) / 2;
-        }
-
-        private void setPlayerDiedChess(Boolean reverse, Pane playerPane, Color playerColor, ChessKind chessKind, Integer number) {
-            double y = getRowOfDiedList(7 - chessKind.getRank(), chessSize);
-            if (reverse) {//mountains of bugs
-                y = playerPane.getPrefHeight() - y;
+            List<Pane> p = new ArrayList<>();
+            p.add(diedChessP1);
+            p.add(diedChessP2);
+            for (Pane pane : p) {
+                for (Node c : pane.getChildren()) {
+                    if (!(c instanceof ImageView)) {
+                        System.out.println("Wrong!!!");
+                        return;
+                    }
+                    c.setId(null);
+                }
             }
-            ImageView c = new ImageView();
-            c.setX(getRowOfDiedList(0, chessSize));
-            c.setY(y);
-            c.setFitHeight(chessSize);
-            c.setFitWidth(chessSize);
-            c.setId(generateChessID(playerColor, chessKind));
-            playerPane.getChildren().add(c);
+        }
 
-            //number的图像还没写
+        private void setPlayerDiedChess(Pane playerPane, Color playerColor, ChessKind chessKind, Integer number) {
+            int index = 7 - chessKind.getRank();
+            final int diedChessSize = 40;
+            //设置ID
+            ImageView c = (ImageView) playerPane.getChildren().get(index);
+            c.setFitHeight(diedChessSize);
+            c.setFitWidth(diedChessSize);
+            if (number == 0) {
+                c.setId(generateChessID(playerColor, chessKind) + "0");
+            } else {
+                c.setId(generateChessID(playerColor, chessKind));
+            }
+            playerPane.getChildren().set(index, c);
 
+            //number部分[还有好几个图标没胡]
+//            final int numberIcon = 19;
+//            int numberIndex = 7 + index;
+//            ImageView d = (ImageView) playerPane.getChildren().get(numberIndex);
+//            d.setFitHeight(numberIcon);
+//            d.setFitWidth(numberIcon);
+//            d.setId("DiedChess" + number);
+//            playerPane.getChildren().set(numberIndex, d);
         }
 
     }

@@ -3,7 +3,7 @@ package units;
 import GameLogic.*;
 import java.io.*;
 
-public class Deserialize {
+public class Deserialize {//未经测试
     public static Game load(String path) throws Exception  {
 
         Game game;
@@ -36,7 +36,6 @@ public class Deserialize {
             throw new Exception("103");
         }
 
-        a = false;
         boolean b  = false;
         a = game.getPlayer1() == null || game.getPlayer2() == null;
         if(!a){

@@ -1,6 +1,6 @@
 package GameLogic;
 
-enum AllChess {
+enum AllChess implements java.io.Serializable{
 
     //red
     General(Color.RED,7,30),

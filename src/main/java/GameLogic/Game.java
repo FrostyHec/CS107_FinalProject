@@ -165,6 +165,7 @@ public class Game implements java.io.Serializable{
                 chess[m][n] = chess_init[m][n];
             }
         }
+        chess[0][0].initClick();
 
         //初始化player
         p1 = new Player();

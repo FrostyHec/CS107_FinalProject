@@ -2,11 +2,16 @@ package AI;
 
 import GameLogic.*;
 
-public class Stupid extends Player{
-    int[][] move = new int[2][2];
+import java.util.ArrayList;
 
-    public int[][] getMove() {
-        return move;
+public class Stupid extends aiMode {
+
+    Stupid(){
+        super();
     }
 
+    public int[][] move() throws Exception {
+        ArrayList<int[][]> canClick = generalUsed.canClick(super.nowPlay(), super.getChess());
+        return generalUsed.random(canClick);
+    }
 }

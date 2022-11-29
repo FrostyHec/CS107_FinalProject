@@ -121,7 +121,11 @@ public class GameArea {
     }
 
     public void retractOnClick(ActionEvent event) {//重做！一堆bug！
-        game = Retract.traceBack(game);
+        try {
+            game = Retract.traceBack(game);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         graphicHandler.refresh();
         textHandler.refreshScore();
         gameStateHandler.changed();

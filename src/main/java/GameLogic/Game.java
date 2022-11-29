@@ -148,6 +148,12 @@ public class Game implements java.io.Serializable{
         }
         chess[0][0].initClick();
 
+        for(int m=0;m<diedChess.length;m++){
+            for(int n=0;n< diedChess[m].length;n++){
+                diedChess[m][n] = 0;
+            }
+        }
+
         //初始化player
         p1.setColor(Color.UNKNOWN);p2.setColor(Color.UNKNOWN);
         p1.setScore(0);p2.setScore(0);
@@ -157,7 +163,17 @@ public class Game implements java.io.Serializable{
         p1.changeStatus();
     }
 
+    private void init(Chess[][] chess){
+        for(Chess[] cc : chess){
+            for(Chess c : cc){
+                c.initTurnOver();
+            }
+        }
+    }
+
     public void setBack(){
+
+        init(chess_init);
 
         //将棋盘放回去
         for(int m=0;m<chess.length;m++){
@@ -166,6 +182,12 @@ public class Game implements java.io.Serializable{
             }
         }
         chess[0][0].initClick();
+
+        for(int m=0;m<diedChess.length;m++){
+            for(int n=0;n< diedChess[m].length;n++){
+                diedChess[m][n] = 0;
+            }
+        }
 
         //初始化player
         p1 = new Player();

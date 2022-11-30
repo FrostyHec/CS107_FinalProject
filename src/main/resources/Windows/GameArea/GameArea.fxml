@@ -38,17 +38,23 @@
                                 <Label fx:id="cheatTitle" alignment="CENTER" layoutY="2.0" prefHeight="25.0" prefWidth="95.0" text="此棋子" />
                             </children>
                         </Pane>
-                        <Pane fx:id="diedChessP2" prefHeight="560.0" prefWidth="95.0">
-                            <children>
-                                <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="28.0" pickOnBounds="true" preserveRatio="true" />
-                                <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="8.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true" />
-                                <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="48.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true" />
-                                <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="8.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true" />
-                                <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="48.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true" />
-                                <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="8.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true" />
-                                <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="48.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true" />
-                            </children>
-                        </Pane>
+                  <Pane fx:id="diedChessP2" prefHeight="560.0" prefWidth="95.0">
+                     <children>
+                        <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="28.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="6.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="50.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="6.0" layoutY="102.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="50.0" layoutY="102.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="6.0" layoutY="152.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="50.0" layoutY="152.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="18.0" fitWidth="18.0" layoutX="31.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="18.0" fitWidth="18.0" layoutX="76.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="18.0" fitWidth="18.0" layoutX="31.0" layoutY="102.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="18.0" fitWidth="18.0" layoutX="76.0" layoutY="102.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="18.0" fitWidth="18.0" layoutX="31.0" layoutY="152.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="18.0" fitWidth="18.0" layoutX="76.0" layoutY="152.0" pickOnBounds="true" preserveRatio="true" />
+                     </children>
+                  </Pane>
                     </children>
                 </Pane>
             </right>
@@ -69,7 +75,12 @@
                                 <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="50.0" layoutY="102.0" pickOnBounds="true" preserveRatio="true" />
                                 <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="6.0" layoutY="152.0" pickOnBounds="true" preserveRatio="true" />
                                 <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="50.0" layoutY="152.0" pickOnBounds="true" preserveRatio="true" />
-                                <ImageView fitHeight="15.0" fitWidth="15.0" layoutX="28.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true" />
+                                <ImageView fitHeight="18.0" fitWidth="18.0" layoutX="31.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="18.0" fitWidth="18.0" layoutX="76.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="18.0" fitWidth="18.0" layoutX="31.0" layoutY="102.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="18.0" fitWidth="18.0" layoutX="76.0" layoutY="102.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="18.0" fitWidth="18.0" layoutX="31.0" layoutY="152.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="18.0" fitWidth="18.0" layoutX="76.0" layoutY="152.0" pickOnBounds="true" preserveRatio="true" />
                             </children>
                         </Pane>
                     </children>

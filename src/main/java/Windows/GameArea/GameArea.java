@@ -81,6 +81,12 @@ public class GameArea {
             return;
         }
         new ChessMove().invoke(event);
+
+    }
+
+    private void chessChanged() {
+        graphicHandler.refresh();
+        textHandler.refreshScore();
         gameStateHandler.changed();
     }
 
@@ -120,15 +126,13 @@ public class GameArea {
         ((Stage) Chessboard.getScene().getWindow()).close();
     }
 
-    public void retractOnClick(ActionEvent event) {//重做！一堆bug！
+    public void retractOnClick(ActionEvent event) {
         try {
             game = Retract.traceBack(game);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        graphicHandler.refresh();
-        textHandler.refreshScore();
-        gameStateHandler.changed();
+        chessChanged();
     }
 
     class CheatModel {
@@ -202,7 +206,7 @@ public class GameArea {
             //临时用的
             System.out.println(clickResult);
             System.out.println("now:" + game.nowPlay().getColor().toString() + " " + game.nowPlay().getScore());
-
+            chessChanged();
             analyzeClickResult(clickResult);
         }
 
@@ -238,8 +242,6 @@ public class GameArea {
         }
 
         private void analyzeClickResult(ClickResult clickResult) {
-            graphicHandler.refresh();
-            textHandler.refreshScore();
             switch (clickResult) {
                 case Player1Win -> graphicHandler.gameOver(1);
                 case Player2Win -> graphicHandler.gameOver(2);
@@ -250,9 +252,9 @@ public class GameArea {
                     showSelectedChess(row, column);
                     showPossibleMove(row, column);
                 }
-                case UnknownError ->
-                        textHandler.showAlert(Alert.AlertType.ERROR, "Wrong Happened!", "null", "ClickResult is Missing");
-
+                case UnknownError -> {
+                    //textHandler.showAlert(Alert.AlertType.ERROR, "Wrong Happened!", "null", "ClickResult is Missing");
+                }
             }
         }
 
@@ -518,6 +520,7 @@ public class GameArea {
         }
 
         private void setPlayerDiedChess(Pane playerPane, Color playerColor, ChessKind chessKind, Integer number) {
+            //死棋图像部分
             int index = 7 - chessKind.getRank();
             final int diedChessSize = 40;
             //设置ID
@@ -531,14 +534,15 @@ public class GameArea {
             }
             playerPane.getChildren().set(index, c);
 
-            //number部分[还有好几个图标没胡]
-//            final int numberIcon = 19;
-//            int numberIndex = 7 + index;
-//            ImageView d = (ImageView) playerPane.getChildren().get(numberIndex);
-//            d.setFitHeight(numberIcon);
-//            d.setFitWidth(numberIcon);
-//            d.setId("DiedChess" + number);
-//            playerPane.getChildren().set(numberIndex, d);
+
+            //number部分
+            int numberIndex = 6 + index;
+            if (chessKind.equals(ChessKind.General)) {
+                return;//将军只有一个，懒得在控件里面再糊了，给你设置个特例
+            }
+            ImageView d = (ImageView) playerPane.getChildren().get(numberIndex);
+            d.setId("DiedChess" + number);
+            playerPane.getChildren().set(numberIndex, d);
         }
 
     }

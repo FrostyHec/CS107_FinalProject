@@ -90,13 +90,18 @@
 -fx-image: url(../images/PauseImage/pauseGray.png);
 -fx-opacity: 0.9;
 }
-.ChessOnClick{
--fx-background-image: url(../images/PlayerColor/BLACK.png);
--fx-size: 200% 200%;
-}
 
-//死棋，真的一堆啊，绝了
-//红子
-#REDGeneral0{
--fx-image: url(../images/Chess/RedChess/General.png);
+
+//死棋&编号
+#DiedChess2{
+-fx-image: url(../images/Chess/DiedChess/DiedChess2.png);
+}
+#DiedChess3{
+-fx-image: url(../images/Chess/DiedChess/DiedChess3.png);
+}
+#DiedChess4{
+-fx-image: url(../images/Chess/DiedChess/DiedChess4.png);
+}
+#DiedChess5{
+-fx-image: url(../images/Chess/DiedChess/DiedChess5.png);
 }

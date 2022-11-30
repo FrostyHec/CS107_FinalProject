@@ -1,8 +1,8 @@
-package AI;
-
-public class aiTest {
-    public static void main(String[] args) {
-        Stupid ai = new Stupid();
-        //System.out.println(ai.getColor());
-    }
-}
+//package AI;
+//
+//public class aiTest {
+//    public static void main(String[] args) {
+//        Stupid ai = new Stupid();
+//        System.out.println(ai.getColor());
+//    }
+//}

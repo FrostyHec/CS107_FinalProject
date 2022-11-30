@@ -46,7 +46,7 @@ public class Game implements java.io.Serializable{
     }
 
     private boolean isFirst = true;
-    private int X,Y;
+    int X,Y;
 
 
     public int Click(Player player,int x,int y){//点击

@@ -1,6 +1,6 @@
 package GameLogic;
 
-
+import AI.*;
 
 public class aiMode extends Game{
     int difficulty;
@@ -10,7 +10,11 @@ public class aiMode extends Game{
         p1 = new Player();
         p2 = new Player();
     }
-    public aiMode(){}
+    public aiMode(){
+        this.difficulty = 1;
+        p1 = new Player();
+        p2 = new Player();
+    }
 
 
 

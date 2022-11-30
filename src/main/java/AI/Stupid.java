@@ -4,14 +4,19 @@ import GameLogic.*;
 
 import java.util.ArrayList;
 
-public class Stupid extends aiMode {
+public class Stupid /*extends aiMode*/ {
 
-    Stupid(){
-        super();
-    }
+//    Stupid(){
+//        super();
+//    }
 
-    public int[][] move() throws Exception {
-        ArrayList<int[][]> canClick = generalUsed.canClick(super.nowPlay(), super.getChess());
+//    public int[][] move() throws Exception {
+//        ArrayList<int[][]> canClick = generalUsed.canClick(super.nowPlay(), super.getChess());
+//        return generalUsed.random(canClick);
+//    }
+
+    public int[][] move(Player player,Chess[][] chess) throws Exception {
+        ArrayList<int[][]> canClick = generalUsed.canClick(player, chess);
         return generalUsed.random(canClick);
     }
 }

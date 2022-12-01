@@ -5,7 +5,11 @@ import java.util.*;
 public class Game implements java.io.Serializable{
 
 
-    Player p1 = new Player(),p2 = new Player();
+    Player p1,p2;
+    public Game(){
+        p1 = new Player();
+        p2 = new Player();
+    }
 
     public Player getPlayer1(){
         return p1;
@@ -213,6 +217,12 @@ public class Game implements java.io.Serializable{
     private Player other(Color color){
         if(p1.getColor()==color)return p2;
         else return p1;
+    }
+
+    public void aiMove(){}
+
+    public int getDifficulty(){
+        return 0;
     }
 
 }

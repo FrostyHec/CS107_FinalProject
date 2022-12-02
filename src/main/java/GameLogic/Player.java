@@ -31,4 +31,9 @@ public class Player implements java.io.Serializable{
     public boolean getStatus(){
         return status;
     }//true代表轮到他走棋了
+
+    public int[][] move(Chess[][] chess){
+        int[][] move = new int[1][2];
+        return move;
+    }
 }

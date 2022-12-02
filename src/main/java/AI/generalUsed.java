@@ -7,7 +7,7 @@ import java.util.Collections;
 
 public class generalUsed {
 
-    public static int[][] random(ArrayList<int[][]> canClick) throws Exception{
+    public static int[][] randomClick(ArrayList<int[][]> canClick) throws Exception{
         if(canClick.size() == 0){
             throw new Exception("can't click");
         }

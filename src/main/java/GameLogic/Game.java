@@ -18,6 +18,10 @@ public class Game implements java.io.Serializable{
     public Player getPlayer2(){
         return p2;
     }
+    public Player getHumanPlayer(){
+        return p1;
+    }
+    public Player getAIPlayer(){return p2;}
     Chess[][] chess = new Chess[8][4];
     Chess[][] chess_init = new Chess[8][4];
 
@@ -222,6 +226,10 @@ public class Game implements java.io.Serializable{
     public void aiMove(){}
 
     public int getDifficulty(){
+        return 0;
+    }
+
+    public int Click(int x,int y){
         return 0;
     }
 

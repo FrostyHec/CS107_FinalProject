@@ -17,6 +17,6 @@ public class Stupid /*extends aiMode*/ {
 
     public static int[][] move(Player player,Chess[][] chess) throws Exception {
         ArrayList<int[][]> canClick = generalUsed.canClick(player, chess);
-        return generalUsed.random(canClick);
+        return generalUsed.randomClick(canClick);
     }
 }

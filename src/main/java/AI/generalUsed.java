@@ -46,4 +46,20 @@ public class generalUsed {
         }
         return canClick;
     }
+
+    public static boolean mayBeEat(Chess[][] chess,int X,int Y){
+        int i = 0;
+        for(Chess[] a :chess){
+            int j=0;
+            for(Chess x : a){
+                if(x == null)continue;
+                for(int[] coordinate : x.possibleMove(chess,i,j)){
+                    if(coordinate[0]==X && coordinate[1]==Y){return true;}
+                }
+                j++;
+            }
+            i++;
+        }
+        return false;
+    }
 }

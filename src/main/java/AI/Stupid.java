@@ -4,7 +4,7 @@ import GameLogic.*;
 
 import java.util.ArrayList;
 
-public class Stupid /*extends aiMode*/ {
+public class Stupid  {
 
 //    Stupid(){
 //        super();

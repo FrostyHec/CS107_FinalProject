@@ -6,10 +6,6 @@ public class aiMode extends Game{
     private int difficulty;
     private boolean isFirst = false;
 
-    @Override
-    public int getDifficulty(){
-        return difficulty;
-    }
     Player p1,p2;
     public aiMode(){
         this.difficulty = 1;
@@ -67,6 +63,11 @@ public class aiMode extends Game{
             return p1;
         else
             return p2;
+    }
+
+    @Override
+    public int getDifficulty(){
+        return difficulty;
     }
 
 }

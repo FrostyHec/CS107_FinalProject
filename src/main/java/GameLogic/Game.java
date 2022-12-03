@@ -5,7 +5,11 @@ import java.util.*;
 public class Game implements java.io.Serializable{
 
 
-    Player p1 = new Player(),p2 = new Player();
+    Player p1,p2;
+    public Game(){
+        p1 = new Player();
+        p2 = new Player();
+    }
 
     public Player getPlayer1(){
         return p1;
@@ -14,6 +18,10 @@ public class Game implements java.io.Serializable{
     public Player getPlayer2(){
         return p2;
     }
+    public Player getHumanPlayer(){
+        return p1;
+    }
+    public Player getAIPlayer(){return p2;}
     Chess[][] chess = new Chess[8][4];
     Chess[][] chess_init = new Chess[8][4];
 
@@ -46,7 +54,7 @@ public class Game implements java.io.Serializable{
     }
 
     private boolean isFirst = true;
-    private int X,Y;
+    int X,Y;
 
 
     public int Click(Player player,int x,int y){//点击
@@ -213,6 +221,16 @@ public class Game implements java.io.Serializable{
     private Player other(Color color){
         if(p1.getColor()==color)return p2;
         else return p1;
+    }
+
+    public void aiMove(){}
+
+    public int getDifficulty(){
+        return 0;
+    }
+
+    public int Click(int x,int y){
+        return 0;
     }
 
 }

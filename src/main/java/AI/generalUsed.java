@@ -5,7 +5,7 @@ import GameLogic.*;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class generalUsed {
+public class generalUsed {//这个类是一些静态方法的集合，因为基本上AI都要用到，所以拿出来放一起
 
     public static int[][] randomClick(ArrayList<int[][]> canClick) throws Exception{
         if(canClick.size() == 0){
@@ -47,8 +47,11 @@ public class generalUsed {
         return canClick;
     }
 
-    public static boolean mayBeEat(Chess[][] chess,int X,int Y){
+    public static boolean mayBeEat(Chess[][] chess,int X,int Y){//在XY处是否可能被吃，注意场上棋子的变化
         int i = 0;
+        if(!chess[X][Y].isTurnOver()){
+            return false;
+        }//防止出现一些奇怪的情况
         for(Chess[] a :chess){
             int j=0;
             for(Chess x : a){
@@ -61,5 +64,33 @@ public class generalUsed {
             i++;
         }
         return false;
+    }
+
+    public static int[] possibleEat(Chess[][] chess,int X,int Y) throws Exception {//返回可能获得的分数
+        if(chess[X][Y]==null || !chess[X][Y].isTurnOver()){
+            throw new Exception("");
+        }//防止出现一些奇怪的情况
+        int[][] moves = chess[X][Y].possibleMove(chess,X,Y);
+        int[] a = new int [4];
+        int i = 0;
+
+        for(int[] xy : moves){
+            if(xy[0] == -1 || xy[1] == -1){
+                a[i] = 0;
+            }
+            else if(chess[xy[0]][xy[1]]==null)
+                a[i] = 0;
+            else{
+                a[i] = chess[xy[0]][xy[1]].getScore();
+            }
+            i++;
+        }
+
+        return a;
+    }
+
+
+    public static double possibility(){
+        return 0.1d;
     }
 }

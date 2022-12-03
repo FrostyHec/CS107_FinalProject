@@ -66,7 +66,7 @@ public class generalUsed {//这个类是一些静态方法的集合，因为基�
         return false;
     }
 
-    public static int[] possibleEat(Chess[][] chess,int X,int Y) throws Exception {//返回可能获得的分数
+    public static int[] possibleEat(Chess[][] chess,int X,int Y) throws Exception {//返回可能获得的分数(仅由某个子的行动带来)
         if(chess[X][Y]==null || !chess[X][Y].isTurnOver()){
             throw new Exception("");
         }//防止出现一些奇怪的情况
@@ -90,7 +90,41 @@ public class generalUsed {//这个类是一些静态方法的集合，因为基�
     }
 
 
-    public static double possibility(){
-        return 0.1d;
+    public static double possibility(Chess[][] chess, Color color,int Rank){//返回大于(不等于)某个子(以Rank形式出现)的可能性
+        double po;
+        int[] Ch = new int[7];
+        int number = 0,need = 0;
+
+        for(Chess[] c : chess){
+            for(Chess x : c){
+                if( x == null || x.isTurnOver()){
+                    continue;
+                }
+                if(x.getColor()==color)
+                    Ch[ x.getRank()-1 ]++;
+                number++;
+            }
+        }
+        if(number == 0) return 0d;
+        if(Rank == 1 || Rank == 2){
+            for(int i=2;i<Ch.length;i++){
+                need += Ch[i];
+            }
+            if(Rank == 1){
+                need -= Ch[6];
+            }
+        }else {
+            for (int i = Rank; i < Ch.length; i++) {
+                need += Ch[i];
+            }
+        }
+
+        po = (double) need / number;
+        return po;
+    }
+
+    public static Chess[][] virtualChessBoard(Chess[][] originChessBoard){//to be continued
+        Chess[][] chess = new Chess[4][8];
+        return chess;
     }
 }

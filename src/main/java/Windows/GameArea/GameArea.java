@@ -472,7 +472,6 @@ public class GameArea {
 
         }
 
-
         public void refreshDiedChess() {
             int[][] arrayDiedChess = game.getDiedChess();
             cleanDiedChess();

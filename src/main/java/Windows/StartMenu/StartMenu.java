@@ -4,6 +4,7 @@ import Windows.GameArea.MainGame;
 import Windows.SetUp.MainSetUp;
 import Windows.SetUp.NormalSettings;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -47,5 +48,9 @@ public class StartMenu {
         s2.initOwner(paneStartMenu.getScene().getWindow());
         s2.initModality(Modality.WINDOW_MODAL);
         new MainSetUp().start(s2);
+    }
+
+    public void exitGame() {
+        Platform.exit();
     }
 }

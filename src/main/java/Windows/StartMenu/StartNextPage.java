@@ -13,9 +13,10 @@ public class StartNextPage {
     public void localPvP() throws IOException {
         startGame();
     }
+
     private void startGame() throws IOException {
-        MainGame game=new MainGame();
+        MainGame game = new MainGame();
         game.start(new Stage());
-        ((Stage)pane.getScene().getWindow()).close();
+        ((Stage) pane.getScene().getWindow()).close();
     }
 }

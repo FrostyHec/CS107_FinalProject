@@ -6,9 +6,11 @@
 
 <Pane fx:id="paneStartMenu" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Windows.StartMenu.StartMenu">
    <children>
-      <Button layoutX="63.0" layoutY="200.0" mnemonicParsing="false" text="双人游戏" />
-      <Button layoutX="63.0" layoutY="250.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="96.0" text="积分榜" />
-      <Button layoutX="63.0" layoutY="150.0" mnemonicParsing="false" onAction="#startNextPage" text="开始游戏" />
-      <Button layoutX="481.0" layoutY="350.0" mnemonicParsing="false" onAction="#openSetUp" text="设置" />
+      <Button layoutX="61.0" layoutY="250.0" mnemonicParsing="false" text="联机对战" />
+      <Button layoutX="437.0" layoutY="150.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="96.0" text="积分榜" />
+      <Button layoutX="61.0" layoutY="200.0" mnemonicParsing="false" onAction="#startNextPage" text="开始游戏" />
+      <Button layoutX="437.0" layoutY="200.0" mnemonicParsing="false" onAction="#openSetUp" prefHeight="36.0" prefWidth="96.0" text="设置" />
+      <Button layoutX="61.0" layoutY="150.0" mnemonicParsing="false" onAction="#startNextPage" text="继续游戏" />
+      <Button layoutX="437.0" layoutY="250.0" mnemonicParsing="false" onAction="#exitGame" prefHeight="36.0" prefWidth="96.0" text="退出游戏" />
    </children>
 </Pane>

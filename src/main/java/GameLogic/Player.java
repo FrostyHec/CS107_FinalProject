@@ -2,7 +2,7 @@ package GameLogic;
 
 public class Player implements java.io.Serializable{
     Color color = Color.UNKNOWN;
-    protected void setColor(Color c){
+    public void setColor(Color c){
         this.color = c ;
     }
     public Color getColor(){

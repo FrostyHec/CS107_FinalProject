@@ -123,8 +123,14 @@ public class generalUsed {//这个类是一些静态方法的集合，因为基�
         return po;
     }
 
-    public static Chess[][] virtualChessBoard(Chess[][] originChessBoard){//to be continued
-        Chess[][] chess = new Chess[4][8];
+    public static Chess[][] virtualChessBoard(Chess[][] originChessBoard){//复制一个棋盘供推演
+        Chess[][] chess = new Chess[8][4];
+        for(int i=0;i<originChessBoard.length;i++){
+            for(int j=0;j<originChessBoard[i].length;j++){
+                if(originChessBoard[i][j] == null)continue;
+                chess[i][j] = new Chess(originChessBoard[i][j]);
+            }
+        }
         return chess;
     }
 }

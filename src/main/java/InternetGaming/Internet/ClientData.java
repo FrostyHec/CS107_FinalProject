@@ -3,8 +3,10 @@ package InternetGaming.Internet;
 import InternetGaming.Internet.Message.MessageHandler;
 import InternetGaming.Internet.Message.PlayerType;
 
-public class ClientData {
-    protected MessageHandler m;
+import java.io.Serializable;
+
+public class ClientData implements Serializable {
+    protected transient MessageHandler m;//注意传输ClientData的时候不会传输handler
     protected String name;
     protected PlayerType playerType;
 

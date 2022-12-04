@@ -1,5 +1,6 @@
 package InternetGaming.Internet;
 
+import InternetGaming.Internet.Message.HandlerType;
 import InternetGaming.Internet.Message.MessageHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -32,19 +33,19 @@ public class LinkingWindow {
 
     }
 
-    public void startLink(ActionEvent event) throws IOException {
+    public void startLink() throws IOException {
         Client c;
         try {
-            c = new Client(new MessageHandler(Client.connect(ipField.getText(), Integer.parseInt(portField.getText()))));
-        } catch (IOException e) {
+            c = new Client(new MessageHandler(Client.connect(ipField.getText(), Integer.parseInt(portField.getText())), HandlerType.Client));
+            System.out.println("Win!");
+        } catch (IOException | NumberFormatException e) {
             linkingMessage.setText("连接失败！请检查您的输入是否正确");
             return;
-            //throw new RuntimeException(e);
         }
         Transmitter.client = c;
         linkingMessage.setText("连接成功！");
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("PreparingWindow.fxml"));
-        ((Stage) paneLinkingWindow.getScene().getWindow()).setScene(new Scene(fxmlLoader.load()));
+        ((Stage) portField.getScene().getWindow()).setScene(new Scene(fxmlLoader.load()));
 
     }
 

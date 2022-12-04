@@ -57,9 +57,9 @@ public class Server extends Thread {
         @Override
         public void parse(String message) {
             PlayerType p;
-            if (clientList.size() == 1) {//初代版本默认服主是先手，后面再改
+            if (clientList.size() == 0) {//初代版本默认服主是先手，后面再改
                 p = PlayerType.FirstHand;
-            } else if (clientList.size() == 2) {
+            } else if (clientList.size() == 1) {
                 p = PlayerType.SecondHand;
             } else {
                 p = PlayerType.Viewer;
@@ -70,9 +70,13 @@ public class Server extends Thread {
             }
 
             //广播新用户登场
-            for (ClientData c: clientList) {
-                c.m.send(MessageType.NewPlayer,"");
-                c.m.sendObj(clientList.toArray());//发送的是数组
+            for (ClientData c : clientList) {
+                c.m.send(MessageType.NewPlayer, "");
+                ClientData[] cd=new ClientData[clientList.size()];
+                for(int i=0;i<cd.length;i++){
+                    cd[i]=clientList.get(i);
+                }//toArray的操作会产生Obj[]，这里只允许传输一个对象
+                c.m.sendObj(cd);//发送的是数组
             }
             checkAbleToStart();
         }
@@ -121,7 +125,7 @@ public class Server extends Thread {
         MessageHandler m;
 
         public MessageParse(Socket client) {
-            m = new MessageHandler(client);
+            m = new MessageHandler(client, HandlerType.Sever);
         }
 
         @Override

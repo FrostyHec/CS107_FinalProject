@@ -14,8 +14,20 @@ public class MessageHandler {
     private PrintWriter writer;
     private Socket client;
 
-    public MessageHandler(Socket client) {
+    public MessageHandler(Socket client,HandlerType handlerType) {
         this.client = client;
+        switch (handlerType){
+            case Sever -> {
+                generateOutputStream();
+                generateInputStream();
+            }
+            case Client -> {
+                generateInputStream();
+                generateOutputStream();
+            }
+        }
+    }
+    private void generateInputStream(){
         //输入流
         try {
             inputStream = client.getInputStream();
@@ -24,7 +36,8 @@ public class MessageHandler {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
+    }
+    private void generateOutputStream(){
         //输出流
         try {
             outputStream = client.getOutputStream();

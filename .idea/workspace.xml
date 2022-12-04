@@ -5,61 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bea79dc5-57f0-48e7-b850-a9fcd65d4f0c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/InternetGaming/GameArea/GameArea.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/InternetGaming/GameArea/MainGame.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/InternetGaming/Internet/Client.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/InternetGaming/Internet/ClientData.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/InternetGaming/Internet/LinkingWindow.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/InternetGaming/Internet/Message/MessageHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/InternetGaming/Internet/Message/MessageType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/InternetGaming/Internet/Message/Parser.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/InternetGaming/Internet/Message/PlayerType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/InternetGaming/Internet/Message/StartGameType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/InternetGaming/Internet/PreparingWindow.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/InternetGaming/Internet/Server.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/InternetGaming/Internet/ServerMain.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/InternetGaming/Internet/Transmitter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/A" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/GameArea/GameArea.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/GameArea/default.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/Internet/LinkingWindow.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/Internet/PerparingWindow.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/Internet/linkSever.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/Internet/newSever.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/images/Chess/BlackChess/Advisor.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/images/Chess/BlackChess/Cannon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/images/Chess/BlackChess/Chariot.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/images/Chess/BlackChess/General.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/images/Chess/BlackChess/Horse.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/images/Chess/BlackChess/Minister.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/images/Chess/BlackChess/Soldier.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/images/Chess/DiedChess/DiedChess2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/images/Chess/DiedChess/DiedChess3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/images/Chess/DiedChess/DiedChess4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/images/Chess/DiedChess/DiedChess5.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/images/Chess/RedChess/Advisor.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/images/Chess/RedChess/Cannon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/images/Chess/RedChess/Chariot.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/images/Chess/RedChess/General.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/images/Chess/RedChess/Horse.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/images/Chess/RedChess/Minister.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/images/Chess/RedChess/Soldier.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/images/Chess/Unturned.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/images/Chessboard001.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/images/PauseImage/pauseGray.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/images/PlayerColor/BLACK.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/images/PlayerColor/RED.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/images/Select/PossibleMove.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/images/Select/Selected.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/images/UserImage/tempUser.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/InternetGaming/Internet/Message/HandlerType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Windows/GameArea/GameArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Windows/GameArea/GameArea.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Windows/GameArea/MainGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Windows/GameArea/MainGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Windows/StartMenu/StartMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Windows/StartMenu/StartMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Windows/GameArea/GameArea.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Windows/GameArea/GameArea.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Windows/StartMenu/StartMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Windows/StartMenu/StartMenu.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Windows/StartMenu/default.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Windows/StartMenu/default.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/InternetGaming/Internet/ClientData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/InternetGaming/Internet/ClientData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/InternetGaming/Internet/LinkingWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/InternetGaming/Internet/LinkingWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/InternetGaming/Internet/Message/MessageHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/InternetGaming/Internet/Message/MessageHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/InternetGaming/Internet/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/InternetGaming/Internet/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/InternetGaming/Internet/PerparingWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/Internet/PreparingWindow.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,9 +23,9 @@
       <list>
         <option value="Kotlin Data Class" />
         <option value="Interface" />
-        <option value="Enum" />
         <option value="FxmlFile" />
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -95,7 +47,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "last_directory_selection": "D:/ComputerScience/Java/javaFX/DarkChess/src/main/java/InternetGaming/Internet",
-    "last_opened_file_path": "D:/ComputerScience/Java/javaFX/DarkChess/src/main/resources/InternetGaming/Internet",
+    "last_opened_file_path": "D:/ComputerScience/Java/javaFX/DarkChess - 副本",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
@@ -127,7 +79,7 @@
       <recent name="GameArea" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Windows.StartMenu.Main">
+  <component name="RunManager" selected="Application.ServerMain">
     <configuration name="InternetGaming.GameArea.MainGame" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="InternetGaming.GameArea.MainGame" />
       <module name="DarkChess" />
@@ -195,8 +147,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Windows.StartMenu.Main" />
         <item itemvalue="Application.ServerMain" />
+        <item itemvalue="Application.Windows.StartMenu.Main" />
         <item itemvalue="Application.InternetGaming.GameArea.MainGame" />
         <item itemvalue="Application.MainGame" />
         <item itemvalue="Application.MainSetUp" />
@@ -246,6 +198,15 @@
     <option name="LAST_COMMIT_MESSAGE" value="我把调用的接口搭了个框架，记得填充内容" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/InternetGaming/Internet/ServerMain.java</url>
+          <line>4</line>
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="javafx.scene.layout.Pane" memberName="children" />

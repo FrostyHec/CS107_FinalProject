@@ -5,11 +5,61 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bea79dc5-57f0-48e7-b850-a9fcd65d4f0c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/InternetGaming/GameArea/GameArea.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/InternetGaming/GameArea/MainGame.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/InternetGaming/Internet/Client.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/InternetGaming/Internet/ClientData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/InternetGaming/Internet/LinkingWindow.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/InternetGaming/Internet/Message/MessageHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/InternetGaming/Internet/Message/MessageType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/InternetGaming/Internet/Message/Parser.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/InternetGaming/Internet/Message/PlayerType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/InternetGaming/Internet/Message/StartGameType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/InternetGaming/Internet/PreparingWindow.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/InternetGaming/Internet/Server.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/InternetGaming/Internet/ServerMain.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/InternetGaming/Internet/Transmitter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/A" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/GameArea/GameArea.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/GameArea/default.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/Internet/LinkingWindow.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/Internet/PerparingWindow.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/Internet/linkSever.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/Internet/newSever.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/images/Chess/BlackChess/Advisor.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/images/Chess/BlackChess/Cannon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/images/Chess/BlackChess/Chariot.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/images/Chess/BlackChess/General.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/images/Chess/BlackChess/Horse.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/images/Chess/BlackChess/Minister.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/images/Chess/BlackChess/Soldier.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/images/Chess/DiedChess/DiedChess2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/images/Chess/DiedChess/DiedChess3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/images/Chess/DiedChess/DiedChess4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/images/Chess/DiedChess/DiedChess5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/images/Chess/RedChess/Advisor.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/images/Chess/RedChess/Cannon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/images/Chess/RedChess/Chariot.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/images/Chess/RedChess/General.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/images/Chess/RedChess/Horse.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/images/Chess/RedChess/Minister.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/images/Chess/RedChess/Soldier.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/images/Chess/Unturned.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/images/Chessboard001.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/images/PauseImage/pauseGray.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/images/PlayerColor/BLACK.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/images/PlayerColor/RED.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/images/Select/PossibleMove.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/images/Select/Selected.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/images/UserImage/tempUser.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Windows/GameArea/GameArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Windows/GameArea/GameArea.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Windows/GameArea/MainGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Windows/GameArea/MainGame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Windows/StartMenu/StartMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Windows/StartMenu/StartMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Windows/StartMenu/StartNextPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Windows/StartMenu/StartNextPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Windows/GameArea/GameArea.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Windows/GameArea/GameArea.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/Windows/StartMenu/StartMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Windows/StartMenu/StartMenu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Windows/StartMenu/default.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Windows/StartMenu/default.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,6 +69,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Kotlin Data Class" />
         <option value="Interface" />
         <option value="Enum" />
         <option value="FxmlFile" />
@@ -43,8 +94,8 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_directory_selection": "D:/ComputerScience/Java/javaFX/DarkChess/src/main/java/Windows/StartMenu",
-    "last_opened_file_path": "D:/ComputerScience/Java/javaFX/DarkChess",
+    "last_directory_selection": "D:/ComputerScience/Java/javaFX/DarkChess/src/main/java/InternetGaming/Internet",
+    "last_opened_file_path": "D:/ComputerScience/Java/javaFX/DarkChess/src/main/resources/InternetGaming/Internet",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
@@ -53,21 +104,22 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
+      <recent name="InternetGaming.Internet" />
       <recent name="UserFiles" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\ComputerScience\Java\javaFX\DarkChess\src\main\resources\InternetGaming\Internet" />
+      <recent name="D:\ComputerScience\Java\javaFX\DarkChess\src\main\resources\InternetGaming" />
+      <recent name="D:\ComputerScience\Java\javaFX\DarkChess\src\main\java\InternetGaming" />
+      <recent name="D:\ComputerScience\Java\javaFX\DarkChess\src\main\java\InternetGaming\GameArea" />
       <recent name="D:\ComputerScience\Java\javaFX\DarkChess\src\main\resources\Windows\images\Chess\DiedChess" />
-      <recent name="D:\ComputerScience\Java\javaFX\DarkChess\src\main\resources\Windows\SetUp" />
-      <recent name="D:\ComputerScience\Java\javaFX\DarkChess\src\main\resources\images\PauseImage" />
-      <recent name="D:\ComputerScience\Java\javaFX\DarkChess\src\main\resources\images" />
-      <recent name="D:\ComputerScience\Java\javaFX\DarkChess\src\main\resources\images\UserImage" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\ComputerScience\Java\javaFX\DarkChess\src\main\resources\InternetGaming\GameArea" />
       <recent name="D:\ComputerScience\Java\javaFX\DarkChess\src\main\resources\Windows\images\Chess\DiedChess" />
       <recent name="D:\ComputerScience\Java\javaFX\DarkChess\src\main\resources\Windows\StartMenu" />
       <recent name="D:\ComputerScience\Java\javaFX\DarkChess\src\main\resources\Windows\GameArea" />
       <recent name="D:\ComputerScience\Java\javaFX\DarkChess\src\main\resources\Windows\CssFiles" />
-      <recent name="D:\ComputerScience\Java\javaFX\DarkChess\src\main\resources\Windows" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="Windows" />
@@ -75,26 +127,13 @@
       <recent name="GameArea" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.MainGame">
-    <configuration name="GameArea.test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="GameArea.test" />
+  <component name="RunManager" selected="Application.Windows.StartMenu.Main">
+    <configuration name="InternetGaming.GameArea.MainGame" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="InternetGaming.GameArea.MainGame" />
       <module name="DarkChess" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Windows.StartMenu.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="GameArea.Main" />
-      <module name="DarkChess" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Windows.StartMenu.*" />
+          <option name="PATTERN" value="InternetGaming.GameArea.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -128,6 +167,19 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="ServerMain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="InternetGaming.Internet.ServerMain" />
+      <module name="DarkChess" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="InternetGaming.Internet.Message.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Windows.StartMenu.Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Windows.StartMenu.Main" />
       <module name="DarkChess" />
@@ -143,11 +195,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.MainGame" />
         <item itemvalue="Application.Windows.StartMenu.Main" />
+        <item itemvalue="Application.ServerMain" />
+        <item itemvalue="Application.InternetGaming.GameArea.MainGame" />
+        <item itemvalue="Application.MainGame" />
         <item itemvalue="Application.MainSetUp" />
-        <item itemvalue="Application.GameArea.test" />
-        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
@@ -207,5 +259,10 @@
         <watch expression="playerPane.children" />
       </configuration>
     </watches-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/MainGame_java$MainGame.ic" NAME="MainGame Coverage Results" MODIFIED="1670077936147" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>GameLogic.*</FILTER>
+    </SUITE>
   </component>
 </project>

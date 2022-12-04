@@ -1,5 +1,6 @@
 package Windows.StartMenu;
 
+import InternetGaming.Internet.LinkingWindow;
 import Windows.GameArea.MainGame;
 import Windows.SetUp.MainSetUp;
 import Windows.SetUp.NormalSettings;
@@ -44,7 +45,7 @@ public class StartMenu {
     }
 
     public void openSetUp() throws Exception {
-        Stage s2=new Stage();
+        Stage s2 = new Stage();
         s2.initOwner(paneStartMenu.getScene().getWindow());
         s2.initModality(Modality.WINDOW_MODAL);
         new MainSetUp().start(s2);
@@ -52,5 +53,11 @@ public class StartMenu {
 
     public void exitGame() {
         Platform.exit();
+    }
+
+    public void startLinkingPage() throws IOException {
+        Application.setUserAgentStylesheet(getClass().getResource(settings.startMenu.getSkin()).toExternalForm());
+        FXMLLoader fxmlLoader = new FXMLLoader(LinkingWindow.class.getResource("LinkingWindow.fxml"));
+        ((Stage) paneStartMenu.getScene().getWindow()).setScene(new Scene(fxmlLoader.load()));
     }
 }

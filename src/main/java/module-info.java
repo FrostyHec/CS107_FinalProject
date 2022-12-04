@@ -11,4 +11,9 @@ module com.example.darkchess {
     opens Windows.StartMenu to javafx.fxml;
     exports Windows.SetUp;
     opens Windows.SetUp to javafx.fxml;
+    exports InternetGaming.GameArea;
+    opens InternetGaming.GameArea to javafx.fxml;
+    exports InternetGaming.Internet;
+    opens InternetGaming.Internet to javafx.fxml;
+
 }

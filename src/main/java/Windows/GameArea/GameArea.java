@@ -19,11 +19,18 @@ import GameLogic.Game;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import units.Retract;
+import units.Serialize;
 
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
+import java.nio.file.*;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.*;
 
 public class GameArea {
+    //用户路径
+    private String userSavePath;
     //暂停界面
     public Pane pausePane;
     public Pane paneChoose;
@@ -64,6 +71,22 @@ public class GameArea {
 
     public GameArea() {
         game = new Game();
+        try {
+            userSavePath = saveNameHandler();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    private String saveNameHandler() throws IOException {
+        for(int i=1;;i++){
+            String path="Userfile/Save"+i;
+            File file = new File(path);
+            if(file.exists()){
+                continue;
+            }
+            return path;
+        }
     }
 
     @FXML
@@ -118,6 +141,7 @@ public class GameArea {
     }
 
     public void saveAndExit() {
+        Serialize.save(game, userSavePath);
         try {
             new Main().start(new Stage());
         } catch (Exception e) {

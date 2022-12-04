@@ -1,0 +1,107 @@
+.root {
+    //-fx-background-color: green;
+    }
+
+.button:hover {
+    -fx-background-color: yellow;
+}
+.imageView{
+-fx-size: 100% 100%;
+}
+
+#Chessboardimg {
+    -fx-background-image: url(../images/Chessboard001.png);
+    -fx-background-size: 100% 100%;
+}
+#UnTurnedChess {
+    -fx-image: url(../images/Chess/Unturned.png);
+}
+//红子
+#RGeneralChess{
+-fx-image: url(../images/Chess/RedChess/General.png);
+}
+#RAdvisorChess{
+-fx-image: url(../images/Chess/RedChess/Advisor.png);
+}
+#RMinisterChess{
+-fx-image: url(../images/Chess/RedChess/Minister.png);
+}
+#RChariotChess{
+-fx-image: url(../images/Chess/RedChess/Chariot.png);
+}
+#RHorseChess{
+-fx-image: url(../images/Chess/RedChess/Horse.png);
+}
+#RSoldierChess{
+-fx-image: url(../images/Chess/RedChess/Soldier.png);
+}
+#RCannonChess{
+-fx-image: url(../images/Chess/RedChess/Cannon.png);
+}
+
+//黑子
+#BGeneralChess{
+-fx-image: url(../images/Chess/BlackChess/General.png);
+}
+#BAdvisorChess{
+-fx-image: url(../images/Chess/BlackChess/Advisor.png);
+}
+#BMinisterChess{
+-fx-image: url(../images/Chess/BlackChess/Minister.png);
+}
+#BChariotChess{
+-fx-image: url(../images/Chess/BlackChess/Chariot.png);
+}
+#BHorseChess{
+-fx-image: url(../images/Chess/BlackChess/Horse.png);
+}
+#BSoldierChess{
+-fx-image: url(../images/Chess/BlackChess/Soldier.png);
+}
+#BCannonChess{
+-fx-image: url(../images/Chess/BlackChess/Cannon.png);
+}
+
+//选择框
+#PossibleMove{
+-fx-image: url(../images/Select/PossibleMove.png);
+
+}
+#Selected{
+-fx-image: url(../images/Select/Selected.png);
+}
+
+//用户颜色
+#PlayerColorRED{
+-fx-background-image: url(../images/PlayerColor/RED.png);
+}
+#PlayerColorBLACK{
+-fx-background-image: url(../images/PlayerColor/BLACK.png);
+}
+
+//按钮亮灭
+.ButtonOn{
+    -fx-background-color: green;
+}
+.ButtonOff{
+   -fx-background-color: rgba(255, 255, 255, .1);
+}
+#pauseGray{
+-fx-image: url(../images/PauseImage/pauseGray.png);
+-fx-opacity: 0.9;
+}
+
+
+//死棋&编号
+#DiedChess2{
+-fx-image: url(../images/Chess/DiedChess/DiedChess2.png);
+}
+#DiedChess3{
+-fx-image: url(../images/Chess/DiedChess/DiedChess3.png);
+}
+#DiedChess4{
+-fx-image: url(../images/Chess/DiedChess/DiedChess4.png);
+}
+#DiedChess5{
+-fx-image: url(../images/Chess/DiedChess/DiedChess5.png);
+}

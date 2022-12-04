@@ -12,7 +12,6 @@ import javafx.stage.WindowEvent;
 import java.io.IOException;
 
 public class MainGame extends Application {
-    Stage stage=new Stage();
     @Override
     public void init() throws Exception {
         super.init();

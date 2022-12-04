@@ -2,16 +2,30 @@ package GameLogic;
 
 
 public class Chess implements java.io.Serializable{//小心chess为null时会出的bug
+
+    public Chess(){}
+
+    public Chess(Chess chess){
+        rank = chess.getRank();
+        score = chess.getScore();
+        color = chess.getColor();
+        turnOver = chess.isTurnOver();
+    }
     private static boolean click = false;
     protected void initClick(){
         click = false;
+    }
+    public static boolean isClick(){
+        return click;
     }
 
     private int rank;//等级
     protected void setRank(int x){
         rank = x;
     }
-    public int getRank(){return rank;}
+    public int getRank(){
+        return rank;
+    }
 
 
     //该棋子移动的可能性

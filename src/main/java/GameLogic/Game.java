@@ -223,7 +223,7 @@ public class Game implements java.io.Serializable{
         else return p1;
     }
 
-    public void aiMove(){}
+    public void aiMove() throws Exception {}
 
     public int getDifficulty(){
         return 0;
@@ -232,5 +232,18 @@ public class Game implements java.io.Serializable{
     public int Click(int x,int y){
         return 0;
     }
+//
+//    public static ArrayList<Chess> getAllChess(){
+//        ArrayList<Chess> allChess = new ArrayList<>();
+//        int i = 0;
+//        for(AllChess x : AllChess.values()){
+//            allChess.add(new Chess());
+//            allChess.get(i).setColor(x.getColor());
+//            allChess.get(i).setRank(x.getRank());
+//            allChess.get(i).setScore(x.getScore());
+//            i++;
+//        }
+//        return allChess;
+//    }
 
 }

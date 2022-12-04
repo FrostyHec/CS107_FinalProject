@@ -5,7 +5,7 @@ import GameLogic.*;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class generalUsed {
+public class generalUsed {//这个类是一些静态方法的集合，因为基本上AI都要用到，所以拿出来放一起
 
     public static int[][] randomClick(ArrayList<int[][]> canClick) throws Exception{
         if(canClick.size() == 0){
@@ -47,8 +47,11 @@ public class generalUsed {
         return canClick;
     }
 
-    public static boolean mayBeEat(Chess[][] chess,int X,int Y){
+    public static boolean mayBeEat(Chess[][] chess,int X,int Y){//在XY处是否可能被吃，注意场上棋子的变化
         int i = 0;
+        if(!chess[X][Y].isTurnOver()){
+            return false;
+        }//防止出现一些奇怪的情况
         for(Chess[] a :chess){
             int j=0;
             for(Chess x : a){
@@ -61,5 +64,73 @@ public class generalUsed {
             i++;
         }
         return false;
+    }
+
+    public static int[] possibleEat(Chess[][] chess,int X,int Y) throws Exception {//返回可能获得的分数(仅由某个子的行动带来)
+        if(chess[X][Y]==null || !chess[X][Y].isTurnOver()){
+            throw new Exception("");
+        }//防止出现一些奇怪的情况
+        int[][] moves = chess[X][Y].possibleMove(chess,X,Y);
+        int[] a = new int [4];
+        int i = 0;
+
+        for(int[] xy : moves){
+            if(xy[0] == -1 || xy[1] == -1){
+                a[i] = 0;
+            }
+            else if(chess[xy[0]][xy[1]]==null)
+                a[i] = 0;
+            else{
+                a[i] = chess[xy[0]][xy[1]].getScore();
+            }
+            i++;
+        }
+
+        return a;
+    }
+
+
+    public static double possibility(Chess[][] chess, Color color,int Rank){//返回大于(不等于)某个子(以Rank形式出现)的可能性
+        double po;
+        int[] Ch = new int[7];
+        int number = 0,need = 0;
+
+        for(Chess[] c : chess){
+            for(Chess x : c){
+                if( x == null || x.isTurnOver()){
+                    continue;
+                }
+                if(x.getColor()==color)
+                    Ch[ x.getRank()-1 ]++;
+                number++;
+            }
+        }
+        if(number == 0) return 0d;
+        if(Rank == 1 || Rank == 2){
+            for(int i=2;i<Ch.length;i++){
+                need += Ch[i];
+            }
+            if(Rank == 1){
+                need -= Ch[6];
+            }
+        }else {
+            for (int i = Rank; i < Ch.length; i++) {
+                need += Ch[i];
+            }
+        }
+
+        po = (double) need / number;
+        return po;
+    }
+
+    public static Chess[][] virtualChessBoard(Chess[][] originChessBoard){//复制一个棋盘供推演
+        Chess[][] chess = new Chess[8][4];
+        for(int i=0;i<originChessBoard.length;i++){
+            for(int j=0;j<originChessBoard[i].length;j++){
+                if(originChessBoard[i][j] == null)continue;
+                chess[i][j] = new Chess(originChessBoard[i][j]);
+            }
+        }
+        return chess;
     }
 }

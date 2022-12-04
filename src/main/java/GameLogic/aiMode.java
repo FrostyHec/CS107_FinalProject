@@ -34,10 +34,14 @@ public class aiMode extends Game{
     }
 
     @Override
-    public void aiMove(){
+    public void aiMove() throws Exception {
         int[][] move;
+        if(!Chess.isClick()){//如果是第一次，随便翻
+            move = Stupid.move(getAIPlayer(), chess);
+        }
+
         try {
-            move = Stupid.move(getAIPlayer(), chess);//move需要根据AI的等级变化
+            move = Stupid.move(getAIPlayer(), chess);//move需要根据AI的等级变化，在这里改进
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

@@ -4,6 +4,7 @@ import InternetGaming.Internet.LinkingWindow;
 import Windows.GameArea.MainGame;
 import Windows.SetUp.MainSetUp;
 import Windows.SetUp.NormalSettings;
+import Windows.Userfiles.UserfilesWindow;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -12,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
 import java.io.IOException;
 
@@ -38,7 +40,7 @@ public class StartMenu {
         if (settings.startMenu.isAlwaysPvE()) {
             //doSomeThing
         }
-        Application.setUserAgentStylesheet(getClass().getResource(settings.startMenu.getSkin()).toExternalForm());
+
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("StartNextPage.fxml"));
         ((Stage) paneStartMenu.getScene().getWindow()).setScene(new Scene(fxmlLoader.load()));
 
@@ -59,5 +61,22 @@ public class StartMenu {
         Application.setUserAgentStylesheet(getClass().getResource(settings.startMenu.getSkin()).toExternalForm());
         FXMLLoader fxmlLoader = new FXMLLoader(LinkingWindow.class.getResource("LinkingWindow.fxml"));
         ((Stage) paneStartMenu.getScene().getWindow()).setScene(new Scene(fxmlLoader.load()));
+    }
+
+    public void changeUser() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(UserfilesWindow.class.getResource("UserfilesWindow.fxml"));
+        ((Stage) paneStartMenu.getScene().getWindow()).setScene(new Scene(fxmlLoader.load()));
+    }
+    public static void show(Stage stage){
+        new StartMenu().defaultStyle();
+        FXMLLoader fxmlLoader = new FXMLLoader(StartMenu.class.getResource("StartMenu.fxml"));
+        try {
+            stage.setScene(new Scene(fxmlLoader.load()));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    private void defaultStyle(){
+        Application.setUserAgentStylesheet(StartMenu.class.getResource(settings.startMenu.getSkin()).toExternalForm());
     }
 }

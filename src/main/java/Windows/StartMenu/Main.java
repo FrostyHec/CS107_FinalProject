@@ -1,6 +1,8 @@
 package Windows.StartMenu;
 
+import UserFiles.UserManager;
 import Windows.SetUp.NormalSettings;
+import Windows.Transmitter;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -12,6 +14,13 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+        try {
+            UserManager.read();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            //是新玩家哦
+        }
+
         //窗体基本属性
         stage.setTitle("DarkChess");
         stage.setResizable(false);

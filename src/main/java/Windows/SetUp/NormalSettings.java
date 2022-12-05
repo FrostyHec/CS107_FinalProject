@@ -1,5 +1,7 @@
 package Windows.SetUp;
 
+import UserFiles.User;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -7,6 +9,8 @@ import java.io.ObjectInputStream;
 public class NormalSettings implements java.io.Serializable {
     public static final String url = "src/main/resources/Settings/Settings.ser";
     public StartMenu startMenu = new StartMenu();
+
+    private User nowPlay;
 
     public static NormalSettings readSettings(String url) {
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(url))) {

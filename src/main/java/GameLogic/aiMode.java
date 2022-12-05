@@ -4,18 +4,18 @@ import AI.*;
 
 public class aiMode extends Game{
     private int difficulty;
-    private boolean isFirst = false;
+    private boolean isFirst = true;
 
     Player p1,p2;
     public aiMode(){
         this.difficulty = 1;
         p1 = new Player();
-        p2 = new Player();
+        p2 = new AI();
     }
     public aiMode(int difficulty){
         this.difficulty = difficulty;
         p1 = new Player();
-        p2 = new Player();
+        p2 = new AI();
     }
     public aiMode(int difficulty,boolean isHumanPlayerFirst){
         this.difficulty = difficulty;
@@ -26,6 +26,7 @@ public class aiMode extends Game{
             p1 = new AI();
             p2 = new Player();
         }
+        isFirst = isHumanPlayerFirst;
     }
 
     @Override

@@ -15,6 +15,17 @@ public class generalUsed {//这个类是一些静态方法的集合，因为基�
         return canClick.get(0);
     }
 
+    public static boolean canWin(Player player,Chess[][] chess){
+        for(int[][] x : canClick(player,chess)){
+            if(x.length==2 && chess[x[1][0]][x[1][1]] != null){
+                if(chess[x[1][0]][x[1][1]].getScore() + player.getScore() >= 60){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public static ArrayList<int[][]> canClick(Player player,Chess[][] chess){
         ArrayList<int[][]> canClick = new ArrayList<>();
         for(int i=0;i<chess.length;i++){
@@ -23,10 +34,9 @@ public class generalUsed {//这个类是一些静态方法的集合，因为基�
                     continue;
 
                 if(!chess[i][j].isTurnOver()){
-                    int[][] xy = new int[2][2];
+                    int[][] xy = new int[1][2];
                     xy[0][0] = i;
                     xy[0][1] = j;
-                    xy[1][0] = (xy[1][1] = -1);
                     canClick.add(xy);
                 }else{
                     if(chess[i][j].getColor() == player.getColor() && chess[i][j].possibleMove(chess,i,j) != null){
@@ -123,6 +133,26 @@ public class generalUsed {//这个类是一些静态方法的集合，因为基�
         return po;
     }
 
+
+    public static double averageScore(Chess[][] chess){
+        int redScore = 0,allScore = 0,number = 0;
+        for(Chess[] c : chess){
+            for(Chess x : c){
+                if( x == null || x.isTurnOver()){
+                    continue;
+                }
+                number ++;
+                if(x.getColor()==Color.RED)
+                    redScore += x.getRank();
+                allScore += x.getRank();
+            }
+        }
+        if(number == 0)
+            return 0;
+        return (double)(redScore - allScore)/number;
+    }
+
+
     public static Chess[][] virtualChessBoard(Chess[][] originChessBoard){//复制一个棋盘供推演
         Chess[][] chess = new Chess[8][4];
         for(int i=0;i<originChessBoard.length;i++){
@@ -132,5 +162,13 @@ public class generalUsed {//这个类是一些静态方法的集合，因为基�
             }
         }
         return chess;
+    }
+
+    public static Color oppositeColor(Color color){
+        if(color == Color.RED){
+            return Color.BLACK;
+        }else{
+            return Color.RED;
+        }
     }
 }

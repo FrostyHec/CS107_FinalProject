@@ -4,18 +4,18 @@ import AI.*;
 
 public class aiMode extends Game{
     private int difficulty;
-    private boolean isFirst = false;
+    private boolean isFirst = true;
 
     Player p1,p2;
     public aiMode(){
         this.difficulty = 1;
         p1 = new Player();
-        p2 = new Player();
+        p2 = new AI();
     }
     public aiMode(int difficulty){
         this.difficulty = difficulty;
         p1 = new Player();
-        p2 = new Player();
+        p2 = new AI();
     }
     public aiMode(int difficulty,boolean isHumanPlayerFirst){
         this.difficulty = difficulty;
@@ -26,6 +26,7 @@ public class aiMode extends Game{
             p1 = new AI();
             p2 = new Player();
         }
+        isFirst = isHumanPlayerFirst;
     }
 
     @Override
@@ -40,17 +41,29 @@ public class aiMode extends Game{
             move = Stupid.move(getAIPlayer(), chess);
         }
 
-        try {
-            move = Stupid.move(getAIPlayer(), chess);//move需要根据AI的等级变化，在这里改进
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        do {
+            it:
+            try {//move需要根据AI的等级变化，在这里改进
+
+                if (generalUsed.canWin(getAIPlayer(), chess)) {//如果能直接赢，就直接赢
+                    move = Selection.highestOnce(chess, getAIPlayer().getColor());
+                    break it;//直接跳出try{}
+                }
+
+                move = Stupid.move(getAIPlayer(), chess);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }while(move[0][0] != -1);//防止出现奇怪的bug
+
+        //行动指令
         if(move.length ==1) {
             Click(getAIPlayer(),move[0][0],move[0][1]);
         }else{
             Click(getAIPlayer(),move[0][0],move[0][1]);
             Click(getAIPlayer(),move[1][0],move[1][1]);
         }
+
     }
 
     @Override

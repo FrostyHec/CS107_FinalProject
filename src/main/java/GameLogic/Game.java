@@ -24,6 +24,9 @@ public class Game implements java.io.Serializable{
     public Player getAIPlayer(){return p2;}
     Chess[][] chess = new Chess[8][4];
     Chess[][] chess_init = new Chess[8][4];
+    public Chess[][] getChess_init(){
+        return chess_init;
+    }
 
     public Chess[][] getChess(){
         return chess;

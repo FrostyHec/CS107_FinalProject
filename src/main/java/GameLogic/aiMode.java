@@ -41,17 +41,20 @@ public class aiMode extends Game{
             move = Stupid.move(getAIPlayer(), chess);
         }
 
-        it:try {//move需要根据AI的等级变化，在这里改进
+        do {
+            it:
+            try {//move需要根据AI的等级变化，在这里改进
 
-            if(generalUsed.canWin(getAIPlayer(),chess)){//如果能直接赢，就直接赢
-                move = Selection.highestOnce(chess,getAIPlayer().getColor());
-                break it;//直接跳出try{}
+                if (generalUsed.canWin(getAIPlayer(), chess)) {//如果能直接赢，就直接赢
+                    move = Selection.highestOnce(chess, getAIPlayer().getColor());
+                    break it;//直接跳出try{}
+                }
+
+                move = Stupid.move(getAIPlayer(), chess);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
             }
-
-            move = Stupid.move(getAIPlayer(), chess);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        }while(move[0][0] != -1);//防止出现奇怪的bug
 
         //行动指令
         if(move.length ==1) {

@@ -15,6 +15,17 @@ public class generalUsed {//这个类是一些静态方法的集合，因为基�
         return canClick.get(0);
     }
 
+    public static boolean canWin(Player player,Chess[][] chess){
+        for(int[][] x : canClick(player,chess)){
+            if(x.length==2 && chess[x[1][0]][x[1][1]] != null){
+                if(chess[x[1][0]][x[1][1]].getScore() + player.getScore() >= 60){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public static ArrayList<int[][]> canClick(Player player,Chess[][] chess){
         ArrayList<int[][]> canClick = new ArrayList<>();
         for(int i=0;i<chess.length;i++){
@@ -23,10 +34,9 @@ public class generalUsed {//这个类是一些静态方法的集合，因为基�
                     continue;
 
                 if(!chess[i][j].isTurnOver()){
-                    int[][] xy = new int[2][2];
+                    int[][] xy = new int[1][2];
                     xy[0][0] = i;
                     xy[0][1] = j;
-                    xy[1][0] = (xy[1][1] = -1);
                     canClick.add(xy);
                 }else{
                     if(chess[i][j].getColor() == player.getColor() && chess[i][j].possibleMove(chess,i,j) != null){

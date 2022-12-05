@@ -39,7 +39,7 @@ public class Selection {
             }
         }
         if(!is)
-            move[0][0] = -1;
+            move[0][0] = -1;//实际上表示没有能吃的棋
         return move;
     }
 
@@ -64,8 +64,7 @@ public class Selection {
         virtualChessboard[X][Y] = null;
 
         int[][] xy = highestOnce(virtualChessboard,generalUsed.oppositeColor(virtualChessboard[x][y].getColor()));
-        if(xy[0][0] == -1);
-        else{
+        if(xy[0][0] != -1){
             Score -= virtualChessboard[xy[1][0]][xy[1][1]].getScore();
         }
 

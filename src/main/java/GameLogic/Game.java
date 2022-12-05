@@ -58,6 +58,8 @@ public class Game implements java.io.Serializable{
 
 
     public int Click(Player player,int x,int y){//点击
+        if(!player.getStatus())
+            return 10086;//大概率是AI部分出了问题才会在这里报错
 
         if(isFirst){//是第一次点击
             if(chess[x][y] == null) return 401;//error code 401:点击了空格子

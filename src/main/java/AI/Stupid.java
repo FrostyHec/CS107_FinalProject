@@ -6,9 +6,6 @@ import java.util.ArrayList;
 
 public class Stupid  {
 
-//    Stupid(){
-//        super();
-//    }
 
 //    public int[][] move() throws Exception {
 //        ArrayList<int[][]> canClick = generalUsed.canClick(super.nowPlay(), super.getChess());

@@ -12,7 +12,7 @@ public class AI extends Player {
 
     @Override
     public int[][] move(Chess[][] chess){
-        int[][] move = new int[1][2];
+        int[][] move = new int[2][2];//不一定是[2][2],如果是翻祺的话就是[1][2]
         return move;
     }
 }

@@ -46,7 +46,7 @@ public class UserManager implements Serializable {
             return (UserManager) in.readObject();
         } catch (IOException i) {
 
-            throw new Exception("Manager not found! May be new player");
+            throw new Exception("Manager not found! May be a new player");
         } catch (ClassNotFoundException c) {
             c.printStackTrace();
             throw new Exception("Unexpect ERROR while loading UserManager");

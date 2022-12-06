@@ -53,16 +53,15 @@ public class ContinueGame {
         );
         fileChooser.setTitle("从本地载入存档");
         File file = fileChooser.showOpenDialog(s2);
-        MainGame game = new MainGame();
+        Game g;
         try {
             if (file == null) {
                 return;
             }
-            Game g = Deserialize.load(file.getPath());
-            Transmitter.loadGame(g);
+            g = Deserialize.load(file.getPath());
         } catch (Exception e) {
             switch (e.getMessage()) {
-                //TODO 101有bug，貌似乱开文件不会抛出101，只有错误的ser会报101，，，
+                //TODO 貌似乱开文件不会抛出101，只有错误的ser会报101
                 case "101" -> {
                     showAlert("ERROR!",
                             "ERROR CODE: 101",
@@ -96,7 +95,8 @@ public class ContinueGame {
             }
             return;
         }
-        game.start(new Stage());
+        new MainGame().start(new Stage());
+        Transmitter.loadGame(g);
         ((Stage) btnContinue.getScene().getWindow()).close();
 
     }

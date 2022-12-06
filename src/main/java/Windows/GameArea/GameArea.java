@@ -2,9 +2,9 @@ package Windows.GameArea;
 
 import GameLogic.Chess;
 import GameLogic.Color;
-import UserFiles.User;
 import UserFiles.UserManager;
 import Windows.StartMenu.Main;
+import Windows.Transmitter;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -20,22 +20,16 @@ import javafx.scene.input.MouseEvent;
 import GameLogic.Game;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import units.Deserialize;
 import units.Retract;
 import units.Serialize;
 
-import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.nio.file.*;
-import java.nio.file.attribute.BasicFileAttributes;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
 
 public class GameArea {
     //用户路径
-    private String userSavePath;
     //暂停界面
     public Pane pausePane;
     public Pane paneChoose;
@@ -74,28 +68,21 @@ public class GameArea {
     private final GraphicHandler graphicHandler = new GraphicHandler();
     private final TextHandler textHandler = new TextHandler();
 
-    private final LocalDateTime dateTime;
-
     private final UserManager userManager;
 
     public GameArea() throws Exception {
+        Transmitter.setGameArea(this);
         game = new Game();
         userManager = UserManager.read();
-        dateTime = LocalDateTime.now();
-        try {
-            userSavePath = saveNameHandler();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
-    private String saveNameHandler() throws IOException {
-        String path = "Userfile/" + userManager.nowPlay().getUid() + "/"
-                + dateTime.getYear() + "-" + dateTime.getMonthValue() + "-" + dateTime.getDayOfMonth()
-                + "-" + dateTime.getHour() + "-" + dateTime.getMinute() + "-" + dateTime.getSecond() + ".ser";
-        Files.deleteIfExists(Path.of(path));
-        return path;
+    public String getSavePath() {
+        LocalDateTime t = game.getStartTime();
+        return "Userfile/" + userManager.nowPlay().getUid() + "/"
+                + t.getYear() + "-" + t.getMonthValue() + "-" + t.getDayOfMonth()
+                + "-" + t.getHour() + "-" + t.getMinute() + "-" + t.getSecond() + ".ser";
     }
+
 
     @FXML
     public void initialize() {
@@ -110,7 +97,6 @@ public class GameArea {
     public void loadGame(Game game) {
         this.game = game;
         chessChanged();
-        ChessMove.resetCount();
     }
 
     public void chessMove(MouseEvent event) {
@@ -155,8 +141,10 @@ public class GameArea {
     }
 
     public void saveAndExit() {
-        Serialize.save(game, userSavePath);
         try {
+            String userSavePath = getSavePath();
+            Files.deleteIfExists(Path.of(userSavePath));
+            Serialize.save(game, userSavePath);
             new Main().start(new Stage());
         } catch (Exception e) {
             throw new RuntimeException(e);

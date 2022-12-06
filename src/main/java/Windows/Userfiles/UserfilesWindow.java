@@ -57,15 +57,18 @@ public class UserfilesWindow {
                     TablePosition tablePosition = observableList.get(i);
                     Object cellData = Uid.getCellData(tablePosition.getRow());
                     selectedUser = Integer.parseInt(cellData.toString());
-                    if(userManager.nowPlay().getUid()!=selectedUser){
-                        setNextButtonVisible(true);
-                    }else {
-                        setNextButtonVisible(false);
-                    }
-                    setRenameVisible(true);
+                    refreshSelectedUserButton();
                 }
             }
         });
+    }
+    private void refreshSelectedUserButton(){
+        if(userManager.nowPlay().getUid()!=selectedUser){
+            setNextButtonVisible(true);
+        }else {
+            setNextButtonVisible(false);
+        }
+        setRenameVisible(true);
     }
 
     private void setNextButtonVisible(boolean b) {//ture可见，false不可见
@@ -101,7 +104,7 @@ public class UserfilesWindow {
         StartMenu.show((Stage) dataTable.getScene().getWindow());
     }
 
-    public void addUser(ActionEvent event) throws Exception {
+    public void addUser() throws Exception {
         newWindowButton();
         Stage s2 = new Stage();
         s2.setTitle("新建玩家");
@@ -114,27 +117,28 @@ public class UserfilesWindow {
     public void deleteUser() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("警告！");
-        alert.setContentText("删除用户确认");
-        alert.setHeaderText("删除用户操作不可逆，请确认您的操作！");
+        alert.setContentText("删除用户操作不可逆，请确认您的操作！");
+        alert.setHeaderText("删除用户确认");
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.CANCEL) {
             return;//取消删除
         }
         //删除
-        deleteTheUser(selectedUser);
+        userManager.deleteUser(selectedUser);
         refreshData();
     }
 
     public void switchUser() {
-
-    }
-
-    private void deleteTheUser(int index) {
-        userManager.deleteUser(index);
-    }
-
-    private void switchTheUser(int index) {
-
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("询问");
+        alert.setContentText("是否确认切换用户？");
+        alert.setHeaderText("切换用户确认");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.CANCEL) {
+            return;//取消切换
+        }
+        userManager.switchUser(selectedUser);
+        refreshSelectedUserButton();
     }
 
     public void renameUser() {

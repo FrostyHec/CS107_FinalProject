@@ -15,12 +15,12 @@ public class UserManager implements Serializable {
     }
 
     public void generateUser(String name) {
-        users.add(new User(name, users.size() + 1));
+        users.add(new User(name, IndexToUid(users.size())));
         save();
     }
 
     public User getUser(int uid) {
-        return users.get(uid);
+        return users.get(UidToIndex(uid));
     }
 
     public List<User> getUserList() {
@@ -57,9 +57,9 @@ public class UserManager implements Serializable {
     public static void main(String[] args) throws Exception {
         UserManager a = new UserManager();
         a.generateUser("打个叫先");
+        a.setNowPlayUid(1);
         a.save();
         System.out.println("测试结束");
-        a.setNowPlayUid(1);
     }
 
     public User nowPlay() {
@@ -71,7 +71,7 @@ public class UserManager implements Serializable {
     }
 
     public void deleteUser(int uid) {
-        int index = uid - 1;
+        int index = UidToIndex(uid);
         try {
             users.get(index).delete();
         } catch (Exception e) {
@@ -84,7 +84,19 @@ public class UserManager implements Serializable {
 
     private void refreshUID() {
         for (User u : users) {
-            u.renameFile(users.indexOf(u) + 1);
+            u.renameFile(IndexToUid(users.indexOf(u)));
         }
+    }
+
+    private int IndexToUid(int index) {
+        return index + 1;
+    }
+
+    private int UidToIndex(int uid) {
+        return uid - 1;
+    }
+
+    public void switchUser(int uid) {
+        setNowPlayUid(uid);
     }
 }

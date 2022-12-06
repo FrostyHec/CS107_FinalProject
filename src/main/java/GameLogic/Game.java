@@ -267,11 +267,15 @@ public class Game implements java.io.Serializable {
 
     public void setLatestTime(LocalDateTime latestTime) {
         this.latestTime = latestTime;
-        }
+    }
     public String chessToString(){
         String s = "";
         for(Chess[] cc : chess){
             for(Chess c : cc){
+                if(c==null) {
+                    s += null;
+                    continue;
+                }
                 s += c.toString();
             }
         }

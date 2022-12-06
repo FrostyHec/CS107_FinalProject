@@ -4,7 +4,7 @@ import AI.*;
 
 public class aiMode extends Game{
     private int difficulty;
-    private boolean isFirst = true;
+    private boolean isHunanPlayerFirst = true;
 
     Player p1,p2;
     public aiMode(){
@@ -26,7 +26,7 @@ public class aiMode extends Game{
             p1 = new AI(difficulty);
             p2 = new Player();
         }
-        isFirst = isHumanPlayerFirst;
+        this.isHunanPlayerFirst = isHumanPlayerFirst;
     }
 
     @Override
@@ -69,7 +69,7 @@ public class aiMode extends Game{
 
     @Override
     public Player getAIPlayer(){
-        if(isFirst)
+        if(isHunanPlayerFirst)
             return p2;
         else
             return p1;
@@ -77,7 +77,7 @@ public class aiMode extends Game{
 
     @Override
     public Player getHumanPlayer(){
-        if(isFirst)
+        if(isHunanPlayerFirst)
             return p1;
         else
             return p2;

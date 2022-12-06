@@ -11,8 +11,10 @@ public class AI extends Player {
      */
 
     @Override
-    public int[][] move(Chess[][] chess){
+    public int[][] move(Chess[][] chess) throws Exception {
         int[][] move = new int[2][2];//不一定是[2][2],如果是翻祺的话就是[1][2]
+        Chess[][] virtualChessBoard = generalUsed.virtualChessBoard(chess);
+        move = Stupid.move(getColor(), chess);
         return move;
     }
 }

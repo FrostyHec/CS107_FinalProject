@@ -12,8 +12,8 @@ public class Stupid  {
 //        return generalUsed.random(canClick);
 //    }
 
-    public static int[][] move(Player player,Chess[][] chess) throws Exception {
-        ArrayList<int[][]> canClick = generalUsed.canClick(player, chess);
+    public static int[][] move(Color color,Chess[][] chess) throws Exception {
+        ArrayList<int[][]> canClick = generalUsed.canClick(color, chess);
         return generalUsed.randomClick(canClick);
     }
 }

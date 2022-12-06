@@ -32,7 +32,7 @@ public class Player implements java.io.Serializable{
         return status;
     }//true代表轮到他走棋了
 
-    public int[][] move(Chess[][] chess){
+    public int[][] move(Chess[][] chess) throws Exception {
         int[][] move = new int[1][2];
         return move;
     }

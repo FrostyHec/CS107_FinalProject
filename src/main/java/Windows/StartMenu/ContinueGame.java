@@ -48,8 +48,8 @@ public class ContinueGame {
         s2.initModality(Modality.WINDOW_MODAL);
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("All", "*.*"),
-                new FileChooser.ExtensionFilter("SaveFiles", "*.ser")
+                new FileChooser.ExtensionFilter("SaveFiles", "*.ser"),
+                new FileChooser.ExtensionFilter("All", "*.*")
         );
         fileChooser.setTitle("从本地载入存档");
         File file = fileChooser.showOpenDialog(s2);

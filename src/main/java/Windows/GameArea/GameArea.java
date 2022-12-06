@@ -2,6 +2,8 @@ package Windows.GameArea;
 
 import GameLogic.Chess;
 import GameLogic.Color;
+import UserFiles.User;
+import UserFiles.UserManager;
 import Windows.StartMenu.Main;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -27,6 +29,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 public class GameArea {
@@ -70,8 +74,14 @@ public class GameArea {
     private final GraphicHandler graphicHandler = new GraphicHandler();
     private final TextHandler textHandler = new TextHandler();
 
-    public GameArea() {
+    private final LocalDateTime dateTime;
+
+    private final UserManager userManager;
+
+    public GameArea() throws Exception {
         game = new Game();
+        userManager = UserManager.read();
+        dateTime = LocalDateTime.now();
         try {
             userSavePath = saveNameHandler();
         } catch (Exception e) {
@@ -80,14 +90,11 @@ public class GameArea {
     }
 
     private String saveNameHandler() throws IOException {
-        for (int i = 1; ; i++) {
-            String path = "Userfile/Save" + i;
-            File file = new File(path);
-            if (file.exists()) {
-                continue;
-            }
-            return path;
-        }
+        String path = "Userfile/" + userManager.nowPlay().getUid() + "/"
+                + dateTime.getYear() + "-" + dateTime.getMonthValue() + "-" + dateTime.getDayOfMonth()
+                + "-" + dateTime.getHour() + "-" + dateTime.getMinute() + "-" + dateTime.getSecond() + ".ser";
+        Files.deleteIfExists(Path.of(path));
+        return path;
     }
 
     @FXML
@@ -157,7 +164,7 @@ public class GameArea {
         close();
     }
 
-    public void close(){
+    public void close() {
         ((Stage) Chessboard.getScene().getWindow()).close();
     }
 

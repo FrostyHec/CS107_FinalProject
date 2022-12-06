@@ -187,7 +187,7 @@ public class Game implements java.io.Serializable {
         p2.setScore(0);
         isFirst = true;
 
-        //p1开始行动
+//        p1开始行动
         p1.changeStatus();
     }
 
@@ -256,7 +256,7 @@ public class Game implements java.io.Serializable {
     public int Click(int x, int y) {
         return 0;
     }
-
+    
     public LocalDateTime getStartTime() {
         return startTime;
     }
@@ -267,6 +267,16 @@ public class Game implements java.io.Serializable {
 
     public void setLatestTime(LocalDateTime latestTime) {
         this.latestTime = latestTime;
+        }
+    public String chessToString(){
+        String s = "";
+        for(Chess[] cc : chess){
+            for(Chess c : cc){
+                s += c.toString();
+            }
+        }
+        return s;
+
     }
 //
 //    public static ArrayList<Chess> getAllChess(){

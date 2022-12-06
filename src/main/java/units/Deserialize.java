@@ -2,6 +2,7 @@ package units;
 
 import GameLogic.*;
 import java.io.*;
+import java.util.Objects;
 
 public class Deserialize {//未经测试
     public static Game load(String path) throws Exception  {
@@ -12,7 +13,7 @@ public class Deserialize {//未经测试
         ObjectInputStream in = new ObjectInputStream(fileIn);
         try {
             game = (Game) in.readObject();
-        }catch (ClassNotFoundException c ){
+        }catch (Exception c ){
             throw new Exception("101") ;
         }
         in.close();
@@ -48,9 +49,9 @@ public class Deserialize {//未经测试
             throw new Exception("104");
         }
 
-        Game g = game;
-        g.setBack();
-        if(game != Retract.trace(g)){
+        String s = game.chessToString();
+        game.setBack();
+        if(!s.equals(Retract.trace(game).chessToString())){
             throw new Exception("105");
         }
 
@@ -79,7 +80,6 @@ public class Deserialize {//未经测试
          * 5. 行棋步骤错误
          * 描述：需要附上从初始棋盘-当前棋盘的行棋步骤，如果过程中有一处有误，则需要报出错误
          * 错误编码：105
-         *
          * done
          *
          */

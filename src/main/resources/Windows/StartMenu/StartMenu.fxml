@@ -11,7 +11,7 @@
       <Button layoutX="437.0" layoutY="150.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="96.0" text="积分榜" />
       <Button layoutX="61.0" layoutY="200.0" mnemonicParsing="false" onAction="#startNextPage" text="开始游戏" />
       <Button layoutX="437.0" layoutY="200.0" mnemonicParsing="false" onAction="#openSetUp" prefHeight="36.0" prefWidth="96.0" text="设置" />
-      <Button layoutX="61.0" layoutY="150.0" mnemonicParsing="false" onAction="#startNextPage" text="继续游戏" />
+      <Button layoutX="61.0" layoutY="150.0" mnemonicParsing="false" onAction="#continueGame" text="继续游戏" />
       <Button layoutX="437.0" layoutY="250.0" mnemonicParsing="false" onAction="#exitGame" prefHeight="36.0" prefWidth="96.0" text="退出游戏" />
       <Pane layoutX="406.0" layoutY="14.0" prefHeight="36.0" prefWidth="180.0">
          <children>

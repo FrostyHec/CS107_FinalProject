@@ -18,6 +18,7 @@ import javafx.scene.input.MouseEvent;
 import GameLogic.Game;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import units.Deserialize;
 import units.Retract;
 import units.Serialize;
 
@@ -73,16 +74,16 @@ public class GameArea {
         game = new Game();
         try {
             userSavePath = saveNameHandler();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     private String saveNameHandler() throws IOException {
-        for(int i=1;;i++){
-            String path="Userfile/Save"+i;
+        for (int i = 1; ; i++) {
+            String path = "Userfile/Save" + i;
             File file = new File(path);
-            if(file.exists()){
+            if (file.exists()) {
                 continue;
             }
             return path;
@@ -97,6 +98,12 @@ public class GameArea {
         textHandler.initialize();
         gameStateHandler.initialize();
 
+    }
+
+    public void loadGame(Game game) {
+        this.game = game;
+        chessChanged();
+        ChessMove.resetCount();
     }
 
     public void chessMove(MouseEvent event) {
@@ -147,6 +154,10 @@ public class GameArea {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+        close();
+    }
+
+    public void close(){
         ((Stage) Chessboard.getScene().getWindow()).close();
     }
 

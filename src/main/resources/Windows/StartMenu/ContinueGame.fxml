@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Windows.StartMenu.ContinueGame">
+   <children>
+      <TableView layoutX="20.0" layoutY="14.0" prefHeight="375.0" prefWidth="401.0">
+        <columns>
+            <TableColumn prefWidth="100.0" text="存档类型" />
+          <TableColumn prefWidth="150.0" text="存档名" />
+            <TableColumn prefWidth="150.0" text="最后打开时间" />
+        </columns>
+      </TableView>
+      <VBox layoutX="452.0" layoutY="102.0" prefHeight="200.0" prefWidth="124.0" spacing="30.0">
+         <children>
+            <Button fx:id="btnContinue" mnemonicParsing="false" onAction="#continueGame" prefHeight="40.0" prefWidth="132.0" text="继续游戏" />
+            <Button mnemonicParsing="false" onAction="#loadFromLocal" prefHeight="40.0" prefWidth="133.0" text="从本地载入" />
+            <Button mnemonicParsing="false" onAction="#backToMain" prefHeight="40.0" prefWidth="148.0" text="返回主界面" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

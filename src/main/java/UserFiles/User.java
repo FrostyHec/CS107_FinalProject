@@ -16,6 +16,8 @@ public class User implements Serializable {
     private List<ScoreList> localScoreList = new ArrayList<>();
     private TimeList timeList;
 
+    private String LatestSaveName;
+
     private User() {
 
     }
@@ -104,6 +106,10 @@ public class User implements Serializable {
 
                 }
         );
+    }
+
+    public String getLatestSaveName() {
+        return LatestSaveName;
     }
 }
 

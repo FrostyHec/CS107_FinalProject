@@ -13,7 +13,6 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
 import java.io.IOException;
 
@@ -68,7 +67,7 @@ public class StartMenu {
         ((Stage) paneStartMenu.getScene().getWindow()).setScene(new Scene(fxmlLoader.load()));
     }
     public static void show(Stage stage){
-        new StartMenu().defaultStyle();
+        new StartMenu().thisStylesheet();
         FXMLLoader fxmlLoader = new FXMLLoader(StartMenu.class.getResource("StartMenu.fxml"));
         try {
             stage.setScene(new Scene(fxmlLoader.load()));
@@ -76,7 +75,11 @@ public class StartMenu {
             throw new RuntimeException(e);
         }
     }
-    private void defaultStyle(){
+    private void thisStylesheet(){
         Application.setUserAgentStylesheet(StartMenu.class.getResource(settings.startMenu.getSkin()).toExternalForm());
     }
+
+    public void continueGame() {
+        ContinueGame.show((Stage) paneStartMenu.getScene().getWindow());
+   }
 }

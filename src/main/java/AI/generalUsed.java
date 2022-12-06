@@ -16,7 +16,7 @@ public class generalUsed {//这个类是一些静态方法的集合，因为基�
     }
 
     public static boolean canWin(Player player,Chess[][] chess){
-        for(int[][] x : canClick(player,chess)){
+        for(int[][] x : canClick(player.getColor(),chess)){
             if(x.length==2 && chess[x[1][0]][x[1][1]] != null){
                 if(chess[x[1][0]][x[1][1]].getScore() + player.getScore() >= 60){
                     return true;
@@ -26,7 +26,7 @@ public class generalUsed {//这个类是一些静态方法的集合，因为基�
         return false;
     }
 
-    public static ArrayList<int[][]> canClick(Player player,Chess[][] chess){
+    public static ArrayList<int[][]> canClick(Color color,Chess[][] chess){
         ArrayList<int[][]> canClick = new ArrayList<>();
         for(int i=0;i<chess.length;i++){
             for(int j=0;j<chess[0].length;j++){
@@ -39,7 +39,7 @@ public class generalUsed {//这个类是一些静态方法的集合，因为基�
                     xy[0][1] = j;
                     canClick.add(xy);
                 }else{
-                    if(chess[i][j].getColor() == player.getColor() && chess[i][j].possibleMove(chess,i,j) != null){
+                    if(chess[i][j].getColor() == color && chess[i][j].possibleMove(chess,i,j) != null){
                         for(int[] a : chess[i][j].possibleMove(chess,i,j)) {
                             if(a[0] != -1) {
                                 int[][] xy = new int[2][2];
@@ -153,7 +153,7 @@ public class generalUsed {//这个类是一些静态方法的集合，因为基�
     }
 
 
-    public static Chess[][] virtualChessBoard(Chess[][] originChessBoard){//复制一个棋盘供推演
+    public static Chess[][] virtualChessBoard(Chess[][] originChessBoard){//复制一个棋盘供推演//已通过初步测试
         Chess[][] chess = new Chess[8][4];
         for(int i=0;i<originChessBoard.length;i++){
             for(int j=0;j<originChessBoard[i].length;j++){

@@ -26,7 +26,7 @@ public class Selection {
         boolean is = false;
         Player p = new Player();
         p.setColor(color);
-        for(int[][] xy : generalUsed.canClick(p,virtualChessboard)){
+        for(int[][] xy : generalUsed.canClick(p.getColor(),virtualChessboard)){
             if(virtualChessboard[xy[1][0]][xy[1][1]] != null
                     && virtualChessboard[xy[1][0]][xy[1][1]].getScore() > score
                     && virtualChessboard[xy[1][0]][xy[1][1]].isTurnOver()){
@@ -69,5 +69,27 @@ public class Selection {
         }
 
         return Score;
+    }
+
+    public static int[][] highest(Chess[][] virtualChessboard,Color color){
+        int[][] move = new int[2][2];
+        int score = 0;
+        boolean is = false;
+        Player p = new Player();
+        p.setColor(color);
+        for(int[][] xy : generalUsed.canClick(p.getColor(),virtualChessboard)){
+            if(virtualChessboard[xy[1][0]][xy[1][1]] != null
+                    && virtualChessboard[xy[1][0]][xy[1][1]].getScore() > score){
+                score = virtualChessboard[xy[1][0]][xy[1][1]].getScore();
+                move[0][0] = xy[0][0];
+                move[0][1] = xy[0][1];
+                move[1][0] = xy[1][0];
+                move[1][1] = xy[1][1];
+                is = true;
+            }
+        }
+        if(!is)
+            move[0][0] = -1;//实际上表示没有能吃的棋
+        return move;
     }
 }

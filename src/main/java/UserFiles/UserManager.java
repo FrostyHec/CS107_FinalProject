@@ -45,7 +45,6 @@ public class UserManager implements Serializable {
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(url))) {
             return (UserManager) in.readObject();
         } catch (IOException i) {
-
             throw new Exception("Manager not found! May be a new player");
         } catch (ClassNotFoundException c) {
             c.printStackTrace();
@@ -56,7 +55,7 @@ public class UserManager implements Serializable {
 
     public static void main(String[] args) throws Exception {
         UserManager a = new UserManager();
-        a.generateUser("打个叫先");
+        a.generateUser("默认用户");
         a.setNowPlayUid(1);
         a.save();
         System.out.println("测试结束");

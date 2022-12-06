@@ -256,7 +256,7 @@ public class Game implements java.io.Serializable {
     public int Click(int x, int y) {
         return 0;
     }
-    
+
     public LocalDateTime getStartTime() {
         return startTime;
     }
@@ -276,7 +276,6 @@ public class Game implements java.io.Serializable {
             }
         }
         return s;
-
     }
 //
 //    public static ArrayList<Chess> getAllChess(){

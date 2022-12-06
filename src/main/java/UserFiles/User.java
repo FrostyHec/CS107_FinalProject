@@ -51,6 +51,7 @@ public class User implements Serializable {
 
     private void generateUrl() {
         saveUrl = "Userfile/" + uid;
+        avatarUrl = "Userfile/" +uid +"/"+"avatar";
     }
 
     private Path generatePath() {//路径不能序列化，原因未知，所以每次都要生成一次地址；
@@ -110,6 +111,10 @@ public class User implements Serializable {
 
     public String getLatestSaveName() {
         return LatestSaveName;
+    }
+
+    public String getAvatarUrl() {
+        return avatarUrl;
     }
 }
 

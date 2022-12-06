@@ -101,6 +101,7 @@ public class UserfilesWindow {
     }
 
     public void exitWindow(ActionEvent event) throws IOException {
+        userManager.save();
         StartMenu.show((Stage) dataTable.getScene().getWindow());
     }
 

@@ -10,20 +10,20 @@ public class aiMode extends Game{
     public aiMode(){
         this.difficulty = 1;
         p1 = new Player();
-        p2 = new AI();
+        p2 = new AI(difficulty);
     }
     public aiMode(int difficulty){
         this.difficulty = difficulty;
         p1 = new Player();
-        p2 = new AI();
+        p2 = new AI(difficulty);
     }
     public aiMode(int difficulty,boolean isHumanPlayerFirst){
         this.difficulty = difficulty;
         if(isHumanPlayerFirst){
             p1 = new Player();
-            p2 = new AI();
+            p2 = new AI(difficulty);
         }else{
-            p1 = new AI();
+            p1 = new AI(difficulty);
             p2 = new Player();
         }
         isFirst = isHumanPlayerFirst;
@@ -41,7 +41,7 @@ public class aiMode extends Game{
             move = Stupid.move(getAIPlayer().getColor(), chess);
         }
 
-        it:try {//move需要根据AI的等级变化，在这里改进
+        it:try {
 
             if(generalUsed.canWin(getAIPlayer(),chess)){//如果能赢，直接赢
                 move = Selection.highest(chess,getAIPlayer().getColor());

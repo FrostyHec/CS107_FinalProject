@@ -1,9 +1,16 @@
 package AI;
 
 import GameLogic.Chess;
+import GameLogic.Color;
 import GameLogic.Player;
 
+import java.util.ArrayList;
+
 public class AI extends Player {
+    private int difficulty;
+    public AI(int difficulty){
+        this.difficulty = difficulty;
+    }
     /*
      * 需要注意的地方：
      * 需要考虑优先级的问题
@@ -11,10 +18,20 @@ public class AI extends Player {
      */
 
     @Override
-    public int[][] move(Chess[][] chess) throws Exception {
-        int[][] move = new int[2][2];//不一定是[2][2],如果是翻祺的话就是[1][2]
-        Chess[][] virtualChessBoard = generalUsed.virtualChessBoard(chess);
+    public int[][] move(Chess[][] chess) throws Exception {//move需要根据AI的等级变化，在这里改进
+        int[][] move;//不一定是[2][2],如果是翻祺的话就是[1][2]
+
+        if(difficulty==0){
+            move = Stupid.move(getColor(), chess);
+            return move;
+        }
+        Chess[][] virtualChessBoard = generalUsed.virtualChessBoard(chess);//此处新开了一个棋盘，以后模拟都用这个棋盘
+
+        int score = 0;//期望得分
+        ArrayList<int[][]> moves = generalUsed.canClick(super.getColor(),chess);
+        int[] r = new int[moves.size()];
         move = Stupid.move(getColor(), chess);
+
         return move;
     }
 }

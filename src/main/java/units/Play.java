@@ -9,7 +9,7 @@ public class Play {
     Game game;
     int step;
 
-    public Play(Game game){
+    public Play(Game game){//构造方法
         this.game = game;
 
         for(int j = 0; j <game.getMoves().size(); j++){
@@ -32,7 +32,7 @@ public class Play {
         step = 0;
     }
 
-    public boolean move(){
+    public boolean move(){//具体方法
         if(moves.get(step).length == 1){
             game.Click(game.nowPlay(),moves.get(step)[0][0],moves.get(step)[0][1]);
         }

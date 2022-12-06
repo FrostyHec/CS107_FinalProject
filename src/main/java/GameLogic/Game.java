@@ -142,8 +142,8 @@ public class Game implements java.io.Serializable{
         //初始化棋盘
         moves = new ArrayList<>();
         ArrayList<Chess> ch = new ArrayList<>();
-        int i=0;
-        for(AllChess x : AllChess.values()){
+        int i = 0;
+        for (AllChess x : AllChess.values()) {
             ch.add(new Chess());
             ch.get(i).setColor(x.getColor());
             ch.get(i).setRank(x.getRank());
@@ -151,9 +151,9 @@ public class Game implements java.io.Serializable{
             i++;
         }
         Collections.shuffle(ch);
-        i=0;
-        for(int m=0;m<chess.length;m++){
-            for(int n=0;n<chess[m].length;n++){
+        i = 0;
+        for (int m = 0; m < chess.length; m++) {
+            for (int n = 0; n < chess[m].length; n++) {
                 chess[m][n] = ch.get(i);
                 chess_init[m][n] = ch.get(i);
                 i++;
@@ -161,18 +161,20 @@ public class Game implements java.io.Serializable{
         }
         chess[0][0].initClick();
 
-        for(int m=0;m<diedChess.length;m++){
-            for(int n=0;n< diedChess[m].length;n++){
+        for (int m = 0; m < diedChess.length; m++) {
+            for (int n = 0; n < diedChess[m].length; n++) {
                 diedChess[m][n] = 0;
             }
         }
 
         //初始化player
-        p1.setColor(Color.UNKNOWN);p2.setColor(Color.UNKNOWN);
-        p1.setScore(0);p2.setScore(0);
+        p1.setColor(Color.UNKNOWN);
+        p2.setColor(Color.UNKNOWN);
+        p1.setScore(0);
+        p2.setScore(0);
         isFirst = true;
 
-        //p1开始行动
+//        p1开始行动
         p1.changeStatus();
     }
 
@@ -236,6 +238,16 @@ public class Game implements java.io.Serializable{
 
     public int Click(int x,int y){
         return 0;
+    }
+
+    public String chessToString(){
+        String s = "";
+        for(Chess[] cc : chess){
+            for(Chess c : cc){
+                s += c.toString();
+            }
+        }
+        return s;
     }
 //
 //    public static ArrayList<Chess> getAllChess(){

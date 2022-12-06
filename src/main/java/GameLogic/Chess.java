@@ -249,4 +249,13 @@ public class Chess implements java.io.Serializable{//小心chess为null时会出
 
         return a;
     }
+
+    @Override
+    public String toString(){
+        String s = "";
+        s += String.valueOf(rank);
+        s += String.valueOf(isTurnOver());
+        s += color.toString();
+        return s;
+    }
 }

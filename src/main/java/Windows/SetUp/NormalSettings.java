@@ -8,11 +8,9 @@ import java.io.ObjectInputStream;
 
 public class NormalSettings implements java.io.Serializable {
     public static final String url = "src/main/resources/Settings/Settings.ser";
-    public StartMenu startMenu = new StartMenu();
+    public StartSettings StartSettings = new StartSettings();
 
-    private User nowPlay;
-
-    public static NormalSettings readSettings(String url) {
+    public static NormalSettings read(String url) {
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(url))) {
             return (NormalSettings) in.readObject();
         } catch (IOException i) {

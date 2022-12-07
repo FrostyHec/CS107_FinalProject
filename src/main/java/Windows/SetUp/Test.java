@@ -7,7 +7,7 @@ import java.io.ObjectOutputStream;
 public class Test {
     public static void main(String[] args) {
         NormalSettings settings=new NormalSettings();
-        settings.startMenu.setAlwaysPvP(false);
+        settings.StartSettings.setAlwaysPvP(false);
         try(ObjectOutputStream out=new ObjectOutputStream(new FileOutputStream("src/main/resources/Settings/Settings.ser")))
         {
             out.writeObject(settings);

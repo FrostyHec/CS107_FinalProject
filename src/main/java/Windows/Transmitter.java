@@ -17,4 +17,8 @@ public class Transmitter {
     public static void setGameArea(GameArea g) {
         gameArea = g;
     }
+
+    public static void setGameSaveName(String name){
+        gameArea.setSaveName(name);
+    }
 }

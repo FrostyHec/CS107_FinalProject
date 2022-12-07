@@ -1,9 +1,17 @@
 .root {
-    //-fx-background-color: green;
+    -fx-background-image: url(../images/BackGround.png);;
     }
-
-.button:hover {
-    -fx-background-color: yellow;
+//按钮亮灭
+.ButtonOn{
+    -fx-background-color: rgba(85, 212, 147, .95);
+}
+.ButtonOff{
+      -fx-background-color: rgba(135, 121, 84, .95);
+      -fx-text-fill: black;
+}
+.button:hover{
+    -fx-background-color: rgba(152, 168, 212, .55);
+    -fx-text-fill: white;
 }
 .imageView{
 -fx-size: 100% 100%;
@@ -77,14 +85,6 @@
 }
 #PlayerColorBLACK{
 -fx-background-image: url(../images/PlayerColor/BLACK.png);
-}
-
-//按钮亮灭
-.ButtonOn{
-    -fx-background-color: green;
-}
-.ButtonOff{
-   -fx-background-color: rgba(255, 255, 255, .1);
 }
 #pauseGray{
 -fx-image: url(../images/PauseImage/pauseGray.png);

@@ -16,8 +16,8 @@ public class MainSetUp extends Application {
         stage.setTitle("SetUp");
         stage.setResizable(false);
         //加载fxml
-        settings = NormalSettings.readSettings(NormalSettings.url);
-        Application.setUserAgentStylesheet(getClass().getResource(settings.startMenu.getSkin()).toExternalForm());
+        settings = NormalSettings.read(NormalSettings.url);
+        Application.setUserAgentStylesheet(getClass().getResource(settings.StartSettings.getSkin()).toExternalForm());
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("SetUp.fxml"));
         stage.setScene(new Scene(fxmlLoader.load(),385,460));
         stage.show();

@@ -19,7 +19,7 @@
       <VBox layoutX="452.0" layoutY="94.0" prefHeight="255.0" prefWidth="124.0" spacing="30.0">
          <children>
             <Button fx:id="btnContinue" mnemonicParsing="false" onAction="#continueGame" prefHeight="40.0" prefWidth="132.0" text="继续游戏" />
-            <Button mnemonicParsing="false" onAction="#deleteSave" prefHeight="40.0" prefWidth="148.0" text="删除存档" />
+            <Button fx:id="btnDeleteFile" mnemonicParsing="false" onAction="#deleteSave" prefHeight="40.0" prefWidth="148.0" text="删除存档" />
             <Button mnemonicParsing="false" onAction="#loadFromLocal" prefHeight="40.0" prefWidth="133.0" text="从本地载入" />
             <Button mnemonicParsing="false" onAction="#backToMain" prefHeight="40.0" prefWidth="148.0" text="返回主界面" />
          </children>

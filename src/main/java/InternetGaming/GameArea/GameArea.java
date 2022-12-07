@@ -429,7 +429,6 @@ public class GameArea {
             cleanCheatTable();
             hidePause();
         }
-
         public void refreshIcon() {//有待扩展
             try {
                 player1Icon.setImage(new Image(new FileInputStream("src/main/resources/Windows/images/UserImage/tempUser.png")));

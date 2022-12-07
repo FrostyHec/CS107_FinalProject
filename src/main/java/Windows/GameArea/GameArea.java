@@ -29,7 +29,6 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 public class GameArea {
-    //用户路径
     //暂停界面
     public Pane pausePane;
     public Pane paneChoose;
@@ -39,6 +38,7 @@ public class GameArea {
     public Button btnRemake;
     public Pane diedChessP1;
     public Pane diedChessP2;
+    public Button bthRetract;
 
     //死棋子图像
 
@@ -70,17 +70,27 @@ public class GameArea {
 
     private final UserManager userManager;
 
+    private String initialSaveName;
+
     public GameArea() throws Exception {
         Transmitter.setGameArea(this);
         game = new Game();
         userManager = UserManager.read();
     }
 
+    public void setSaveName(String name) {
+        initialSaveName = name;
+    }
+
     public String getSavePath() {
-        LocalDateTime t = game.getStartTime();
-        return "Userfile/" + userManager.nowPlay().getUid() + "/"
-                + t.getYear() + "-" + t.getMonthValue() + "-" + t.getDayOfMonth()
-                + "-" + t.getHour() + "-" + t.getMinute() + "-" + t.getSecond() + ".ser";
+        if (initialSaveName == null) {
+            LocalDateTime t = game.getStartTime();
+            return "Userfile/" + userManager.nowPlay().getUid() + "/"
+                    + t.getYear() + "-" + t.getMonthValue() + "-" + t.getDayOfMonth()
+                    + "-" + t.getHour() + "-" + t.getMinute() + "-" + t.getSecond() + ".ser";
+        } else {
+            return "Userfile/" + userManager.nowPlay().getUid() + "/" + initialSaveName;
+        }
     }
 
 
@@ -160,7 +170,7 @@ public class GameArea {
         try {
             game = Retract.traceBack(game);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            //do nothing!
         }
         chessChanged();
     }
@@ -444,6 +454,15 @@ public class GameArea {
             refreshIcon();
             cleanCheatTable();
             hidePause();
+            initializePause();
+        }
+
+        private void initializePause() {
+                btnContinue.getStyleClass().add("ButtonOff");
+                btnRemake.getStyleClass().add("ButtonOff");
+                btnQuit.getStyleClass().add("ButtonOff");
+                btnSetup.getStyleClass().add("ButtonOff");
+
         }
 
         public void refreshIcon() {//有待扩展
@@ -464,6 +483,7 @@ public class GameArea {
         }
 
         public void cleanCheatTable() {
+            bthRetract.getStyleClass().add("ButtonOff");
             cleanCheatImage();
             cheatTitle.setVisible(false);
             cheatImage.setVisible(false);

@@ -35,6 +35,7 @@ public class ContinueGame {
     public TableColumn saveName;
     public TableColumn latestPlayTime;
     public TableColumn saveScore;
+    public Button btnDeleteFile;
     private String selectedSaveName;
     private SaveList saveList;
 
@@ -52,7 +53,7 @@ public class ContinueGame {
     public void initialize() {
         Application.setUserAgentStylesheet(Application.STYLESHEET_MODENA);
         btnContinueVisible(false);
-        saveList=new SaveList();
+        saveList = new SaveList();
         refreshData();
         //单选与监听
         dataTable.getSelectionModel().setCellSelectionEnabled(true);
@@ -83,8 +84,11 @@ public class ContinueGame {
     private void btnContinueVisible(boolean b) {
         btnContinue.setVisible(b);
         btnContinue.setDisable(!b);
+        btnDeleteFile.setVisible(b);
+        btnDeleteFile.setDisable(!b);
     }
-    private void loadGame(File file){
+
+    private void loadGame(File file) {
         Game g;
         try {
             if (file == null) {
@@ -137,6 +141,12 @@ public class ContinueGame {
 
     }
 
+    private void loadGame(File file, String name) {
+        //TODO 测试这一模块
+        loadGame(file);
+        Transmitter.setGameSaveName(name);
+    }
+
     @SuppressWarnings("RedundantLabeledSwitchRuleCodeBlock")
     public void loadFromLocal(ActionEvent event) throws IOException {
         Stage s2 = new Stage();
@@ -149,7 +159,11 @@ public class ContinueGame {
         );
         fileChooser.setTitle("从本地载入存档");
         File file = fileChooser.showOpenDialog(s2);
-        loadGame(file);
+        if (file == null) {
+            return;
+        }
+        loadGame(file, file.getName());
+
     }
 
     private void showAlert(String title, String headerText, String contentText) {
@@ -181,5 +195,8 @@ public class ContinueGame {
         saveList.deleteSave(selectedSaveName);
         refreshData();
     }
-    //TODO:自动打开上一次存档还没做
+
+    public void automaticSave() {
+        //TODO:自动打开上一次存档还没做
+    }
 }

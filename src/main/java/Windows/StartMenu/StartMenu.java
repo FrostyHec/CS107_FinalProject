@@ -15,7 +15,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
@@ -26,7 +25,6 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Objects;
 
 public class StartMenu {
     public Pane paneStartMenu;
@@ -39,7 +37,7 @@ public class StartMenu {
 
 
     public StartMenu() {
-        settings = NormalSettings.readSettings(NormalSettings.url);
+        settings = NormalSettings.read(NormalSettings.url);
     }
 
     @FXML
@@ -89,10 +87,10 @@ public class StartMenu {
     }
 
     public void startNextPage() throws IOException {
-        if (settings.startMenu.isAlwaysPvP()) {
+        if (settings.StartSettings.isAlwaysPvP()) {
             startGame();
         }
-        if (settings.startMenu.isAlwaysPvE()) {
+        if (settings.StartSettings.isAlwaysPvE()) {
             //doSomeThing
         }
 
@@ -113,7 +111,7 @@ public class StartMenu {
     }
 
     public void startLinkingPage() throws IOException {
-        Application.setUserAgentStylesheet(getClass().getResource(settings.startMenu.getSkin()).toExternalForm());
+        Application.setUserAgentStylesheet(getClass().getResource(settings.StartSettings.getSkin()).toExternalForm());
         FXMLLoader fxmlLoader = new FXMLLoader(LinkingWindow.class.getResource("LinkingWindow.fxml"));
         ((Stage) paneStartMenu.getScene().getWindow()).setScene(new Scene(fxmlLoader.load()));
     }
@@ -134,7 +132,7 @@ public class StartMenu {
     }
 
     private void thisStylesheet() {
-        Application.setUserAgentStylesheet(StartMenu.class.getResource(settings.startMenu.getSkin()).toExternalForm());
+        Application.setUserAgentStylesheet(StartMenu.class.getResource(settings.StartSettings.getSkin()).toExternalForm());
     }
 
     public void continueGame() {

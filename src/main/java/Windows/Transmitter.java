@@ -21,4 +21,7 @@ public class Transmitter {
     public static void setGameSaveName(String name){
         gameArea.setSaveName(name);
     }
+    public static void setPvEDifficulty(int difficulty,boolean isHumanFirst){
+        gameArea.setPvE(difficulty,isHumanFirst);
+    }
 }

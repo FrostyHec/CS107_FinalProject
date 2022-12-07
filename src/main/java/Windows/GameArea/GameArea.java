@@ -2,6 +2,7 @@ package Windows.GameArea;
 
 import GameLogic.Chess;
 import GameLogic.Color;
+import GameLogic.aiMode;
 import UserFiles.UserManager;
 import Windows.StartMenu.Main;
 import Windows.Transmitter;
@@ -175,6 +176,10 @@ public class GameArea {
         chessChanged();
     }
 
+    public void setPvE(int difficulty, boolean isHumanFirst) {
+        game = new aiMode(difficulty, isHumanFirst);
+    }
+
     class CheatModel {
         static private boolean isStart = false;
         private int column;
@@ -237,9 +242,12 @@ public class GameArea {
             if (!generateRowAndColumn(event.getX(), event.getY())) {
                 return;
             }
-
-            int res = game.Click(game.nowPlay(), row, column);//完成点击
-
+            int res;
+            if (game instanceof aiMode) {
+                res = game.Click(row, column);
+            } else {
+                res = game.Click(game.nowPlay(), row, column);//完成点击
+            }
             ClickResult clickResult = ClickResult.getClickResult(res);
 
 
@@ -248,6 +256,27 @@ public class GameArea {
             System.out.println("now:" + game.nowPlay().getColor().toString() + " " + game.nowPlay().getScore());
             chessChanged();
             analyzeClickResult(clickResult);
+
+            aiMove();
+        }
+
+        private void aiMove() {
+            Chessboard.setDisable(true);
+            try {
+                game.aiMove();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+//            new Thread(() -> {
+//                try {
+//                    Thread.sleep(100);
+//                    game.aiMove();
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//            });
+            Chessboard.setDisable(false);
         }
 
         private void showSelectedChess(int row, int column) {
@@ -458,10 +487,10 @@ public class GameArea {
         }
 
         private void initializePause() {
-                btnContinue.getStyleClass().add("ButtonOff");
-                btnRemake.getStyleClass().add("ButtonOff");
-                btnQuit.getStyleClass().add("ButtonOff");
-                btnSetup.getStyleClass().add("ButtonOff");
+            btnContinue.getStyleClass().add("ButtonOff");
+            btnRemake.getStyleClass().add("ButtonOff");
+            btnQuit.getStyleClass().add("ButtonOff");
+            btnSetup.getStyleClass().add("ButtonOff");
 
         }
 

@@ -4,26 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bea79dc5-57f0-48e7-b850-a9fcd65d4f0c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Windows/images/BackGround.png" afterDir="false" />
+    <list default="true" id="bea79dc5-57f0-48e7-b850-a9fcd65d4f0c" name="Changes" comment="我把调用的接口搭了个框架，记得填充内容">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Windows/StartMenu/setDifficulty.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Userfile/2/2022-12-7-18-53-20.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/InternetGaming/GameArea/GameArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/InternetGaming/GameArea/GameArea.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Userfile/2/2022-12-7-21-30-47.ser" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Userfile/2/2022-12-7-22-54-14.ser" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Userfile/2/2022-12-7-22-56-32.ser" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Userfile/2/2022-12-7-22-57-13.ser" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Windows/GameArea/GameArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Windows/GameArea/GameArea.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Windows/SetUp/MainSetUp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Windows/SetUp/MainSetUp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Windows/SetUp/NormalSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Windows/SetUp/NormalSettings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Windows/SetUp/StartMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Windows/SetUp/StartSettings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Windows/SetUp/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Windows/SetUp/Test.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Windows/StartMenu/ContinueGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Windows/StartMenu/ContinueGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Windows/StartMenu/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Windows/StartMenu/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Windows/StartMenu/StartMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Windows/StartMenu/StartMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Windows/StartMenu/StartNextPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Windows/StartMenu/StartNextPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Windows/Transmitter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Windows/Transmitter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Settings/Settings.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Windows/GameArea/GameArea.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Windows/GameArea/GameArea.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Windows/GameArea/default.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Windows/GameArea/default.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Windows/StartMenu/ContinueGame.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Windows/StartMenu/ContinueGame.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Windows/StartMenu/StartMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Windows/StartMenu/StartMenu.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Windows/images/Chessboard001.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Windows/images/Chessboard001.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Windows/StartMenu/startNextPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Windows/StartMenu/startNextPage.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,8 +27,8 @@
         <option value="Kotlin Data Class" />
         <option value="Interface" />
         <option value="Enum" />
-        <option value="FxmlFile" />
         <option value="Class" />
+        <option value="FxmlFile" />
       </list>
     </option>
   </component>
@@ -94,7 +85,7 @@
       <recent name="GameArea" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.MainGame">
+  <component name="RunManager" selected="Application.Windows.StartMenu.Main">
     <configuration name="MainGame" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Windows.GameArea.MainGame" />
       <module name="DarkChess" />
@@ -162,8 +153,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.MainGame" />
         <item itemvalue="Application.Windows.StartMenu.Main" />
+        <item itemvalue="Application.MainGame" />
         <item itemvalue="Application.Test" />
         <item itemvalue="Application.UserManager" />
         <item itemvalue="Application.unitTest" />

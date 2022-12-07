@@ -1,15 +1,24 @@
 package Windows.StartMenu;
 
 import GameLogic.Game;
+import UserFiles.User;
+import UserFiles.UserManager;
 import Windows.GameArea.MainGame;
 import Windows.Transmitter;
+import Windows.Userfiles.SaveList;
+import Windows.Userfiles.ShowingSave;
+import Windows.Userfiles.ShowingUser;
+import javafx.application.Application;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -21,6 +30,14 @@ import java.util.Optional;
 
 public class ContinueGame {
     public Button btnContinue;
+    public TableView dataTable;
+    public TableColumn saveKind;
+    public TableColumn saveName;
+    public TableColumn latestPlayTime;
+    public TableColumn saveScore;
+    private String selectedSaveName;
+    private SaveList saveList;
+
 
     public static void show(Stage stage) {
         FXMLLoader fxmlLoader = new FXMLLoader(StartMenu.class.getResource("ContinueGame.fxml"));
@@ -33,26 +50,41 @@ public class ContinueGame {
 
     @FXML
     public void initialize() {
+        Application.setUserAgentStylesheet(Application.STYLESHEET_MODENA);
         btnContinueVisible(false);
+        saveList=new SaveList();
+        refreshData();
+        //单选与监听
+        dataTable.getSelectionModel().setCellSelectionEnabled(true);
+        dataTable.getSelectionModel().getSelectedCells().addListener((InvalidationListener) observable -> {
+            ObservableList<TablePosition> observableList = (ObservableList<TablePosition>) observable;
+            for (int i = 0; i < observableList.size(); i++) {
+                TablePosition tablePosition = observableList.get(i);
+                Object cellData = saveName.getCellData(tablePosition.getRow());
+                selectedSaveName = cellData.toString();
+                btnContinueVisible(true);
+            }
+        });
     }
+
+    public void refreshData() {
+        ObservableList<ShowingSave> data = FXCollections.observableArrayList();
+        saveKind.setCellValueFactory(new PropertyValueFactory<>("saveKind"));
+        saveName.setCellValueFactory(new PropertyValueFactory<>("saveName"));
+        latestPlayTime.setCellValueFactory(new PropertyValueFactory<>("latestPlayTime"));
+        saveScore.setCellValueFactory(new PropertyValueFactory<>("saveScore"));
+        for (String key : saveList.getSaveList().keySet()) {
+            data.add(new ShowingSave(saveList.getSaveList().get(key), key));
+        }
+        dataTable.setItems(data);
+    }
+
 
     private void btnContinueVisible(boolean b) {
         btnContinue.setVisible(b);
         btnContinue.setDisable(!b);
     }
-
-    @SuppressWarnings("RedundantLabeledSwitchRuleCodeBlock")
-    public void loadFromLocal(ActionEvent event) throws IOException {
-        Stage s2 = new Stage();
-        s2.initOwner(btnContinue.getScene().getWindow());
-        s2.initModality(Modality.WINDOW_MODAL);
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("SaveFiles", "*.ser"),
-                new FileChooser.ExtensionFilter("All", "*.*")
-        );
-        fileChooser.setTitle("从本地载入存档");
-        File file = fileChooser.showOpenDialog(s2);
+    private void loadGame(File file){
         Game g;
         try {
             if (file == null) {
@@ -95,10 +127,29 @@ public class ContinueGame {
             }
             return;
         }
-        new MainGame().start(new Stage());
+        try {
+            new MainGame().start(new Stage());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         Transmitter.loadGame(g);
         ((Stage) btnContinue.getScene().getWindow()).close();
 
+    }
+
+    @SuppressWarnings("RedundantLabeledSwitchRuleCodeBlock")
+    public void loadFromLocal(ActionEvent event) throws IOException {
+        Stage s2 = new Stage();
+        s2.initOwner(btnContinue.getScene().getWindow());
+        s2.initModality(Modality.WINDOW_MODAL);
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("SaveFiles", "*.ser"),
+                new FileChooser.ExtensionFilter("All", "*.*")
+        );
+        fileChooser.setTitle("从本地载入存档");
+        File file = fileChooser.showOpenDialog(s2);
+        loadGame(file);
     }
 
     private void showAlert(String title, String headerText, String contentText) {
@@ -114,7 +165,21 @@ public class ContinueGame {
     }
 
     public void continueGame(ActionEvent event) {
-        //TODO
+        loadGame(saveList.generateSavePath(selectedSaveName).toFile());
+    }
+
+    public void deleteSave() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("警告！");
+        alert.setContentText("删除存档操作不可逆，请确认您的操作！");
+        alert.setHeaderText("删除存档确认");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.CANCEL) {
+            return;//取消删除
+        }
+        //删除
+        saveList.deleteSave(selectedSaveName);
+        refreshData();
     }
     //TODO:自动打开上一次存档还没做
 }

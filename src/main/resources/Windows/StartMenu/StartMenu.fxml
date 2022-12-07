@@ -15,9 +15,10 @@
       <Button layoutX="437.0" layoutY="250.0" mnemonicParsing="false" onAction="#exitGame" prefHeight="36.0" prefWidth="96.0" text="退出游戏" />
       <Pane layoutX="406.0" layoutY="14.0" prefHeight="36.0" prefWidth="180.0">
          <children>
-            <ImageView fx:id="avatarPic" fitHeight="50.0" fitWidth="50.0" layoutX="-17.0" layoutY="-3.0" onMouseClicked="#changeAvatar" onMouseDragEntered="#showChangeAvaTip" onMouseDragExited="#hideChangeAvaTip" pickOnBounds="true" preserveRatio="true" />
-            <Label fx:id="userName" contentDisplay="CENTER" layoutX="42.0" prefHeight="36.0" prefWidth="65.0" text="名字" />
+            <ImageView fx:id="avatarPic" fitHeight="50.0" fitWidth="50.0" layoutX="-17.0" layoutY="-3.0" onMouseClicked="#changeAvatar" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="userName"  contentDisplay="CENTER" layoutX="42.0" prefHeight="36.0" prefWidth="65.0" text="名字" />
             <Button layoutX="113.0" mnemonicParsing="false" onAction="#changeUser" prefHeight="30.0" prefWidth="61.0" text="切换" />
+            <Label fx:id="toolTipper" onMouseClicked="#changeAvatar" layoutX="-17.0" layoutY="-3.0" prefHeight="50.0" prefWidth="50.0" />
          </children>
       </Pane>
    </children>

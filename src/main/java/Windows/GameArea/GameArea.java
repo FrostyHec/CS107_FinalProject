@@ -152,7 +152,7 @@ public class GameArea {
         close();
     }
 
-    public void close() {
+    private void close() {
         ((Stage) Chessboard.getScene().getWindow()).close();
     }
 

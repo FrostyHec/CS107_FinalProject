@@ -5,15 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bea79dc5-57f0-48e7-b850-a9fcd65d4f0c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/Windows/Userfiles/SaveList.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Windows/Userfiles/ShowingSave.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Userfile/1/2022-12-6-22-58-41.ser" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Userfile/2/avatar" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Userfile/UserManager.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/GameLogic/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GameLogic/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/GameLogic/aiMode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GameLogic/aiMode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/UserFiles/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UserFiles/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/UserFiles/UserManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UserFiles/UserManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Windows/GameArea/GameArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Windows/GameArea/GameArea.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Windows/StartMenu/ContinueGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Windows/StartMenu/ContinueGame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Windows/StartMenu/StartMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Windows/StartMenu/StartMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Windows/Userfiles/UserfilesWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Windows/Userfiles/UserfilesWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Windows/StartMenu/ContinueGame.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Windows/StartMenu/ContinueGame.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/Windows/StartMenu/StartMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Windows/StartMenu/StartMenu.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

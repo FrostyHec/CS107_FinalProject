@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseDragEvent;
@@ -31,6 +32,7 @@ public class StartMenu {
     public Pane paneStartMenu;
     public ImageView avatarPic;
     public Label userName;
+    public Label toolTipper;
     private String defaultAvatar = "src/main/resources/Windows/images/UserImage/tempUser.png";
 
     private NormalSettings settings;
@@ -43,6 +45,15 @@ public class StartMenu {
     @FXML
     public void initialize() throws Exception {
         generateUserInfo();
+        setToolTip();
+    }
+
+    private void setToolTip() {
+        final Tooltip tooltip = new Tooltip();
+        tooltip.setText(
+                "点击切换头像"
+        );
+        toolTipper.setTooltip(tooltip);
     }
 
     public void generateUserInfo() throws Exception {
@@ -50,12 +61,13 @@ public class StartMenu {
         userName.setText(name);
         generateAvatar();
     }
-    public void generateAvatar()  {
+
+    public void generateAvatar() {
         FileInputStream f;
         try {
             String url = UserManager.read().nowPlay().getAvatarUrl();
             f = new FileInputStream(url);
-        }catch (Exception e){
+        } catch (Exception e) {
             try {
                 f = new FileInputStream(defaultAvatar);
             } catch (FileNotFoundException ex) {
@@ -152,11 +164,5 @@ public class StartMenu {
             throw new RuntimeException();
         }
         generateAvatar();
-    }
-
-    public void showChangeAvaTip(MouseDragEvent mouseDragEvent) {
-    }
-
-    public void hideChangeAvaTip(MouseDragEvent mouseDragEvent) {
     }
 }

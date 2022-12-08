@@ -12,6 +12,11 @@ public class Chess implements java.io.Serializable{//小心chess为null时会出
         turnOver = chess.isTurnOver();
     }
     private static boolean click = false;
+
+    public static void trueClick(){
+        click = true;
+    }
+
     protected void initClick(){
         click = false;
     }
@@ -162,7 +167,7 @@ public class Chess implements java.io.Serializable{//小心chess为null时会出
 
 
 
-    private int[][] line(Chess[][] chess,int x,int y){
+    private int[][] line(Chess[][] chess,int x,int y){//看看需不需要重新写
         int[][]a = new int[4][2];
 
         int i = x+1;

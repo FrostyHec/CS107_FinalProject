@@ -2,7 +2,7 @@ package AI;
 
 import GameLogic.*;
 
-public class Selection {
+public class Selection {//做剪枝算法的时候可能要用到
 
     public static double Score(Chess[][] virtualChessboard,int X,int Y){//一步最高得分
         Chess[][] chessboard = virtualChessboard;
@@ -27,7 +27,7 @@ public class Selection {
         Player p = new Player();
         p.setColor(color);
         for(int[][] xy : generalUsed.canClick(p.getColor(),virtualChessboard)){
-            if(virtualChessboard[xy[1][0]][xy[1][1]] != null
+            if(xy.length == 2 && virtualChessboard[xy[1][0]][xy[1][1]] != null
                     && virtualChessboard[xy[1][0]][xy[1][1]].getScore() > score
                     && virtualChessboard[xy[1][0]][xy[1][1]].isTurnOver()){
                 score = virtualChessboard[xy[1][0]][xy[1][1]].getScore();

@@ -6,16 +6,17 @@ public class aiMode extends Game{
     private int difficulty;
     private boolean isHunanPlayerFirst = true;
 
-    Player p1,p2;
     public aiMode(){
         this.difficulty = 1;
         p1 = new Player();
         p2 = new AI(difficulty);
+        super.init();
     }
     public aiMode(int difficulty){
         this.difficulty = difficulty;
         p1 = new Player();
         p2 = new AI(difficulty);
+        super.init();
     }
     public aiMode(int difficulty,boolean isHumanPlayerFirst){
         this.difficulty = difficulty;
@@ -27,6 +28,7 @@ public class aiMode extends Game{
             p2 = new Player();
         }
         this.isHunanPlayerFirst = isHumanPlayerFirst;
+        super.init();
     }
 
     @Override
@@ -39,6 +41,8 @@ public class aiMode extends Game{
         int[][] move;
         if(!Chess.isClick()){//如果是第一次，随便翻
             move = Stupid.move(getAIPlayer().getColor(), chess);
+            Click(getAIPlayer(), move[0][0], move[0][1]);
+            return;
         }
 
         it:try {
@@ -49,6 +53,7 @@ public class aiMode extends Game{
             }
 
             move = getAIPlayer().move(chess);
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

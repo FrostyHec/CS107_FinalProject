@@ -1,8 +1,11 @@
 .root {
-    -fx-background-image: url(../images/BackGround.png);;
+    -fx-background-image: url(../images/BackGround.png);
     }
 //按钮亮灭
 .ButtonOn{
+-fx-border-width: 3;
+-fx-border-color: rgba(152, 168, 212, .55);
+-fx-background-color: rgba(135, 121, 84, .95);
     -fx-background-color: rgba(85, 212, 147, .95);
 }
 .ButtonOff{

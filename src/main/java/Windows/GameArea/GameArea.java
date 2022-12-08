@@ -108,6 +108,7 @@ public class GameArea {
     public void loadGame(Game game) {
         this.game = game;
         chessChanged();
+        //TODO 补丁
     }
 
     public void chessMove(MouseEvent event) {

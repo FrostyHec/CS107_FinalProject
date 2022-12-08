@@ -27,7 +27,7 @@ public class Selection {//做剪枝算法的时候可能要用到
         Player p = new Player();
         p.setColor(color);
         for(int[][] xy : generalUsed.canClick(p.getColor(),virtualChessboard)){
-            if(virtualChessboard[xy[1][0]][xy[1][1]] != null
+            if(xy.length == 2 && virtualChessboard[xy[1][0]][xy[1][1]] != null
                     && virtualChessboard[xy[1][0]][xy[1][1]].getScore() > score
                     && virtualChessboard[xy[1][0]][xy[1][1]].isTurnOver()){
                 score = virtualChessboard[xy[1][0]][xy[1][1]].getScore();

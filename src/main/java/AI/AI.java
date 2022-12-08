@@ -20,7 +20,7 @@ public class AI extends Player {
 
     @Override
     public int[][] move(Chess[][] chess) throws Exception {//move需要根据AI的等级变化，在这里改进
-        int[][] move;//不一定是[2][2],如果是翻祺的话就是[1][2]
+        int[][] move;//不一定是[2][2],如果是翻棋的话就是[1][2]
 
         if(difficulty==0){
             move = Stupid.move(getColor(), chess);
@@ -32,7 +32,7 @@ public class AI extends Player {
 
         //据何俞均说，枚举六步不会太慢，但是要合理表达估价函数
         if(difficulty > 0 && difficulty <= 3){
-            ans = enumerationAlgorithm();
+            ans = enumerationAlgorithm(virtualChessBoard,moves);
             move = generalUsed.randomClick(ans);
             return move;
         }
@@ -60,8 +60,14 @@ public class AI extends Player {
         return score;
     }
 
-    private ArrayList<int[][]> enumerationAlgorithm(){//枚举算法
+    private ArrayList<int[][]> enumerationAlgorithm(Chess[][] virtualChessBoard ,ArrayList<int[][]> moves){//枚举算法
         ArrayList<int[][]> ans = new ArrayList<>();
+        ArrayList<ArrayList<Integer>> enumResult = new ArrayList<>();
+        for(int i=0;i<difficulty;i++){//枚举的步数
+            for(int[][] move : moves){
+
+            }
+        }
         return ans;
     }
 }

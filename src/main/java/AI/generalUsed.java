@@ -11,7 +11,12 @@ public class generalUsed {//这个类是一些静态方法的集合，因为基�
         if(canClick.size() == 0){
             throw new Exception("can't click");
         }
-        Collections.shuffle(canClick);
+        int x = 0;
+        do {
+            Collections.shuffle(canClick);
+            x++;
+        }while(canClick.get(0).length==1 && x<2);
+
         return canClick.get(0);
     }
 

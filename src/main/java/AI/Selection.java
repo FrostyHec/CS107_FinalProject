@@ -2,7 +2,7 @@ package AI;
 
 import GameLogic.*;
 
-public class Selection {
+public class Selection {//做剪枝算法的时候可能要用到
 
     public static double Score(Chess[][] virtualChessboard,int X,int Y){//一步最高得分
         Chess[][] chessboard = virtualChessboard;

@@ -27,10 +27,17 @@ public class AI extends Player {
             return move;
         }
         Chess[][] virtualChessBoard = generalUsed.virtualChessBoard(chess);//此处新开了一个棋盘，以后模拟都用这个棋盘
+        ArrayList<int[][]> moves = generalUsed.canClick(super.getColor(),chess);//所有的moves必须从这里来找
+        ArrayList<int[][]> ans = new ArrayList<>();
+
+        //据何俞均说，枚举六步不会太慢，但是要合理表达估价函数
+        if(difficulty > 0 && difficulty <= 3){
+            ans = enumerationAlgorithm();
+            move = generalUsed.randomClick(ans);
+            return move;
+        }
 
         int max = -100;
-        ArrayList<int[][]> moves = generalUsed.canClick(super.getColor(),chess);
-        ArrayList<int[][]> ans = new ArrayList<>();
         int[] r = new int[moves.size()];
         for(int i=0;i<r.length;i++){
             r[i] = score(chess,moves.get(i));
@@ -51,5 +58,10 @@ public class AI extends Player {
     private int score(Chess[][] chess,int[][] move){
         int score = 0;//期望得分
         return score;
+    }
+
+    private ArrayList<int[][]> enumerationAlgorithm(){//枚举算法
+        ArrayList<int[][]> ans = new ArrayList<>();
+        return ans;
     }
 }

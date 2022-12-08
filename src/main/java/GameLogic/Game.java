@@ -91,7 +91,7 @@ public class Game implements java.io.Serializable {
                     X = x;
                     Y = y;
                     isFirst = false;
-                    return -1;
+                    return -1;//第一次点击了自己的棋子，进入第二次点击
                 }
             }
         } else {//是第二次点击
@@ -127,7 +127,7 @@ public class Game implements java.io.Serializable {
                 }
             }
 
-            //如果不能走，错误类型判断
+            //如果不能走，错误类型判断并返回
             if (chess[x][y] == null)
                 return 6;//妄图移动炮
 
@@ -254,7 +254,19 @@ public class Game implements java.io.Serializable {
     }
 
     public int Click(int x, int y) {
-        return 0;
+        int re = Click(nowPlay(),x,y);
+        return re;
+    }
+
+    public void bd(){
+        for(int i=0;i<chess.length;i++){
+            for(int j=0;j<chess[i].length;j++){
+                if(chess[i][j] == null || chess[i][j].isTurnOver()){
+                    Chess.trueClick();
+                    return;
+                }
+            }
+        }
     }
 
     public LocalDateTime getStartTime() {
@@ -273,7 +285,7 @@ public class Game implements java.io.Serializable {
         for(Chess[] cc : chess){
             for(Chess c : cc){
                 if(c==null) {
-                    s += null;
+                    s += "null";
                     continue;
                 }
                 s += c.toString();

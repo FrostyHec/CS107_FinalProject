@@ -153,6 +153,7 @@ public class GameArea {
 
     public void saveAndExit() {
         try {
+            game.setLatestTime(LocalDateTime.now());
             String userSavePath = getSavePath();
             Files.deleteIfExists(Path.of(userSavePath));
             Serialize.save(game, userSavePath);

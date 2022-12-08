@@ -5,19 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bea79dc5-57f0-48e7-b850-a9fcd65d4f0c" name="Changes" comment="我把调用的接口搭了个框架，记得填充内容">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Windows/Userfiles/RenameUserWindow.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Windows/Userfiles/RenameUserWindow.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Userfile/2/2022-12-7-21-28-38.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Userfile/2/2022-12-7-23-10-59.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Userfile/2/2022-12-8-0-13-16.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Userfile/2/avatar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Userfile/UserManager.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/UserFiles/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UserFiles/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/UserFiles/UserManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UserFiles/UserManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Windows/GameArea/GameArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Windows/GameArea/GameArea.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Windows/Transmitter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Windows/Transmitter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Windows/Userfiles/UserfilesWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Windows/Userfiles/UserfilesWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Windows/StartMenu/ContinueGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Windows/StartMenu/ContinueGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Windows/Userfiles/SaveList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Windows/Userfiles/SaveList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Windows/Userfiles/ShowingSave.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Windows/Userfiles/ShowingSave.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Windows/StartMenu/ContinueGame.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Windows/StartMenu/ContinueGame.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,6 +95,19 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="ShowingSave" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Windows.Userfiles.ShowingSave" />
+      <module name="DarkChess" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Windows.Userfiles.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Windows.SetUp.Test" />
       <module name="DarkChess" />
@@ -141,26 +147,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="unitTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="units.unitTest" />
-      <module name="DarkChess" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="units.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Windows.StartMenu.Main" />
+        <item itemvalue="Application.ShowingSave" />
         <item itemvalue="Application.UserManager" />
         <item itemvalue="Application.MainGame" />
         <item itemvalue="Application.Test" />
-        <item itemvalue="Application.unitTest" />
       </list>
     </recent_temporary>
   </component>

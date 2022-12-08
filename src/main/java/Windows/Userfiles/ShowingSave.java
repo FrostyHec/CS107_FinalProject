@@ -1,9 +1,13 @@
 package Windows.Userfiles;
 
 import GameLogic.Game;
+import GameLogic.aiMode;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class ShowingSave {
     private SimpleStringProperty saveKind;
@@ -15,15 +19,24 @@ public class ShowingSave {
     private SimpleStringProperty saveScore;
 
     public ShowingSave(Game game, String name) {
-        //TODO SaveKind还没写
-        saveKind=null;
+        if (game instanceof aiMode) {
+            System.out.println("有的");
+            saveKind = new SimpleStringProperty("人机");
+        }else {
+            saveKind=new SimpleStringProperty("双人");
+        }
         saveName = new SimpleStringProperty(name);
-        //TODO 最近游戏时间也没写
-        latestPlayTime=null;
+        latestPlayTime = new SimpleStringProperty(generateLatestPlayTime(game));
         saveScore = new SimpleStringProperty(
                 game.getPlayer1().getScore() + "/" +
                         game.getPlayer2().getScore()
         );
+    }
+
+    private String generateLatestPlayTime(Game game){
+        LocalDateTime d=game.getLatestTime();
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm");
+        return d.format(df);
     }
 
     public String getSaveKind() {

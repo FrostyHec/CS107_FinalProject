@@ -43,11 +43,13 @@ public class SaveList {
                         @Override
                         public FileVisitResult visitFile(Path path, BasicFileAttributes attrs) {
                             try {
-                                System.out.println(path.toFile().getPath());
+                                if (!path.toFile().getName().contains(".ser")) {
+                                    return FileVisitResult.CONTINUE;
+                                }
                                 System.out.println(path);
                                 saveList.put(path.toFile().getName(), Deserialize.load(path.toString()));
                             } catch (Exception e) {
-
+                                //e.printStackTrace();
                             }
                             return FileVisitResult.CONTINUE;
                         }
@@ -57,7 +59,8 @@ public class SaveList {
             e.printStackTrace();
         }
     }
-    public Path generateSavePath(String path){
+
+    public Path generateSavePath(String path) {
         return Path.of(nowPlay.getSavePath() + "/" + path);
     }
 

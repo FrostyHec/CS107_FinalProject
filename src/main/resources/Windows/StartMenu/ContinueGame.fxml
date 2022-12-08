@@ -8,20 +8,20 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Windows.StartMenu.ContinueGame">
    <children>
-      <TableView fx:id="dataTable" layoutX="20.0" layoutY="14.0" prefHeight="375.0" prefWidth="401.0">
+      <TableView fx:id="dataTable" layoutX="14.0" layoutY="13.0" prefHeight="375.0" prefWidth="420.0">
         <columns>
             <TableColumn fx:id="saveKind" prefWidth="70.0" text="类型" />
-          <TableColumn fx:id="saveName" prefWidth="130.0" text="存档名" />
-            <TableColumn fx:id="latestPlayTime" prefWidth="100.0" text="上次游玩" />
-            <TableColumn fx:id="saveScore" prefWidth="100.0" text="比分" />
+          <TableColumn fx:id="saveName" prefWidth="150.0" text="存档名" />
+            <TableColumn fx:id="latestPlayTime" prefWidth="120.0" text="上次游玩" />
+            <TableColumn fx:id="saveScore" prefWidth="81.0" text="比分" />
         </columns>
       </TableView>
-      <VBox layoutX="452.0" layoutY="94.0" prefHeight="255.0" prefWidth="124.0" spacing="30.0">
+      <VBox layoutX="459.0" layoutY="73.0" prefHeight="255.0" prefWidth="120.0" spacing="30.0">
          <children>
-            <Button fx:id="btnContinue" mnemonicParsing="false" onAction="#continueGame" prefHeight="40.0" prefWidth="132.0" text="继续游戏" />
-            <Button fx:id="btnDeleteFile" mnemonicParsing="false" onAction="#deleteSave" prefHeight="40.0" prefWidth="148.0" text="删除存档" />
-            <Button mnemonicParsing="false" onAction="#loadFromLocal" prefHeight="40.0" prefWidth="133.0" text="从本地载入" />
-            <Button mnemonicParsing="false" onAction="#backToMain" prefHeight="40.0" prefWidth="148.0" text="返回主界面" />
+            <Button fx:id="btnContinue" mnemonicParsing="false" onAction="#continueGame" prefHeight="40.0" prefWidth="120.0" text="继续游戏" />
+            <Button fx:id="btnDeleteFile" mnemonicParsing="false" onAction="#deleteSave" prefHeight="40.0" prefWidth="120.0" text="删除存档" />
+            <Button mnemonicParsing="false" onAction="#loadFromLocal" prefHeight="40.0" prefWidth="120.0" text="从本地载入" />
+            <Button mnemonicParsing="false" onAction="#backToMain" prefHeight="40.0" prefWidth="120.0" text="返回主界面" />
          </children>
       </VBox>
    </children>

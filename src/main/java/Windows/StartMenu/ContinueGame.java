@@ -97,7 +97,7 @@ public class ContinueGame {
             g = Deserialize.load(file.getPath());
         } catch (Exception e) {
             switch (e.getMessage()) {
-                //TODO 貌似乱开文件不会抛出101，只有错误的ser会报101
+                //貌似乱开文件不会抛出101，只有错误的ser会报101
                 case "101" -> {
                     showAlert("ERROR!",
                             "ERROR CODE: 101",
@@ -142,7 +142,6 @@ public class ContinueGame {
     }
 
     private void loadGame(File file, String name) {
-        //TODO 测试这一模块
         loadGame(file);
         Transmitter.setGameSaveName(name);
     }

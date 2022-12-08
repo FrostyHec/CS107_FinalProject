@@ -160,10 +160,10 @@ public class GameArea {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        close();
+        forceExit();
     }
 
-    private void close() {
+    private void forceExit() {
         ((Stage) Chessboard.getScene().getWindow()).close();
     }
 
@@ -464,7 +464,7 @@ public class GameArea {
 
         public void gameOver(int playerNumber) {
             textHandler.getWinner(playerNumber);
-            saveAndExit();
+            forceExit();
         }
 
         public void refresh() {

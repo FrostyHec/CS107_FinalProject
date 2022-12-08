@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="200.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Windows.Userfiles.RenameUserWindow">
+   <children>
+       <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="29.0" prefWidth="272.0" text="修改用户名" />
+       <Label layoutX="14.0" layoutY="71.0" prefHeight="29.0" prefWidth="135.0" text="请输入新用户名" />
+       <TextField fx:id="textField" layoutX="147.0" layoutY="68.0" prefHeight="36.0" prefWidth="135.0" />
+       <Button layoutX="170.0" layoutY="133.0" mnemonicParsing="false" onAction="#commit" prefHeight="36.0" prefWidth="103.0" text="确认" />
+       <Button layoutX="26.0" layoutY="133.0" mnemonicParsing="false" onAction="#exit" prefHeight="36.0" prefWidth="103.0" text="放弃" />
+   </children>
+
+</AnchorPane>

@@ -39,6 +39,10 @@ public class User implements Serializable {
         this.uid = uid;
     }
 
+    public void renameUser(String newName) {
+        name = newName;
+    }
+
     private void createFile() {
         generateUrl();
         Path path = generatePath();
@@ -51,7 +55,7 @@ public class User implements Serializable {
 
     private void generateUrl() {
         saveUrl = "Userfile/" + uid;
-        avatarUrl = "Userfile/" +uid +"/"+"avatar";
+        avatarUrl = "Userfile/" + uid + "/" + "avatar";
     }
 
     private Path generatePath() {//路径不能序列化，原因未知，所以每次都要生成一次地址；

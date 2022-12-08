@@ -3,6 +3,7 @@ package Windows.Userfiles;
 import UserFiles.User;
 import UserFiles.UserManager;
 import Windows.StartMenu.StartMenu;
+import Windows.Transmitter;
 import javafx.application.Application;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
@@ -12,6 +13,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
@@ -37,7 +40,8 @@ public class UserfilesWindow {
     public void Userfiles() {
 
     }
-    private void newWindowButton(){
+
+    private void newWindowButton() {
         setRenameVisible(false);
         setNextButtonVisible(false);
     }
@@ -62,10 +66,11 @@ public class UserfilesWindow {
             }
         });
     }
-    private void refreshSelectedUserButton(){
-        if(userManager.nowPlay().getUid()!=selectedUser){
+
+    private void refreshSelectedUserButton() {
+        if (userManager.nowPlay().getUid() != selectedUser) {
             setNextButtonVisible(true);
-        }else {
+        } else {
             setNextButtonVisible(false);
         }
         setRenameVisible(true);
@@ -77,7 +82,8 @@ public class UserfilesWindow {
         btnSwitch.setVisible(b);
         btnSwitch.setDisable(!b);
     }
-    private void setRenameVisible(boolean b){
+
+    private void setRenameVisible(boolean b) {
         btnRename.setVisible(b);
         btnRename.setDisable(!b);
     }
@@ -143,6 +149,18 @@ public class UserfilesWindow {
     }
 
     public void renameUser() {
-        //TODO:没做
+        Stage s2 = new Stage();
+        s2.setTitle("用户重命名");
+        s2.initOwner(dataTable.getScene().getWindow());
+        s2.initModality(Modality.WINDOW_MODAL);
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(UserfilesWindow.class.getResource("RenameUserWindow.fxml"));
+            s2.setScene(new Scene(fxmlLoader.load()));
+            Transmitter.getRenameUserWindow().setUid(selectedUser);
+            s2.showAndWait();
+            refreshData();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

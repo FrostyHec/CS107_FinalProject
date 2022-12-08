@@ -19,6 +19,16 @@ public class UserManager implements Serializable {
         save();
     }
 
+    public void renameUser(int uid, String newName) {
+        for (User u : users) {
+            if (u.getUid() == uid) {
+                u.renameUser(newName);
+                save();
+                return;
+            }
+        }
+    }
+
     public User getUser(int uid) {
         return users.get(UidToIndex(uid));
     }
@@ -35,9 +45,11 @@ public class UserManager implements Serializable {
         }
         try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(url))) {
             out.writeObject(this);
-            System.out.print("UserManager is saved.");
+            System.out.println("UserManager is saved.");
         } catch (IOException i) {
             i.printStackTrace();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 

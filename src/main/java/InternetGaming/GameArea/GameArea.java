@@ -31,7 +31,7 @@ import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.*;
 
-public class GameArea {
+public class GameArea extends Windows.GameArea.GameArea{
     //暂停界面
     public Pane pausePane;
     public Pane paneChoose;
@@ -70,7 +70,8 @@ public class GameArea {
     private final GraphicHandler graphicHandler = new GraphicHandler();
     private final TextHandler textHandler = new TextHandler();
 
-    public GameArea() {
+    public GameArea() throws Exception {//TODO 整体重构这一部分
+        super();
         game = new Game();
         Transmitter.gameArea = this;
     }

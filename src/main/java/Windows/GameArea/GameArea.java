@@ -250,17 +250,20 @@ public class GameArea {
             } else {
                 res = game.Click(game.nowPlay(), row, column);//完成点击
             }
+            System.out.println(res);
             ClickResult clickResult = ClickResult.getClickResult(res);
 
 
             //临时用的
             System.out.println(clickResult);
             System.out.println("now:" + game.nowPlay().getColor().toString() + " " + game.nowPlay().getScore());
-            chessChanged();
             analyzeClickResult(clickResult);
         }
 
         private void aiMove() {
+            if(!(game instanceof aiMode)){
+                return;
+            }
             Chessboard.setDisable(true);
             try {
                 game.aiMove();
@@ -311,12 +314,14 @@ public class GameArea {
         }
 
         private void analyzeClickResult(ClickResult clickResult) {
+            //TODO 有时间优化
             switch (clickResult) {
                 case Player1Win -> graphicHandler.gameOver(1);
                 case Player2Win -> graphicHandler.gameOver(2);
 
                 case Finished -> {
                     aiMove();
+                    chessChanged();
                 }
                 case Continue -> {
                     showSelectedChess(row, column);
@@ -324,6 +329,9 @@ public class GameArea {
                 }
                 case UnknownError -> {
                     //textHandler.showAlert(Alert.AlertType.ERROR, "Wrong Happened!", "null", "ClickResult is Missing");
+                }
+                default -> {
+                    chessChanged();
                 }
             }
         }

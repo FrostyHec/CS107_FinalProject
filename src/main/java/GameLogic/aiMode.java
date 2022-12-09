@@ -37,12 +37,11 @@ public class aiMode extends Game{
     }
 
     @Override
-    public void aiMove() throws Exception {
+    public int aiMove() throws Exception {
         int[][] move;
         if(!Chess.isClick()){//如果是第一次，随便翻
             move = Stupid.move(getAIPlayer().getColor(), chess);
-            Click(getAIPlayer(), move[0][0], move[0][1]);
-            return;
+            return Click(getAIPlayer(), move[0][0], move[0][1]);
         }
 
         it:try {
@@ -61,15 +60,13 @@ public class aiMode extends Game{
 
         if(move[0][0] != -1 ) {
             if (move.length == 1) {
-                Click(getAIPlayer(), move[0][0], move[0][1]);
-                return;
+                return Click(getAIPlayer(), move[0][0], move[0][1]);
             } else {
                 Click(getAIPlayer(), move[0][0], move[0][1]);
-                Click(getAIPlayer(), move[1][0], move[1][1]);
-                return;
+                return Click(getAIPlayer(), move[1][0], move[1][1]);
             }
         }
-        aiMove();
+        return aiMove();
     }
 
     @Override

@@ -93,9 +93,17 @@ public class AI extends Player {
         return Score;
     }
 
-    private ArrayList<Integer> recursionClick(Chess[][] virtualChessBoard , int[][] move , int step , ArrayList<Integer> ans){
+    private int recursionClick(Chess[][] virtualChessBoard , int[][] move , int step , ArrayList<Integer> ans , boolean x , Color color , int score){
+        if(step == difficulty){
+            return 0;
+        }
         Chess[][] virtualChessBoard_1 = generalUsed.virtualChessBoard(virtualChessBoard);
-        virtualClick(virtualChessBoard_1,move);
-        return ans;
+        score = virtualClick(virtualChessBoard_1,move);
+        x = !x ;
+        Color co = generalUsed.oppositeColor(color);
+        for(int[][] mo : generalUsed.canClick(co,virtualChessBoard_1)){
+
+        }
+        return score;
     }
 }

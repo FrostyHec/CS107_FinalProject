@@ -3,6 +3,7 @@ package AI;
 import GameLogic.Chess;
 import GameLogic.Color;
 import GameLogic.Player;
+import javafx.scene.control.Tooltip;
 
 import java.util.ArrayList;
 
@@ -25,6 +26,11 @@ public class AI extends Player {
         if(difficulty==0){
             move = Stupid.move(getColor(), chess);
             return move;
+        }else if(difficulty == 1){//不会逃跑，二级要实现会逃跑
+            move = Selection.highest(chess,getColor());
+            return move;
+        }else if(difficulty == 2){
+            //to do
         }
 
         Chess[][] virtualChessBoard = generalUsed.virtualChessBoard(chess);//此处新开了一个棋盘，以后模拟都用这个棋盘
@@ -32,7 +38,8 @@ public class AI extends Player {
         ArrayList<int[][]> ans = new ArrayList<>();
 
         //据何俞均说，枚举六步不会太慢，但是要合理表达估价函数
-        if(difficulty > 0 && difficulty <= 3){
+        //但因为我的代码比较冗长，不一定能枚举六步
+        if(difficulty > 2 && difficulty <= 6){
             ans = enumerationAlgorithm(virtualChessBoard,moves);
             move = generalUsed.randomClick(ans);
             return move;

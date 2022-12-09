@@ -255,6 +255,13 @@ public class Chess implements java.io.Serializable{//小心chess为null时会出
             }
         }
 
+        for(int[]xx : a){//非常神奇但是确实有用的补丁
+            if(xx[0] != -1 && chess[xx[0]][xx[1]] == null){
+                xx[0] = -1;
+                xx[1] = -1;
+            }
+        }
+
         return a;
     }
 

@@ -15,6 +15,14 @@ public class Retract {//悔棋
         }
         g.removeLast();
         g = trace(g);
+        if(g instanceof aiMode){
+            g.setBack();
+            if(game.getMoves().size() == 0){
+                throw new Exception("It's already the first step");
+            }
+            g.removeLast();
+            g = trace(g);
+        }
         return g;
     }
 

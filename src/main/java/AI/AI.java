@@ -92,4 +92,9 @@ public class AI extends Player {
         }
         return Score;
     }
+
+    private ArrayList<Integer> recursionClick(Chess[][] virtualChessBoard , int[][] move , int step){
+        ArrayList<Integer> ans = new ArrayList<>();
+        return ans;
+    }
 }

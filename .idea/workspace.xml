@@ -5,28 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bea79dc5-57f0-48e7-b850-a9fcd65d4f0c" name="Changes" comment="我把调用的接口搭了个框架，记得填充内容">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Windows/GameArea/Extract/Music/RandomPlayer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Windows/GameArea/Extract/ProcessHandlable.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Windows/GameArea/Extract/Pursuance.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Windows/Music/Classical/LanLingWangRuZhenQu.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Windows/Music/a.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Windows/Music/Classical/China-2.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Windows/Music/Classical/古筝梁祝.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Windows/Music/Classical/战台风.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Windows/Music/Classical/水墨兰亭.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Windows/Music/Classical/高山流水.mp3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Userfile/3/2022-12-8-17-47-15.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Userfile/3/2022-12-9-16-18-3.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Userfile/3/2022-12-9-16-19-18.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Userfile/3/2022-12-9-16-19-27.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Userfile/3/2022-12-9-16-19-32.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Userfile/3/2022-12-9-16-20-18.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Userfile/3/2022-12-9-16-20-42.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Userfile/3/2022-12-9-16-34-30.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/InternetGaming/GameArea/GameArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/InternetGaming/GameArea/GameArea.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/InternetGaming/Internet/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/InternetGaming/Internet/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Windows/GameArea/ClickResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Windows/GameArea/ClickResult.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Windows/GameArea/Extract/Music/MusicPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Windows/GameArea/Extract/Music/MusicPlayer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Windows/GameArea/GameArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Windows/GameArea/GameArea.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Windows/GameArea/Music/MusicPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Windows/GameArea/Extract/Music/MusicPlayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Windows/StartMenu/ContinueGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Windows/StartMenu/ContinueGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Windows/Userfiles/SaveList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Windows/Userfiles/SaveList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Windows/Music/Classical/LanLingWangRuZhenQu.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Windows/Music/Classical/兰陵王入阵曲.mp3" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,11 +71,11 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "last_directory_selection": "D:/ComputerScience/Java/javaFX/DarkChess/src/main/java/Windows/SetUp",
-    "last_opened_file_path": "D:/ComputerScience/Java/javaFX/DarkChess/src/main/resources/Windows/Music/Classical",
+    "last_opened_file_path": "D:/ComputerScience/Java/Attempt/MathProblem",
     "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.3261391",
-    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices"
+    "settings.editor.selected.configurable": "preferences.keymap"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -98,18 +85,18 @@
       <recent name="UserFiles" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\ComputerScience\Java\javaFX\DarkChess\src\main\resources\Windows\Music" />
       <recent name="D:\ComputerScience\Java\javaFX\DarkChess\src\main\resources\Windows\Music\Classical" />
       <recent name="D:\ComputerScience\Java\javaFX\DarkChess\src\main\java\InternetGaming\GameArea" />
       <recent name="D:\ComputerScience\Java\javaFX\DarkChess\src\main\resources\Windows\images\BackGround" />
       <recent name="D:\ComputerScience\Java\javaFX\DarkChess\src\main\resources\Windows\images" />
-      <recent name="D:\ComputerScience\Java\javaFX\DarkChess\src\main\resources\InternetGaming\Internet" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\ComputerScience\Java\javaFX\DarkChess\src\main\resources\Windows\Music" />
       <recent name="D:\ComputerScience\Java\javaFX\DarkChess\src\main\resources\Windows\images\BackGround" />
       <recent name="D:\ComputerScience\Java\javaFX\DarkChess\src\main\resources\Windows\images" />
       <recent name="D:\ComputerScience\Java\javaFX\DarkChess\src\main\resources\InternetGaming\GameArea" />
       <recent name="D:\ComputerScience\Java\javaFX\DarkChess\src\main\resources\Windows\images\Chess\DiedChess" />
-      <recent name="D:\ComputerScience\Java\javaFX\DarkChess\src\main\resources\Windows\StartMenu" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="Windows.GameArea" />

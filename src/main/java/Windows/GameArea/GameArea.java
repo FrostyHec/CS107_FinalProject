@@ -4,6 +4,7 @@ import GameLogic.Chess;
 import GameLogic.Color;
 import GameLogic.aiMode;
 import UserFiles.UserManager;
+import Windows.GameArea.Extract.Music.MusicPlayer;
 import Windows.GameArea.Extract.Music.RandomPlayer;
 import Windows.StartMenu.Main;
 import Windows.Transmitter;
@@ -74,7 +75,7 @@ public class GameArea {
 
     private String initialSaveName;
 
-    public SoundsHandler soundsHandler=new SoundsHandler();
+    public SoundsHandler soundsHandler = new SoundsHandler();
 
     public GameArea() throws Exception {
         Transmitter.setGameArea(this);
@@ -267,13 +268,13 @@ public class GameArea {
         }
 
         private void aiMove() {
-            if(!(game instanceof aiMode)){
+            if (!(game instanceof aiMode)) {
                 return;
             }
             Chessboard.setDisable(true);
             try {
                 game.aiMove();
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
@@ -321,7 +322,7 @@ public class GameArea {
 
         private void analyzeClickResult(ClickResult clickResult) {
             //TODO 有时间优化
-            boolean needRefresh=true;
+            boolean needRefresh = true;
             switch (clickResult) {
                 case Player1Win -> graphicHandler.gameOver(1);
                 case Player2Win -> graphicHandler.gameOver(2);
@@ -332,14 +333,14 @@ public class GameArea {
                 case Continue -> {
                     showSelectedChess(row, column);
                     showPossibleMove(row, column);
-                    needRefresh=false;
+                    needRefresh = false;
                 }
                 case UnknownError -> {
                     //textHandler.showAlert(Alert.AlertType.ERROR, "Wrong Happened!", "null", "ClickResult is Missing");
                 }
 
             }
-            if(needRefresh){
+            if (needRefresh) {
                 chessChanged();
             }
         }
@@ -355,7 +356,7 @@ public class GameArea {
 
         private void toPause() {
             graphicHandler.showPause();
-            soundsHandler.stopBGM();
+            soundsHandler.pauseBGM();
             previousGameState = gameState;
             gameState = GameState.Pause;
             System.out.println("游戏已暂停");
@@ -711,26 +712,30 @@ public class GameArea {
         }
 
     }
-    class SoundsHandler{
-        Thread music;
-        public void generateBGM(){
-            music =new Thread(new RandomPlayer(null,"Classical"));
-            music.start();
+
+    class SoundsHandler {
+        private Thread threadMusic;
+        private MusicPlayer music;
+
+        public void generateBGM() {
+            music = new RandomPlayer(null, "Classical");
+            threadMusic = new Thread(music);
+            threadMusic.start();
         }
-        public void stopBGM() {
-            try {
-                music.wait();
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
+
+        public void pauseBGM() {
+            music.stop();
         }
-        public void continueBGM(){
-            music.notify();
+
+        public void continueBGM() {
+            music.continuePlay();
         }
-        public void gameEnd(){
-            music.interrupt();
+
+        public void gameEnd() {
+            threadMusic.interrupt();
         }
     }
+
 }
 
 enum ChessKind {

@@ -1,7 +1,6 @@
 package Windows.GameArea.Extract.Music;
 
 import Windows.GameArea.Extract.Pursuance;
-import javafx.collections.ObservableList;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
@@ -20,6 +19,7 @@ public abstract class MusicPlayer implements Runnable {
 
     protected List<Media> totalMusic = new ArrayList<>();//总音乐列表
     protected Pursuance pursuance;
+    protected MediaPlayer nowMedia;
 
     public MusicPlayer(Pursuance pursuance, String filePath) {
         this.pursuance = pursuance;
@@ -29,7 +29,7 @@ public abstract class MusicPlayer implements Runnable {
 
     @Override
     public void run() {//默认循环播放
-        if(playingMusicList==null||playingMusicList.size()==0){
+        if (playingMusicList == null || playingMusicList.size() == 0) {
             generateMusicList(pursuance);
         }
         playMediaTracks(playingMusicList);
@@ -38,9 +38,13 @@ public abstract class MusicPlayer implements Runnable {
     public abstract void generateMusicList(Pursuance pursuance);
 
     private void playMediaTracks(List<Media> mediaList) {//这个方法将会播放所有的音频直到播完
-        MediaPlayer mediaplayer = new MediaPlayer(mediaList.remove(0));
-        mediaplayer.play();
-        mediaplayer.setOnEndOfMedia(this);
+        nowMedia = new MediaPlayer(mediaList.remove(0));
+        nowMedia.play();
+        nowMedia.setOnEndOfMedia(this);
+    }
+
+    public void continuePlay() {
+        nowMedia.play();
     }
 
     private void read() {
@@ -64,8 +68,12 @@ public abstract class MusicPlayer implements Runnable {
         }
     }
 
-    public void insertMusic(int index){//点歌台，强行插入音乐
-        playingMusicList=new ArrayList<>();
+    public void stop() {
+        nowMedia.pause();
+    }
+
+    public void insertMusic(int index) {//点歌台，强行插入音乐
+        playingMusicList = new ArrayList<>();
         playingMusicList.add(totalMusic.get(index));
         run();
     }

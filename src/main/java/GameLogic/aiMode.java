@@ -15,16 +15,16 @@ public class aiMode extends Game{
     public aiMode(int difficulty){
         this.difficulty = difficulty;
         p1 = new Player();
-        p2 = new AI(difficulty);
+        p2 = new AI(this.difficulty);
         super.init();
     }
     public aiMode(int difficulty,boolean isHumanPlayerFirst){
         this.difficulty = difficulty;
         if(isHumanPlayerFirst){
             p1 = new Player();
-            p2 = new AI(difficulty);
+            p2 = new AI(this.difficulty);
         }else{
-            p1 = new AI(difficulty);
+            p1 = new AI(this.difficulty);
             p2 = new Player();
         }
         this.isHunanPlayerFirst = isHumanPlayerFirst;

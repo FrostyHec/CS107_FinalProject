@@ -143,6 +143,9 @@ public class Chess implements java.io.Serializable{//小心chess为null时会出
     public void initTurnOver(){
         turnOver = false;
     }
+    public void TurnOver(){
+        turnOver = true;
+    }
 
     protected boolean TurnOver(Player player1, Player player2){
         if(!click){

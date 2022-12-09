@@ -26,6 +26,7 @@ public class AI extends Player {
             move = Stupid.move(getColor(), chess);
             return move;
         }
+
         Chess[][] virtualChessBoard = generalUsed.virtualChessBoard(chess);//此处新开了一个棋盘，以后模拟都用这个棋盘
         ArrayList<int[][]> moves = generalUsed.canClick(super.getColor(),chess);//所有的moves必须从这里来找
         ArrayList<int[][]> ans = new ArrayList<>();
@@ -63,11 +64,38 @@ public class AI extends Player {
     private ArrayList<int[][]> enumerationAlgorithm(Chess[][] virtualChessBoard ,ArrayList<int[][]> moves){//枚举算法
         ArrayList<int[][]> ans = new ArrayList<>();
         ArrayList<ArrayList<Integer>> enumResult = new ArrayList<>();
-        for(int i=0;i<difficulty;i++){//枚举的步数
-            for(int[][] move : moves){
-
+        Chess[][] virtualChessBoard_1 = generalUsed.virtualChessBoard(virtualChessBoard);
+        for(int[][] move : moves) {
+            for (int i = 0; i < difficulty; i++) {//枚举的步数,这里应该是不能用for写的，得用递归写
             }
         }
+        return ans;
+    }
+
+    private int virtualClick(Chess[][] virtualChessBoard,int[][] move){
+        int Score = 0;
+        if(move.length == 1){
+            virtualChessBoard[move[0][0]][move[0][1]].TurnOver();
+        }else{
+            if(virtualChessBoard[move[1][0]][move[1][1]] == null){
+                virtualChessBoard[move[1][0]][move[1][1]] = virtualChessBoard[move[0][0]][move[0][1]];
+                virtualChessBoard[move[0][0]][move[0][1]] = null;
+            } else if(virtualChessBoard[move[1][0]][move[1][1]].isTurnOver()){
+                Score += virtualChessBoard[move[1][0]][move[1][1]].getScore();
+                virtualChessBoard[move[1][0]][move[1][1]] = virtualChessBoard[move[0][0]][move[0][1]];
+                virtualChessBoard[move[0][0]][move[0][1]] = null;
+            } else if(!virtualChessBoard[move[1][0]][move[1][1]].isTurnOver()){
+                Score += 3;
+                virtualChessBoard[move[1][0]][move[1][1]] = virtualChessBoard[move[0][0]][move[0][1]];
+                virtualChessBoard[move[0][0]][move[0][1]] = null;
+            }
+        }
+        return Score;
+    }
+
+    private ArrayList<Integer> recursionClick(Chess[][] virtualChessBoard , int[][] move , int step , ArrayList<Integer> ans){
+        Chess[][] virtualChessBoard_1 = generalUsed.virtualChessBoard(virtualChessBoard);
+        virtualClick(virtualChessBoard_1,move);
         return ans;
     }
 }

@@ -70,8 +70,6 @@ public class Game implements java.io.Serializable {
 
 
     public int Click(Player player, int x, int y) {//点击
-//        if (!player.getStatus())
-//            return 10086;//大概率是AI部分出了问题才会在这里报错
 
         if (isFirst) {//是第一次点击
             if (chess[x][y] == null) return 401;//error code 401:点击了空格子
@@ -218,15 +216,20 @@ public class Game implements java.io.Serializable {
         }
 
         //初始化player
-        p1 = new Player();
-        p2 = new Player();
+
         p1.setColor(Color.UNKNOWN);
         p2.setColor(Color.UNKNOWN);
         p1.setScore(0);
         p2.setScore(0);
         isFirst = true;
 
-        //从p1开始行动
+        //从p1开始行动(先全部变为false，再把p1变为true)
+        if(p1.getStatus()){
+            p1.changeStatus();
+        }
+        if(p2.getStatus()){
+            p2.changeStatus();
+        }
         p1.changeStatus();
     }
 
@@ -246,7 +249,8 @@ public class Game implements java.io.Serializable {
         else return p1;
     }
 
-    public void aiMove() throws Exception {
+    public int aiMove() throws Exception {
+        return 0;
     }
 
     public int getDifficulty() {

@@ -27,12 +27,16 @@ public class Play {
                 moves.add(temp);
             }
         }
+        step = game.getMoves().size();
 
         game.clearMoves();
-        step = 0;
+
     }
 
     public boolean move(){//具体方法
+        if (step == 0){
+            return false;
+        }
         if(moves.get(step).length == 1){
             game.Click(game.nowPlay(),moves.get(step)[0][0],moves.get(step)[0][1]);
         }
@@ -40,6 +44,7 @@ public class Play {
             game.Click(game.nowPlay(),moves.get(step)[0][0],moves.get(step)[0][1]);
             game.Click(game.nowPlay(),moves.get(step)[1][0],moves.get(step)[1][1]);
         }
+        step--;
         return true;
     }
 }

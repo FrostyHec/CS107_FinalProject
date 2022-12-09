@@ -6,7 +6,7 @@ import java.util.*;
 public class aiTest {
     public static void main(String[] args) throws Exception {
         Scanner in = new Scanner(System.in);
-        Game game = new aiMode(5);
+        Game game = new aiMode(0);
         game.init();
         int a = 0;
 
@@ -44,7 +44,6 @@ public class aiTest {
             int x = in.nextInt(), y = in.nextInt();
             a = game.Click(x, y);
             game.aiMove();
-            System.out.println(game.getMoves());
         }
     }
 }

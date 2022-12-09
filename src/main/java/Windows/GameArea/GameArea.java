@@ -102,13 +102,13 @@ public class GameArea {
         ChessMove.resetCount();
         textHandler.initialize();
         gameStateHandler.initialize();
-
+        Windows.GameArea.Transmitter.setGameArea(this);
     }
 
     public void loadGame(Game game) {
         this.game = game;
         chessChanged();
-        //TODO 补丁
+        game.bd();//补丁
     }
 
     public void chessMove(MouseEvent event) {
@@ -258,8 +258,6 @@ public class GameArea {
             System.out.println("now:" + game.nowPlay().getColor().toString() + " " + game.nowPlay().getScore());
             chessChanged();
             analyzeClickResult(clickResult);
-
-            aiMove();
         }
 
         private void aiMove() {
@@ -318,6 +316,7 @@ public class GameArea {
                 case Player2Win -> graphicHandler.gameOver(2);
 
                 case Finished -> {
+                    aiMove();
                 }
                 case Continue -> {
                     showSelectedChess(row, column);

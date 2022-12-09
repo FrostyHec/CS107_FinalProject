@@ -6,12 +6,19 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="460.0" prefWidth="370.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="460.0" prefWidth="370.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Windows.SetUp.SettingController">
    <children>
-      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefWidth="90.0" text="开始界面" />
-      <Button layoutX="104.0" layoutY="14.0" mnemonicParsing="false" prefWidth="90.0" text="本地游戏" />
-      <Button layoutX="194.0" layoutY="14.0" mnemonicParsing="false" prefWidth="90.0" text="音效" />
-      <Button layoutX="284.0" layoutY="14.0" mnemonicParsing="false" prefWidth="90.0" text="画面" />
+      <MenuBar nodeOrientation="LEFT_TO_RIGHT" prefHeight="38.0" prefWidth="370.0">
+        <menus>
+          <Menu mnemonicParsing="false" onAction="#startMenu" text="  开始  " />
+          <Menu mnemonicParsing="false" onAction="#gameSetting" text="  游戏  " />
+          <Menu mnemonicParsing="false" onAction="#soundSetting" text="  音效  " />
+            <Menu mnemonicParsing="false" onAction="#viewSetting" text="  画面  " />
+        </menus>
+      </MenuBar>
+      <AnchorPane fx:id="paneStart" layoutY="38.0" prefHeight="423.0" prefWidth="370.0" />
+      <AnchorPane fx:id="paneGame" layoutY="38.0" prefHeight="423.0" prefWidth="370.0" />
+      <AnchorPane fx:id="paneSound" layoutY="38.0" prefHeight="423.0" prefWidth="370.0" />
+      <AnchorPane fx:id="paneView" layoutY="38.0" prefHeight="423.0" prefWidth="370.0" />
    </children>
 </Pane>

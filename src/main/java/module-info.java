@@ -1,6 +1,7 @@
 module com.example.darkchess {
     requires javafx.controls;
     requires javafx.fxml;
+    requires javafx.media;
 
     opens Windows.GameArea to javafx.fxml;
     exports Windows.GameArea;

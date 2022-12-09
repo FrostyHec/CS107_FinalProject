@@ -4,6 +4,8 @@ public class StartSettings implements java.io.Serializable {
     private boolean alwaysPvE = false;
     private boolean alwaysPvP = false;
 
+    private boolean alwaysLatestSave=false;
+
     private String skin="default.css";
     public boolean isAlwaysPvE() {
         return alwaysPvE;
@@ -27,5 +29,13 @@ public class StartSettings implements java.io.Serializable {
 
     public void setSkin(String skin) {
         this.skin = skin;
+    }
+
+    public boolean isAlwaysLatestSave() {
+        return alwaysLatestSave;
+    }
+
+    public void setAlwaysLatestSave(boolean alwaysLatestSave) {
+        this.alwaysLatestSave = alwaysLatestSave;
     }
 }

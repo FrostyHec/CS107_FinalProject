@@ -4,6 +4,7 @@ import GameLogic.Game;
 import UserFiles.User;
 import UserFiles.UserManager;
 import Windows.GameArea.MainGame;
+import Windows.SetUp.NormalSettings;
 import Windows.Transmitter;
 import Windows.Userfiles.SaveList;
 import Windows.Userfiles.ShowingSave;
@@ -26,6 +27,7 @@ import units.Deserialize;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.Optional;
 
 public class ContinueGame {
@@ -48,9 +50,10 @@ public class ContinueGame {
             throw new RuntimeException(e);
         }
     }
-
     @FXML
     public void initialize() {
+        automaticSave();
+        //存档选择界面
         Application.setUserAgentStylesheet(Application.STYLESHEET_MODENA);
         btnContinueVisible(false);
         saveList = new SaveList();
@@ -66,6 +69,10 @@ public class ContinueGame {
                 btnContinueVisible(true);
             }
         });
+    }
+
+    private Path generateSavePath(User nowPlay,String path) {
+        return Path.of(nowPlay.getSavePath() + "/" + path);
     }
 
     public void refreshData() {
@@ -137,8 +144,11 @@ public class ContinueGame {
             throw new RuntimeException(e);
         }
         Transmitter.loadGame(g);
-        ((Stage) btnContinue.getScene().getWindow()).close();
+        exit();
+    }
 
+    private void exit() {
+        ((Stage) btnContinue.getScene().getWindow()).close();
     }
 
     private void loadGame(File file, String name) {
@@ -171,7 +181,7 @@ public class ContinueGame {
         alert.setContentText(contentText);
         alert.setHeaderText(headerText);
         alert.showAndWait();
-    }//晚点再美化这个界面
+    }
 
     public void backToMain(ActionEvent event) {
         StartMenu.show((Stage) btnContinue.getScene().getWindow());
@@ -196,6 +206,21 @@ public class ContinueGame {
     }
 
     public void automaticSave() {
-        //TODO:自动打开上一次存档还没做
+        //自动加载存档//TODO 测试这一模块
+        if (NormalSettings.read(NormalSettings.url).StartSettings.isAlwaysLatestSave()) {
+            String saveName=null;
+            User u = null;
+            try {
+                u=UserManager.read().nowPlay();
+                saveName = u.getLatestSaveName();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            if (saveName!=null){
+                loadGame(generateSavePath(u,selectedSaveName).toFile());
+                exit();
+            }
+        }
+
     }
 }

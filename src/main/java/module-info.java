@@ -17,5 +17,9 @@ module com.example.darkchess {
     opens InternetGaming.Internet to javafx.fxml;
     exports Windows.Userfiles;
     opens Windows.Userfiles to javafx.fxml;
+    exports Windows.GameArea.Extract;
+    opens Windows.GameArea.Extract to javafx.fxml;
+    exports Windows.GameArea.Extract.Music;
+    opens Windows.GameArea.Extract.Music to javafx.fxml;
 
 }

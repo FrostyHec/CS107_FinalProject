@@ -144,7 +144,7 @@ public class Server extends Thread {
                 }
                 switch (MessageType.valueOf(args[0])) {
                     case PlayerSetting -> {
-                        new SetPlayer(m).parse(args[1]);
+                       new SetPlayer(m).parse(args[1]);
                     }
                     case StartGame -> {
                         new StartGame().parse(args[1]);
@@ -158,6 +158,7 @@ public class Server extends Thread {
                     default -> {
                         throw new RuntimeException();
                     }
+
                 }
             }
         }

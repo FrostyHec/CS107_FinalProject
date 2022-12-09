@@ -5,9 +5,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bea79dc5-57f0-48e7-b850-a9fcd65d4f0c" name="Changes" comment="我把调用的接口搭了个框架，记得填充内容">
+      <change afterPath="$PROJECT_DIR$/src/main/java/Windows/GameArea/Extract/Music/RandomPlayer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Windows/GameArea/Extract/ProcessHandlable.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Windows/GameArea/Extract/Pursuance.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Windows/Music/Classical/LanLingWangRuZhenQu.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Windows/Music/a.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/GameLogic/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GameLogic/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Userfile/3/2022-12-8-17-47-15.ser" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Userfile/3/2022-12-9-16-18-3.ser" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Userfile/3/2022-12-9-16-19-18.ser" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Userfile/3/2022-12-9-16-19-27.ser" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Userfile/3/2022-12-9-16-19-32.ser" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Userfile/3/2022-12-9-16-20-18.ser" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Userfile/3/2022-12-9-16-20-42.ser" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Userfile/3/2022-12-9-16-34-30.ser" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/InternetGaming/GameArea/GameArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/InternetGaming/GameArea/GameArea.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/InternetGaming/Internet/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/InternetGaming/Internet/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Windows/GameArea/ClickResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Windows/GameArea/ClickResult.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Windows/GameArea/GameArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Windows/GameArea/GameArea.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Windows/GameArea/Music/MusicPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Windows/GameArea/Extract/Music/MusicPlayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Windows/StartMenu/ContinueGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Windows/StartMenu/ContinueGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Windows/Userfiles/SaveList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Windows/Userfiles/SaveList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,15 +37,31 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Kotlin Data Class" />
-        <option value="Interface" />
         <option value="Enum" />
-        <option value="FxmlFile" />
+        <option value="Interface" />
         <option value="Class" />
+        <option value="FxmlFile" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/main/java/AI/AI.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/AI/Stupid.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/AI/generalUsed.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/GameLogic/Chess.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/GameLogic/Game.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/GameLogic/Player.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/GameLogic/aiMode.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/InternetGaming/GameArea/GameArea.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/Windows/GameArea/ClickResult.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/Windows/GameArea/GameArea.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/Windows/StartMenu/ContinueGame.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/Windows/Userfiles/SaveList.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/Windows/Userfiles/ShowingSave.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/Windows/Userfiles/UserfilesWindow.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -49,24 +84,25 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "last_directory_selection": "D:/ComputerScience/Java/javaFX/DarkChess/src/main/java/Windows/SetUp",
-    "last_opened_file_path": "D:/ComputerScience/Java/javaFX/DarkChess/src/main/java/InternetGaming/GameArea",
+    "last_opened_file_path": "D:/ComputerScience/Java/javaFX/DarkChess/src/main/resources/Windows/Music/Classical",
     "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.2",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.3261391",
     "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
+      <recent name="Windows.GameArea.Extract" />
       <recent name="InternetGaming.Internet" />
       <recent name="UserFiles" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\ComputerScience\Java\javaFX\DarkChess\src\main\resources\Windows\Music\Classical" />
       <recent name="D:\ComputerScience\Java\javaFX\DarkChess\src\main\java\InternetGaming\GameArea" />
       <recent name="D:\ComputerScience\Java\javaFX\DarkChess\src\main\resources\Windows\images\BackGround" />
       <recent name="D:\ComputerScience\Java\javaFX\DarkChess\src\main\resources\Windows\images" />
       <recent name="D:\ComputerScience\Java\javaFX\DarkChess\src\main\resources\InternetGaming\Internet" />
-      <recent name="D:\ComputerScience\Java\javaFX\DarkChess\src\main\resources\InternetGaming" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\ComputerScience\Java\javaFX\DarkChess\src\main\resources\Windows\images\BackGround" />
@@ -76,9 +112,9 @@
       <recent name="D:\ComputerScience\Java\javaFX\DarkChess\src\main\resources\Windows\StartMenu" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="Windows.GameArea" />
       <recent name="Windows.Userfiles" />
       <recent name="Windows" />
-      <recent name="Windows.GameArea" />
       <recent name="GameArea" />
     </key>
   </component>
@@ -88,7 +124,7 @@
       <module name="DarkChess" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Windows.GameArea.*" />
+          <option name="PATTERN" value="Windows.GameArea.Extract.Music.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -151,10 +187,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.Windows.StartMenu.Main" />
+        <item itemvalue="Application.MainGame" />
         <item itemvalue="Application.Test" />
         <item itemvalue="Application.ShowingSave" />
         <item itemvalue="Application.UserManager" />
-        <item itemvalue="Application.MainGame" />
       </list>
     </recent_temporary>
   </component>
@@ -207,16 +243,6 @@
           <url>file://$PROJECT_DIR$/src/main/java/InternetGaming/Internet/ServerMain.java</url>
           <line>4</line>
           <option name="timeStamp" value="18" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/AI/generalUsed.java</url>
-          <line>30</line>
-          <option name="timeStamp" value="23" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/GameLogic/aiMode.java</url>
-          <line>54</line>
-          <option name="timeStamp" value="24" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-defaults>

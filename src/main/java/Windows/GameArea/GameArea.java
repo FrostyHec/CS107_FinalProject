@@ -4,6 +4,7 @@ import GameLogic.Chess;
 import GameLogic.Color;
 import GameLogic.aiMode;
 import UserFiles.UserManager;
+import Windows.GameArea.Extract.Music.RandomPlayer;
 import Windows.StartMenu.Main;
 import Windows.Transmitter;
 import javafx.event.ActionEvent;
@@ -73,6 +74,8 @@ public class GameArea {
 
     private String initialSaveName;
 
+    public SoundsHandler soundsHandler=new SoundsHandler();
+
     public GameArea() throws Exception {
         Transmitter.setGameArea(this);
         game = new Game();
@@ -97,11 +100,13 @@ public class GameArea {
 
     @FXML
     public void initialize() {
+        soundsHandler.generateBGM();
         game.init();
         graphicHandler.initialize();
         ChessMove.resetCount();
         textHandler.initialize();
         gameStateHandler.initialize();
+
         Windows.GameArea.Transmitter.setGameArea(this);
     }
 
@@ -158,6 +163,7 @@ public class GameArea {
             String userSavePath = getSavePath();
             Files.deleteIfExists(Path.of(userSavePath));
             Serialize.save(game, userSavePath);
+            soundsHandler.gameEnd();
             new Main().start(new Stage());
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -315,24 +321,26 @@ public class GameArea {
 
         private void analyzeClickResult(ClickResult clickResult) {
             //TODO 有时间优化
+            boolean needRefresh=true;
             switch (clickResult) {
                 case Player1Win -> graphicHandler.gameOver(1);
                 case Player2Win -> graphicHandler.gameOver(2);
 
                 case Finished -> {
                     aiMove();
-                    chessChanged();
                 }
                 case Continue -> {
                     showSelectedChess(row, column);
                     showPossibleMove(row, column);
+                    needRefresh=false;
                 }
                 case UnknownError -> {
                     //textHandler.showAlert(Alert.AlertType.ERROR, "Wrong Happened!", "null", "ClickResult is Missing");
                 }
-                default -> {
-                    chessChanged();
-                }
+
+            }
+            if(needRefresh){
+                chessChanged();
             }
         }
 
@@ -347,6 +355,7 @@ public class GameArea {
 
         private void toPause() {
             graphicHandler.showPause();
+            soundsHandler.stopBGM();
             previousGameState = gameState;
             gameState = GameState.Pause;
             System.out.println("游戏已暂停");
@@ -354,6 +363,7 @@ public class GameArea {
 
         private void fromPause() {
             graphicHandler.hidePause();
+            soundsHandler.continueBGM();
             gameState = previousGameState;
             System.out.println("游戏已继续");
         }
@@ -386,7 +396,6 @@ public class GameArea {
                     gameState = GameState.FirstHandChoose;
                 }
             }
-
             textHandler.refreshGameState();
         }
 
@@ -701,6 +710,26 @@ public class GameArea {
 
         }
 
+    }
+    class SoundsHandler{
+        Thread music;
+        public void generateBGM(){
+            music =new Thread(new RandomPlayer(null,"Classical"));
+            music.start();
+        }
+        public void stopBGM() {
+            try {
+                music.wait();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        public void continueBGM(){
+            music.notify();
+        }
+        public void gameEnd(){
+            music.interrupt();
+        }
     }
 }
 

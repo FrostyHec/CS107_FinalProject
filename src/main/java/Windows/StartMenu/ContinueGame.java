@@ -82,7 +82,12 @@ public class ContinueGame {
         latestPlayTime.setCellValueFactory(new PropertyValueFactory<>("latestPlayTime"));
         saveScore.setCellValueFactory(new PropertyValueFactory<>("saveScore"));
         for (String key : saveList.getSaveList().keySet()) {
-            data.add(new ShowingSave(saveList.getSaveList().get(key), key));
+            ShowingSave sv=new ShowingSave(saveList.getSaveList().get(key), key);
+            if(sv.getSaveKind().equals("人机")){
+                System.out.println("屏蔽了");
+                continue;
+            }//因为有bug，所以把AI的存档全都屏蔽掉了
+            data.add(sv);
         }
         dataTable.setItems(data);
     }

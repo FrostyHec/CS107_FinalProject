@@ -22,13 +22,8 @@ import GameLogic.Game;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import units.Retract;
-import units.Serialize;
 
-import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
-import java.nio.file.*;
-import java.nio.file.attribute.BasicFileAttributes;
 import java.util.*;
 
 public class GameArea extends Windows.GameArea.GameArea{
@@ -590,7 +585,7 @@ public class GameArea extends Windows.GameArea.GameArea{
             alert.setContentText(contentText);
             alert.setHeaderText(headerText);
             alert.showAndWait();
-        }//晚点再美化这个界面
+        }//TODO 晚点再美化这个界面
 
         public void refreshScore() {
             player1Score.setText(Integer.toString(game.getPlayer1().getScore()));

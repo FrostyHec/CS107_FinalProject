@@ -47,7 +47,7 @@ public class SaveList {
                                     return FileVisitResult.CONTINUE;
                                 }
                                 System.out.println(path);
-                                saveList.put(path.toFile().getName(), Deserialize.load(path.toString()));
+                                saveList.put(path.toFile().getName(),Deserialize.load(path.toString()) );
                             } catch (Exception e) {
                                 //e.printStackTrace();
                             }

@@ -1,8 +1,7 @@
-package Windows.GameArea.Extract.Music;
+package Windows.GameArea.Extract.Music.Music;
 
+import Windows.GameArea.Extract.Music.MusicPlayer;
 import Windows.GameArea.Extract.Pursuance;
-import javafx.collections.ObservableList;
-import javafx.collections.ObservableListBase;
 import javafx.scene.media.Media;
 
 import java.util.ArrayList;

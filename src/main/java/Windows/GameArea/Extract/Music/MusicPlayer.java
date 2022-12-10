@@ -37,7 +37,7 @@ public abstract class MusicPlayer implements Runnable {
 
     public abstract void generateMusicList(Pursuance pursuance);
 
-    private void playMediaTracks(List<Media> mediaList) {//这个方法将会播放所有的音频直到播完
+    protected void playMediaTracks(List<Media> mediaList) {//这个方法将会播放所有的音频直到播完
         nowMedia = new MediaPlayer(mediaList.remove(0));
         nowMedia.play();
         nowMedia.setOnEndOfMedia(this);

@@ -1,4 +1,4 @@
 package Windows.GameArea.Extract;
 
-public class Pursuance {
+public interface Pursuance {
 }

@@ -5,7 +5,9 @@ import GameLogic.Color;
 import GameLogic.aiMode;
 import UserFiles.UserManager;
 import Windows.GameArea.Extract.Music.MusicPlayer;
-import Windows.GameArea.Extract.Music.RandomPlayer;
+import Windows.GameArea.Extract.Music.Music.RandomPlayer;
+import Windows.GameArea.Extract.Music.SoundEffect.ClickEffect;
+import Windows.GameArea.Extract.Pursuance;
 import Windows.StartMenu.Main;
 import Windows.Transmitter;
 import javafx.event.ActionEvent;
@@ -733,6 +735,10 @@ public class GameArea {
 
         public void gameEnd() {
             threadMusic.interrupt();
+        }
+
+        public void clickEffect(Pursuance pursuance){
+            new ClickEffect(pursuance,"Effect/Click").run();
         }
     }
 

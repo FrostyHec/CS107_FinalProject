@@ -93,7 +93,7 @@ public class AI extends Player {
                 Score += virtualChessBoard[move[1][0]][move[1][1]].getScore();
                 virtualChessBoard[move[1][0]][move[1][1]] = virtualChessBoard[move[0][0]][move[0][1]];
                 virtualChessBoard[move[0][0]][move[0][1]] = null;
-            } else if(!virtualChessBoard[move[1][0]][move[1][1]].isTurnOver()){
+            } else{
                 Score += 3;
                 virtualChessBoard[move[1][0]][move[1][1]] = virtualChessBoard[move[0][0]][move[0][1]];
                 virtualChessBoard[move[0][0]][move[0][1]] = null;

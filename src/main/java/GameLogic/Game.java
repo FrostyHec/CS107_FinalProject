@@ -297,18 +297,5 @@ public class Game implements java.io.Serializable {
         }
         return s;
     }
-//
-//    public static ArrayList<Chess> getAllChess(){
-//        ArrayList<Chess> allChess = new ArrayList<>();
-//        int i = 0;
-//        for(AllChess x : AllChess.values()){
-//            allChess.add(new Chess());
-//            allChess.get(i).setColor(x.getColor());
-//            allChess.get(i).setRank(x.getRank());
-//            allChess.get(i).setScore(x.getScore());
-//            i++;
-//        }
-//        return allChess;
-//    }
 
 }

@@ -102,6 +102,18 @@ public class Selection {//做剪枝算法的时候可能要用到,也是一堆st
         return move;
     }
 
+    public static int[][] bestTwice(Chess[][] virtualChessboard,Color color,ArrayList<int[][]> moves){//还需要优化
+        Random random = new Random();
+        int a = random.nextInt(5);
+        int[][] move = generalUsed.bestMove(virtualChessboard,color,moves);
+
+        if(move.length == 0){
+            move = highest(virtualChessboard,color);
+        }
+
+        return move;
+    }
+
     public static ArrayList<int[][]> find(Chess[][] virtualChessboard,ArrayList<int[][]> moves){
         ArrayList<int[][]> ans = new ArrayList<>();
         for(int[][] move : moves){

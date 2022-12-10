@@ -176,4 +176,58 @@ public class generalUsed {//这个类是一些静态方法的集合，因为基�
             return Color.RED;
         }
     }
+
+    public static int[][] bestMove(Chess[][] virtualChessboard,Color color,ArrayList<int[][]> moves){
+
+        double Score = 0,max = 0;
+        int[][] ans = new int[0][0];
+        int x = 0,y = 0;
+
+        for(int[][] move : moves){
+            Chess[][] virtualChessboard_1 = generalUsed.virtualChessBoard(virtualChessboard);
+            if(move.length == 2) {
+                if(virtualChessboard_1[move[1][0]][move[1][1]] != null)
+                    Score += virtualChessboard_1[move[1][0]][move[1][1]].getScore();
+                move(virtualChessboard_1,move);
+                x = move[1][0];
+                y = move[1][1];
+            }else if(move.length == 1){
+                move(virtualChessboard_1,move);
+                x = move[0][0];
+                y = move[0][1];
+            }
+
+            int max1 = 0,max2 = 0;
+            for(int i=0;i<virtualChessboard_1.length;i++){
+                for(int j=0;j<virtualChessboard_1[i].length;j++){
+                    if(virtualChessboard_1[i][j] == null || !virtualChessboard_1[i][j].isTurnOver())
+                        continue;
+                    if(virtualChessboard_1[i][j].getColor() == color && mayBeEat(virtualChessboard_1,i,j)){
+                        if(virtualChessboard_1[x][y].getScore() > max1) {
+                            Score += max2;
+                            max2 = max1;
+                            max1 = virtualChessboard_1[x][y].getScore();
+                            Score -= max1;
+                        }
+                    }
+                }
+            }
+
+            if(Score > max){
+                max = Score;
+                ans = move;
+            }
+        }
+
+        return ans;
+    }
+
+    public static void move(Chess[][] chessboard,int[][]move){
+        if(move.length==1 && !chessboard[move[0][0]][move[0][1]].isTurnOver()){
+            chessboard[move[0][0]][move[0][1]].TurnOver();
+        }else if(move.length == 2){
+            chessboard[move[1][0]][move[1][1]] = chessboard[move[0][0]][move[0][1]];
+            chessboard[move[0][0]][move[0][1]] = null;
+        }
+    }
 }

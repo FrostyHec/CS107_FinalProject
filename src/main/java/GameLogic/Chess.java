@@ -228,13 +228,15 @@ public class Chess implements java.io.Serializable{//小心chess为null时会出
                         i++;
                         break;
                     }
-                }
+
                 if (i == 4) a[2][0] = (a[2][1] = -1);
                 else {
                     a[2][0] = x;
                     a[2][1] = i;
                 }
             }
+        }
+
         i = y-1;
         if(i<=0)a[3][0] = (a[3][1] = -1);
         else {
@@ -256,12 +258,6 @@ public class Chess implements java.io.Serializable{//小心chess为null时会出
             }
         }
 
-        for(int[]xx : a){//非常神奇但是确实有用的补丁
-            if(xx[0] != -1 && chess[xx[0]][xx[1]] == null){
-                xx[0] = -1;
-                xx[1] = -1;
-            }
-        }
 
         return a;
     }

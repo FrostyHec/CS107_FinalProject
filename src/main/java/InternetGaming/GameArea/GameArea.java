@@ -6,6 +6,7 @@ import InternetGaming.Internet.Message.MessageHandler;
 import InternetGaming.Internet.Message.MessageType;
 import InternetGaming.Internet.Message.PlayerType;
 import InternetGaming.Internet.Transmitter;
+import Windows.GameArea.ClickResult;
 import Windows.GameArea.GameState;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -44,9 +45,8 @@ public class GameArea extends Windows.GameArea.GameArea {
             if (type.equals(PlayerType.SecondHand)) {
                 return;
             }
-            super.chessMove(event);
+            new ChessMove().invoke(event);
             analyzeColor();
-            sendMsg();
             return;
         }
 
@@ -54,9 +54,10 @@ public class GameArea extends Windows.GameArea.GameArea {
         if (!game.nowPlay().getColor().equals(color)) {
             return;
         }
-        super.chessMove(event);
-        sendMsg();
+        new ChessMove().invoke(event);
     }
+
+    static int count = 0;
 
     private void analyzeColor() {
         switch (type) {
@@ -76,6 +77,23 @@ public class GameArea extends Windows.GameArea.GameArea {
     }
 
     public void remoteRefresh(Game game) {
-        this.game=game;
+        this.game = game;
+        System.out.println("刷新成功");
+        chessChanged();
+        if (color.equals(Color.UNKNOWN)) {//说明还没有初始化
+            analyzeColor();
+        }
+    }
+
+    protected class ChessMove extends Windows.GameArea.GameArea.ChessMove {
+        @Override
+        protected void analyzeClickResult(ClickResult clickResult){
+            super.analyzeClickResult(clickResult);
+            switch (clickResult){
+                case Finished -> {
+                    sendMsg();
+                }
+            }
+        }
     }
 }

@@ -2,6 +2,7 @@ package InternetGaming.Internet;
 
 import GameLogic.Game;
 import InternetGaming.Internet.Message.*;
+import javafx.application.Platform;
 
 import java.io.EOFException;
 import java.io.IOException;
@@ -108,7 +109,8 @@ public class Client extends ClientData {
             Game game;
             try {
                 game = (Game) m.hearObj();
-                Transmitter.gameArea.remoteRefresh(game);
+                Platform.runLater(() -> Transmitter.gameArea.remoteRefresh(game));
+
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }

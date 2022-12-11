@@ -128,7 +128,7 @@ public class GameArea {
 
     }
 
-    private void chessChanged() {
+    protected void chessChanged() {
         graphicHandler.refresh();
         textHandler.refreshScore();
         gameStateHandler.changed();
@@ -232,7 +232,7 @@ public class GameArea {
         }
     }
 
-    class ChessMove {
+   protected class ChessMove {
         static private long count = 0L;
         private final int selectedSize = squareSize - 8;
         private int column;
@@ -323,7 +323,7 @@ public class GameArea {
 
         }
 
-        private void analyzeClickResult(ClickResult clickResult) {
+        protected void analyzeClickResult(ClickResult clickResult) {
             //TODO 有时间优化
             boolean needRefresh = true;
             switch (clickResult) {
@@ -353,6 +353,7 @@ public class GameArea {
         }
 
     }
+
 
     class GameStateHandler {
         private GameState previousGameState;

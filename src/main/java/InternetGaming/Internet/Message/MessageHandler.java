@@ -55,7 +55,7 @@ public class MessageHandler {
     public void sendObj(Object o) {
         try {
             try {
-                Thread.sleep(300);
+                Thread.sleep(50);//TODO 我真的是无语，为什么睡会就好了啊
             } catch (Exception e) {
             }
             objWriter.writeObject(o);

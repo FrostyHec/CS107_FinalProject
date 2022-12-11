@@ -84,21 +84,35 @@ public class Selection {//做剪枝算法的时候可能要用到,也是一堆st
         p.setColor(color);
         ArrayList<int[][]> moves = generalUsed.canClick(p.getColor(),virtualChessboard);
         Collections.shuffle(moves);
-        for(int[][] xy : moves){
-            if(xy.length == 2 && a > 0 &&
-                    virtualChessboard[xy[1][0]][xy[1][1]] != null
-                    && virtualChessboard[xy[1][0]][xy[1][1]].getScore() > score){
-                score = virtualChessboard[xy[1][0]][xy[1][1]].getScore();
-                move[0][0] = xy[0][0];
-                move[0][1] = xy[0][1];
-                move[1][0] = xy[1][0];
-                move[1][1] = xy[1][1];
-                is = false;
+        if(a>0) {
+            for (int[][] xy : moves) {
+                if (xy.length == 2 &&
+                        virtualChessboard[xy[1][0]][xy[1][1]] != null
+                        && virtualChessboard[xy[1][0]][xy[1][1]].getScore() > score) {
+                    score = virtualChessboard[xy[1][0]][xy[1][1]].getScore();
+                    move[0][0] = xy[0][0];
+                    move[0][1] = xy[0][1];
+                    move[1][0] = xy[1][0];
+                    move[1][1] = xy[1][1];
+                    is = false;
+                }
             }
         }
         if( is ) {//实际上表示没有能吃的棋
             move = find(virtualChessboard,moves).get(0);
         }
+        return move;
+    }
+
+    public static int[][] bestTwice(Chess[][] virtualChessboard,Color color,ArrayList<int[][]> moves){//还需要优化
+        Random random = new Random();
+        int a = random.nextInt(5);
+        int[][] move = generalUsed.bestMove(virtualChessboard,color,moves);
+
+        if(move.length == 0){
+            move = highest(virtualChessboard,color);
+        }
+
         return move;
     }
 

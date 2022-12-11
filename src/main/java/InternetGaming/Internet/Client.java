@@ -1,13 +1,15 @@
 package InternetGaming.Internet;
 
 import GameLogic.Game;
-import InternetGaming.GameArea.GameArea;
 import InternetGaming.Internet.Message.*;
 
+import java.io.EOFException;
 import java.io.IOException;
 import java.net.Socket;
 
 public class Client extends ClientData {
+    ClientData[] totalClient;
+
     public Client(MessageHandler m) {
         super(m);
     }
@@ -37,6 +39,7 @@ public class Client extends ClientData {
                 } catch (Exception e) {
                     throw new RuntimeException("Server is closed unexpectedly!");
                 }
+                System.out.println(args[0]);
                 switch (MessageType.valueOf(args[0])) {
                     case PlayerSetting -> {
                         new SetPlayer().parse(args[1]);
@@ -64,21 +67,22 @@ public class Client extends ClientData {
     class SetPlayer implements Parser {
         @Override
         public void parse(String message) {
-
+            Transmitter.preparingWindow.setThisPlayerType(PlayerType.valueOf(message));
         }
     }
 
     class NewPlayer implements Parser {
         @Override
         public void parse(String message) {
-            ClientData[] cd;
             try {
-                Object o = m.hearObj();
-                cd = (ClientData[]) o;
+                System.out.println("试图收取玩家列表");
+                totalClient = (ClientData[]) m.hearObj();
+                System.out.println("收到玩家列表");
+                //totalClient = (ClientData[]) o;
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
-            Transmitter.preparingWindow.refresh(cd);
+            Transmitter.preparingWindow.refresh(totalClient);
         }
     }
 
@@ -103,8 +107,7 @@ public class Client extends ClientData {
         public void parse(String message) {
             Game game;
             try {
-                Object o = m.hearObj();
-                game = (Game) o;
+                game = (Game) m.hearObj();
                 Transmitter.gameArea.remoteRefresh(game);
             } catch (Exception e) {
                 throw new RuntimeException(e);

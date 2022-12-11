@@ -48,7 +48,7 @@ public class GameArea {
     //死棋子图像
 
     //游戏状态
-    private GameState gameState;
+    protected GameState gameState;
     private GameStateHandler gameStateHandler = new GameStateHandler();
 
     //基本常量
@@ -69,7 +69,7 @@ public class GameArea {
     public Button cheatButton;
     public ImageView cheatImage;
     public Label cheatTitle;
-    private Game game;
+    protected Game game;
     private final GraphicHandler graphicHandler = new GraphicHandler();
     private final TextHandler textHandler = new TextHandler();
 
@@ -80,7 +80,6 @@ public class GameArea {
     public SoundsHandler soundsHandler = new SoundsHandler();
 
     public GameArea() throws Exception {
-        Transmitter.setGameArea(this);
         game = new Game();
         userManager = UserManager.read();
     }
@@ -109,7 +108,9 @@ public class GameArea {
         ChessMove.resetCount();
         textHandler.initialize();
         gameStateHandler.initialize();
-
+        setTransmitter();
+    }
+    protected void setTransmitter(){
         Windows.GameArea.Transmitter.setGameArea(this);
     }
 

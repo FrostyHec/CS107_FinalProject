@@ -1,7 +1,5 @@
 package InternetGaming.Internet.Message;
 
-import InternetGaming.Internet.Message.MessageType;
-
 import java.io.*;
 import java.net.Socket;
 
@@ -55,8 +53,10 @@ public class MessageHandler {
     }
 
     public void sendObj(Object o) {
+
         try {
             objWriter.writeObject(o);
+            objWriter.flush();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -74,11 +74,7 @@ public class MessageHandler {
     }
 
     public Object hearObj() throws Exception {
-        try {
-            return objReader.readObject();
-        } catch (IOException e) {
-            throw new Exception(e);
-        }
+        Object o=objReader.readObject();
+        return o;
     }
-
 }

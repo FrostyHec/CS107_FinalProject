@@ -57,7 +57,7 @@ public class Server extends Thread {
         @Override
         public void parse(String message) {
             PlayerType p;
-            if (clientList.size() == 0) {//初代版本默认服主是先手，后面再改
+            if (clientList.size() == 0) {//TODO 初代版本默认服主是先手，后面再改
                 p = PlayerType.FirstHand;
             } else if (clientList.size() == 1) {
                 p = PlayerType.SecondHand;
@@ -68,15 +68,20 @@ public class Server extends Thread {
             synchronized (this) {//添加用户优先锁定
                 clientList.add(new ClientData(message, m, p));
             }
+            for (ClientData cd : clientList) {
+                System.out.println("广播：当前玩家" + cd.name + cd.playerType);
+            }
 
             //广播新用户登场
+            ClientData[] cd = new ClientData[clientList.size()];
+            for (int i = 0; i < cd.length; i++) {
+                cd[i] = clientList.get(i);
+            }//toArray的操作会产生Obj[]，这里只允许传输一个对象
+
             for (ClientData c : clientList) {
                 c.m.send(MessageType.NewPlayer, "");
-                ClientData[] cd=new ClientData[clientList.size()];
-                for(int i=0;i<cd.length;i++){
-                    cd[i]=clientList.get(i);
-                }//toArray的操作会产生Obj[]，这里只允许传输一个对象
-                c.m.sendObj(cd);//发送的是数组
+                c.m.sendObj(cd.clone());//发送的是数组
+                System.out.println("已发送给：" + c.name + c.playerType);
             }
             checkAbleToStart();
         }
@@ -117,7 +122,7 @@ public class Server extends Thread {
     }
 
     public void playerIllegalExit(MessageHandler m) {
-        //还没写
+        //TODO 还没写
     }
 
     @SuppressWarnings("RedundantLabeledSwitchRuleCodeBlock")
@@ -144,7 +149,7 @@ public class Server extends Thread {
                 }
                 switch (MessageType.valueOf(args[0])) {
                     case PlayerSetting -> {
-                       new SetPlayer(m).parse(args[1]);
+                        new SetPlayer(m).parse(args[1]);
                     }
                     case StartGame -> {
                         new StartGame().parse(args[1]);
@@ -194,6 +199,7 @@ public class Server extends Thread {
             isGameStart = true;
             for (ClientData c : clientList) {
                 c.getM().send(MessageType.StartGame, StartGameType.Start.toString());
+                System.out.println(c.name + "已启动:" + c.playerType);
             }
         }
     }

@@ -16,7 +16,7 @@
             <center>
                 <Pane prefHeight="791.0" prefWidth="410.0" BorderPane.alignment="CENTER">
                     <children>
-                        <Pane id="Chessboardimg" layoutX="13.0" layoutY="25.0" onMouseClicked="#chessMove" prefHeight="670.0" prefWidth="384.3">
+                        <Pane id="Chessboardimg" layoutX="13.0" layoutY="25.0" onMouseClicked="#chessMove" prefHeight="675.0" prefWidth="387.16">
                             <children>
                                 <Pane id="Chessboard" fx:id="Chessboard" layoutX="20.0" layoutY="16.0" onMouseClicked="#chessMove" prefHeight="640.0" prefWidth="320.0" />
                             </children>
@@ -61,7 +61,7 @@
             <left>
                 <Pane prefHeight="719.0" prefWidth="95.0" BorderPane.alignment="CENTER">
                     <children>
-                        <Button layoutY="681.0" mnemonicParsing="false" onAction="#retractOnClick" prefHeight="45.0" prefWidth="95.0" text="悔棋">
+                        <Button fx:id="bthRetract" alignment="CENTER" layoutY="681.0" mnemonicParsing="false" onAction="#retractOnClick" prefHeight="45.0" prefWidth="95.0" text="悔棋">
                             <font>
                                 <Font name="System Bold" size="18.0" />
                             </font>
@@ -122,14 +122,14 @@
         </BorderPane>
         <Pane fx:id="pausePane" disable="true" prefHeight="830.0" prefWidth="600.0" visible="false">
             <children>
-                <ImageView id="pauseGray" fitHeight="830.0" fitWidth="600.0" pickOnBounds="true"  />
+                <ImageView id="pauseGray" fitHeight="830.0" fitWidth="600.0" pickOnBounds="true" />
                 <Pane fx:id="paneChoose" layoutX="200.0" layoutY="218.0" prefHeight="355.0" prefWidth="200.0">
                     <children>
-                        <Button fx:id="btnContinue" layoutX="33.0" layoutY="88.0" mnemonicParsing="false" onAction="#btnContinueGame" prefHeight="50.0" prefWidth="125.0" text="继续游戏" />
-                        <Button fx:id="btnRemake" layoutX="33.0" layoutY="153.0" mnemonicParsing="false" onAction="#clickRemake" prefHeight="50.0" prefWidth="125.0" text="重新开始" />
-                        <Label layoutX="50.0" layoutY="28.0" text="游戏已暂停" />
-                        <Button fx:id="btnQuit" layoutX="33.0" layoutY="216.0" mnemonicParsing="false" onAction="#saveAndExit" prefHeight="50.0" prefWidth="125.0" text="保存并退出" />
-                        <Button fx:id="btnSetup" layoutX="33.0" layoutY="279.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="125.0" text="设置" />
+                        <Label alignment="CENTER" layoutX="33.0" layoutY="28.0" prefHeight="50.0" prefWidth="125.0" text="游戏已暂停" textFill="WHITE" />
+                        <Button fx:id="btnContinue" alignment="CENTER" layoutX="33.0" layoutY="88.0" mnemonicParsing="false" onAction="#btnContinueGame" prefHeight="50.0" prefWidth="125.0" text="继续游戏" />
+                        <Button fx:id="btnRemake" alignment="CENTER" layoutX="33.0" layoutY="153.0" mnemonicParsing="false" onAction="#clickRemake" prefHeight="50.0" prefWidth="125.0" text="重新开始" />
+                        <Button fx:id="btnQuit" alignment="CENTER" contentDisplay="CENTER" layoutX="33.0" layoutY="216.0" mnemonicParsing="false" onAction="#saveAndExit" prefHeight="50.0" prefWidth="125.0" text="保存并退出" />
+                        <Button fx:id="btnSetup" alignment="CENTER" contentDisplay="TOP" layoutX="33.0" layoutY="279.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="125.0" text="设置" />
                     </children>
                 </Pane>
             </children>

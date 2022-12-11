@@ -1,9 +1,11 @@
 package GameLogic;
 
+import InternetGaming.GameArea.GameArea;
+
 import java.time.LocalDateTime;
 import java.util.*;
 
-public class Game implements java.io.Serializable {
+public class Game implements java.io.Serializable,Cloneable{
 
     private final LocalDateTime startTime = LocalDateTime.now();
     private  LocalDateTime latestTime;
@@ -12,6 +14,16 @@ public class Game implements java.io.Serializable {
     public Game() {
         p1 = new Player();
         p2 = new Player();
+    }
+    @Override
+    public Object clone() {
+        Game g = null;
+        try{
+            g = (Game) super.clone();
+        }catch(CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        return g;
     }
 
     public Player getPlayer1() {

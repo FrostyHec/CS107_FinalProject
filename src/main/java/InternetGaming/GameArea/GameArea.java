@@ -72,7 +72,7 @@ public class GameArea extends Windows.GameArea.GameArea {
     private void sendMsg() {
         MessageHandler m = Transmitter.client.getM();
         m.send(MessageType.ChessBoardRefresh, "");
-        m.sendObj(game);
+        m.sendObj(game.clone());
     }
 
     public void remoteRefresh(Game game) {

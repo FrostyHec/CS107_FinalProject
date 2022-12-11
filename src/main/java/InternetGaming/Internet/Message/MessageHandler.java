@@ -53,8 +53,11 @@ public class MessageHandler {
     }
 
     public void sendObj(Object o) {
-
         try {
+            try {
+                Thread.sleep(300);
+            } catch (Exception e) {
+            }
             objWriter.writeObject(o);
             objWriter.flush();
         } catch (IOException e) {

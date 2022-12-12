@@ -18,7 +18,7 @@
             <Label fx:id="toolTipper" layoutX="-17.0" layoutY="-3.0" onMouseClicked="#changeAvatar" prefHeight="50.0" prefWidth="50.0" />
          </children>
       </Pane>
-      <Button alignment="CENTER" layoutX="424.0" layoutY="134.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="120.0" text="积分榜" />
+      <Button alignment="CENTER" layoutX="424.0" layoutY="134.0" mnemonicParsing="false" onAction="#openRankList" prefHeight="36.0" prefWidth="120.0" text="积分榜" />
       <Button alignment="CENTER" layoutX="424.0" layoutY="198.0" mnemonicParsing="false" onAction="#openSetUp" prefHeight="36.0" prefWidth="120.0" text="设置" />
       <Button alignment="CENTER" layoutX="424.0" layoutY="265.0" mnemonicParsing="false" onAction="#exitGame" prefHeight="36.0" prefWidth="120.0" text="退出游戏" />
       <Pane id="Title" layoutX="200.0" layoutY="81.0" prefHeight="270.0" prefWidth="200.0" />

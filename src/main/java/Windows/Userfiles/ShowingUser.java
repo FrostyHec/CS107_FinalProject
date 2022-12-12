@@ -12,7 +12,7 @@ public class ShowingUser {
 
     private SimpleStringProperty playTime;
 
-    private SimpleIntegerProperty longestWin;
+    private SimpleIntegerProperty playTimes;
 
     private SimpleStringProperty createTime;
 
@@ -20,7 +20,7 @@ public class ShowingUser {
         uid = new SimpleLongProperty(user.getUid());
         name = new SimpleStringProperty(user.getName());
         playTime = new SimpleStringProperty(generatePlayTime(user));
-        longestWin = new SimpleIntegerProperty();//还没写
+        playTimes = new SimpleIntegerProperty(generatePlayTimes(user));
         createTime = new SimpleStringProperty(generateStartTime(user));
     }
 
@@ -33,11 +33,14 @@ public class ShowingUser {
         }
         int hours = (int) (playSec / 3600);
         int minutes = (int) ((playSec % 3600) / 60);
-        return hours + " 小时" + minutes + " 分钟";
+        return hours + " 时" + minutes + " 分";
+    }
+    private Integer generatePlayTimes(User user){
+        return user.getTotalPlayTimes();
     }
 
     private String generateStartTime(User user) {
-        return "";//还没写
+        return "";//TODO 还没写
     }
 
     public long getUid() {
@@ -64,12 +67,12 @@ public class ShowingUser {
         return playTime;
     }
 
-    public int getLongestWin() {
-        return longestWin.get();
+    public int getPlayTimes() {
+        return playTimes.get();
     }
 
-    public SimpleIntegerProperty longestWinProperty() {
-        return longestWin;
+    public SimpleIntegerProperty playTimesProperty() {
+        return playTimes;
     }
 
     public String getCreateTime() {

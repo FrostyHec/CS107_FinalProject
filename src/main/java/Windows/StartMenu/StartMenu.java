@@ -3,11 +3,13 @@ package Windows.StartMenu;
 import InternetGaming.Internet.LinkingWindow;
 import UserFiles.UserManager;
 import Windows.GameArea.MainGame;
+import Windows.RankingList.RankingListController;
 import Windows.SetUp.MainSetUp;
 import Windows.SetUp.NormalSettings;
 import Windows.Userfiles.UserfilesWindow;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -147,7 +149,7 @@ public class StartMenu {
                 new FileChooser.ExtensionFilter("BMP", "*.bmp"),
                 new FileChooser.ExtensionFilter("PNG", "*.png")
         );
-        fileChooser.setTitle("从本地载入存档");
+        fileChooser.setTitle("选择头像");
         File file = fileChooser.showOpenDialog(new Stage());
         if (file == null) {
             return;
@@ -162,5 +164,10 @@ public class StartMenu {
             throw new RuntimeException();
         }
         generateAvatar();
+    }
+
+    public void openRankList(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(RankingListController.class.getResource("RankingList.fxml"));
+        ((Stage) paneStartMenu.getScene().getWindow()).setScene(new Scene(fxmlLoader.load()));
     }
 }

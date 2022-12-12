@@ -1,28 +1,34 @@
 package UserFiles;
 
+import Windows.GameArea.Difficulty;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class User implements Serializable {
     private String name;
     private String saveUrl;
     private int uid;
     private String avatarUrl;
-    private List<ScoreList> localScoreList = new ArrayList<>();
+    private ScoreList scoreList;
     private TimeList timeList;
 
     private String LatestSaveName;
 
     private User() {
-
+        scoreList = new ScoreList();
+        timeList = new TimeList();
     }
 
     public User(String name, int uid) {
+        this();
         this.name = name;
         this.uid = uid;
         createFile();
@@ -74,10 +80,6 @@ public class User implements Serializable {
         this.name = name;
     }
 
-    public List<ScoreList> getLocalScoreList() {
-        return localScoreList;
-    }
-
     public TimeList getTimeList() {
         return timeList;
     }
@@ -120,30 +122,19 @@ public class User implements Serializable {
     public String getAvatarUrl() {
         return avatarUrl;
     }
-}
 
-class ScoreList implements Serializable {
-    private int score;
-    private String filesUrl;
-
-    private int nowContinueWin;
-
-    private int longestContinueWin;
-
-    public int getScore() {
-        return score;
+    public ScoreList getScoreList() {
+        return scoreList;
     }
 
-    public void setScore(int score) {
-        this.score = score;
+    public void setLatestSaveName(String latestSaveName) {
+        LatestSaveName = latestSaveName;
     }
-
-    public String getFilesUrl() {
-        return filesUrl;
-    }
-
-    public void setFilesUrl(String filesUrl) {
-        this.filesUrl = filesUrl;
+    public int getTotalPlayTimes(){
+        return scoreList.getTotalPlayTimes();
     }
 }
+
+
+
 

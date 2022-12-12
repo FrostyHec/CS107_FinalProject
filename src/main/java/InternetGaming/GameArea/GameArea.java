@@ -10,6 +10,7 @@ import Windows.GameArea.ClickResult;
 import Windows.GameArea.GameState;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Window;
 
 public class GameArea extends Windows.GameArea.GameArea {
     private PlayerType type;
@@ -94,6 +95,13 @@ public class GameArea extends Windows.GameArea.GameArea {
                     sendMsg();
                 }
             }
+        }
+    }
+
+    protected class GraphicHandler extends Windows.GameArea.GameArea.GraphicHandler{
+        @Override
+        public void refreshIcon(){
+            //TODO 完成图标刷新与用户刷新
         }
     }
 }

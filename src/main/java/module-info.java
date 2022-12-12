@@ -25,5 +25,7 @@ module com.example.darkchess {
     opens Windows.GameArea.Extract.Music.SoundEffect to javafx.fxml;
     exports Windows.GameArea.Extract.Music.Music;
     opens Windows.GameArea.Extract.Music.Music to javafx.fxml;
+    exports Windows.RankingList;
+    opens Windows.RankingList to javafx.fxml;
 
 }

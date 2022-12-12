@@ -7,8 +7,6 @@ import Windows.Transmitter;
 import javafx.application.Application;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -28,7 +26,7 @@ public class UserfilesWindow {
     public TableView dataTable;
     public TableColumn Uid;
     public TableColumn UserName;
-    public TableColumn LongestWin;
+    public TableColumn playTimes;
     public TableColumn PlayTime;
     public TableColumn CreateTime;
     public UserManager userManager;
@@ -98,7 +96,7 @@ public class UserfilesWindow {
         Uid.setCellValueFactory(new PropertyValueFactory<>("uid"));
         UserName.setCellValueFactory(new PropertyValueFactory<>("name"));
         PlayTime.setCellValueFactory(new PropertyValueFactory<>("playTime"));
-        LongestWin.setCellValueFactory(new PropertyValueFactory<>("longestWin"));
+        playTimes.setCellValueFactory(new PropertyValueFactory<>("playTimes"));
         CreateTime.setCellValueFactory(new PropertyValueFactory<>("createTime"));
         for (User u : userManager.getUserList()) {
             data.add(new ShowingUser(u));

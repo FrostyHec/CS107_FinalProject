@@ -9,7 +9,6 @@ import Windows.GameArea.Extract.Music.Music.RandomPlayer;
 import Windows.GameArea.Extract.Music.SoundEffect.ClickEffect;
 import Windows.GameArea.Extract.Pursuance;
 import Windows.StartMenu.Main;
-import Windows.Transmitter;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -35,6 +34,9 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 public class GameArea {
+    private String defaultAvatar = "src/main/resources/Windows/images/UserImage/tempUser.png";
+    private String defaultComputerAvatar = "src/main/resources/Windows/images/UserImage/ComputerUser.png";
+    private boolean isHumanFirst;
     //暂停界面
     public Pane pausePane;
     public Pane paneChoose;
@@ -83,7 +85,7 @@ public class GameArea {
     public GameArea() throws Exception {
         game = new Game();
         userManager = UserManager.read();
-        //setTransmitter();
+        setTransmitter();
     }
 
     public void setSaveName(String name) {
@@ -110,9 +112,9 @@ public class GameArea {
         ChessMove.resetCount();
         textHandler.initialize();
         gameStateHandler.initialize();
-        setTransmitter();
     }
-    protected void setTransmitter(){
+
+    protected void setTransmitter() {
         Windows.Transmitter.setGameArea(this);
     }
 
@@ -120,6 +122,7 @@ public class GameArea {
         this.game = game;
         chessChanged();
         game.bd();//补丁
+        graphicHandler.refreshIcon();//刷新用户图标
     }
 
     public void chessMove(MouseEvent event) {
@@ -185,13 +188,15 @@ public class GameArea {
         try {
             game = Retract.traceBack(game);
         } catch (Exception e) {
-            //do nothing!
+            //do nothing!`
         }
         chessChanged();
     }
 
     public void setPvE(int difficulty, boolean isHumanFirst) {
+        this.isHumanFirst = isHumanFirst;
         game = new aiMode(difficulty, isHumanFirst);
+        graphicHandler.refreshIcon();//重新刷新用户图标
     }
 
     class CheatModel {
@@ -234,7 +239,7 @@ public class GameArea {
         }
     }
 
-   protected class ChessMove {
+    protected class ChessMove {
         static private long count = 0L;
         private final int selectedSize = squareSize - 8;
         private int column;
@@ -273,7 +278,7 @@ public class GameArea {
         }
 
         private void aiMove() {
-            new Thread(()->{
+            new Thread(() -> {
                 try {
                     Chessboard.setDisable(true);
                     bthRetract.setDisable(false);
@@ -412,7 +417,7 @@ public class GameArea {
     }
 
     @SuppressWarnings("RedundantLabeledSwitchRuleCodeBlock")
-    class GraphicHandler {
+    protected class GraphicHandler {
         public int getGraphicX(int column, int size) {
             return column * squareSize + (squareSize - size) / 2;
         }
@@ -517,10 +522,46 @@ public class GameArea {
 
         }
 
-        public void refreshIcon() {//有待扩展
-            try {
-                player1Icon.setImage(new Image(new FileInputStream("src/main/resources/Windows/images/UserImage/tempUser.png")));
-                player2Icon.setImage(new Image(new FileInputStream("src/main/resources/Windows/images/UserImage/tempUser.png")));
+        public void refreshIcon() {//TODO 有待扩展
+            if (game instanceof aiMode) {//AI模式
+                System.out.println("win");
+                if (isHumanFirst) {//人类先手
+                    try {//玩家图片
+                        player1Icon.setImage(new Image(new FileInputStream(userManager.nowPlay().getAvatarUrl())));
+                    } catch (Exception e) {
+                        try {
+                            player1Icon.setImage(new Image(new FileInputStream(defaultAvatar)));
+                        } catch (Exception n) {
+                            System.out.println("图片加载失败！");
+                        }
+                    }
+                    try {//电脑图片
+                        player2Icon.setImage(new Image(new FileInputStream(defaultComputerAvatar)));
+                    } catch (Exception e) {
+                        System.out.println("图片加载失败！");
+                    }
+                } else {//ai先手
+                    try {//玩家图片
+                        player1Icon.setImage(new Image(new FileInputStream(userManager.nowPlay().getAvatarUrl())));
+                    } catch (Exception e) {
+                        try {
+                            player1Icon.setImage(new Image(new FileInputStream(defaultAvatar)));
+                        } catch (Exception n) {
+                            System.out.println("图片加载失败！");
+                        }
+                    }
+                    try {//电脑图片
+                        player2Icon.setImage(new Image(new FileInputStream(defaultComputerAvatar)));
+                    } catch (Exception e) {
+                        System.out.println("图片加载失败！");
+                    }
+                }
+                return;
+            }
+            //非ai模式
+            try {//默认图片
+                player1Icon.setImage(new Image(new FileInputStream(defaultAvatar)));
+                player2Icon.setImage(new Image(new FileInputStream(defaultAvatar)));
             } catch (Exception e) {
                 System.out.println("图片加载失败！");
             }
@@ -739,8 +780,8 @@ public class GameArea {
             threadMusic.interrupt();
         }
 
-        public void clickEffect(Pursuance pursuance){
-            new ClickEffect(pursuance,"Effect/Click").run();
+        public void clickEffect(Pursuance pursuance) {
+            new ClickEffect(pursuance, "Effect/Click").run();
         }
     }
 

@@ -6,14 +6,14 @@ import java.time.Period;
 
 public class TimeList implements Serializable {
     private long playSec;
-    private LocalDate playDate;
+    private LocalDate createDate;
 
     public TimeList() {
         initialize();
     }
 
-    public LocalDate getPlayDate() {
-        return playDate;
+    public LocalDate getCreateDate() {
+        return createDate;
     }
 
     public long getPlaySec() {
@@ -21,7 +21,7 @@ public class TimeList implements Serializable {
     }
 
     public void initialize() {
-        playDate = LocalDate.now();
+        createDate = LocalDate.now();
         playSec = 0;
     }
 
@@ -30,6 +30,6 @@ public class TimeList implements Serializable {
     }
 
     public Period getPlayingDays() {
-        return Period.between(playDate, LocalDate.now());
+        return Period.between(createDate, LocalDate.now());
     }
 }

@@ -82,6 +82,7 @@ public class GameArea {
     public GameArea() throws Exception {
         game = new Game();
         userManager = UserManager.read();
+        //setTransmitter();
     }
 
     public void setSaveName(String name) {
@@ -111,7 +112,7 @@ public class GameArea {
         setTransmitter();
     }
     protected void setTransmitter(){
-        Windows.GameArea.Transmitter.setGameArea(this);
+        Windows.Transmitter.setGameArea(this);
     }
 
     public void loadGame(Game game) {

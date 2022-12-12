@@ -6,10 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="bea79dc5-57f0-48e7-b850-a9fcd65d4f0c" name="Changes" comment="我把调用的接口搭了个框架，记得填充内容">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/InternetGaming/GameArea/GameArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/InternetGaming/GameArea/GameArea.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/InternetGaming/Internet/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/InternetGaming/Internet/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/InternetGaming/Internet/Message/MessageHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/InternetGaming/Internet/Message/MessageHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Windows/GameArea/GameArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Windows/GameArea/GameArea.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,7 +100,7 @@
       <recent name="Windows.StartMenu" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.ServerMain">
+  <component name="RunManager" selected="Application.Windows.StartMenu.Main">
     <configuration name="Main2" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Windows.StartMenu.Main2" />
       <module name="DarkChess" />
@@ -172,8 +168,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main2" />
         <item itemvalue="Application.Windows.StartMenu.Main" />
+        <item itemvalue="Application.Main2" />
         <item itemvalue="Application.ServerMain" />
         <item itemvalue="Application.Main3" />
         <item itemvalue="Application.MainGame" />

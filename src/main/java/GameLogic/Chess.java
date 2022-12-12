@@ -71,7 +71,10 @@ public class Chess implements java.io.Serializable{//小心chess为null时会出
                         i++;
                         continue;
                     }
-                    if(chess[a[0]][a[1]]==null || chess[a[0]][a[1]].getRank()==7 || chess[a[0]][a[1]].getRank()==1);
+                    if(chess[a[0]][a[1]]==null || chess[a[0]][a[1]].getRank()==7 || chess[a[0]][a[1]].getRank()==1){
+                        i++;
+                        continue;
+                    }
                     else p[i][0] = (p[i][1] = -1);
                     i++;
                 }
@@ -82,7 +85,10 @@ public class Chess implements java.io.Serializable{//小心chess为null时会出
                         i++;
                         continue;
                     }
-                    if(chess[a[0]][a[1]]==null);
+                    if(chess[a[0]][a[1]]==null){
+                        i++;
+                        continue;
+                    }
                     else if (chess[a[0]][a[1]].getRank() == 1)
                         p[i][0] = (p[i][1] = -1);
                     i++;
@@ -94,7 +100,10 @@ public class Chess implements java.io.Serializable{//小心chess为null时会出
                         i++;
                         continue;
                     }
-                    if(chess[a[0]][a[1]]==null);
+                    if(chess[a[0]][a[1]]==null){
+                        i++;
+                        continue;
+                    }
                     else if (chess[a[0]][a[1]].getRank() > rank)
                         p[i][0] = (p[i][1] = -1);
                     i++;
@@ -105,7 +114,10 @@ public class Chess implements java.io.Serializable{//小心chess为null时会出
             int i = 0;
             for(int[] a:p){
                 if (a[0] != -1){
-                    if(chess[a[0]][a[1]]==null);
+                    if(chess[a[0]][a[1]]==null){
+                        i++;
+                        continue;
+                    }
                     else if(chess[a[0]][a[1]].getColor()==color || !chess[a[0]][a[1]].isTurnOver()){
                         p[i][0] = (p[i][1] = -1);
                     }

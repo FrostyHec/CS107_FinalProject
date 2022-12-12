@@ -1,7 +1,5 @@
 package GameLogic;
 
-import InternetGaming.GameArea.GameArea;
-
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -193,8 +191,8 @@ public class Game implements java.io.Serializable,Cloneable{
         //初始化player
         p1.setColor(Color.UNKNOWN);
         p2.setColor(Color.UNKNOWN);
-        p1.setScore(0);
-        p2.setScore(0);
+        p1.initScore();
+        p2.initScore();
         isFirst = true;
 
 //        p1开始行动
@@ -231,8 +229,8 @@ public class Game implements java.io.Serializable,Cloneable{
 
         p1.setColor(Color.UNKNOWN);
         p2.setColor(Color.UNKNOWN);
-        p1.setScore(0);
-        p2.setScore(0);
+        p1.initScore();
+        p2.initScore();
         isFirst = true;
 
         //从p1开始行动(先全部变为false，再把p1变为true)
@@ -297,17 +295,17 @@ public class Game implements java.io.Serializable,Cloneable{
         this.latestTime = latestTime;
     }
     public String chessToString(){
-        String s = "";
+        StringBuilder s = new StringBuilder();
         for(Chess[] cc : chess){
             for(Chess c : cc){
                 if(c==null) {
-                    s += "null";
+                    s.append("null");
                     continue;
                 }
-                s += c.toString();
+                s.append(c.toString());
             }
         }
-        return s;
+        return s.toString();
     }
 
 }

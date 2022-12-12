@@ -10,6 +10,7 @@ import Windows.GameArea.Extract.Music.SoundEffect.ClickEffect;
 import Windows.GameArea.Extract.Pursuance;
 import Windows.StartMenu.Main;
 import Windows.Transmitter;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -272,25 +273,21 @@ public class GameArea {
         }
 
         private void aiMove() {
-            if (!(game instanceof aiMode)) {
-                return;
-            }
-            Chessboard.setDisable(true);
-            try {
-                game.aiMove();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-//            new Thread(() -> {
-//                try {
-//                    Thread.sleep(100);
-//                    game.aiMove();
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//            });
-            Chessboard.setDisable(false);
+            new Thread(()->{
+                try {
+                    Chessboard.setDisable(true);
+                    bthRetract.setDisable(false);
+                    System.out.println("AI思考中");
+                    Thread.sleep(300);//TODO 一个合适的睡眠时间
+                    System.out.println("暂思考完毕");
+                    game.aiMove();
+                    Platform.runLater(GameArea.this::chessChanged);
+                    bthRetract.setDisable(false);
+                    Chessboard.setDisable(false);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }).start();
         }
 
         private void showSelectedChess(int row, int column) {
@@ -332,7 +329,9 @@ public class GameArea {
                 case Player2Win -> graphicHandler.gameOver(2);
 
                 case Finished -> {
-                    aiMove();
+                    if (game instanceof aiMode) {
+                        aiMove();//move完会自己调用棋盘刷新
+                    }
                 }
                 case Continue -> {
                     showSelectedChess(row, column);

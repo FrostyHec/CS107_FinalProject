@@ -35,4 +35,7 @@ public class Transmitter {
     public static void setRenameUserWindow(RenameUserWindow renameUserWindow) {
         Transmitter.renameUserWindow = renameUserWindow;
     }
+    public static GameArea getGameArea(){
+        return gameArea;
+    }
 }

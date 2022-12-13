@@ -1,13 +1,12 @@
 package Windows.GameArea;
 
-import GameLogic.Chess;
-import GameLogic.Color;
-import GameLogic.aiMode;
+import GameLogic.*;
 import UserFiles.UserManager;
 import Windows.GameArea.Extract.Music.MusicPlayer;
 import Windows.GameArea.Extract.Music.Music.RandomPlayer;
 import Windows.GameArea.Extract.Music.SoundEffect.ClickEffect;
 import Windows.GameArea.Extract.Pursuance;
+import Windows.SetUp.MainSetUp;
 import Windows.StartMenu.Main;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -22,8 +21,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import GameLogic.Game;
 import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import units.Retract;
 import units.Serialize;
@@ -173,15 +172,31 @@ public class GameArea {
             Files.deleteIfExists(Path.of(userSavePath));
             Serialize.save(game, userSavePath);
             soundsHandler.gameEnd();
-            new Main().start(new Stage());
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
         forceExit();
     }
 
+    public void mainExit(){
+        forceExit();
+    }
+    public void reGameExit(){
+        ((Stage) Chessboard.getScene().getWindow()).close();
+        try {
+            new MainGame().start(new Stage());
+        }catch (Exception e){
+            throw new RuntimeException(e);
+        }
+    }
     private void forceExit() {
         ((Stage) Chessboard.getScene().getWindow()).close();
+        try {
+            new Main().start(new Stage());
+        }catch (Exception e){
+            throw new RuntimeException(e);
+        }
     }
 
     public void retractOnClick(ActionEvent event) {
@@ -330,8 +345,8 @@ public class GameArea {
             //TODO 有时间优化
             boolean needRefresh = true;
             switch (clickResult) {
-                case Player1Win -> graphicHandler.gameOver(1);
-                case Player2Win -> graphicHandler.gameOver(2);
+                case Player1Win -> graphicHandler.gameOver(game.getPlayer1());
+                case Player2Win -> graphicHandler.gameOver(game.getPlayer2());
 
                 case Finished -> {
                     if (game instanceof aiMode) {
@@ -490,8 +505,8 @@ public class GameArea {
             return sb.toString();
         }
 
-        public void gameOver(int playerNumber) {
-            textHandler.getWinner(playerNumber);
+        public void gameOver(Player winner) {
+            textHandler.getWinner(winner);
             forceExit();
         }
 
@@ -690,36 +705,28 @@ public class GameArea {
     }
 
     class TextHandler {
-        Locale locale = Locale.getDefault();//后面可以改
+        Locale locale = Locale.getDefault();//TODO 语言接口
         ResourceBundle t = ResourceBundle.getBundle("Language/GameAreaLanguage", locale);
 
-        public void getWinner(int playerNum) {
-            //生成赢家信息
-            StringBuilder contentText = new StringBuilder();
-            contentText.append(t.getString("GameState.gameOver.contentText.1"));
-            if (playerNum == 1) {
-                contentText.append(t.getString("GameState.gameOver.contentText.1.1"));
-            } else if (playerNum == 2) {
-                contentText.append(t.getString("GameState.gameOver.contentText.1.2"));
+        public void getWinner(Player winner) {
+            Stage s2 = new Stage();
+            s2.initOwner(pausePane.getScene().getWindow());
+            s2.initModality(Modality.WINDOW_MODAL);
+            FinishedController.show(s2);
+            if(game instanceof aiMode){
+                if(winner.equals(game.getHumanPlayer())){
+                    Transmitter.setWinUser(true);
+                }else {
+                    Transmitter.setWinUser(false);
+                }
+            }else {
+                if(winner.equals(game.getPlayer1())){
+                    Transmitter.setWinUser("player1");
+                }else {//player2
+                    Transmitter.setWinUser("player2");
+                }
             }
-            contentText.append(t.getString("GameState.gameOver.contentText.2"));
-
-            //生成弹窗
-            showAlert(Alert.AlertType.INFORMATION,
-                    t.getString("GameState.gameOver.title"),
-                    t.getString("GameState.gameOver.headerText"),
-                    contentText.toString()
-
-            );
         }
-
-        private void showAlert(Alert.AlertType alertType, String title, String headerText, String contentText) {
-            Alert alert = new Alert(alertType);
-            alert.setTitle(title);
-            alert.setContentText(contentText);
-            alert.setHeaderText(headerText);
-            alert.showAndWait();
-        }//晚点再美化这个界面
 
         public void refreshScore() {
             player1Score.setText(Integer.toString(game.getPlayer1().getScore()));

@@ -310,7 +310,7 @@ public class Game implements java.io.Serializable,Cloneable{
         }
         return s.toString();
     }
-    
+
     public Period getNowPlayerHavePlayed() {
         return nowPlayerHavePlayed;
     }

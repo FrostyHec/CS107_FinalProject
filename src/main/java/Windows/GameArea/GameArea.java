@@ -6,14 +6,12 @@ import Windows.GameArea.Extract.Music.MusicPlayer;
 import Windows.GameArea.Extract.Music.Music.RandomPlayer;
 import Windows.GameArea.Extract.Music.SoundEffect.ClickEffect;
 import Windows.GameArea.Extract.Pursuance;
-import Windows.SetUp.MainSetUp;
 import Windows.StartMenu.Main;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -213,7 +211,25 @@ public class GameArea {
         game = new aiMode(difficulty, isHumanFirst);
         graphicHandler.refreshIcon();//重新刷新用户图标
     }
-
+    public void winnerExists(Player winner) {
+        Stage s2 = new Stage();
+        s2.initOwner(pausePane.getScene().getWindow());
+        s2.initModality(Modality.WINDOW_MODAL);
+        FinishedController.show(s2);
+        if(game instanceof aiMode){
+            if(winner.equals(game.getHumanPlayer())){
+                Transmitter.setWinUser(true);
+            }else {
+                Transmitter.setWinUser(false);
+            }
+        }else {
+            if(winner.equals(game.getPlayer1())){
+                Transmitter.setWinUser("player1");
+            }else {//player2
+                Transmitter.setWinUser("player2");
+            }
+        }
+    }
     class CheatModel {
         static private boolean isStart = false;
         private int column;
@@ -345,8 +361,8 @@ public class GameArea {
             //TODO 有时间优化
             boolean needRefresh = true;
             switch (clickResult) {
-                case Player1Win -> graphicHandler.gameOver(game.getPlayer1());
-                case Player2Win -> graphicHandler.gameOver(game.getPlayer2());
+                case Player1Win -> winnerExists(game.getPlayer1());
+                case Player2Win -> winnerExists(game.getPlayer2());
 
                 case Finished -> {
                     if (game instanceof aiMode) {
@@ -431,6 +447,7 @@ public class GameArea {
         }
     }
 
+
     @SuppressWarnings("RedundantLabeledSwitchRuleCodeBlock")
     protected class GraphicHandler {
         public int getGraphicX(int column, int size) {
@@ -505,11 +522,6 @@ public class GameArea {
             return sb.toString();
         }
 
-        public void gameOver(Player winner) {
-            textHandler.getWinner(winner);
-            forceExit();
-        }
-
         public void refresh() {
             refreshColor();
             refreshChessboard();
@@ -539,7 +551,6 @@ public class GameArea {
 
         public void refreshIcon() {//TODO 有待扩展
             if (game instanceof aiMode) {//AI模式
-                System.out.println("win");
                 if (isHumanFirst) {//人类先手
                     try {//玩家图片
                         player1Icon.setImage(new Image(new FileInputStream(userManager.nowPlay().getAvatarUrl())));
@@ -708,25 +719,7 @@ public class GameArea {
         Locale locale = Locale.getDefault();//TODO 语言接口
         ResourceBundle t = ResourceBundle.getBundle("Language/GameAreaLanguage", locale);
 
-        public void getWinner(Player winner) {
-            Stage s2 = new Stage();
-            s2.initOwner(pausePane.getScene().getWindow());
-            s2.initModality(Modality.WINDOW_MODAL);
-            FinishedController.show(s2);
-            if(game instanceof aiMode){
-                if(winner.equals(game.getHumanPlayer())){
-                    Transmitter.setWinUser(true);
-                }else {
-                    Transmitter.setWinUser(false);
-                }
-            }else {
-                if(winner.equals(game.getPlayer1())){
-                    Transmitter.setWinUser("player1");
-                }else {//player2
-                    Transmitter.setWinUser("player2");
-                }
-            }
-        }
+
 
         public void refreshScore() {
             player1Score.setText(Integer.toString(game.getPlayer1().getScore()));

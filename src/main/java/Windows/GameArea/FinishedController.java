@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.time.Duration;
 import java.time.LocalTime;
 import java.time.Period;
 import java.util.Locale;
@@ -99,11 +100,8 @@ public class FinishedController {
         lbScoreDif.setText(t.getString("GameOver.scoreDifference") + ": " + dif);
 
         //用时
-        LocalTime p = gameArea.game.getTotalTime();
-        if (p == null) {
-            return;
-        }
-        lbUsedTime.setText(t.getString("GameOver.usedTime") + p.getMinute() + t.getString("GameOver.minutes"));
+        Duration p = gameArea.game.getTotalTime();
+        lbUsedTime.setText(t.getString("GameOver.usedTime") + p.toMinutes() + t.getString("GameOver.minutes"));
 
     }
 

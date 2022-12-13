@@ -27,7 +27,9 @@ import units.Serialize;
 
 import java.io.FileInputStream;
 import java.nio.file.*;
+import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.*;
 
 public class GameArea {
@@ -77,7 +79,8 @@ public class GameArea {
 
     private String initialSaveName;
 
-    public SoundsHandler soundsHandler = new SoundsHandler();
+    protected TimeHandler timeHandler;
+    protected SoundsHandler soundsHandler = new SoundsHandler();
 
     public GameArea() throws Exception {
         game = new Game();
@@ -109,6 +112,7 @@ public class GameArea {
         ChessMove.resetCount();
         textHandler.initialize();
         gameStateHandler.initialize();
+        timeHandler.totalInvoke()
     }
 
     protected void setTransmitter() {
@@ -177,22 +181,19 @@ public class GameArea {
         forceExit();
     }
 
-    public void mainExit(){
+    public void mainExit() {
         forceExit();
     }
-    public void reGameExit(){
-        ((Stage) Chessboard.getScene().getWindow()).close();
-        try {
-            new MainGame().start(new Stage());
-        }catch (Exception e){
-            throw new RuntimeException(e);
-        }
+
+    public void reGameExit() {
+        initialize();
     }
+
     private void forceExit() {
         ((Stage) Chessboard.getScene().getWindow()).close();
         try {
             new Main().start(new Stage());
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
@@ -210,26 +211,27 @@ public class GameArea {
         this.isHumanFirst = isHumanFirst;
         game = new aiMode(difficulty, isHumanFirst);
         graphicHandler.refreshIcon();//重新刷新用户图标
+        if (!isHumanFirst) {
+            new ChessMove().aiMove();
+        }
     }
+
     public void winnerExists(Player winner) {
         Stage s2 = new Stage();
         s2.initOwner(pausePane.getScene().getWindow());
         s2.initModality(Modality.WINDOW_MODAL);
-        FinishedController.show(s2);
-        if(game instanceof aiMode){
-            if(winner.equals(game.getHumanPlayer())){
-                Transmitter.setWinUser(true);
-            }else {
-                Transmitter.setWinUser(false);
-            }
-        }else {
-            if(winner.equals(game.getPlayer1())){
+        new FinishedController().show(s2);
+        if (game instanceof aiMode) {
+            Transmitter.setWinUser(winner.equals(game.getHumanPlayer()));//true or false
+        } else {
+            if (winner.equals(game.getPlayer1())) {
                 Transmitter.setWinUser("player1");
-            }else {//player2
+            } else {//player2
                 Transmitter.setWinUser("player2");
             }
         }
     }
+
     class CheatModel {
         static private boolean isStart = false;
         private int column;
@@ -316,7 +318,8 @@ public class GameArea {
                     System.out.println("AI思考中");
                     Thread.sleep(300);//TODO 一个合适的睡眠时间
                     System.out.println("暂思考完毕");
-                    game.aiMove();
+                    int res = game.aiMove();
+                    Platform.runLater(() -> new ChessMove().analyzeAIResult(ClickResult.getClickResult(res)));//判断ai是不是赢了
                     Platform.runLater(GameArea.this::chessChanged);
                     bthRetract.setDisable(false);
                     Chessboard.setDisable(false);
@@ -324,6 +327,20 @@ public class GameArea {
                     e.printStackTrace();
                 }
             }).start();
+
+        }
+
+        private void analyzeAIResult(ClickResult clickResult) {
+            switch (clickResult) {
+                case Player1Win -> winnerExists(game.getPlayer1());
+                case Player2Win -> winnerExists(game.getPlayer2());
+                case Finished -> {
+
+                }
+                default -> {
+                    throw new RuntimeException("Illegal AI move result");
+                }
+            }
         }
 
         private void showSelectedChess(int row, int column) {
@@ -720,7 +737,6 @@ public class GameArea {
         ResourceBundle t = ResourceBundle.getBundle("Language/GameAreaLanguage", locale);
 
 
-
         public void refreshScore() {
             player1Score.setText(Integer.toString(game.getPlayer1().getScore()));
             player2Score.setText(Integer.toString(game.getPlayer2().getScore()));
@@ -782,6 +798,19 @@ public class GameArea {
 
         public void clickEffect(Pursuance pursuance) {
             new ClickEffect(pursuance, "Effect/Click").run();
+        }
+    }
+
+    class TimeHandler {
+        private LocalTime tempStartTime;
+
+        public void totalInvoke() {
+            tempStartTime = LocalTime.now();
+        }
+
+        public void totalFinished() {
+            Duration duration = Duration.between(tempStartTime, LocalTime.now());
+
         }
     }
 

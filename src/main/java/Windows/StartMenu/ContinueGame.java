@@ -84,10 +84,10 @@ public class ContinueGame {
 
         for (String key : saveList.getSaveList().keySet()) {
             ShowingSave sv=new ShowingSave(saveList.getSaveList().get(key), key);
-            if(sv.getSaveKind().equals("人机")){
-                System.out.println("屏蔽了");
-                continue;
-            }//TODO 因为有bug，所以把AI的存档全都屏蔽掉了
+//            if(sv.getSaveKind().equals("人机")){
+//                System.out.println("屏蔽了");
+//                continue;
+//            }//TODO 因为有bug，所以把AI的存档全都屏蔽掉了
 
             data.add(sv);
         }

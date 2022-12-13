@@ -31,23 +31,24 @@ public class FinishedController {
     public Label lbUsedTime;
     Locale locale = Locale.getDefault();//TODO 语言接口
     private GameArea gameArea;
-    private static boolean rawClose = true;//?
+    private boolean rawClose = true;
     ResourceBundle t = ResourceBundle.getBundle("Language/GameAreaLanguage", locale);
 
-    public static void show(Stage stage) {
+    public void show(Stage stage) {
         FXMLLoader fxmlLoader = new FXMLLoader(GameArea.class.getResource("FinishedWindow.fxml"));
         try {
             stage.setScene(new Scene(fxmlLoader.load()));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        stage.setTitle(t.getString("GameOver"));
         stage.show();
         stage.setOnCloseRequest(event -> {
             if (!rawClose) {
                 return;
             }
             try {
-                new Main().start(new Stage());
+                Windows.Transmitter.getGameArea().mainExit();
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }

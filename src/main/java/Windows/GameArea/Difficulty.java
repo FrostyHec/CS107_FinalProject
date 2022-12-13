@@ -25,4 +25,12 @@ public enum Difficulty {
         }
         throw new Exception("Difficulty not found");
     }
+    public static Difficulty getDifficulty(int difficulty){
+        for (Difficulty d : Difficulty.values()) {
+            if (d.value==difficulty) {
+                return d;
+            }
+        }
+        throw new RuntimeException("Difficulty not found");
+    }
 }

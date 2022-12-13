@@ -1,6 +1,7 @@
 package Windows.GameArea;
 
 import GameLogic.*;
+import UserFiles.User;
 import UserFiles.UserManager;
 import Windows.GameArea.Extract.Music.MusicPlayer;
 import Windows.GameArea.Extract.Music.Music.RandomPlayer;
@@ -79,8 +80,11 @@ public class GameArea {
 
     private String initialSaveName;
 
-    protected TimeHandler timeHandler;
+    protected TimeHandler timeHandler=new TimeHandler();
     protected SoundsHandler soundsHandler = new SoundsHandler();
+    protected RankHandler rankHandler=new RankHandler();
+    private int difficulty;
+    private boolean isHumanWin;
 
     public GameArea() throws Exception {
         game = new Game();
@@ -112,7 +116,7 @@ public class GameArea {
         ChessMove.resetCount();
         textHandler.initialize();
         gameStateHandler.initialize();
-        timeHandler.totalInvoke()
+        timeHandler.totalInvoke();
     }
 
     protected void setTransmitter() {
@@ -131,7 +135,6 @@ public class GameArea {
             return;
         }
         new ChessMove().invoke(event);
-
     }
 
     protected void chessChanged() {
@@ -173,8 +176,8 @@ public class GameArea {
             String userSavePath = getSavePath();
             Files.deleteIfExists(Path.of(userSavePath));
             Serialize.save(game, userSavePath);
-            soundsHandler.gameEnd();
-
+            timeHandler.totalEnd();
+            userManager.save();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -182,6 +185,13 @@ public class GameArea {
     }
 
     public void mainExit() {
+        //TODO 删除存档
+        if(game instanceof aiMode){
+         User u=userManager.nowPlay();
+         u.getScoreList().addScore(Difficulty.getDifficulty(difficulty),isHumanWin);
+         u.getTimeList().addSec(game.getTotalTime().toSeconds());
+         userManager.save();
+        }
         forceExit();
     }
 
@@ -190,6 +200,7 @@ public class GameArea {
     }
 
     private void forceExit() {
+        soundsHandler.gameEnd();
         ((Stage) Chessboard.getScene().getWindow()).close();
         try {
             new Main().start(new Stage());
@@ -209,6 +220,7 @@ public class GameArea {
 
     public void setPvE(int difficulty, boolean isHumanFirst) {
         this.isHumanFirst = isHumanFirst;
+        this.difficulty =difficulty;
         game = new aiMode(difficulty, isHumanFirst);
         graphicHandler.refreshIcon();//重新刷新用户图标
         if (!isHumanFirst) {
@@ -220,11 +232,14 @@ public class GameArea {
         Stage s2 = new Stage();
         s2.initOwner(pausePane.getScene().getWindow());
         s2.initModality(Modality.WINDOW_MODAL);
+        timeHandler.totalEnd();
         new FinishedController().show(s2);
         if (game instanceof aiMode) {
-            Transmitter.setWinUser(winner.equals(game.getHumanPlayer()));//true or false
+            isHumanWin = winner.equals(game.getHumanPlayer());
+            Transmitter.setWinUser(isHumanWin);//true or false
         } else {
             if (winner.equals(game.getPlayer1())) {
+
                 Transmitter.setWinUser("player1");
             } else {//player2
                 Transmitter.setWinUser("player2");
@@ -808,10 +823,20 @@ public class GameArea {
             tempStartTime = LocalTime.now();
         }
 
-        public void totalFinished() {
+        public void totalEnd() {
             Duration duration = Duration.between(tempStartTime, LocalTime.now());
-
+            Duration have = game.getTotalTime();
+            if (have != null) {
+                game.setTotalTime(have.plus(duration));//?
+            } else {
+                game.setTotalTime(duration);
+            }
         }
+
+    }
+
+    class RankHandler{
+
     }
 
 }

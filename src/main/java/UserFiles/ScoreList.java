@@ -20,6 +20,7 @@ public class ScoreList implements Serializable {
     }
 
     public void addScore(Difficulty d, boolean isWin) {
+        addAPlayTime();
         AIScore s = score.get(d);
         s.addAPlayTimes();
         if (isWin) {
@@ -33,7 +34,7 @@ public class ScoreList implements Serializable {
         return score;
     }
 
-    public void addAPlayTime() {
+    private void addAPlayTime() {
         playTimes++;
     }
 

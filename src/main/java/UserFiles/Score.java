@@ -27,7 +27,7 @@ public abstract class Score implements Serializable {
     }
 
     public double getWinRates() {
-        return (double) playTimes / winTimes;
+        return (double)  winTimes/playTimes;
     }
 
     private void addANContinueWin() {

@@ -25,7 +25,7 @@ public class TimeList implements Serializable {
         playSec = 0;
     }
 
-    public void addSec(int sec) {
+    public void addSec(long sec) {
         playSec += sec;
     }
 

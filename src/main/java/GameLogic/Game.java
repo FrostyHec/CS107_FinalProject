@@ -1,6 +1,8 @@
 package GameLogic;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.Period;
 import java.util.*;
 
@@ -8,8 +10,8 @@ public class Game implements java.io.Serializable,Cloneable{
 
     private final LocalDateTime startTime = LocalDateTime.now();
     private  LocalDateTime latestTime;
-    private Period totalTime;
-    private Period nowPlayerHavePlayed;
+    private LocalTime totalTime;
+    private LocalTime nowPlayerHavePlayed;
     Player p1, p2;
 
     public Game() {
@@ -311,19 +313,19 @@ public class Game implements java.io.Serializable,Cloneable{
         return s.toString();
     }
 
-    public Period getNowPlayerHavePlayed() {
-        return nowPlayerHavePlayed;
-    }
-
-    public void setNowPlayerHavePlayed(Period nowPlayerHavePlayed) {
-        this.nowPlayerHavePlayed = nowPlayerHavePlayed;
-    }
-
-    public Period getTotalTime() {
+    public LocalTime getTotalTime() {
         return totalTime;
     }
 
-    public void setTotalTime(Period totalTime) {
+    public void setTotalTime(LocalTime totalTime) {
         this.totalTime = totalTime;
+    }
+
+    public LocalTime getNowPlayerHavePlayed() {
+        return nowPlayerHavePlayed;
+    }
+
+    public void setNowPlayerHavePlayed(LocalTime nowPlayerHavePlayed) {
+        this.nowPlayerHavePlayed = nowPlayerHavePlayed;
     }
 }

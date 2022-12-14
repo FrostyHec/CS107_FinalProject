@@ -62,6 +62,92 @@ public class generalUsed {//这个类是一些静态方法的集合，因为基�
         return canClick;
     }
 
+    
+    public static ArrayList<int[][]> enhancedCanClick(Color color,Chess[][] chess){//舍弃一些非常无聊的子,用于枚举时进行优化
+        ArrayList<int[][]> eCanClick = canClick(color,chess);
+
+        it:for(int[][] move : eCanClick){
+            if(move.length == 1){
+                for(int[]xy : surround(move[0])){//不要翻大棋周围的棋
+                    if(chess[xy[0]][xy[1]] != null && chess[xy[0]][xy[1]].isTurnOver() && chess[xy[0]][xy[1]].getRank()>4){
+                        eCanClick.remove(move);
+                        continue it;
+                    }
+                }
+                for(int[]xy : pow(move[0])){
+                    if(chess[xy[0]][xy[1]] != null && chess[xy[0]][xy[1]].isTurnOver()
+                            && (chess[xy[0]][xy[1]].getRank()>5 || chess[xy[0]][xy[1]].getRank() == 2)){
+                        eCanClick.remove(move);
+                        continue it;
+                    }
+                }
+            } else if (move.length == 2) {
+                //TODO
+            }
+        }
+
+        return eCanClick;
+    }
+
+
+    public static ArrayList<int[]> pow(int[] xy){//返回炮位
+        ArrayList<int[]> ans = new ArrayList<>();
+        /* TODO: */
+        return ans;
+    }
+
+
+    public static ArrayList<int[]> surround(int[] xy){//返回棋盘上曼哈顿距离为1的点
+        ArrayList<int[]> ans = new ArrayList<>();
+
+        if(xy[0] > 0){
+            int[] temp1 = new int[2];
+            if(xy[1] > 0){
+                int[] temp2 = new int[2];
+                temp1[0] = xy[0] - 1; temp1[1] = xy[1];
+                temp2[0] = xy[0]; temp2[1] = xy[1] - 1;
+                ans.add(temp1);
+                ans.add(temp2);
+            }else{
+                temp1[0] = xy[0] - 1; temp1[1] = xy[1];
+                ans.add(temp1);
+            }
+        }else {
+            if (xy[1] > 0) {
+                int[] temp2 = new int[2];
+                temp2[0] = xy[0];
+                temp2[1] = xy[1] - 1;
+                ans.add(temp2);
+            }
+        }
+
+        if (xy[0] < 8) {
+            int[] temp1 = new int[2];
+            if (xy[1] < 4) {
+                int[] temp2 = new int[2];
+                temp1[0] = xy[0] + 1;
+                temp1[1] = xy[1];
+                temp2[0] = xy[0];
+                temp2[1] = xy[1] + 1;
+                ans.add(temp1);
+                ans.add(temp2);
+            } else {
+                temp1[0] = xy[0] + 1;
+                temp1[1] = xy[1];
+                ans.add(temp1);
+            }
+        } else {
+            if (xy[1] < 4) {
+                int[] temp2 = new int[2];
+                temp2[0] = xy[0];
+                temp2[1] = xy[1] + 1;
+                ans.add(temp2);
+            }
+        }
+
+        return ans;
+    }
+
     public static boolean mayBeEat(Chess[][] chess,int X,int Y){//在XY处是否可能被吃，注意场上棋子的变化
         int i = 0;
         if(!chess[X][Y].isTurnOver()){

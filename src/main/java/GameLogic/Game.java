@@ -9,6 +9,12 @@ public class Game implements java.io.Serializable,Cloneable{
     private  LocalDateTime latestTime;
     private Duration totalTime;
     private int nowPlayerHavePlayedSec;
+
+    private void init_(){
+        totalTime = null;
+        nowPlayerHavePlayedSec = 0;
+    }
+
     Player p1, p2;
 
     public Game() {
@@ -190,6 +196,9 @@ public class Game implements java.io.Serializable,Cloneable{
             }
         }
 
+        //其它的初始化
+        init_();
+
         //初始化player
         p1.setColor(Color.UNKNOWN);
         p2.setColor(Color.UNKNOWN);
@@ -197,7 +206,7 @@ public class Game implements java.io.Serializable,Cloneable{
         p2.initScore();
         isFirst = true;
 
-//        p1开始行动
+        //p1开始行动
         p1.changeStatus();
     }
 

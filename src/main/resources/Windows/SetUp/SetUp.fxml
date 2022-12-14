@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
@@ -7,18 +8,71 @@
 <?import javafx.scene.layout.*?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="460.0" prefWidth="370.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Windows.SetUp.SettingController">
-   <children>
-      <MenuBar nodeOrientation="LEFT_TO_RIGHT" prefHeight="38.0" prefWidth="370.0">
-        <menus>
-          <Menu mnemonicParsing="false" onAction="#startMenu" text="  开始  " />
-          <Menu mnemonicParsing="false" onAction="#gameSetting" text="  游戏  " />
-          <Menu mnemonicParsing="false" onAction="#soundSetting" text="  音效  " />
-            <Menu mnemonicParsing="false" onAction="#viewSetting" text="  画面  " />
-        </menus>
-      </MenuBar>
-      <AnchorPane fx:id="paneStart" layoutY="38.0" prefHeight="423.0" prefWidth="370.0" />
-      <AnchorPane fx:id="paneGame" layoutY="38.0" prefHeight="423.0" prefWidth="370.0" />
-      <AnchorPane fx:id="paneSound" layoutY="38.0" prefHeight="423.0" prefWidth="370.0" />
-      <AnchorPane fx:id="paneView" layoutY="38.0" prefHeight="423.0" prefWidth="370.0" />
-   </children>
+    <children>
+      <HBox prefHeight="38.0" prefWidth="380.0">
+         <children>
+            <Button fx:id="btnStart" mnemonicParsing="false" prefHeight="38.0" prefWidth="95.0" text="开始" />
+            <Button fx:id="btnGame" mnemonicParsing="false" prefHeight="38.0" prefWidth="95.0" text="游戏" />
+            <Button fx:id="btnSound" mnemonicParsing="false" prefHeight="38.0" prefWidth="95.0" text="音效" />
+            <Button fx:id="btnView" mnemonicParsing="false" prefHeight="38.0" prefWidth="95.0" text="画面" />
+         </children>
+      </HBox>
+        <AnchorPane fx:id="paneStart" layoutY="38.0" prefHeight="370.0" prefWidth="370.0" visible="false">
+         <children>
+            <RadioButton fx:id="btnAlwaysPVE" layoutX="14.0" layoutY="26.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="177.0" text="总是人机对战" />
+            <RadioButton fx:id="btnAlwaysPVP" layoutX="14.0" layoutY="61.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="177.0" text="总是本地游戏" />
+            <Button fx:id="btnMakerList" layoutX="14.0" layoutY="129.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="342.0" text="制作名单" />
+            <Button fx:id="btnCleanAllData" layoutX="14.0" layoutY="175.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="342.0" text="清空游戏记录" />
+            <RadioButton fx:id="btnNoAlways" layoutX="14.0" layoutY="94.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="177.0" text="默认选择界面" />
+         </children></AnchorPane>
+        <AnchorPane fx:id="paneGame" layoutY="38.0" prefHeight="370.0" prefWidth="370.0" visible="false">
+         <children>
+            <VBox layoutX="14.0" layoutY="14.0" prefHeight="235.0" prefWidth="342.0" spacing="15.0">
+               <children>
+                  <Label fx:id="lbPVP" alignment="CENTER" prefHeight="24.0" prefWidth="352.0" text="本地对战">
+                     <font>
+                        <Font size="20.0" />
+                     </font></Label>
+                  <RadioButton fx:id="btnPVPCanRetract" mnemonicParsing="false" prefHeight="24.0" prefWidth="118.0" text="允许悔棋" />
+                  <RadioButton fx:id="btnPVPCanCheat" mnemonicParsing="false" prefHeight="24.0" prefWidth="118.0" text="允许作弊" />
+                  <Label fx:id="lbPVE" alignment="CENTER" prefHeight="24.0" prefWidth="352.0" text="人机对战">
+                     <font>
+                        <Font size="20.0" />
+                     </font></Label>
+                  <RadioButton fx:id="btnPVECanRetract" mnemonicParsing="false" prefHeight="24.0" prefWidth="118.0" text="允许悔棋" />
+                  <RadioButton fx:id="btnPVECanCheat" mnemonicParsing="false" prefHeight="24.0" prefWidth="118.0" text="允许作弊" />
+               </children>
+            </VBox>
+            <Button fx:id="btnNewUser" layoutX="14.0" layoutY="249.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="342.0" text="新手教程" />
+         </children></AnchorPane>
+        <AnchorPane fx:id="paneView" layoutY="38.0" prefHeight="370.0" prefWidth="370.0">
+         <children>
+            <VBox layoutX="26.0" layoutY="28.0" prefHeight="200.0" prefWidth="302.0" spacing="15.0">
+               <children>
+                  <Label fx:id="lbVisualEffect" alignment="CENTER" prefHeight="24.0" prefWidth="310.0" text="视觉效果">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <RadioButton fx:id="btnStartVisualEffect" mnemonicParsing="false" prefHeight="24.0" prefWidth="159.0" text="开启游戏特效" />
+                  <AnchorPane prefHeight="36.0" prefWidth="302.0">
+                     <children>
+                        <ChoiceBox fx:id="cbStyleSheet" layoutX="128.0" layoutY="1.0" prefHeight="36.0" prefWidth="166.0" />
+                        <Label fx:id="lbStyleSheet" alignment="CENTER" prefHeight="38.0" prefWidth="118.0" text="画面风格" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="36.0" prefWidth="302.0">
+                     <children>
+                        <ChoiceBox fx:id="cbLanguage" layoutX="128.0" layoutY="1.0" prefHeight="36.0" prefWidth="166.0" />
+                        <Label fx:id="lbLanguageChange" alignment="CENTER" prefHeight="38.0" prefWidth="118.0" text="语言切换" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </VBox>
+         </children></AnchorPane>
+        <AnchorPane fx:id="paneSound" layoutY="38.0" prefHeight="370.0" prefWidth="370.0" visible="false" />
+        <Button fx:id="btnToDefault" layoutX="231.0" layoutY="408.0" mnemonicParsing="false" onAction="#toDefault" prefHeight="36.0" prefWidth="100.0" text="恢复默认" />
+        <Button fx:id="btnCancel" layoutX="136.0" layoutY="408.0" mnemonicParsing="false" onAction="#cancel" prefHeight="36.0" prefWidth="84.0" text="取消" />
+        <Button fx:id="btnCommit" layoutX="40.0" layoutY="408.0" mnemonicParsing="false" onAction="#commit" prefHeight="36.0" prefWidth="84.0" text="确定" />
+    </children>
 </Pane>

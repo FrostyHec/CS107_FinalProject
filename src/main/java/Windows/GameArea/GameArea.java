@@ -7,6 +7,7 @@ import Windows.GameArea.Extract.Music.MusicPlayer;
 import Windows.GameArea.Extract.Music.Music.RandomPlayer;
 import Windows.GameArea.Extract.Music.SoundEffect.ClickEffect;
 import Windows.GameArea.Extract.Pursuance;
+import Windows.SetUp.Settings;
 import Windows.StartMenu.Main;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -80,11 +81,11 @@ public class GameArea {
 
     private String initialSaveName;
 
-    protected TimeHandler timeHandler=new TimeHandler();
+    protected TimeHandler timeHandler = new TimeHandler();
     protected SoundsHandler soundsHandler = new SoundsHandler();
-    protected RankHandler rankHandler=new RankHandler();
     private int difficulty;
     private boolean isHumanWin;
+    private Settings settings = Settings.read(Settings.url);
 
     public GameArea() throws Exception {
         game = new Game();
@@ -128,6 +129,7 @@ public class GameArea {
         chessChanged();
         game.bd();//补丁
         graphicHandler.refreshIcon();//刷新用户图标
+        textHandler.refreshName();//刷新名字
     }
 
     public void chessMove(MouseEvent event) {
@@ -185,17 +187,26 @@ public class GameArea {
     }
 
     public void mainExit() {
-        //TODO 删除存档
-        if(game instanceof aiMode){
-         User u=userManager.nowPlay();
-         u.getScoreList().addScore(Difficulty.getDifficulty(difficulty),isHumanWin);
-         u.getTimeList().addSec(game.getTotalTime().toSeconds());
-         userManager.save();
+        try {
+            Files.deleteIfExists(Path.of(getSavePath()));
+        } catch (Exception e) {
+
         }
+        setScore();
         forceExit();
     }
 
+    private void setScore() {
+        if (game instanceof aiMode) {
+            User u = userManager.nowPlay();
+            u.getScoreList().addScore(Difficulty.getDifficulty(difficulty), isHumanWin);
+            u.getTimeList().addSec(game.getTotalTime().toSeconds());
+            userManager.save();
+        }
+    }
+
     public void reGameExit() {
+        setScore();
         initialize();
     }
 
@@ -220,9 +231,10 @@ public class GameArea {
 
     public void setPvE(int difficulty, boolean isHumanFirst) {
         this.isHumanFirst = isHumanFirst;
-        this.difficulty =difficulty;
+        this.difficulty = difficulty;
         game = new aiMode(difficulty, isHumanFirst);
         graphicHandler.refreshIcon();//重新刷新用户图标
+        textHandler.refreshName();//刷新名字
         if (!isHumanFirst) {
             new ChessMove().aiMove();
         }
@@ -600,16 +612,16 @@ public class GameArea {
                     }
                 } else {//ai先手
                     try {//玩家图片
-                        player1Icon.setImage(new Image(new FileInputStream(userManager.nowPlay().getAvatarUrl())));
+                        player2Icon.setImage(new Image(new FileInputStream(userManager.nowPlay().getAvatarUrl())));
                     } catch (Exception e) {
                         try {
-                            player1Icon.setImage(new Image(new FileInputStream(defaultAvatar)));
+                            player2Icon.setImage(new Image(new FileInputStream(defaultAvatar)));
                         } catch (Exception n) {
                             System.out.println("图片加载失败！");
                         }
                     }
                     try {//电脑图片
-                        player2Icon.setImage(new Image(new FileInputStream(defaultComputerAvatar)));
+                        player1Icon.setImage(new Image(new FileInputStream(defaultComputerAvatar)));
                     } catch (Exception e) {
                         System.out.println("图片加载失败！");
                     }
@@ -748,7 +760,7 @@ public class GameArea {
     }
 
     class TextHandler {
-        Locale locale = Locale.getDefault();//TODO 语言接口
+        Locale locale = settings.visualSettings.getLanguage();
         ResourceBundle t = ResourceBundle.getBundle("Language/GameAreaLanguage", locale);
 
 
@@ -764,6 +776,17 @@ public class GameArea {
         }
 
         private void refreshName() {
+            if (game instanceof aiMode) {
+                if (game.getPlayer1().equals(game.getHumanPlayer())) {//人类先手
+                    firstHand.setText(userManager.nowPlay().getName());
+                    secondHand.setText(t.getString("Player.Computer") + t.getString("Player"));
+
+                } else {
+                    secondHand.setText(userManager.nowPlay().getName());
+                    firstHand.setText(t.getString("Player.Computer"));
+                }
+                return;
+            }
             firstHand.setText(t.getString("Player1"));
             secondHand.setText(t.getString("Player2"));
         }
@@ -832,10 +855,6 @@ public class GameArea {
                 game.setTotalTime(duration);
             }
         }
-
-    }
-
-    class RankHandler{
 
     }
 

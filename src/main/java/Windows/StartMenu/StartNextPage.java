@@ -1,6 +1,7 @@
 package Windows.StartMenu;
 
 import Windows.GameArea.MainGame;
+import Windows.SetUp.Settings;
 import Windows.Transmitter;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
@@ -17,7 +18,28 @@ import java.io.IOException;
 
 public class StartNextPage {
     public AnchorPane pane;
+    private Settings settings = Settings.read(Settings.url);
 
+    @FXML
+    public void initialize() {
+        Transmitter.startNextPage = this;
+    }
+
+    public void jump() {
+        if (settings.StartSettings.isAlwaysPvP()) {
+            try {
+                localPvP();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        } else if (settings.StartSettings.isAlwaysPvE()) {
+            try {
+                localPvE();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
 
     public void localPvP() throws IOException {
         startGame();
@@ -27,6 +49,7 @@ public class StartNextPage {
         MainGame game = new MainGame();
         game.start(new Stage());
         ((Stage) pane.getScene().getWindow()).close();
+
     }
 
     public void localPvE() throws IOException {

@@ -4,14 +4,12 @@ import GameLogic.Game;
 import UserFiles.User;
 import UserFiles.UserManager;
 import Windows.GameArea.MainGame;
-import Windows.SetUp.NormalSettings;
+import Windows.SetUp.Settings;
 import Windows.Transmitter;
 import Windows.Userfiles.SaveList;
 import Windows.Userfiles.ShowingSave;
-import Windows.Userfiles.ShowingUser;
 import javafx.application.Application;
 import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -214,7 +212,7 @@ public class ContinueGame {
 
     public void automaticSave() {
         //自动加载存档//TODO 测试这一模块
-        if (NormalSettings.read(NormalSettings.url).StartSettings.isAlwaysLatestSave()) {
+        if (Settings.read(Settings.url).StartSettings.isAlwaysLatestSave()) {
             String saveName=null;
             User u = null;
             try {

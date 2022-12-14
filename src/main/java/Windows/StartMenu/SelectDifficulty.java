@@ -22,8 +22,9 @@ public class SelectDifficulty {
     private ToggleGroup tg = new ToggleGroup();
 
     private RadioButton selectedPlayerFirst;
+
     @FXML
-    public void initialize(){
+    public void initialize() {
         //选择难度模式才初始化
         for (Difficulty d : Difficulty.values()) {
             choiceBox.getItems().add(d.toString());
@@ -35,6 +36,7 @@ public class SelectDifficulty {
         selectedPlayerFirst = humanFirst;
         tg.selectedToggleProperty().addListener((observable, oldValue, newValue) -> selectedPlayerFirst = (RadioButton) newValue);
     }
+
     public void startAIGame(ActionEvent event) throws IOException {
         int difficulty;
         try {
@@ -45,9 +47,17 @@ public class SelectDifficulty {
         }
         //TODO 搓出选择难度界面
         startGame();
+        boolean humanFirst;
+        try {
+            humanFirst = isHumanFirst();
+        } catch (Exception e) {
+            showAlert("选择错误", "没有选择先手！", "没有选择先手！请选择先手玩家");
+            return;
+        }
         //Transmitter.setPvEDifficulty(0,false);
-        Transmitter.setPvEDifficulty(difficulty, isHumanFirst());
+        Transmitter.setPvEDifficulty(difficulty, humanFirst);
     }
+
     private void startGame() throws IOException {
         MainGame game = new MainGame();
         game.start(new Stage());
@@ -63,9 +73,9 @@ public class SelectDifficulty {
     }
 
     private boolean isHumanFirst() {
-        if(selectedPlayerFirst.equals(humanFirst)){
+        if (selectedPlayerFirst.equals(humanFirst)) {
             return true;
-        }else if(selectedPlayerFirst.equals(aiFirst)){
+        } else if (selectedPlayerFirst.equals(aiFirst)) {
             return false;
         }
         throw new RuntimeException("Player first missing!");

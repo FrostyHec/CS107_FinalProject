@@ -20,7 +20,6 @@ public class ShowingSave {
 
     public ShowingSave(Game game, String name) {
         if (game instanceof aiMode) {
-            System.out.println("有的");
             saveKind = new SimpleStringProperty("人机");
         }else {
             saveKind=new SimpleStringProperty("双人");

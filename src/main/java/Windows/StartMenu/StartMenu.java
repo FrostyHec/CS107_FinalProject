@@ -3,9 +3,10 @@ package Windows.StartMenu;
 import InternetGaming.Internet.LinkingWindow;
 import UserFiles.UserManager;
 import Windows.GameArea.MainGame;
+import Windows.GameArea.Transmitter;
 import Windows.RankingList.RankingListController;
 import Windows.SetUp.MainSetUp;
-import Windows.SetUp.NormalSettings;
+import Windows.SetUp.Settings;
 import Windows.Userfiles.UserfilesWindow;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -20,8 +21,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -35,11 +36,11 @@ public class StartMenu {
     public Label toolTipper;
     private String defaultAvatar = "src/main/resources/Windows/images/UserImage/tempUser.png";
 
-    private NormalSettings settings;
+    private Settings settings;
 
 
     public StartMenu() {
-        settings = NormalSettings.read(NormalSettings.url);
+        settings = Settings.read(Settings.url);
     }
 
     @FXML
@@ -82,30 +83,15 @@ public class StartMenu {
         }
     }
 
-    private void startGame() throws IOException {
-        MainGame game = new MainGame();
-        game.start(new Stage());
-        ((Stage) paneStartMenu.getScene().getWindow()).close();
-    }
-
     public void startNextPage() throws IOException {
-        if (settings.StartSettings.isAlwaysPvP()) {
-            startGame();
-        }
-        if (settings.StartSettings.isAlwaysPvE()) {
-            //doSomeThing
-        }
-
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("StartNextPage.fxml"));
         ((Stage) paneStartMenu.getScene().getWindow()).setScene(new Scene(fxmlLoader.load()));
-
+        Windows.Transmitter.startNextPage.jump();
     }
 
     public void openSetUp() throws Exception {
-        Stage s2 = new Stage();
-        s2.initOwner(paneStartMenu.getScene().getWindow());
-        s2.initModality(Modality.WINDOW_MODAL);
-        new MainSetUp().start(s2);
+        new MainSetUp().start(new Stage());
+        ((Stage) paneStartMenu.getScene().getWindow()).close();
     }
 
     public void exitGame() {
@@ -113,7 +99,7 @@ public class StartMenu {
     }
 
     public void startLinkingPage() throws IOException {
-        Application.setUserAgentStylesheet(getClass().getResource(settings.StartSettings.getSkin()).toExternalForm());
+        Application.setUserAgentStylesheet(getClass().getResource(settings.visualSettings.getSkin()).toExternalForm());
         FXMLLoader fxmlLoader = new FXMLLoader(LinkingWindow.class.getResource("LinkingWindow.fxml"));
         ((Stage) paneStartMenu.getScene().getWindow()).setScene(new Scene(fxmlLoader.load()));
     }
@@ -134,7 +120,7 @@ public class StartMenu {
     }
 
     private void thisStylesheet() {
-        Application.setUserAgentStylesheet(StartMenu.class.getResource(settings.StartSettings.getSkin()).toExternalForm());
+        Application.setUserAgentStylesheet(StartMenu.class.getResource(settings.visualSettings.getSkin()).toExternalForm());
     }
 
     public void continueGame() {
@@ -170,4 +156,5 @@ public class StartMenu {
         FXMLLoader fxmlLoader = new FXMLLoader(RankingListController.class.getResource("RankingList.fxml"));
         ((Stage) paneStartMenu.getScene().getWindow()).setScene(new Scene(fxmlLoader.load()));
     }
+
 }

@@ -1,8 +1,8 @@
 package UserFiles;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.nio.file.*;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.*;
 
 public class UserManager implements Serializable {
@@ -109,5 +109,34 @@ public class UserManager implements Serializable {
 
     public void switchUser(int uid) {
         setNowPlayUid(uid);
+    }
+
+    public static void deleteAll() {
+        try {
+            Files.walkFileTree(Paths.get("Userfile"),
+                    new SimpleFileVisitor<Path>() {
+                        // 遍历删除文件
+                        @Override
+                        public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+                            Files.delete(file);
+                            System.out.printf("文件被删除 : %s%n", file);
+                            return FileVisitResult.CONTINUE;
+                        }
+
+                        //删除目录
+                        @Override
+                        public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
+                            Files.delete(dir);
+                            System.out.printf("文件夹被删除: %s%n", dir);
+                            return FileVisitResult.CONTINUE;
+                        }
+
+                    }
+            );
+            Files.createFile(Paths.get("Userfile"));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
     }
 }

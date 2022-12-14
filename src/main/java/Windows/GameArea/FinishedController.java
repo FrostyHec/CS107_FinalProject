@@ -3,6 +3,7 @@ package Windows.GameArea;
 import GameLogic.Player;
 import UserFiles.User;
 import UserFiles.UserManager;
+import Windows.SetUp.Settings;
 import Windows.StartMenu.Main;
 import Windows.StartMenu.StartMenu;
 import javafx.event.ActionEvent;
@@ -30,7 +31,8 @@ public class FinishedController {
     public Label lbWinner;
     public Label lbScoreDif;
     public Label lbUsedTime;
-    Locale locale = Locale.getDefault();//TODO 语言接口
+    private Settings settings=Settings.read(Settings.url);
+    Locale locale=settings.visualSettings.getLanguage();
     private GameArea gameArea;
     private boolean rawClose = true;
     ResourceBundle t = ResourceBundle.getBundle("Language/GameAreaLanguage", locale);

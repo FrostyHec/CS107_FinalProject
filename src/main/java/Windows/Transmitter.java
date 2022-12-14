@@ -3,6 +3,7 @@ package Windows;
 
 import GameLogic.Game;
 import Windows.GameArea.GameArea;
+import Windows.StartMenu.StartNextPage;
 import Windows.Userfiles.RenameUserWindow;
 import units.Deserialize;
 
@@ -10,7 +11,7 @@ import java.io.File;
 
 public class Transmitter {
     private static GameArea gameArea;
-
+public static StartNextPage startNextPage;
     private static RenameUserWindow renameUserWindow;
 
     public static void loadGame(Game game) {

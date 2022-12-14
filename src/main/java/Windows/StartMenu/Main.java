@@ -1,7 +1,7 @@
 package Windows.StartMenu;
 
 import UserFiles.UserManager;
-import Windows.SetUp.NormalSettings;
+import Windows.SetUp.Settings;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 
 
 public class Main extends Application {
-    private NormalSettings settings;
+    private Settings settings;
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -24,8 +24,8 @@ public class Main extends Application {
         stage.setTitle("DarkChess");
         stage.setResizable(false);
         //加载fxml
-        settings = NormalSettings.read(NormalSettings.url);
-        Application.setUserAgentStylesheet(getClass().getResource(settings.StartSettings.getSkin()).toExternalForm());
+        settings = Settings.read(Settings.url);
+        Application.setUserAgentStylesheet(getClass().getResource(settings.visualSettings.getSkin()).toExternalForm());
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("StartMenu.fxml"));
         stage.setScene(new Scene(fxmlLoader.load(), 600, 400));
         stage.show();

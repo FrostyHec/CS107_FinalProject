@@ -24,6 +24,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import units.Play;
 import units.Retract;
 import units.Serialize;
 
@@ -47,7 +48,7 @@ public class GameArea {
     public Button btnRemake;
     public Pane diedChessP1;
     public Pane diedChessP2;
-    public Button bthRetract;
+    public Button btnRetract;
 
     //死棋子图像
 
@@ -70,7 +71,7 @@ public class GameArea {
     public ImageView player2Icon;
     public Pane player1Color;
     public Pane player2Color;
-    public Button cheatButton;
+    public Button btnCheat;
     public ImageView cheatImage;
     public Label cheatTitle;
     protected Game game;
@@ -86,6 +87,7 @@ public class GameArea {
     private int difficulty;
     private boolean isHumanWin;
     private Settings settings = Settings.read(Settings.url);
+    private int playSleepTime=1500;
 
     public GameArea() throws Exception {
         game = new Game();
@@ -124,12 +126,30 @@ public class GameArea {
         Windows.Transmitter.setGameArea(this);
     }
 
-    public void loadGame(Game game) {
+    public void loadGame(Game game, boolean isPlay) {
         this.game = game;
+        if(isPlay){
+            Play p = new Play(game);
+            Chessboard.setVisible(false);
+            btnRetract.setDisable(true);
+            btnCheat.setDisable(true);
+            do{
+                chessChanged();
+                try {
+                    Thread.sleep(playSleepTime);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                System.out.println("播放中");
+            }while (p.move());
+            Chessboard.setVisible(true);
+            btnRetract.setDisable(false);
+            btnCheat.setDisable(false);
+        }
         chessChanged();
         game.bd();//补丁
-        graphicHandler.refreshIcon();//刷新用户图标
-        textHandler.refreshName();//刷新名字
+        graphicHandler.initialize();//再次刷新界面
+        textHandler.initialize();//再次刷新图标
     }
 
     public void chessMove(MouseEvent event) {
@@ -233,8 +253,8 @@ public class GameArea {
         this.isHumanFirst = isHumanFirst;
         this.difficulty = difficulty;
         game = new aiMode(difficulty, isHumanFirst);
-        graphicHandler.refreshIcon();//重新刷新用户图标
-        textHandler.refreshName();//刷新名字
+        graphicHandler.initialize();//重新刷新用户图标
+        textHandler.initialize();//刷新名字
         if (!isHumanFirst) {
             new ChessMove().aiMove();
         }
@@ -341,14 +361,14 @@ public class GameArea {
             new Thread(() -> {
                 try {
                     Chessboard.setDisable(true);
-                    bthRetract.setDisable(false);
+                    btnRetract.setDisable(false);
                     System.out.println("AI思考中");
                     Thread.sleep(300);//TODO 一个合适的睡眠时间
                     System.out.println("暂思考完毕");
                     int res = game.aiMove();
                     Platform.runLater(() -> new ChessMove().analyzeAIResult(ClickResult.getClickResult(res)));//判断ai是不是赢了
                     Platform.runLater(GameArea.this::chessChanged);
-                    bthRetract.setDisable(false);
+                    btnRetract.setDisable(false);
                     Chessboard.setDisable(false);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -458,7 +478,6 @@ public class GameArea {
                 fromPause();
             } else {
                 toPause();
-
             }
             textHandler.refreshGameState();
         }
@@ -583,6 +602,11 @@ public class GameArea {
             cleanCheatTable();
             hidePause();
             initializePause();
+            settingsLoad();
+        }
+        public void settingsLoad(){
+            setBtnCheat();
+            setBtnRetract();
         }
 
         private void initializePause() {
@@ -640,19 +664,41 @@ public class GameArea {
         public void initializeCheatTable() {
             cheatTitle.setVisible(true);
             cheatImage.setVisible(true);
-            cheatButton.getStyleClass().clear();
-            cheatButton.getStyleClass().add("button");
-            cheatButton.getStyleClass().add("ButtonOn");
+            btnCheat.getStyleClass().clear();
+            btnCheat.getStyleClass().add("button");
+            btnCheat.getStyleClass().add("ButtonOn");
         }
 
         public void cleanCheatTable() {
-            bthRetract.getStyleClass().add("ButtonOff");
+            btnRetract.getStyleClass().add("ButtonOff");
             cleanCheatImage();
             cheatTitle.setVisible(false);
             cheatImage.setVisible(false);
-            cheatButton.getStyleClass().clear();
-            cheatButton.getStyleClass().add("button");
-            cheatButton.getStyleClass().add("ButtonOff");
+            btnCheat.getStyleClass().clear();
+            btnCheat.getStyleClass().add("button");
+            btnCheat.getStyleClass().add("ButtonOff");
+        }
+        public void setBtnCheat(){
+            if(game instanceof aiMode){
+                if(!settings.gameSettings.isPVECanCheat()){
+                    btnCheat.setVisible(false);
+                }
+            }else {//PVP
+                if(!settings.gameSettings.isPVPCanCheat()){
+                    btnCheat.setVisible(false);
+                }
+            }
+        }
+        public void setBtnRetract(){
+            if(game instanceof aiMode){
+                if(!settings.gameSettings.isPVECanRetract()){
+                    btnRetract.setVisible(false);
+                }
+            }else {//PVP
+                if(!settings.gameSettings.isPVPCanRetract()){
+                    btnRetract.setVisible(false);
+                }
+            }
         }
 
         public void refreshCheatImage(int row, int column) {
@@ -760,9 +806,10 @@ public class GameArea {
     }
 
     class TextHandler {
-        Locale locale = settings.visualSettings.getLanguage();
-        ResourceBundle t = ResourceBundle.getBundle("Language/GameAreaLanguage", locale);
-
+        ResourceBundle t;
+        private void setResource(){
+            t=ResourceBundle.getBundle("Language/GameAreaLanguage", settings.visualSettings.getLanguage());
+        }
 
         public void refreshScore() {
             player1Score.setText(Integer.toString(game.getPlayer1().getScore()));
@@ -770,6 +817,7 @@ public class GameArea {
         }
 
         public void initialize() {
+            setResource();
             refreshName();
             refreshCheatModel();
             refreshScore();
@@ -792,7 +840,7 @@ public class GameArea {
         }
 
         private void refreshCheatModel() {
-            cheatButton.setText(t.getString("CheatModel.button"));
+            btnCheat.setText(t.getString("CheatModel.button"));
             cheatTitle.setText(t.getString("CheatModel.title"));
         }
 

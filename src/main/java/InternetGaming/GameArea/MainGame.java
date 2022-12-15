@@ -3,6 +3,7 @@ package InternetGaming.GameArea;
 
 import Windows.StartMenu.Main;
 import Windows.StartMenu.StartMenu;
+import Windows.Transmitter;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -24,11 +25,10 @@ public class MainGame extends Application {
         stage.setTitle("DarkChess");
         stage.setResizable(false);
         //加载fxml
-        Application.setUserAgentStylesheet(getClass().getResource("default.css").toExternalForm());
-        FXMLLoader fxmlLoader = new FXMLLoader(MainGame.class.getResource("GameArea.fxml"));
+        Application.setUserAgentStylesheet(Windows.GameArea.GameArea.class.getResource("default.css").toExternalForm());
+        FXMLLoader fxmlLoader = new FXMLLoader(Windows.GameArea.GameArea.class.getResource("GameArea.fxml"));
         stage.setScene(new Scene(fxmlLoader.load()));
-        stage.show();
-
+        stage.show();//close request在controller里
         stage.setOnCloseRequest(event -> {
             try {
                 new Main().start(new Stage());

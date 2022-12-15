@@ -39,12 +39,21 @@ public class SettingController {
     private final GameSettings gameSettings = new GameSettings();
     private final VisualSettings visualSettings = new VisualSettings();
     private final SoundsSettings soundsSettings = new SoundsSettings();
-    private final Settings settings = Settings.read(Settings.url);
+    public Label lbPVP;
+    public Label lbPVE;
+    private Settings settings;
     public Button btnSound;
+    public RadioButton btnPVPCanRetract;
+    public RadioButton btnPVPCanCheat;
+    public RadioButton btnPVECanRetract;
+    public RadioButton btnPVECanCheat;
+    public Button btnNewUser;
     ResourceBundle t;
+    private static Settings temporarySettings;
 
     @FXML
     public void initialize() {
+        setSettings();
         textHandler();
         startMenu.initialize();
         visualSettings.initialize();
@@ -53,8 +62,17 @@ public class SettingController {
         startMenu.invoke();
     }
 
+    private void setSettings() {
+        if (temporarySettings == null) {//newOpen
+            settings = Settings.read(Settings.url);
+        } else {//OpenAfterTempClose
+            settings = temporarySettings;
+            temporarySettings = null;
+        }
+    }
+
     private void textHandler() {
-        Locale locale = Locale.getDefault();//TODO 语言接口
+        Locale locale = settings.visualSettings.getLanguage();
         t = ResourceBundle.getBundle("Language/SetUpLanguage", locale);
         btnCommit.setText(t.getString("Commit"));
         btnCancel.setText(t.getString("Cancel"));
@@ -93,12 +111,23 @@ public class SettingController {
     }
 
     public void commit(ActionEvent event) {
-        startMenu.save();
-        visualSettings.save();
+        saveToSettings();
         Settings.save(settings, Settings.url);
         exit();
     }
 
+    private void saveToSettings() {
+        startMenu.save();
+        visualSettings.save();
+        gameSettings.save();
+        soundsSettings.save();
+    }
+
+    public void tempExit() {
+        saveToSettings();
+        temporarySettings = settings;
+        exit();
+    }
 
     interface handler {
         void initialize();
@@ -190,6 +219,7 @@ public class SettingController {
         }
     }
 
+    @SuppressWarnings("CodeBlock2Expr")
     class GameSettings implements handler {
         @Override
         public void invoke() {
@@ -202,11 +232,34 @@ public class SettingController {
 
         @Override
         public void save() {
-
+            settings.gameSettings.setPVECanCheat(btnPVECanCheat.isSelected());
+            settings.gameSettings.setPVECanRetract(btnPVECanRetract.isSelected());
+            settings.gameSettings.setPVPCanCheat(btnPVPCanCheat.isSelected());
+            settings.gameSettings.setPVPCanRetract(btnPVPCanRetract.isSelected());
         }
 
         @Override
         public void initialize() {
+            lbPVE.setText(t.getString("Game.PVE"));
+            lbPVP.setText(t.getString("Game.PVP"));
+            btnPVPCanRetract.setText(t.getString("Game.retract"));
+            btnPVECanRetract.setText(t.getString("Game.retract"));
+            btnPVECanCheat.setText(t.getString("Game.cheat"));
+            btnPVPCanCheat.setText(t.getString("Game.cheat"));
+            btnNewUser.setText(t.getString("Game.newUser"));
+
+            btnPVECanCheat.setSelected(settings.gameSettings.isPVECanCheat());
+            btnPVECanRetract.setSelected(settings.gameSettings.isPVECanRetract());
+            btnPVPCanCheat.setSelected(settings.gameSettings.isPVPCanCheat());
+            btnPVPCanRetract.setSelected(settings.gameSettings.isPVPCanRetract());
+
+            btnNewUser.setOnAction(e -> {
+                welcomeNewUser();
+            });
+
+        }
+
+        private void welcomeNewUser() {//TODO welcomeUser
         }
     }
 
@@ -227,7 +280,7 @@ public class SettingController {
             //保存画面风格
             settings.visualSettings.setSkinName(SkinList.valueOf(cbStyleSheet.getValue()));
             //保存语言
-            settings.visualSettings.setLanguage(Language.valueOf(cbLanguage.getValue()));
+            settings.visualSettings.setLanguage(Language.getLanguage(cbLanguage.getValue()));
         }
 
         @Override
@@ -242,11 +295,9 @@ public class SettingController {
             for (Language l : Language.values()) {
                 cbLanguage.getItems().add(l.getName());
             }
-            cbStyleSheet.setValue(settings.visualSettings.getSkin());
+            cbStyleSheet.setValue(settings.visualSettings.getSkinInList().toString());
             cbLanguage.setValue(Language.getLanguage(settings.visualSettings.getLanguage()).getName());
-            btnStartVisualEffect.setOnAction(e -> {
-                btnStartVisualEffect.setSelected(!btnStartVisualEffect.isSelected());
-            });
+            btnStartVisualEffect.setSelected(btnStartVisualEffect.isSelected());
         }
     }
 

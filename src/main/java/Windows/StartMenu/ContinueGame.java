@@ -36,6 +36,7 @@ public class ContinueGame {
     public TableColumn latestPlayTime;
     public TableColumn saveScore;
     public Button btnDeleteFile;
+    public RadioButton btnPlaySave;
     private String selectedSaveName;
     private SaveList saveList;
 
@@ -48,6 +49,7 @@ public class ContinueGame {
             throw new RuntimeException(e);
         }
     }
+
     @FXML
     public void initialize() {
         automaticSave();
@@ -69,7 +71,7 @@ public class ContinueGame {
         });
     }
 
-    private Path generateSavePath(User nowPlay,String path) {
+    private Path generateSavePath(User nowPlay, String path) {
         return Path.of(nowPlay.getSavePath() + "/" + path);
     }
 
@@ -81,7 +83,7 @@ public class ContinueGame {
         saveScore.setCellValueFactory(new PropertyValueFactory<>("saveScore"));
 
         for (String key : saveList.getSaveList().keySet()) {
-            ShowingSave sv=new ShowingSave(saveList.getSaveList().get(key), key);
+            ShowingSave sv = new ShowingSave(saveList.getSaveList().get(key), key);
 //            if(sv.getSaveKind().equals("人机")){
 //                System.out.println("屏蔽了");
 //                continue;
@@ -94,6 +96,7 @@ public class ContinueGame {
 
 
     private void btnContinueVisible(boolean b) {
+        btnPlaySave.setVisible(b);
         btnContinue.setVisible(b);
         btnContinue.setDisable(!b);
         btnDeleteFile.setVisible(b);
@@ -148,7 +151,7 @@ public class ContinueGame {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        Transmitter.loadGame(g);
+        Transmitter.loadGame(g, getIsPlay());
         exit();
     }
 
@@ -177,7 +180,10 @@ public class ContinueGame {
             return;
         }
         loadGame(file, file.getName());
+    }
 
+    private boolean getIsPlay() {
+        return btnPlaySave.isSelected();
     }
 
     private void showAlert(String title, String headerText, String contentText) {
@@ -208,21 +214,22 @@ public class ContinueGame {
         //删除
         saveList.deleteSave(selectedSaveName);
         refreshData();
+        btnContinueVisible(false);
     }
 
     public void automaticSave() {
         //自动加载存档//TODO 测试这一模块
         if (Settings.read(Settings.url).StartSettings.isAlwaysLatestSave()) {
-            String saveName=null;
+            String saveName = null;
             User u = null;
             try {
-                u=UserManager.read().nowPlay();
+                u = UserManager.read().nowPlay();
                 saveName = u.getLatestSaveName();
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
-            if (saveName!=null){
-                loadGame(generateSavePath(u,selectedSaveName).toFile());
+            if (saveName != null) {
+                loadGame(generateSavePath(u, selectedSaveName).toFile());
                 exit();
             }
         }

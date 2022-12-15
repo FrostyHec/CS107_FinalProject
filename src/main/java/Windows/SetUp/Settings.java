@@ -6,6 +6,7 @@ public class Settings implements java.io.Serializable {
     public static final String url = "src/main/resources/Settings/Settings.ser";
     public StartSettings StartSettings = new StartSettings();
     public VisualSettings visualSettings=new VisualSettings();
+    public GameSettings gameSettings=new GameSettings();
 
     public static Settings read(String url) {
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(url))) {

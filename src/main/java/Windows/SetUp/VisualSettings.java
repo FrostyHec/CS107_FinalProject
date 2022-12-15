@@ -14,6 +14,9 @@ public class VisualSettings implements Serializable {
     public String getSkin() {
         return skin.getName();
     }
+    public SkinList getSkinInList(){
+        return skin;
+    }
 
     public void setSkinName(SkinList skin) {
         this.skin = skin;

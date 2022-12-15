@@ -9,7 +9,7 @@
 -fx-text-fill: black;
 }
 .root {
--fx-background-image: url(../images/BackGround.png);
+-fx-background-color: rgb(192,192,192);
 -fx-background-size: 100% 100%;
 //-fx-background-image: url(../images/BackGround/Back.png);
 }
@@ -17,3 +17,4 @@
 -fx-background-size: 100% 100%;
 -fx-background-image: url(../images/BackGround/Title2.png);
 }
+

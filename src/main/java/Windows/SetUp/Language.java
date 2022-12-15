@@ -39,6 +39,14 @@ public enum Language {
         }
         throw new RuntimeException("Language not found!");
     }
+    public static Language getLanguage(String name)  {
+        for (Language l: Language.values()) {
+           if( l.getName().equals(name)){
+               return l;
+           }
+        }
+        throw new RuntimeException("language not found!");
+    }
     private static Language refactorTWandHK(Locale l){
         if(l.getCountry().equals("HK")){
             return Chinese_Traditional;

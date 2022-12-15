@@ -29,11 +29,13 @@
                     <children>
                         <Pane layoutY="570.0" prefHeight="170.0" prefWidth="95.0">
                             <children>
-                                <Button fx:id="cheatButton" alignment="CENTER" layoutY="111.0" mnemonicParsing="false" onAction="#cheatClick" prefHeight="45.0" prefWidth="95.0" text="开启作弊">
-                                    <font>
+                                <Button fx:id="btnCheat" alignment="CENTER" layoutY="111.0" mnemonicParsing="false" onAction="#cheatClick" prefHeight="45.0" prefWidth="95.0" text="开启作弊">
+
+                                <font>
                                         <Font name="System Bold" size="20.0" />
                                     </font>
                                 </Button>
+                                <Button id="rubbish" alignment="CENTER" layoutY="111.0" mnemonicParsing="false" onAction="#cheatClick" prefHeight="45.0" prefWidth="95.0" text=""/>
                                 <ImageView fx:id="cheatImage" fitHeight="73.0" fitWidth="73.0" layoutX="12.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
                                 <Label fx:id="cheatTitle" alignment="CENTER" layoutY="2.0" prefHeight="25.0" prefWidth="95.0" text="此棋子" />
                             </children>
@@ -61,7 +63,7 @@
             <left>
                 <Pane prefHeight="719.0" prefWidth="95.0" BorderPane.alignment="CENTER">
                     <children>
-                        <Button fx:id="bthRetract" alignment="CENTER" layoutY="681.0" mnemonicParsing="false" onAction="#retractOnClick" prefHeight="45.0" prefWidth="95.0" text="悔棋">
+                        <Button fx:id="btnRetract" alignment="CENTER" layoutY="681.0" mnemonicParsing="false" onAction="#retractOnClick" prefHeight="45.0" prefWidth="95.0" text="悔棋" >
                             <font>
                                 <Font name="System Bold" size="18.0" />
                             </font>

@@ -14,8 +14,8 @@ public class Transmitter {
 public static StartNextPage startNextPage;
     private static RenameUserWindow renameUserWindow;
 
-    public static void loadGame(Game game) {
-        gameArea.loadGame(game);
+    public static void loadGame(Game game,boolean isPlay) {
+        gameArea.loadGame(game,isPlay);
     }
 
     public static void setGameArea(GameArea g) {

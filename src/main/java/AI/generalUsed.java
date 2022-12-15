@@ -59,6 +59,7 @@ public class generalUsed {//这个类是一些静态方法的集合，因为基�
                 }
             }
         }
+        Collections.shuffle(canClick);
         return canClick;
     }
 
@@ -346,7 +347,6 @@ public class generalUsed {//这个类是一些静态方法的集合，因为基�
 
         double Score = 0,max = 0;
         int[][] ans = new int[0][0];
-        int x = 0,y = 0;
 
         for(int[][] move : moves){
             Chess[][] virtualChessboard_1 = generalUsed.virtualChessBoard(virtualChessboard);

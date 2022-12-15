@@ -58,7 +58,7 @@ public class aiMode extends Game{
         }
 
 
-        if(move[0][0] != -1 ) {
+        if(move[0][0] != -1 ) {//行动
             if (move.length == 1) {
                 return Click(getAIPlayer(), move[0][0], move[0][1]);
             } else {

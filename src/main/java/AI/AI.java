@@ -30,7 +30,7 @@ public class AI extends Player {
         }else if(difficulty == 1){//不会逃跑，二级要实现会逃跑
             move = Selection.highest(chess,getColor());
             return move;
-        }else if(difficulty == 2){
+        }else if(difficulty == 2){//两步最佳：新增逃跑机制，不容易掉入陷阱
             ArrayList<int[][]> moves = generalUsed.enhancedCanClick(super.getColor(),chess);
             Chess[][] virtualChessBoard = generalUsed.virtualChessBoard(chess);//此处新开了一个棋盘
             move = Selection.bestTwice(virtualChessBoard,getColor(),moves);
@@ -40,6 +40,7 @@ public class AI extends Player {
         ArrayList<int[][]> moves = generalUsed.canClick(super.getColor(),chess);
         Chess[][] virtualChessBoard = generalUsed.virtualChessBoard(chess);//此处新开了一个棋盘，以后模拟都用这个棋盘
         ArrayList<int[][]> ans = new ArrayList<>();
+
 
         //据何俞均说，枚举六步不会太慢，但是要合理表达估价函数
         //但因为我的代码比较冗长，不一定能枚举六步

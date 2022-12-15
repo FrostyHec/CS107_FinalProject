@@ -87,7 +87,7 @@ public class GameArea {
     private int difficulty;
     private boolean isHumanWin;
     private Settings settings = Settings.read(Settings.url);
-    private int playSleepTime=1500;
+    private int playSleepTime = 500;
 
     public GameArea() throws Exception {
         game = new Game();
@@ -128,23 +128,40 @@ public class GameArea {
 
     public void loadGame(Game game, boolean isPlay) {
         this.game = game;
-        if(isPlay){
-            Play p = new Play(game);
-            Chessboard.setVisible(false);
-            btnRetract.setDisable(true);
-            btnCheat.setDisable(true);
-            do{
-                chessChanged();
+        if (isPlay) {
+            new Thread(() -> {
+                Play p = new Play(game);
+                Platform.runLater(() -> {
+                    btnRetract.setDisable(true);
+                    btnCheat.setDisable(true);
+                    gameState = GameState.Playing;
+                });
+                do {
+                    Platform.runLater(this::chessChanged);
+                    try {
+                        Thread.sleep(playSleepTime);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                } while (p.move());
+                Platform.runLater(() -> {
+                    gameState = GameState.PlayFinished;
+                    textHandler.refreshGameState();
+                });
                 try {
                     Thread.sleep(playSleepTime);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
-                System.out.println("播放中");
-            }while (p.move());
-            Chessboard.setVisible(true);
-            btnRetract.setDisable(false);
-            btnCheat.setDisable(false);
+                Platform.runLater(() -> {
+                    btnRetract.setDisable(false);
+                    btnCheat.setDisable(false);
+                });
+            }).start();
+            chessChanged();
+        }
+        if(game instanceof aiMode){
+            isHumanFirst=game.getHumanPlayer().equals(game.getPlayer1());//bad
         }
         chessChanged();
         game.bd();//补丁
@@ -153,7 +170,7 @@ public class GameArea {
     }
 
     public void chessMove(MouseEvent event) {
-        if (gameState == GameState.Pause) {
+        if (gameState == GameState.Pause || gameState == GameState.Playing) {//在暂停或者播放
             return;
         }
         new ChessMove().invoke(event);
@@ -324,6 +341,7 @@ public class GameArea {
         private final int selectedSize = squareSize - 8;
         private int column;
         private int row;
+        private int aiSleep=300;//TODO
 
         private boolean generateRowAndColumn(double x, double y) {
             column = (int) x / squareSize;
@@ -363,7 +381,7 @@ public class GameArea {
                     Chessboard.setDisable(true);
                     btnRetract.setDisable(false);
                     System.out.println("AI思考中");
-                    Thread.sleep(300);//TODO 一个合适的睡眠时间
+                    Thread.sleep(aiSleep);//TODO 一个合适的睡眠时间
                     System.out.println("暂思考完毕");
                     int res = game.aiMove();
                     Platform.runLater(() -> new ChessMove().analyzeAIResult(ClickResult.getClickResult(res)));//判断ai是不是赢了
@@ -489,15 +507,17 @@ public class GameArea {
 
         @SuppressWarnings("RedundantLabeledSwitchRuleCodeBlock")
         public void changed() {
-            switch (game.nowPlay().getColor()) {
-                case RED -> {
-                    gameState = GameState.RedTurn;
-                }
-                case BLACK -> {
-                    gameState = GameState.BlackTurn;
-                }
-                case UNKNOWN -> {
-                    gameState = GameState.FirstHandChoose;
+            if (!(gameState == GameState.Playing)) {
+                switch (game.nowPlay().getColor()) {
+                    case RED -> {
+                        gameState = GameState.RedTurn;
+                    }
+                    case BLACK -> {
+                        gameState = GameState.BlackTurn;
+                    }
+                    case UNKNOWN -> {
+                        gameState = GameState.FirstHandChoose;
+                    }
                 }
             }
             textHandler.refreshGameState();
@@ -604,7 +624,8 @@ public class GameArea {
             initializePause();
             settingsLoad();
         }
-        public void settingsLoad(){
+
+        public void settingsLoad() {
             setBtnCheat();
             setBtnRetract();
         }
@@ -678,24 +699,26 @@ public class GameArea {
             btnCheat.getStyleClass().add("button");
             btnCheat.getStyleClass().add("ButtonOff");
         }
-        public void setBtnCheat(){
-            if(game instanceof aiMode){
-                if(!settings.gameSettings.isPVECanCheat()){
+
+        public void setBtnCheat() {
+            if (game instanceof aiMode) {
+                if (!settings.gameSettings.isPVECanCheat()) {
                     btnCheat.setVisible(false);
                 }
-            }else {//PVP
-                if(!settings.gameSettings.isPVPCanCheat()){
+            } else {//PVP
+                if (!settings.gameSettings.isPVPCanCheat()) {
                     btnCheat.setVisible(false);
                 }
             }
         }
-        public void setBtnRetract(){
-            if(game instanceof aiMode){
-                if(!settings.gameSettings.isPVECanRetract()){
+
+        public void setBtnRetract() {
+            if (game instanceof aiMode) {
+                if (!settings.gameSettings.isPVECanRetract()) {
                     btnRetract.setVisible(false);
                 }
-            }else {//PVP
-                if(!settings.gameSettings.isPVPCanRetract()){
+            } else {//PVP
+                if (!settings.gameSettings.isPVPCanRetract()) {
                     btnRetract.setVisible(false);
                 }
             }
@@ -807,8 +830,9 @@ public class GameArea {
 
     class TextHandler {
         ResourceBundle t;
-        private void setResource(){
-            t=ResourceBundle.getBundle("Language/GameAreaLanguage", settings.visualSettings.getLanguage());
+
+        private void setResource() {
+            t = ResourceBundle.getBundle("Language/GameAreaLanguage", settings.visualSettings.getLanguage());
         }
 
         public void refreshScore() {
@@ -854,6 +878,9 @@ public class GameArea {
 
                 case BlackTurn -> labelGameState.setText(t.getString("GameState.BlackTurn"));
 
+                case Playing -> labelGameState.setText(t.getString("GameState.Playing"));
+
+                case PlayFinished -> labelGameState.setText(t.getString("GameState.PlayFinished"));
             }
 
         }

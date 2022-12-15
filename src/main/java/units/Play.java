@@ -8,6 +8,7 @@ public class Play {
     List<int[][]> moves = new ArrayList<>();
     Game game;
     int step;
+    final int step1;
 
     public Play(Game game){//构造方法
         this.game = game;
@@ -27,14 +28,15 @@ public class Play {
                 moves.add(temp);
             }
         }
-        step = game.getMoves().size();
+        step1 = game.getMoves().size();
+        step = 0;
 
+        game.setBack();
         game.clearMoves();
-
     }
 
     public boolean move(){//具体方法
-        if (step == 0){
+        if (step == step1){
             return false;
         }
         if(moves.get(step).length == 1){
@@ -44,7 +46,7 @@ public class Play {
             game.Click(game.nowPlay(),moves.get(step)[0][0],moves.get(step)[0][1]);
             game.Click(game.nowPlay(),moves.get(step)[1][0],moves.get(step)[1][1]);
         }
-        step--;
+        step++;
         return true;
     }
 }

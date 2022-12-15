@@ -59,6 +59,7 @@ public class generalUsed {//这个类是一些静态方法的集合，因为基�
                 }
             }
         }
+        Collections.shuffle(canClick);
         return canClick;
     }
 
@@ -74,30 +75,108 @@ public class generalUsed {//这个类是一些静态方法的集合，因为基�
                         continue it;
                     }
                 }
-                for(int[]xy : pow(move[0])){
+                for(int[]xy : pow(move[0],chess)){
                     if(chess[xy[0]][xy[1]] != null && chess[xy[0]][xy[1]].isTurnOver()
                             && (chess[xy[0]][xy[1]].getRank()>5 || chess[xy[0]][xy[1]].getRank() == 2)){
                         eCanClick.remove(move);
                         continue it;
                     }
                 }
-            } else if (move.length == 2) {
-                //TODO
             }
         }
 
         return eCanClick;
     }
 
-
-    public static ArrayList<int[]> pow(int[] xy){//返回炮位
+    //返回炮位
+    public static ArrayList<int[]> pow(int[] xy,Chess[][] chess){
         ArrayList<int[]> ans = new ArrayList<>();
-        /* TODO: */
+        int x = xy[0],y = xy[1];
+        int[] a = new int[2];
+
+        int i = x+1;
+        if(i<7){
+            for (; chess[i][y] == null; i++)
+                if (i == 7) break;
+            if (i != 7){
+                i++;
+                for (; chess[i][y] == null; i++)
+                    if (i == 7) {
+                        i++;
+                        break;
+                    }
+                if (i != 8){
+                    a[0] = i;
+                    a[1] = y;
+                    ans.add(a);
+                }
+            }
+        }
+
+        i = x-1;
+        if(i>0){
+            for (; chess[i][y] == null; i--)
+                if (i == 0) break;
+            if (i != 0){
+                i--;
+                for (; chess[i][y] == null; i--)
+                    if (i == 0) {
+                        i--;
+                        break;
+                    }
+                if (i != -1){
+                    a[0] = i;
+                    a[1] = y;
+                    ans.add(a);
+                }
+            }
+        }
+
+        i = y+1;
+        if(i<3){
+            for (; chess[x][i] == null; i++)
+                if (i == 3) break;
+            if (i != 3){
+                i++;
+                for (; chess[x][i] == null; i++)
+                    if (i == 3) {
+                        i++;
+                        break;
+                    }
+
+                if (i != 4){
+                    a[0] = x;
+                    a[1] = i;
+                    ans.add(a);
+                }
+            }
+        }
+
+        i = y-1;
+        if(i > 0){
+            for (; chess[x][i] == null; i--)
+                if (i == 0) break;
+            if (i != 0){
+                i--;
+                for (; chess[x][i] == null; i--)
+                    if (i == 0) {
+                        i--;
+                        break;
+                    }
+                if (i != -1){
+                    a[0] = x;
+                    a[1] = i;
+                    ans.add(a);
+                }
+            }
+        }
+
         return ans;
     }
 
 
-    public static ArrayList<int[]> surround(int[] xy){//返回棋盘上曼哈顿距离为1的点
+    //返回棋盘上曼哈顿距离为1的点
+    public static ArrayList<int[]> surround(int[] xy){
         ArrayList<int[]> ans = new ArrayList<>();
 
         if(xy[0] > 0){
@@ -244,7 +323,7 @@ public class generalUsed {//这个类是一些静态方法的集合，因为基�
     }
 
 
-    public static Chess[][] virtualChessBoard(Chess[][] originChessBoard){//复制一个棋盘供推演//已通过初步测试
+    public static Chess[][] virtualChessBoard(Chess[][] originChessBoard){//复制一个棋盘供推演
         Chess[][] chess = new Chess[8][4];
         for(int i=0;i<originChessBoard.length;i++){
             for(int j=0;j<originChessBoard[i].length;j++){
@@ -263,37 +342,36 @@ public class generalUsed {//这个类是一些静态方法的集合，因为基�
         }
     }
 
-    public static int[][] bestMove(Chess[][] virtualChessboard,Color color,ArrayList<int[][]> moves){
+    public static int[][] bestMove(Chess[][] virtualChessboard,Color color,ArrayList<int[][]> moves){//两步最优
+        //比较各个行棋方法最低得分中的最高分，濒死状态另说
 
         double Score = 0,max = 0;
         int[][] ans = new int[0][0];
-        int x = 0,y = 0;
 
         for(int[][] move : moves){
             Chess[][] virtualChessboard_1 = generalUsed.virtualChessBoard(virtualChessboard);
             if(move.length == 2) {
-                if(virtualChessboard_1[move[1][0]][move[1][1]] != null)
-                    Score += virtualChessboard_1[move[1][0]][move[1][1]].getScore();
+                if(virtualChessboard_1[move[1][0]][move[1][1]] != null) {
+                    Score += (virtualChessboard_1[move[1][0]][move[1][1]].getScore()
+                            + virtualChessboard_1[move[1][0]][move[1][1]].getRank());
+                }
                 move(virtualChessboard_1,move);
-                x = move[1][0];
-                y = move[1][1];
             }else if(move.length == 1){
                 move(virtualChessboard_1,move);
-                x = move[0][0];
-                y = move[0][1];
             }
 
-            int max1 = 0,max2 = 0;
+            int min1 = 0, min2 = 0;
             for(int i=0;i<virtualChessboard_1.length;i++){
                 for(int j=0;j<virtualChessboard_1[i].length;j++){
-                    if(virtualChessboard_1[i][j] == null || !virtualChessboard_1[i][j].isTurnOver())
+                    if(virtualChessboard_1[i][j] == null || !virtualChessboard_1[i][j].isTurnOver()) {
                         continue;
+                    }
                     if(virtualChessboard_1[i][j].getColor() == color && mayBeEat(virtualChessboard_1,i,j)){
-                        if(virtualChessboard_1[x][y].getScore() > max1) {
-                            Score += max2;
-                            max2 = max1;
-                            max1 = virtualChessboard_1[x][y].getScore();
-                            Score -= max1;
+                        if(virtualChessboard_1[i][j].getScore() + virtualChessboard_1[i][j].getRank() > min1) {
+                            Score += min2;
+                            min2 = min1;
+                            min1 = virtualChessboard_1[i][j].getScore() + virtualChessboard_1[i][j].getRank();
+                            Score -= min1;
                         }
                     }
                 }
@@ -303,6 +381,7 @@ public class generalUsed {//这个类是一些静态方法的集合，因为基�
                 max = Score;
                 ans = move;
             }
+
         }
 
         return ans;

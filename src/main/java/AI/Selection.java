@@ -80,9 +80,8 @@ public class Selection {//做剪枝算法的时候可能要用到,也是一堆st
         int[][] move = new int[2][2];
         int score = 0;
         boolean is = true;
-        Player p = new Player();
-        p.setColor(color);
-        ArrayList<int[][]> moves = generalUsed.canClick(p.getColor(),virtualChessboard);
+
+        ArrayList<int[][]> moves = generalUsed.canClick(color,virtualChessboard);
         Collections.shuffle(moves);
         if(a>0) {
             for (int[][] xy : moves) {
@@ -105,8 +104,12 @@ public class Selection {//做剪枝算法的时候可能要用到,也是一堆st
     }
 
     public static int[][] bestTwice(Chess[][] virtualChessboard,Color color,ArrayList<int[][]> moves){//还需要优化
+
+        //TODO
         Random random = new Random();
         int a = random.nextInt(5);
+
+
         int[][] move = generalUsed.bestMove(virtualChessboard,color,moves);
 
         if(move.length == 0){

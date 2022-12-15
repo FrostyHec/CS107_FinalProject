@@ -74,15 +74,13 @@ public class generalUsed {//这个类是一些静态方法的集合，因为基�
                         continue it;
                     }
                 }
-                for(int[]xy : pow(move[0])){
+                for(int[]xy : pow(move[0],chess)){
                     if(chess[xy[0]][xy[1]] != null && chess[xy[0]][xy[1]].isTurnOver()
                             && (chess[xy[0]][xy[1]].getRank()>5 || chess[xy[0]][xy[1]].getRank() == 2)){
                         eCanClick.remove(move);
                         continue it;
                     }
                 }
-            } else if (move.length == 2) {
-                //TODO
             }
         }
 
@@ -90,9 +88,88 @@ public class generalUsed {//这个类是一些静态方法的集合，因为基�
     }
 
 
-    public static ArrayList<int[]> pow(int[] xy){//返回炮位
+    public static ArrayList<int[]> pow(int[] xy,Chess[][] chess){//返回炮位
         ArrayList<int[]> ans = new ArrayList<>();
-        /* TODO: */
+        int x = xy[0],y = xy[1];
+        int[] a = new int[2];
+
+        int i = x+1;
+        if(i<7){
+            for (; chess[i][y] == null; i++)
+                if (i == 7) break;
+            if (i != 7){
+                i++;
+                for (; chess[i][y] == null; i++)
+                    if (i == 7) {
+                        i++;
+                        break;
+                    }
+                if (i != 8){
+                    a[0] = i;
+                    a[1] = y;
+                    ans.add(a);
+                }
+            }
+        }
+
+        i = x-1;
+        if(i>0){
+            for (; chess[i][y] == null; i--)
+                if (i == 0) break;
+            if (i != 0){
+                i--;
+                for (; chess[i][y] == null; i--)
+                    if (i == 0) {
+                        i--;
+                        break;
+                    }
+                if (i != -1){
+                    a[0] = i;
+                    a[1] = y;
+                    ans.add(a);
+                }
+            }
+        }
+
+        i = y+1;
+        if(i<3){
+            for (; chess[x][i] == null; i++)
+                if (i == 3) break;
+            if (i != 3){
+                i++;
+                for (; chess[x][i] == null; i++)
+                    if (i == 3) {
+                        i++;
+                        break;
+                    }
+
+                if (i != 4){
+                    a[0] = x;
+                    a[1] = i;
+                    ans.add(a);
+                }
+            }
+        }
+
+        i = y-1;
+        if(i > 0){
+            for (; chess[x][i] == null; i--)
+                if (i == 0) break;
+            if (i != 0){
+                i--;
+                for (; chess[x][i] == null; i--)
+                    if (i == 0) {
+                        i--;
+                        break;
+                    }
+                if (i != -1){
+                    a[0] = x;
+                    a[1] = i;
+                    ans.add(a);
+                }
+            }
+        }
+
         return ans;
     }
 

@@ -1,0 +1,9 @@
+code：
+error code 0 ： 正常，玩家交换
+error code -1： 正常，该玩家继续点击下一区域
+error code 1 ： 不正常， 该玩家第一次就选择了对面颜色的棋子（想要移动对方的棋）
+error code 2: 妄图覆盖自己的棋子
+error code 3: 不能吃未翻开的棋子
+error code 4: 想吃比自己更加大的棋
+error code 5: 将不能吃兵
+error code 404: 其他类型错误 //若测试时出现这个一定要跟我说，大概率是有bug

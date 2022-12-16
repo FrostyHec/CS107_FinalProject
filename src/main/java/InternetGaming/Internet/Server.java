@@ -160,6 +160,9 @@ public class Server extends Thread {
                     case GameOver -> {
                         new GameOver().parse(args[1]);
                     }
+                    case ObjMissing -> {
+                        new ObjMissing(m).parse(args[1]);
+                    }
                     default -> {
                         throw new RuntimeException();
                     }
@@ -170,6 +173,7 @@ public class Server extends Thread {
     }
 
     class FlushChessBoard implements Parser {
+        public static Object o;//TODO 临时这么写
         MessageHandler m;
 
         public FlushChessBoard(MessageHandler m) {
@@ -178,12 +182,13 @@ public class Server extends Thread {
 
         @Override
         public void parse(String message) {
-            Object o;
-            try {
-                o = m.hearObj();
-                //Game g = (Game) o;//暂时先不在服务器端判断是不是棋盘
-            } catch (Exception e) {
-                throw new RuntimeException(e);
+            if (!message.equals("resend")) {
+                try {
+                    o = m.hearObj(MessageType.ChessBoardRefresh);
+                    //Game g = (Game) o;//暂时先不在服务器端判断是不是棋盘
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
             }
             for (ClientData c : clientList) {
                 MessageHandler m = c.getM();
@@ -213,6 +218,25 @@ public class Server extends Thread {
             }
         }
     }
+
+    class ObjMissing implements Parser {
+        MessageHandler m;
+
+        public ObjMissing(MessageHandler m) {
+            this.m = m;
+        }
+
+        @Override
+        public void parse(String message) {
+            System.out.println("发生了一场史诗级的掉包");
+            switch (MessageType.valueOf(message)) {
+                case ChessBoardRefresh -> {
+                    new FlushChessBoard(m).parse("resend");
+                }
+            }
+        }
+    }
+
 }
 
 

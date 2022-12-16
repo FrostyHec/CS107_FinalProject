@@ -78,14 +78,12 @@ public class MessageHandler {
         }
     }
 
-    public Object hearObj() throws Exception {
+    public Object hearObj(MessageType messageType) throws Exception {
         Object o = null;
         try {
             o = objReader.readObject();
         } catch (OptionalDataException e) {
-            if (!e.eof) {
-                throw new RuntimeException(e);
-            }
+            send(MessageType.ObjMissing,messageType.name());
         }
         return o;
     }

@@ -77,7 +77,7 @@ public class Client extends ClientData {
         public void parse(String message) {
             try {
                 System.out.println("试图收取玩家列表");
-                totalClient = (ClientData[]) m.hearObj(MessageType.NewPlayer);
+                totalClient = (ClientData[]) m.hearObj();
                 System.out.println("收到玩家列表");
                 //totalClient = (ClientData[]) o;
             } catch (Exception e) {
@@ -108,7 +108,7 @@ public class Client extends ClientData {
         public void parse(String message) {
             Game game;
             try {
-                game = (Game) m.hearObj(MessageType.ChessBoardRefresh);
+                game = (Game) m.hearObj();
                 Platform.runLater(() -> Transmitter.gameArea.remoteRefresh(game));
 
             } catch (Exception e) {

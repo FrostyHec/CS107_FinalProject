@@ -104,7 +104,7 @@
       <recent name="Windows.StartMenu" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="Application.Main2">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Windows.StartMenu.Main" />
       <module name="DarkChess" />
@@ -172,9 +172,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.ServerMain" />
-        <item itemvalue="Application.Main" />
         <item itemvalue="Application.Main2" />
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.ServerMain" />
         <item itemvalue="Application.Test" />
         <item itemvalue="Application.UserManager" />
       </list>

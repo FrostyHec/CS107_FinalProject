@@ -9,6 +9,8 @@ public class MessageHandler {
     private OutputStream outputStream;
     private ObjectOutputStream objWriter;
     private ObjectInputStream objReader;
+    private ByteArrayOutputStream BA_outputStream;
+    private ByteArrayInputStream BA_inputStream;
     private PrintWriter writer;
     private Socket client;
 
@@ -57,7 +59,7 @@ public class MessageHandler {
     public void sendObj(Object o) {
         try {
             try {
-                Thread.sleep(50);//TODO 我真的是无语，为什么睡会就好了啊
+                Thread.sleep(1000);//TODO 我真的是无语，为什么睡会就好了啊
             } catch (Exception e) {
             }
             objWriter.writeObject(o);
@@ -78,12 +80,15 @@ public class MessageHandler {
         }
     }
 
-    public Object hearObj(MessageType messageType) throws Exception {
+    public Object hearObj() throws Exception {
+        Thread.sleep(100);
         Object o = null;
         try {
             o = objReader.readObject();
         } catch (OptionalDataException e) {
-            send(MessageType.ObjMissing,messageType.name());
+            if (!e.eof) {
+                throw new RuntimeException(e);
+            }
         }
         return o;
     }

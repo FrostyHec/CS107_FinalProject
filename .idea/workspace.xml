@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="bea79dc5-57f0-48e7-b850-a9fcd65d4f0c" name="Changes" comment="我把调用的接口搭了个框架，记得填充内容">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Userfile/UserManager.ser" beforeDir="false" afterPath="$PROJECT_DIR$/Userfile/UserManager.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/InternetGaming/GameArea/GameArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/InternetGaming/GameArea/GameArea.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/InternetGaming/Internet/Message/MessageHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/InternetGaming/Internet/Message/MessageHandler.java" afterDir="false" />
     </list>

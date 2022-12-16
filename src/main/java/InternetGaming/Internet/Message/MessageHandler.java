@@ -59,7 +59,7 @@ public class MessageHandler {
     public void sendObj(Object o) {
 
             try {
-                Thread.sleep(800);//TODO 多睡会，少粘包
+                Thread.sleep(300);//TODO 多睡会，少粘包
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }

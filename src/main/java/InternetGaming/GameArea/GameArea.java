@@ -2,16 +2,15 @@ package InternetGaming.GameArea;
 
 import GameLogic.Color;
 import GameLogic.Game;
+import GameLogic.Player;
 import InternetGaming.Internet.Message.MessageHandler;
 import InternetGaming.Internet.Message.MessageType;
 import InternetGaming.Internet.Message.PlayerType;
 import InternetGaming.Internet.Transmitter;
 import Windows.GameArea.ClickResult;
 import Windows.GameArea.GameState;
-import javafx.application.Platform;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Window;
 
 public class GameArea extends Windows.GameArea.GameArea {
     private PlayerType type;
@@ -59,8 +58,6 @@ public class GameArea extends Windows.GameArea.GameArea {
         new ChessMove().invoke(event);
     }
 
-    static int count = 0;
-
     private void analyzeColor() {
         switch (type) {
             case FirstHand -> {
@@ -85,17 +82,27 @@ public class GameArea extends Windows.GameArea.GameArea {
         if (color.equals(Color.UNKNOWN)) {//说明还没有初始化
             analyzeColor();
         }
+        if(game.getPlayer1().getScore()>=60){
+            winnerExists(game.getPlayer1());
+        }else if(game.getPlayer2().getScore()>=60){
+            winnerExists(game.getPlayer2());
+        }//raw use of score analyze, pretty bad.
     }
+
+//    @Override
+//    public void winnerExists(Player player){
+//        //禁用这个方法
+//    }
 
     protected class ChessMove extends Windows.GameArea.GameArea.ChessMove {
         @Override
         protected void analyzeClickResult(ClickResult clickResult){
             super.analyzeClickResult(clickResult);
             switch (clickResult){
-                case Finished -> {
+                case Player1Win, Player2Win, Finished -> {
                     sendMsg();
+                }
             }
-        }
     }}
 
     protected class GraphicHandler extends Windows.GameArea.GameArea.GraphicHandler{

@@ -5,12 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bea79dc5-57f0-48e7-b850-a9fcd65d4f0c" name="Changes" comment="我把调用的接口搭了个框架，记得填充内容">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Language/StartMenuLanguage.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Language/StartMenuLanguage_en_US.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Language/StartMenuLanguage_zh_CN.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/GameArea/GameArea.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Windows/GameArea/GameArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Windows/GameArea/GameArea.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Windows/StartMenu/StartMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Windows/StartMenu/StartMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Userfile/1/2022-12-16-0-18-28.ser" beforeDir="false" afterPath="$PROJECT_DIR$/Userfile/1/2022-12-16-0-18-28.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Userfile/1/2022-12-16-0-33-22.ser" beforeDir="false" afterPath="$PROJECT_DIR$/Userfile/1/2022-12-16-0-33-22.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Userfile/UserManager.ser" beforeDir="false" afterPath="$PROJECT_DIR$/Userfile/UserManager.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/InternetGaming/GameArea/MainGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/InternetGaming/GameArea/MainGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Settings/Settings.ser" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Settings/Settings.ser" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,7 +68,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "last_directory_selection": "D:/ComputerScience/Java/javaFX/DarkChess/src/main/java/Windows/GameArea",
-    "last_opened_file_path": "D:/ComputerScience/Java/javaFX/DarkChess/src/main/resources/Language/ee",
+    "last_opened_file_path": "D:/ComputerScience/Java/javaFX/DarkChess/src/main/resources/InternetGaming/GameArea",
     "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.3261391",
@@ -81,10 +82,10 @@
       <recent name="UserFiles" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\ComputerScience\Java\javaFX\DarkChess\src\main\resources\InternetGaming\GameArea" />
       <recent name="D:\ComputerScience\Java\javaFX\DarkChess\src\main\resources\Language\ee" />
       <recent name="D:\ComputerScience\Java\javaFX\DarkChess\src\main\resources\Windows\StartMenu" />
       <recent name="D:\ComputerScience\Java\javaFX\DarkChess\src\main\resources\Language" />
-      <recent name="D:\ComputerScience\Java\javaFX\DarkChess\src\main\resources\InternetGaming\GameArea" />
       <recent name="D:\ComputerScience\Java\javaFX\DarkChess\src\main\resources\Windows\Music" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -173,11 +174,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
         <item itemvalue="Application.ServerMain" />
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Main2" />
         <item itemvalue="Application.Test" />
         <item itemvalue="Application.UserManager" />
-        <item itemvalue="Application.Main2" />
       </list>
     </recent_temporary>
   </component>
@@ -225,6 +226,13 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Windows/GameArea/GameArea.java</url>
+          <line>443</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+      </breakpoints>
       <breakpoints-defaults>
         <breakpoint suspend="THREAD" type="java-line" />
       </breakpoints-defaults>

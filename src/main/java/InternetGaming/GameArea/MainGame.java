@@ -9,6 +9,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import javafx.stage.WindowEvent;
 
 import java.io.IOException;
@@ -26,7 +27,7 @@ public class MainGame extends Application {
         stage.setResizable(false);
         //加载fxml
         Application.setUserAgentStylesheet(Windows.GameArea.GameArea.class.getResource("default.css").toExternalForm());
-        FXMLLoader fxmlLoader = new FXMLLoader(Windows.GameArea.GameArea.class.getResource("GameArea.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(InternetGaming.GameArea.GameArea.class.getResource("GameArea.fxml"));//TODO ?
         stage.setScene(new Scene(fxmlLoader.load()));
         stage.show();//close request在controller里
         stage.setOnCloseRequest(event -> {

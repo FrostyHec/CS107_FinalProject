@@ -288,7 +288,6 @@ public class GameArea {
             Transmitter.setWinUser(isHumanWin);//true or false
         } else {
             if (winner.equals(game.getPlayer1())) {
-
                 Transmitter.setWinUser("player1");
             } else {//player2
                 Transmitter.setWinUser("player2");
@@ -914,7 +913,7 @@ public class GameArea {
         }
     }
 
-    class TimeHandler {
+    protected class TimeHandler {
         private LocalTime tempStartTime;
 
         public void totalInvoke() {

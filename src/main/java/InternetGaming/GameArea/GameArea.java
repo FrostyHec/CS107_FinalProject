@@ -3,6 +3,7 @@ package InternetGaming.GameArea;
 import GameLogic.Color;
 import GameLogic.Game;
 import GameLogic.Player;
+import InternetGaming.Internet.ClientData;
 import InternetGaming.Internet.Message.MessageHandler;
 import InternetGaming.Internet.Message.MessageType;
 import InternetGaming.Internet.Message.PlayerType;
@@ -11,6 +12,8 @@ import Windows.GameArea.ClickResult;
 import Windows.GameArea.GameState;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 public class GameArea extends Windows.GameArea.GameArea {
     private PlayerType type;
@@ -72,8 +75,10 @@ public class GameArea extends Windows.GameArea.GameArea {
     private void sendMsg() {
         MessageHandler m = Transmitter.client.getM();
         m.send(MessageType.ChessBoardRefresh, "");
-        new Thread(()->m.sendObj(game.clone())).start();
+        new Thread(() -> m.sendObj(game.clone())).start();
     }
+
+    private boolean isBDed;
 
     public void remoteRefresh(Game game) {
         this.game = game;
@@ -82,32 +87,57 @@ public class GameArea extends Windows.GameArea.GameArea {
         if (color.equals(Color.UNKNOWN)) {//说明还没有初始化
             analyzeColor();
         }
-        if(game.getPlayer1().getScore()>=60){
-            winnerExists(game.getPlayer1());
-        }else if(game.getPlayer2().getScore()>=60){
-            winnerExists(game.getPlayer2());
-        }//raw use of score analyze, pretty bad.
+
+        if (!isBDed) {//为先手打补丁
+            game.bd();
+            isBDed = true;
+        }
     }
 
-//    @Override
-//    public void winnerExists(Player player){
-//        //禁用这个方法
-//    }
-
+    @Override
+    public void winnerExists(Player player) {
+        //禁用这个方法
+    }
+    private void someoneWin() {
+        MessageHandler m = Transmitter.client.getM();
+        m.send(MessageType.GameOver, type.toString());
+    }
+    public void searchWinner(String message){
+        PlayerType winner=PlayerType.valueOf(message);
+        for (ClientData cd: Transmitter.client.getTotalClient()) {
+            if(cd.getPlayerTurns().equals(winner)){
+                showWinner(cd);
+            }
+        }
+    }
+    private void showWinner(ClientData cd){
+        Stage s2 = new Stage();
+        s2.initOwner(pausePane.getScene().getWindow());
+        s2.initModality(Modality.WINDOW_MODAL);
+        timeHandler.totalEnd();
+        new FinishedController().show(s2);
+        Transmitter.finishedController.setWinner(cd);
+    }
     protected class ChessMove extends Windows.GameArea.GameArea.ChessMove {
         @Override
-        protected void analyzeClickResult(ClickResult clickResult){
+        protected void analyzeClickResult(ClickResult clickResult) {
             super.analyzeClickResult(clickResult);
-            switch (clickResult){
-                case Player1Win, Player2Win, Finished -> {
+            switch (clickResult) {
+                case Player1Win, Player2Win -> {
+                    sendMsg();
+                    someoneWin();
+                }
+                case Finished -> {
                     sendMsg();
                 }
             }
-    }}
+        }
 
-    protected class GraphicHandler extends Windows.GameArea.GameArea.GraphicHandler{
+    }
+
+    protected class GraphicHandler extends Windows.GameArea.GameArea.GraphicHandler {
         @Override
-        public void refreshIcon(){
+        public void refreshIcon() {
             //TODO 完成图标刷新与用户刷新
         }
     }

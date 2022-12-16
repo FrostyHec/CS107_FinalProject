@@ -4,12 +4,12 @@ import GameLogic.Game;
 import InternetGaming.Internet.Message.*;
 import javafx.application.Platform;
 
-import java.io.EOFException;
 import java.io.IOException;
 import java.net.Socket;
 
 public class Client extends ClientData {
-    ClientData[] totalClient;
+    private ClientData[] totalClient;
+    Thread parser;
 
     public Client(MessageHandler m) {
         super(m);
@@ -25,8 +25,17 @@ public class Client extends ClientData {
         return client;
     }
 
+    public ClientData[] getTotalClient() {
+        return totalClient;
+    }
+
     public void start() {
-        new MessageParse().start();
+        parser= new MessageParse();
+        parser.start();
+    }
+    public void close(){
+        parser.interrupt();
+        m.close();
     }
 
     @SuppressWarnings("RedundantLabeledSwitchRuleCodeBlock")
@@ -55,7 +64,7 @@ public class Client extends ClientData {
                         new FlushChessBoard().parse(args[1]);//解析构造传入消息处理器有两种可能：一种是发消息，一种是获取进一步消息
                     }
                     case GameOver -> {
-                        // new Server.GameOver().parse(args[1]);
+                        new GameOver().parse(args[1]);
                     }
                     default -> {
                         throw new RuntimeException();
@@ -114,6 +123,14 @@ public class Client extends ClientData {
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
+        }
+    }
+
+    class GameOver implements Parser{
+
+        @Override
+        public void parse(String message) {
+            Platform.runLater(() -> Transmitter.gameArea.searchWinner(message));
         }
     }
 

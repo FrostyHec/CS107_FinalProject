@@ -24,7 +24,7 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class FinishedController {
-    private String defaultAvatar = "src/main/resources/Windows/images/UserImage/tempUser.png";
+    protected String defaultAvatar = "src/main/resources/Windows/images/UserImage/tempUser.png";
     private String defaultComputerAvatar = "src/main/resources/Windows/images/UserImage/ComputerUser.png";
     public ImageView imgAvatar;
     public Label lbGameOver;
@@ -33,9 +33,9 @@ public class FinishedController {
     public Label lbUsedTime;
     private Settings settings=Settings.read(Settings.url);
     Locale locale=settings.visualSettings.getLanguage();
-    private GameArea gameArea;
+    protected GameArea gameArea;
     private boolean rawClose = true;
-    ResourceBundle t = ResourceBundle.getBundle("Language/GameAreaLanguage", locale);
+    protected ResourceBundle t = ResourceBundle.getBundle("Language/GameAreaLanguage", locale);
 
     public void show(Stage stage) {
         FXMLLoader fxmlLoader = new FXMLLoader(GameArea.class.getResource("FinishedWindow.fxml"));
@@ -96,7 +96,7 @@ public class FinishedController {
         setDetailedInfo();
     }
 
-    private void setDetailedInfo() {
+    protected void setDetailedInfo() {
         //分差： xx
         int dif = Math.abs(gameArea.game.getPlayer1().getScore() - gameArea.game.getPlayer2().getScore());
         lbScoreDif.setText(t.getString("GameOver.scoreDifference") + ": " + dif);

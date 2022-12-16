@@ -9,8 +9,6 @@ public class MessageHandler {
     private OutputStream outputStream;
     private ObjectOutputStream objWriter;
     private ObjectInputStream objReader;
-    private ByteArrayOutputStream BA_outputStream;
-    private ByteArrayInputStream BA_inputStream;
     private PrintWriter writer;
     private Socket client;
 
@@ -57,9 +55,8 @@ public class MessageHandler {
     }
 
     public void sendObj(Object o) {
-
             try {
-                Thread.sleep(300);//TODO 多睡会，少粘包
+                Thread.sleep(500);//TODO 多睡会，少粘包
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
@@ -84,7 +81,7 @@ public class MessageHandler {
     }
 
     public Object hearObj() throws Exception {
-        Thread.sleep(20);
+        //Thread.sleep(20);
         Object o = null;
         try {
             o = objReader.readObject();
@@ -94,5 +91,14 @@ public class MessageHandler {
             }
         }
         return o;
+    }
+    public void close(){
+        try {
+            objWriter.close();
+            objReader.close();
+            client.close();
+        }catch (Exception e){
+            throw new RuntimeException(e);
+        }
     }
 }

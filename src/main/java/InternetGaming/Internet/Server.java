@@ -10,6 +10,8 @@ import java.util.*;
 public class Server extends Thread {
     private ServerSocket server;
     private List<ClientData> clientList = new ArrayList<>();
+    private List<Thread> parsers = new ArrayList<>();
+    ConnectHandler cn;
 
     public Server(int port) {
         try {
@@ -22,9 +24,8 @@ public class Server extends Thread {
 
     @Override
     public void run() {
-        ConnectHandler cn = new ConnectHandler();
+        cn = new ConnectHandler();
         cn.start();
-        Scanner sc = new Scanner(System.in);
     }
 
     private boolean isGameStart = false;
@@ -39,7 +40,9 @@ public class Server extends Thread {
                     System.out.println("IP:" + client.getInetAddress() + "连接成功");
                     System.out.println("端口号:" + client.getPort());
                     //开启下一个线程
-                    new MessageParse(client).start();
+                    Thread t = new MessageParse(client);
+                    t.start();
+                    parsers.add(t);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -123,6 +126,20 @@ public class Server extends Thread {
 
     public void playerIllegalExit(MessageHandler m) {
         //TODO 还没写
+    }
+
+    public void stopSever() {
+        for (Thread t : parsers) {
+            t.interrupt();
+        }
+        for (ClientData c : clientList) {
+            c.getM().close();
+        }
+        try {
+            server.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @SuppressWarnings("RedundantLabeledSwitchRuleCodeBlock")

@@ -3,6 +3,7 @@ package InternetGaming.Internet;
 import InternetGaming.Internet.Message.MessageHandler;
 import InternetGaming.Internet.Message.PlayerType;
 
+import java.io.File;
 import java.io.Serializable;
 
 public class ClientData implements Serializable {
@@ -10,6 +11,7 @@ public class ClientData implements Serializable {
     protected String name;
     protected PlayerType playerType;
 
+    protected File avatar;//TODO 头像
     public ClientData(MessageHandler m) {
         this.m = m;
     }
@@ -39,5 +41,8 @@ public class ClientData implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+    public File getAvatar(){
+        return avatar;
     }
 }

@@ -84,7 +84,7 @@ public class StartMenu {
     }
 
     public void startNextPage() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("StartNextPage.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("startNextPage.fxml"));
         ((Stage) paneStartMenu.getScene().getWindow()).setScene(new Scene(fxmlLoader.load()));
         Windows.Transmitter.startNextPage.jump();
     }

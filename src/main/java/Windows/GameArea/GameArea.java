@@ -161,7 +161,7 @@ public class GameArea {
             chessChanged();
         }
         if(game instanceof aiMode){
-            isHumanFirst=game.getHumanPlayer().equals(game.getPlayer1());//bad
+            isHumanFirst=game.getHumanPlayer().equals(game.getPlayer1());
         }
         chessChanged();
         game.bd();//补丁

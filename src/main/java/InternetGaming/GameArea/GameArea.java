@@ -8,6 +8,7 @@ import InternetGaming.Internet.Message.PlayerType;
 import InternetGaming.Internet.Transmitter;
 import Windows.GameArea.ClickResult;
 import Windows.GameArea.GameState;
+import javafx.application.Platform;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Window;
@@ -74,7 +75,7 @@ public class GameArea extends Windows.GameArea.GameArea {
     private void sendMsg() {
         MessageHandler m = Transmitter.client.getM();
         m.send(MessageType.ChessBoardRefresh, "");
-        m.sendObj(game.clone());
+        new Thread(()->m.sendObj(game.clone())).start();
     }
 
     public void remoteRefresh(Game game) {
@@ -93,10 +94,9 @@ public class GameArea extends Windows.GameArea.GameArea {
             switch (clickResult){
                 case Finished -> {
                     sendMsg();
-                }
             }
         }
-    }
+    }}
 
     protected class GraphicHandler extends Windows.GameArea.GameArea.GraphicHandler{
         @Override

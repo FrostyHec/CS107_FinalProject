@@ -57,16 +57,19 @@ public class MessageHandler {
     }
 
     public void sendObj(Object o) {
-        try {
+
             try {
-                Thread.sleep(1000);//TODO 我真的是无语，为什么睡会就好了啊
-            } catch (Exception e) {
+                Thread.sleep(800);//TODO 多睡会，少粘包
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
             }
-            objWriter.writeObject(o);
-            objWriter.flush();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+            try {
+                objWriter.writeObject(o);
+                objWriter.flush();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
     }
 
     public String[] hear() throws Exception {//返回一个args,0为消息类型，1为消息信息
@@ -81,7 +84,7 @@ public class MessageHandler {
     }
 
     public Object hearObj() throws Exception {
-        Thread.sleep(100);
+        Thread.sleep(20);
         Object o = null;
         try {
             o = objReader.readObject();

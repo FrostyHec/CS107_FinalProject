@@ -5,13 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bea79dc5-57f0-48e7-b850-a9fcd65d4f0c" name="Changes" comment="我把调用的接口搭了个框架，记得填充内容">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/GameArea/GameArea.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Userfile/1/2022-12-16-0-18-28.ser" beforeDir="false" afterPath="$PROJECT_DIR$/Userfile/1/2022-12-16-0-18-28.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Userfile/1/2022-12-16-0-33-22.ser" beforeDir="false" afterPath="$PROJECT_DIR$/Userfile/1/2022-12-16-0-33-22.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Userfile/UserManager.ser" beforeDir="false" afterPath="$PROJECT_DIR$/Userfile/UserManager.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/InternetGaming/GameArea/MainGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/InternetGaming/GameArea/MainGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Settings/Settings.ser" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Settings/Settings.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/InternetGaming/Internet/Message/MessageHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/InternetGaming/Internet/Message/MessageHandler.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,23 +53,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Downloaded.Files.Path.Enabled": "false",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_directory_selection": "D:/ComputerScience/Java/javaFX/DarkChess/src/main/java/Windows/GameArea",
-    "last_opened_file_path": "D:/ComputerScience/Java/javaFX/DarkChess/src/main/resources/InternetGaming/GameArea",
-    "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.3261391",
-    "settings.editor.selected.configurable": "preferences.keymap"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;last_directory_selection&quot;: &quot;D:/ComputerScience/Java/javaFX/DarkChess/src/main/java/Windows/GameArea&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/ComputerScience/Java/javaFX/DarkChess/src/main/resources/InternetGaming/GameArea&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.3261391&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="Windows.GameArea.Extract" />
@@ -106,7 +101,7 @@
       <recent name="Windows.StartMenu" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="Application.Main2">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Windows.StartMenu.Main" />
       <module name="DarkChess" />
@@ -174,9 +169,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.ServerMain" />
-        <item itemvalue="Application.Main" />
         <item itemvalue="Application.Main2" />
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.ServerMain" />
         <item itemvalue="Application.Test" />
         <item itemvalue="Application.UserManager" />
       </list>

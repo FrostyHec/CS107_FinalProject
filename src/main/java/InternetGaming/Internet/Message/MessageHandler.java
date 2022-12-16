@@ -12,9 +12,9 @@ public class MessageHandler {
     private PrintWriter writer;
     private Socket client;
 
-    public MessageHandler(Socket client,HandlerType handlerType) {
+    public MessageHandler(Socket client, HandlerType handlerType) {
         this.client = client;
-        switch (handlerType){
+        switch (handlerType) {
             case Sever -> {
                 generateOutputStream();
                 generateInputStream();
@@ -25,7 +25,8 @@ public class MessageHandler {
             }
         }
     }
-    private void generateInputStream(){
+
+    private void generateInputStream() {
         //输入流
         try {
             inputStream = client.getInputStream();
@@ -35,7 +36,8 @@ public class MessageHandler {
             throw new RuntimeException(e);
         }
     }
-    private void generateOutputStream(){
+
+    private void generateOutputStream() {
         //输出流
         try {
             outputStream = client.getOutputStream();
@@ -77,7 +79,14 @@ public class MessageHandler {
     }
 
     public Object hearObj() throws Exception {
-        Object o=objReader.readObject();
+        Object o = null;
+        try {
+            o = objReader.readObject();
+        } catch (OptionalDataException e) {
+            if (!e.eof) {
+                throw new RuntimeException(e);
+            }
+        }
         return o;
     }
 }

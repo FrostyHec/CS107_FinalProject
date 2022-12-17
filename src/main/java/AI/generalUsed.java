@@ -234,9 +234,9 @@ public class generalUsed {//这个类是一些静态方法的集合，因为基�
 
     public static boolean mayBeEat(Chess[][] chess,int X,int Y){//在XY处是否可能被吃，注意场上棋子的变化
         int i = 0;
-        if(!chess[X][Y].isTurnOver()){
+        if(!chess[X][Y].isTurnOver()){//防止出现一些奇怪的情况
             return false;
-        }//防止出现一些奇怪的情况
+        }
         for(Chess[] a :chess){
             int j=0;
             for(Chess x : a){
@@ -317,14 +317,85 @@ public class generalUsed {//这个类是一些静态方法的集合，因为基�
                     continue;
                 }
                 number ++;
-                if(x.getColor()==Color.RED)
+                if(x.getColor()==Color.RED) {
                     redScore += x.getRank();
+                }
                 allScore += x.getRank();
             }
         }
         if(number == 0)
             return 0;
-        return (double)(redScore - allScore)/number;
+        return (double)(2*redScore - allScore)/number;
+    }
+
+
+    public static boolean isGonnaDie(Chess[][] chess, Color color){
+        int s = 95;
+        for(Chess[] c : chess){
+            for(Chess x : c){
+                if(x != null && x.getColor() == color){
+                    s -= x.getScore();
+                }
+            }
+        }
+
+
+        for(int i=0;i<chess.length;i++){
+            for(int j=0;j<chess[i].length;j++){
+                Chess x = chess[i][j];
+                if(x != null && x.isTurnOver() && x.getColor() == color){
+                    if(mayBeEat(chess,i,j) && x.getScore() + s >= 60 ){
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+
+
+    public static int[][] dyingMove(Chess[][] chess, Color color){
+        ArrayList<int[]> dc = new ArrayList<>();
+
+        int s = 95;
+        for(Chess[] c : chess){
+            for(Chess x : c){
+                if(x != null && x.getColor() == color){
+                    s -= x.getScore();
+                }
+            }
+        }
+
+        for(int i=0;i<chess.length;i++){
+            for(int j=0;j<chess[i].length;j++){
+                Chess x = chess[i][j];
+                if(x != null && x.isTurnOver() && x.getColor() == color){
+                    if(mayBeEat(chess,i,j) && x.getScore() + s >= 60 ){
+                        int[] temp = new int[2];
+                        temp[0] = i;
+                        temp[1] = j;
+                        dc.add(temp);
+                    }
+                }
+            }
+        }
+
+        int[][] def = new int[1][2];
+        def[0][0] = def[0][1] = -1;
+
+        if(dc.size() >1){
+            return Selection.highestOnce(chess,color);
+        }else if(dc.size() == 0){
+            return def;
+        }else {
+            Chess[][] virtual = virtualChessBoard(chess);
+            if(canRun(virtual,dc.get(0)[0],dc.get(0)[1])){
+                return Run(virtual,dc.get(0)[0],dc.get(0)[1]);
+            }else{
+                return Selection.highestOnce(chess,color);
+            }
+        }
     }
 
 
@@ -362,14 +433,12 @@ public class generalUsed {//这个类是一些静态方法的集合，因为基�
                             Score += (virtualChessboard_1[move[1][0]][move[1][1]].getScore()
                                     + virtualChessboard_1[move[1][0]][move[1][1]].getRank());
                     }else{
-                        if (virtualChessboard_1[move[1][0]][move[1][1]].getColor() == oppositeColor(color)) {
-                            Score += (virtualChessboard_1[move[1][0]][move[1][1]].getScore()
-                                    + virtualChessboard_1[move[1][0]][move[1][1]].getRank());
-                        }else{
-                            Score -= (virtualChessboard_1[move[1][0]][move[1][1]].getScore()
-                                    + virtualChessboard_1[move[1][0]][move[1][1]].getRank());
+
+                        if(color == Color.RED){
+                            Score += averageScore(virtualChessboard_1) + 2;
+                        }else {
+                            Score -= averageScore(virtualChessboard_1) + 2;
                         }
-                        Score /= 2;
                     }
                 }
                 move(virtualChessboard_1,move);
@@ -412,4 +481,110 @@ public class generalUsed {//这个类是一些静态方法的集合，因为基�
             chessboard[move[0][0]][move[0][1]] = null;
         }
     }
+
+
+    public static int[][] bestMove2(Chess[][] virtualChessboard,Color color,ArrayList<int[][]> moves){//两步最优
+        //比较各个行棋方法最低得分中的最高分，濒死状态另说
+
+        double Score,max = 0;
+        int[][] ans = new int[0][0];
+
+        for(int[][] move : moves){
+            Score = 0d;
+            Chess[][] virtualChessboard_1 = generalUsed.virtualChessBoard(virtualChessboard);
+            if(move.length == 2) {
+                if(virtualChessboard_1[move[1][0]][move[1][1]] != null) {
+                    if(virtualChessboard_1[move[1][0]][move[1][1]].isTurnOver()) {
+                        Score += (virtualChessboard_1[move[1][0]][move[1][1]].getScore()
+                                + virtualChessboard_1[move[1][0]][move[1][1]].getRank());
+                    }else{
+                        if (virtualChessboard_1[move[1][0]][move[1][1]].getColor() == oppositeColor(color)) {
+                            Score += (virtualChessboard_1[move[1][0]][move[1][1]].getScore()
+                                    + virtualChessboard_1[move[1][0]][move[1][1]].getRank());
+                        }else{
+                            Score -= (virtualChessboard_1[move[1][0]][move[1][1]].getScore()
+                                    + virtualChessboard_1[move[1][0]][move[1][1]].getRank());
+                        }
+
+                    }
+                }
+                move(virtualChessboard_1,move);
+            }else if(move.length == 1){
+                move(virtualChessboard_1,move);
+            }
+
+            int min1 = 0, min2 = 0;
+            for(int i=0;i<virtualChessboard_1.length;i++){
+                for(int j=0;j<virtualChessboard_1[i].length;j++){
+                    if(virtualChessboard_1[i][j] == null || !virtualChessboard_1[i][j].isTurnOver()) {
+                        continue;
+                    }
+                    if(virtualChessboard_1[i][j].getColor() == color && mayBeEat(virtualChessboard_1,i,j)){
+                        if(virtualChessboard_1[i][j].getScore() + virtualChessboard_1[i][j].getRank() > min1) {
+                            Score += min2;
+                            min2 = min1;
+                            min1 = virtualChessboard_1[i][j].getScore() + virtualChessboard_1[i][j].getRank();
+                            Score -= min1;
+                        }
+                    }
+                }
+            }
+
+            if(Score > max){
+                max = Score;
+                ans = move;
+            }
+
+        }
+
+        return ans;
+    }
+
+
+    public static boolean canRun(Chess[][] virtualChessboard,int x,int y){
+        int[][] move = new int[2][2];
+        move[0][0] = x;
+        move[0][1] = y;
+
+        for(int[] xy : virtualChessboard[x][y].possibleMove(virtualChessboard,x,y)){
+            Chess[][] v = virtualChessBoard(virtualChessboard);
+
+            if(xy[0] != -1){
+                move[1][0] = xy[0];
+                move[1][1] = xy[1];
+                move(v,move);
+            }
+
+            if(mayBeEat(v,xy[0],xy[1])){
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+
+    public static int[][] Run(Chess[][] virtualChessboard,int x,int y){
+        int[][] ans = new int[2][2];
+        ans[0][0] = x;
+        ans[0][1] = y;
+
+        for(int[] xy : virtualChessboard[x][y].possibleMove(virtualChessboard,x,y)){
+            Chess[][] v = virtualChessBoard(virtualChessboard);
+
+            if(xy[0] != -1){
+                ans[1][0] = xy[0];
+                ans[1][1] = xy[1];
+                move(v,ans);
+            }
+
+            if(! mayBeEat(v,xy[0],xy[1])){
+                return ans;//TODO:还可以继续优化
+            }
+        }
+
+
+        return ans;
+    }
+
 }

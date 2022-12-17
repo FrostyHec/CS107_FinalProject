@@ -105,11 +105,20 @@ public class Selection {//做剪枝算法的时候可能要用到,也是一堆st
 
     public static int[][] bestTwice(Chess[][] virtualChessboard,Color color,ArrayList<int[][]> moves){//还需要优化
 
-        //TODO:濒死状态的玩法
+        int[][] move;
+
+        if(generalUsed.isGonnaDie(virtualChessboard,color)){
+            move = generalUsed.dyingMove(virtualChessboard,color);
+            if(move.length == 2){
+                if(move[1][0] != -1){
+                    return move;
+                }
+            }
+        }
 
         Random random = new Random();
         int a = random.nextInt(2);
-        int[][] move;
+
         if(a > 0) {
             move = generalUsed.bestMove(virtualChessboard, color, moves);
         }else {

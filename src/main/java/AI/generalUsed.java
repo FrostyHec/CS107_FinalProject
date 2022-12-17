@@ -2,8 +2,7 @@ package AI;
 
 import GameLogic.*;
 
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.*;
 
 public class generalUsed {//这个类是一些静态方法的集合，因为基本上AI都要用到，所以拿出来放一起
 
@@ -568,8 +567,25 @@ public class generalUsed {//这个类是一些静态方法的集合，因为基�
         int[][] ans = new int[2][2];
         ans[0][0] = x;
         ans[0][1] = y;
+        ans[1][0] = -1;
+        ans[1][1] = -1;
 
-        for(int[] xy : virtualChessboard[x][y].possibleMove(virtualChessboard,x,y)){
+        int[][] t = virtualChessboard[x][y].possibleMove(virtualChessboard,x,y);
+
+        Random r = new Random();
+        for(int i=0;i<5;i++) {
+            int a = r.nextInt(3);
+            int[] temp = new int[2];
+            temp[0] = t[0][0];
+            temp[1] = t[0][1];
+            t[0][0] = t[a + 1][0];
+            t[0][1] = t[a + 1][1];
+            t[a + 1][0] = temp[0];
+            t[a + 1][1] = temp[1];
+        }
+
+
+        for(int[] xy : t){
             Chess[][] v = virtualChessBoard(virtualChessboard);
 
             if(xy[0] != -1){
@@ -579,7 +595,7 @@ public class generalUsed {//这个类是一些静态方法的集合，因为基�
             }
 
             if(! mayBeEat(v,xy[0],xy[1])){
-                return ans;//TODO:还可以继续优化
+                return ans;
             }
         }
 

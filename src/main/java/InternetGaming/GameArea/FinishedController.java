@@ -1,11 +1,12 @@
 package InternetGaming.GameArea;
+
 import InternetGaming.Internet.ClientData;
 import InternetGaming.Internet.Transmitter;
-import UserFiles.User;
-import UserFiles.UserManager;
-import Windows.GameArea.GameArea;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
@@ -13,9 +14,16 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 public class FinishedController extends Windows.GameArea.FinishedController {
+    public Button btnReGame;
+
     public FinishedController() {
-        Transmitter.finishedController=this;
-        gameArea=Transmitter.gameArea;
+        Transmitter.finishedController = this;
+        gameArea = Transmitter.gameArea;
+    }
+
+    @FXML
+    public void initialize() {
+        btnReGame.setVisible(false);
     }
 
     public void show(Stage stage) {
@@ -32,7 +40,12 @@ public class FinishedController extends Windows.GameArea.FinishedController {
         });
     }
 
-    public void setWinner(ClientData cd){
+    @Override
+    public void gotoMain(ActionEvent event) {
+        ((Stage) btnReGame.getScene().getWindow()).close();
+    }
+
+    public void setWinner(ClientData cd) {
         try {
             lbWinner.setText(cd.getName() + t.getString("GameOver.win"));
             try {

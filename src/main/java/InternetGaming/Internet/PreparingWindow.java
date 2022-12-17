@@ -6,6 +6,7 @@ import InternetGaming.Internet.Message.PlayerType;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -14,6 +15,7 @@ import java.io.IOException;
 
 public class PreparingWindow {
     public AnchorPane preparingPane;
+    public Button btnStartGame;
     Client c;
 
     private PlayerType thisPlayerType;
@@ -34,7 +36,7 @@ public class PreparingWindow {
     }
 
     public void ableToStartGame() {
-//TODO 能够开始游戏
+        btnStartGame.setVisible(true);
     }
 
     public void startGame() {
@@ -46,7 +48,7 @@ public class PreparingWindow {
                 throw new RuntimeException(e);
             }
         });
-        Transmitter.playerType=thisPlayerType;
+        Transmitter.playerType = thisPlayerType;
         Platform.runLater(() -> {
             ((Stage) preparingPane.getScene().getWindow()).close();
         });
@@ -58,6 +60,6 @@ public class PreparingWindow {
     }
 
     public void startGameClick(ActionEvent event) {
-        c.getM().send(MessageType.StartGame,"");
+        c.getM().send(MessageType.StartGame, "");
     }
 }

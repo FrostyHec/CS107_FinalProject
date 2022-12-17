@@ -3,6 +3,7 @@ package InternetGaming.Internet;
 import GameLogic.Game;
 import InternetGaming.Internet.Message.*;
 import javafx.application.Platform;
+import javafx.stage.Window;
 
 import java.io.IOException;
 import java.net.Socket;
@@ -133,6 +134,5 @@ public class Client extends ClientData {
             Platform.runLater(() -> Transmitter.gameArea.searchWinner(message));
         }
     }
-
 }
 

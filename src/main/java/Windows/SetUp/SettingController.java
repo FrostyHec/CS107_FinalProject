@@ -41,6 +41,7 @@ public class SettingController {
     private final SoundsSettings soundsSettings = new SoundsSettings();
     public Label lbPVP;
     public Label lbPVE;
+    public RadioButton btnStartPromptLabel;
     private Settings settings;
     public Button btnSound;
     public RadioButton btnPVPCanRetract;
@@ -277,6 +278,7 @@ public class SettingController {
         public void save() {
             //是否开启动画特效
             settings.visualSettings.setVisualEffect(btnStartVisualEffect.isSelected());
+            settings.visualSettings.setVisualAlarm(btnStartPromptLabel.isSelected());
             //保存画面风格
             settings.visualSettings.setSkinName(SkinList.valueOf(cbStyleSheet.getValue()));
             //保存语言
@@ -287,6 +289,7 @@ public class SettingController {
         public void initialize() {
             lbVisualEffect.setText(t.getString("Visual.visualEffect"));
             btnStartVisualEffect.setText(t.getString("Visual.startVisualEffect"));
+            btnStartPromptLabel.setText(t.getString("Visual.starPromptLabel"));
             lbStyleSheet.setText(t.getString("Visual.styleSheet"));
             lbLanguageChange.setText(t.getString("Visual.languageChange"));
             for (SkinList d : SkinList.values()) {
@@ -297,7 +300,8 @@ public class SettingController {
             }
             cbStyleSheet.setValue(settings.visualSettings.getSkinInList().toString());
             cbLanguage.setValue(Language.getLanguage(settings.visualSettings.getLanguage()).getName());
-            btnStartVisualEffect.setSelected(btnStartVisualEffect.isSelected());
+            btnStartVisualEffect.setSelected(settings.visualSettings.isVisualEffect());
+            btnStartPromptLabel.setSelected(settings.visualSettings.isVisualAlarm());
         }
     }
 

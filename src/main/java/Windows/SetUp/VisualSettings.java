@@ -10,6 +10,7 @@ public class VisualSettings implements Serializable {
     private Locale language;
 
     private boolean visualEffect;
+    private boolean visualAlarm;
 
     public String getSkin() {
         return skin.getName();
@@ -41,5 +42,13 @@ public class VisualSettings implements Serializable {
 
     public void setLanguage(Language language) {
         setLanguage(language.getLocale());
+    }
+
+    public boolean isVisualAlarm() {
+        return visualAlarm;
+    }
+
+    public void setVisualAlarm(boolean visualAlarm) {
+        this.visualAlarm = visualAlarm;
     }
 }

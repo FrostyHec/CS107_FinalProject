@@ -8,6 +8,7 @@ import InternetGaming.Internet.Message.MessageHandler;
 import InternetGaming.Internet.Message.MessageType;
 import InternetGaming.Internet.Message.PlayerType;
 import InternetGaming.Internet.Transmitter;
+import UserFiles.User;
 import Windows.GameArea.ClickResult;
 import Windows.GameArea.GameState;
 import javafx.scene.input.KeyEvent;
@@ -18,11 +19,17 @@ import javafx.stage.Stage;
 public class GameArea extends Windows.GameArea.GameArea {
     private PlayerType type;
     private Color color = Color.UNKNOWN;
+    private PlayerType winner;
+
+    private void banAnimation(){
+        settings.visualSettings.setVisualEffect(false);
+    }
 
     public GameArea() throws Exception {
         super();
         setType(Transmitter.playerType);
         System.out.println(type);
+        banAnimation();
     }
 
     public void setType(PlayerType type) {
@@ -98,19 +105,42 @@ public class GameArea extends Windows.GameArea.GameArea {
     public void winnerExists(Player player) {
         //禁用这个方法
     }
+
+    @Override
+    protected void setScore() {
+        if (type == PlayerType.Viewer) {
+            return;
+        }
+        User u = userManager.nowPlay();
+        u.getScoreList().addInternetScore(type.equals(winner));
+        u.getTimeList().addSec(game.getTotalTime().toSeconds());
+    }
+
+    @Override
+    public void mainExit() {
+        Transmitter.client.close();
+        if (Transmitter.serverMain != null) {
+            Transmitter.serverMain.closeSever();
+        }
+        Transmitter.refreshAll();
+        super.mainExit();
+    }
+
     private void someoneWin() {
         MessageHandler m = Transmitter.client.getM();
         m.send(MessageType.GameOver, type.toString());
     }
-    public void searchWinner(String message){
-        PlayerType winner=PlayerType.valueOf(message);
-        for (ClientData cd: Transmitter.client.getTotalClient()) {
-            if(cd.getPlayerTurns().equals(winner)){
+
+    public void searchWinner(String message) {
+        winner = PlayerType.valueOf(message);
+        for (ClientData cd : Transmitter.client.getTotalClient()) {
+            if (cd.getPlayerTurns().equals(winner)) {
                 showWinner(cd);
             }
         }
     }
-    private void showWinner(ClientData cd){
+
+    private void showWinner(ClientData cd) {
         Stage s2 = new Stage();
         s2.initOwner(pausePane.getScene().getWindow());
         s2.initModality(Modality.WINDOW_MODAL);
@@ -118,6 +148,7 @@ public class GameArea extends Windows.GameArea.GameArea {
         new FinishedController().show(s2);
         Transmitter.finishedController.setWinner(cd);
     }
+
     protected class ChessMove extends Windows.GameArea.GameArea.ChessMove {
         @Override
         protected void analyzeClickResult(ClickResult clickResult) {
@@ -125,7 +156,15 @@ public class GameArea extends Windows.GameArea.GameArea {
             switch (clickResult) {
                 case Player1Win, Player2Win -> {
                     sendMsg();
-                    someoneWin();
+                    new Thread(() -> {
+                        try {
+                            Thread.sleep(300);
+                            someoneWin();
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+
+                    }).start();
                 }
                 case Finished -> {
                     sendMsg();
@@ -139,6 +178,16 @@ public class GameArea extends Windows.GameArea.GameArea {
         @Override
         public void refreshIcon() {
             //TODO 完成图标刷新与用户刷新
+        }
+
+        @Override
+        public void setBtnCheat() {
+            btnCheat.setVisible(false);
+        }
+
+        @Override
+        public void setBtnRetract() {
+            btnRetract.setVisible(false);
         }
     }
 }

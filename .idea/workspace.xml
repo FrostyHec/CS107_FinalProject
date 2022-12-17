@@ -5,19 +5,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bea79dc5-57f0-48e7-b850-a9fcd65d4f0c" name="Changes" comment="我把调用的接口搭了个框架，记得填充内容">
-      <change afterPath="$PROJECT_DIR$/src/main/java/InternetGaming/GameArea/FinishedController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/GameArea/FinishedWindow.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Windows/GameArea/Extract/Animation/ChessAnimation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Windows/GameArea/Extract/Animation/PromptAnimation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Userfile/UserManager.ser" beforeDir="false" afterPath="$PROJECT_DIR$/Userfile/UserManager.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/GameLogic/aiMode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GameLogic/aiMode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/InternetGaming/GameArea/FinishedController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/InternetGaming/GameArea/FinishedController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/InternetGaming/GameArea/GameArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/InternetGaming/GameArea/GameArea.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/InternetGaming/Internet/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/InternetGaming/Internet/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/InternetGaming/Internet/ClientData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/InternetGaming/Internet/ClientData.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/InternetGaming/Internet/LinkingWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/InternetGaming/Internet/LinkingWindow.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/InternetGaming/Internet/Message/MessageHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/InternetGaming/Internet/Message/MessageHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/InternetGaming/Internet/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/InternetGaming/Internet/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/InternetGaming/Internet/ServerMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/InternetGaming/Internet/ServerMain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/InternetGaming/Internet/PreparingWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/InternetGaming/Internet/PreparingWindow.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/InternetGaming/Internet/Transmitter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/InternetGaming/Internet/Transmitter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Windows/GameArea/FinishedController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Windows/GameArea/FinishedController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Windows/GameArea/GameArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Windows/GameArea/GameArea.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Windows/SetUp/SettingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Windows/SetUp/SettingController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Windows/SetUp/VisualSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Windows/SetUp/VisualSettings.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/InternetGaming/GameArea/FinishedWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/GameArea/FinishedWindow.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/InternetGaming/Internet/PreparingWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/InternetGaming/Internet/PreparingWindow.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Language/SetUpLanguage_zh_CN.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Language/SetUpLanguage_zh_CN.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Settings/Settings.ser" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Windows/GameArea/GameArea.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Windows/GameArea/GameArea.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Windows/SetUp/SetUp.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Windows/SetUp/SetUp.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +83,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "last_directory_selection": "D:/ComputerScience/Java/javaFX/DarkChess/src/main/java/InternetGaming/Internet",
-    "last_opened_file_path": "D:/ComputerScience/Java/javaFX/DarkChess/src/main/resources/InternetGaming/GameArea",
+    "last_opened_file_path": "D:/ComputerScience/Java/javaFX/Text001",
     "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.3261391",
@@ -113,7 +122,7 @@
       <recent name="Windows.StartMenu" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="Application.Test">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Windows.StartMenu.Main" />
       <module name="DarkChess" />
@@ -181,10 +190,10 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main2" />
-        <item itemvalue="Application.Main" />
-        <item itemvalue="Application.ServerMain" />
         <item itemvalue="Application.Test" />
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Main2" />
+        <item itemvalue="Application.ServerMain" />
         <item itemvalue="Application.UserManager" />
       </list>
     </recent_temporary>

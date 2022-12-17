@@ -13,4 +13,14 @@ public class Transmitter {
     public static PlayerType playerType;
 
     public static FinishedController finishedController;
+    public static ServerMain serverMain;
+
+    public static void refreshAll(){
+        client=null;
+        preparingWindow=null;
+        gameArea=null;
+        playerType=null;
+        finishedController=null;
+        serverMain=null;
+    }
 }

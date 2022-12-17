@@ -8,6 +8,6 @@
 
 <AnchorPane fx:id="preparingPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="InternetGaming.Internet.PreparingWindow">
    <children>
-      <Button layoutX="259.0" layoutY="299.0" mnemonicParsing="false" onAction="#startGameClick" text="开始游戏" />
+      <Button fx:id="btnStartGame" layoutX="259.0" layoutY="299.0" mnemonicParsing="false" onAction="#startGameClick" text="开始游戏" />
    </children>
 </AnchorPane>

@@ -1,19 +1,24 @@
 package Windows.GameArea;
 
 import GameLogic.*;
+import GameLogic.Color;
 import UserFiles.User;
 import UserFiles.UserManager;
+import Windows.GameArea.Extract.Animation.ChessAnimation;
+import Windows.GameArea.Extract.Animation.PromptAnimation;
 import Windows.GameArea.Extract.Music.MusicPlayer;
 import Windows.GameArea.Extract.Music.Music.RandomPlayer;
 import Windows.GameArea.Extract.Music.SoundEffect.ClickEffect;
 import Windows.GameArea.Extract.Pursuance;
 import Windows.SetUp.Settings;
 import Windows.StartMenu.Main;
+import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -22,20 +27,27 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import units.Play;
 import units.Retract;
 import units.Serialize;
 
+import java.awt.*;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.nio.file.*;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.*;
+import java.util.List;
 
 public class GameArea {
+    public Pane mainPain;
     private String defaultAvatar = "src/main/resources/Windows/images/UserImage/tempUser.png";
     private String defaultComputerAvatar = "src/main/resources/Windows/images/UserImage/ComputerUser.png";
     private boolean isHumanFirst;
@@ -78,7 +90,7 @@ public class GameArea {
     private final GraphicHandler graphicHandler = new GraphicHandler();
     private final TextHandler textHandler = new TextHandler();
 
-    private final UserManager userManager;
+    protected final UserManager userManager;
 
     private String initialSaveName;
 
@@ -86,7 +98,7 @@ public class GameArea {
     protected SoundsHandler soundsHandler = new SoundsHandler();
     private int difficulty;
     private boolean isHumanWin;
-    private Settings settings = Settings.read(Settings.url);
+    protected Settings settings = Settings.read(Settings.url);
     private int playSleepTime = 500;
 
     public GameArea() throws Exception {
@@ -160,8 +172,8 @@ public class GameArea {
             }).start();
             chessChanged();
         }
-        if(game instanceof aiMode){
-            isHumanFirst=game.getHumanPlayer().equals(game.getPlayer1());
+        if (game instanceof aiMode) {
+            isHumanFirst = game.getHumanPlayer().equals(game.getPlayer1());
         }
         chessChanged();
         game.bd();//补丁
@@ -177,9 +189,24 @@ public class GameArea {
     }
 
     protected void chessChanged() {
-        graphicHandler.refresh();
         textHandler.refreshScore();
         gameStateHandler.changed();
+        if (settings.visualSettings.isVisualEffect()) {//是否有视觉效果
+            new Thread(() -> {
+                try {
+                    Thread.sleep(400);//视觉效果写死了是400ms
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                Platform.runLater(() -> {
+                    graphicHandler.refresh();
+                });
+            }).start();
+        } else {
+            graphicHandler.refresh();
+            textHandler.refreshScore();
+            gameStateHandler.changed();
+        }
     }
 
     public void cheatClick() {
@@ -233,7 +260,7 @@ public class GameArea {
         forceExit();
     }
 
-    private void setScore() {
+    protected void setScore() {
         if (game instanceof aiMode) {
             User u = userManager.nowPlay();
             u.getScoreList().addScore(Difficulty.getDifficulty(difficulty), isHumanWin);
@@ -340,7 +367,7 @@ public class GameArea {
         private final int selectedSize = squareSize - 8;
         private int column;
         private int row;
-        private int aiSleep=300;//TODO
+        private int aiSleep = 300;//TODO
 
         private boolean generateRowAndColumn(double x, double y) {
             column = (int) x / squareSize;
@@ -384,7 +411,6 @@ public class GameArea {
                     System.out.println("暂思考完毕");
                     int res = game.aiMove();
                     Platform.runLater(() -> new ChessMove().analyzeAIResult(ClickResult.getClickResult(res)));//判断ai是不是赢了
-                    Platform.runLater(GameArea.this::chessChanged);
                     btnRetract.setDisable(false);
                     Chessboard.setDisable(false);
                 } catch (Exception e) {
@@ -399,13 +425,15 @@ public class GameArea {
                 case Player1Win -> winnerExists(game.getPlayer1());
                 case Player2Win -> winnerExists(game.getPlayer2());
                 case Finished -> {
-
+                    //graphicHandler.playMoveAnimation();
                 }
                 default -> {
                     throw new RuntimeException("Illegal AI move result");
                 }
             }
+            chessChanged();
         }
+
 
         private void showSelectedChess(int row, int column) {
 
@@ -444,8 +472,8 @@ public class GameArea {
             switch (clickResult) {
                 case Player1Win -> winnerExists(game.getPlayer1());
                 case Player2Win -> winnerExists(game.getPlayer2());
-
                 case Finished -> {
+                    graphicHandler.playMoveAnimation();
                     if (game instanceof aiMode) {
                         aiMove();//move完会自己调用棋盘刷新
                     }
@@ -453,6 +481,7 @@ public class GameArea {
                 case Continue -> {
                     showSelectedChess(row, column);
                     showPossibleMove(row, column);
+                    graphicHandler.chessMoveWithMouse(row, column);
                     needRefresh = false;
                 }
                 case UnknownError -> {
@@ -463,6 +492,7 @@ public class GameArea {
             if (needRefresh) {
                 chessChanged();
             }
+
         }
 
         public static void resetCount() {
@@ -470,7 +500,6 @@ public class GameArea {
         }
 
     }
-
 
     class GameStateHandler {
         private GameState previousGameState;
@@ -532,12 +561,25 @@ public class GameArea {
 
     @SuppressWarnings("RedundantLabeledSwitchRuleCodeBlock")
     protected class GraphicHandler {
+        Alarm alarm = new Alarm();
+
         public int getGraphicX(int column, int size) {
             return column * squareSize + (squareSize - size) / 2;
         }
 
         public int getGraphicY(int row, int size) {
             return row * squareSize + (squareSize - size) / 2;
+        }
+
+        public int[] getGraphicPositions(int row, int column) {
+            int[] i = new int[2];
+            i[0] = getGraphicX(column, chessSize);
+            i[1] = getGraphicY(row, chessSize);
+            return i;
+        }
+
+        private int generateIndex(int row, int column) {
+            return row * 4 + column;
         }
 
         public void refreshChessboard() {
@@ -557,8 +599,9 @@ public class GameArea {
 
                     //有很多，先判断是不是空，再判断是否翻开来，再判断颜色，最后判断棋子种类
                     if (thisChess == null) {//空
+                        Chessboard.getChildren().add(c);
                         continue;
-                    }
+                    }//TODO Changed in 2022.12.17
 
                     if (!thisChess.isTurnOver()) {//没翻开
                         c.setId("UnTurnedChess");
@@ -571,6 +614,19 @@ public class GameArea {
                 }
             }
         }//refreshChessboard 用来刷新整个棋盘画面
+
+        private void playMoveAnimation() {//TODO 完全失效
+            int[][] moves = game.getMoves().get(game.getMoves().size() - 1);
+            if (moves.length == 1) {//翻棋
+                ChessAnimation.fade(Chessboard, generateIndex(moves[0][0], moves[0][1]), generateChessID(game.getChess(moves[0][0], moves[0][1])));
+
+            } else if (moves.length == 2) {//吃子
+                ChessAnimation.move(Chessboard, generateIndex(moves[0][0], moves[0][1]),
+                        getGraphicPositions(moves[1][0], moves[1][1]));
+            } else {
+                throw new RuntimeException("Invalid move");
+            }
+        }
 
         private String generateChessID(Chess legalChess) {
             //命名规范: R/B+General/Advisor/Minister/Chariot/Horse/Cannon/Soldier+Chess
@@ -608,6 +664,46 @@ public class GameArea {
             refreshColor();
             refreshChessboard();
             refreshDiedChess();
+            if (settings.visualSettings.isVisualAlarm()) {
+                alarm.showAlarm();
+            }
+        }
+
+        class Alarm {
+            String forwardPath = "src/main/resources/Windows/Media/";
+            boolean redKingDied;
+            boolean blackKingDied;
+
+            private void showAlarm() {//TODO 播放视频
+
+            }
+
+            private void scoreAlarm() {
+
+            }
+
+            private void kingCaptured() {
+                int[][] d = game.getDiedChess();
+                if (!redKingDied && d[0][6] == 0) {//红方第一次寄了老帅
+                    playMedia(" ");
+                }
+                if (!blackKingDied && d[1][6] == 0) {//黑方
+                    playMedia(" ");
+                }
+            }
+
+            private void playMedia(String name) {//以后再考虑播放视频
+                MediaPlayer m = null;
+                m = new MediaPlayer(new Media(forwardPath+name));
+                MediaView mv = new MediaView(m);
+                mv.setX(400);
+                mv.setY(400);
+                mainPain.getChildren().add(mv);
+                m.play();
+                m.setOnEndOfMedia(() -> {
+                    Platform.runLater(() -> mainPain.getChildren().remove(mv));
+                });
+            }
         }
 
         public void refreshColor() {
@@ -825,6 +921,31 @@ public class GameArea {
             playerPane.getChildren().set(numberIndex, d);
         }
 
+        public void chessMoveWithMouse(int row, int column) {//TODO 失效，有严重bug
+//            int x=getGraphicX(column,chessSize);
+//            int y=getGraphicY(row,chessSize);
+//            double expansion=1.1;
+//            Node n= Chessboard.getChildren().get(generateIndex(row,column));
+//            Chessboard.getChildren().remove(n);
+//            ImageView i=(ImageView)n;
+//            double delta=i.getFitHeight()*((expansion-1)/2);//TODO rawUse
+//            i.setX(i.getX()-delta);
+//            i.setY(i.getY()-delta);
+//            i.setFitHeight(i.getFitHeight()*expansion);
+//            i.setFitWidth(i.getFitWidth()*expansion);
+//            Chessboard.getChildren().add(i);
+//            Node node=Chessboard.getChildren().get(Chessboard.getChildren().size()-1);
+//            node.setOnMouseDragged((e)->{
+////                node.setLayoutX(e.getX());
+////                node.setLayoutY(e.getY());
+//                double dX=e.getX()-x;
+//                double dY=e.getY()-y;
+//                double newX=node.getLayoutX()+dX;
+//                double newY=node.getLayoutY()+dY;
+//                node.relocate(newX+165,newY+125);
+//            });
+//            n.setOnMouseDragReleased(GameArea.this::chessMove);
+        }
     }
 
     class TextHandler {

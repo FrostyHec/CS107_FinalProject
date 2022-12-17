@@ -36,28 +36,30 @@ public class LinkingWindow {
             ServerMain s = new ServerMain();
             port = Integer.parseInt(portField.getText());
             s.startSever(port);
+            Transmitter.serverMain =s;
         } catch (NumberFormatException nb) {
-            linkingMessage.setText("连接失败！请检查您的输入是否正确");
+            linkingMessage.setText("创建失败！请检查您的输入是否正确");
             return;
         } catch (Exception e) {
-            linkingMessage.setText("连接失败！端口号大于1000为宜，请更换端口号尝试");
+            linkingMessage.setText("创建失败！端口号大于1000为宜，请更换端口号尝试");
             return;
         }
-        startLink("127.0.0.1", port);
-//        new Thread(() -> {
-//            try {
-//                Thread.sleep(1000);
-//                Platform.runLater(()-> {
-//                    try {
-//                        startLink("127.0.0.1", port);
-//                    } catch (IOException e) {
-//                        throw new RuntimeException(e);
-//                    }
-//                });
-//            } catch (InterruptedException e) {
-//                throw new RuntimeException(e);
-//            }
-//        });
+        linkingMessage.setText("服务器创建成功！");
+//        startLink("127.0.0.1", port);
+        new Thread(() -> {
+            try {
+                Thread.sleep(1000);
+                Platform.runLater(() -> {
+                    try {
+                        startLink("127.0.0.1", port);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }).start();
     }
 
     public void startLink() throws IOException {
@@ -75,8 +77,16 @@ public class LinkingWindow {
         }
         Transmitter.client = c;
         linkingMessage.setText("连接成功！");
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("PreparingWindow.fxml"));
-        ((Stage) portField.getScene().getWindow()).setScene(new Scene(fxmlLoader.load()));
+        new Thread(() -> {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("PreparingWindow.fxml"));
+            Platform.runLater(() -> {
+                try {
+                    ((Stage) portField.getScene().getWindow()).setScene(new Scene(fxmlLoader.load()));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+        }).start();
 
     }
 

@@ -52,7 +52,6 @@ public class aiMode extends Game{
             }
 
             move = getAIPlayer().move(chess);
-
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

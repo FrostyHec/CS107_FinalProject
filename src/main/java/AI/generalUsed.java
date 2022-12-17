@@ -66,23 +66,28 @@ public class generalUsed {//这个类是一些静态方法的集合，因为基�
     
     public static ArrayList<int[][]> enhancedCanClick(Color color,Chess[][] chess){//舍弃一些非常无聊的子,用于枚举时进行优化
         ArrayList<int[][]> eCanClick = canClick(color,chess);
+        ArrayList<int[][]> remove = new ArrayList<>();
 
         it:for(int[][] move : eCanClick){
             if(move.length == 1){
                 for(int[]xy : surround(move[0])){//不要翻大棋周围的棋
                     if(chess[xy[0]][xy[1]] != null && chess[xy[0]][xy[1]].isTurnOver() && chess[xy[0]][xy[1]].getRank()>4){
-                        eCanClick.remove(move);
+                        remove.add(move);
                         continue it;
                     }
                 }
                 for(int[]xy : pow(move[0],chess)){
                     if(chess[xy[0]][xy[1]] != null && chess[xy[0]][xy[1]].isTurnOver()
                             && (chess[xy[0]][xy[1]].getRank()>5 || chess[xy[0]][xy[1]].getRank() == 2)){
-                        eCanClick.remove(move);
+                        remove.add(move);
                         continue it;
                     }
                 }
             }
+        }
+
+        for(int[][]i : remove){
+            eCanClick.remove(i);
         }
 
         return eCanClick;
@@ -200,9 +205,9 @@ public class generalUsed {//这个类是一些静态方法的集合，因为基�
             }
         }
 
-        if (xy[0] < 8) {
+        if (xy[0] < 7) {
             int[] temp1 = new int[2];
-            if (xy[1] < 4) {
+            if (xy[1] < 3) {
                 int[] temp2 = new int[2];
                 temp1[0] = xy[0] + 1;
                 temp1[1] = xy[1];
@@ -216,7 +221,7 @@ public class generalUsed {//这个类是一些静态方法的集合，因为基�
                 ans.add(temp1);
             }
         } else {
-            if (xy[1] < 4) {
+            if (xy[1] < 3) {
                 int[] temp2 = new int[2];
                 temp2[0] = xy[0];
                 temp2[1] = xy[1] + 1;
@@ -345,15 +350,27 @@ public class generalUsed {//这个类是一些静态方法的集合，因为基�
     public static int[][] bestMove(Chess[][] virtualChessboard,Color color,ArrayList<int[][]> moves){//两步最优
         //比较各个行棋方法最低得分中的最高分，濒死状态另说
 
-        double Score = 0,max = 0;
+        double Score,max = 0;
         int[][] ans = new int[0][0];
 
         for(int[][] move : moves){
+            Score = 0d;
             Chess[][] virtualChessboard_1 = generalUsed.virtualChessBoard(virtualChessboard);
             if(move.length == 2) {
                 if(virtualChessboard_1[move[1][0]][move[1][1]] != null) {
-                    Score += (virtualChessboard_1[move[1][0]][move[1][1]].getScore()
-                            + virtualChessboard_1[move[1][0]][move[1][1]].getRank());
+                    if(virtualChessboard_1[move[1][0]][move[1][1]].isTurnOver()) {
+                            Score += (virtualChessboard_1[move[1][0]][move[1][1]].getScore()
+                                    + virtualChessboard_1[move[1][0]][move[1][1]].getRank());
+                    }else{
+                        if (virtualChessboard_1[move[1][0]][move[1][1]].getColor() == oppositeColor(color)) {
+                            Score += (virtualChessboard_1[move[1][0]][move[1][1]].getScore()
+                                    + virtualChessboard_1[move[1][0]][move[1][1]].getRank());
+                        }else{
+                            Score -= (virtualChessboard_1[move[1][0]][move[1][1]].getScore()
+                                    + virtualChessboard_1[move[1][0]][move[1][1]].getRank());
+                        }
+                        Score /= 2;
+                    }
                 }
                 move(virtualChessboard_1,move);
             }else if(move.length == 1){

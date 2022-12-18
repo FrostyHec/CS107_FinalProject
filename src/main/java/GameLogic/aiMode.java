@@ -64,8 +64,10 @@ public class aiMode extends Game{
                 Click(getAIPlayer(), move[0][0], move[0][1]);
                 return Click(getAIPlayer(), move[1][0], move[1][1]);
             }
+        }else{
+            move = Stupid.move(getAIPlayer().getColor(), chess);
+            return Click(getAIPlayer(), move[0][0], move[0][1]);
         }
-        return aiMove();
     }
 
     @Override

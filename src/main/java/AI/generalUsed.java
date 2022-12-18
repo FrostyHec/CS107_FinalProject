@@ -239,7 +239,9 @@ public class generalUsed {//这个类是一些静态方法的集合，因为基�
         for(Chess[] a :chess){
             int j=0;
             for(Chess x : a){
-                if(x == null)continue;
+                if(x == null || x.getColor() == chess[X][Y].getColor() || !x.isTurnOver()){
+                    continue;
+                }
                 for(int[] coordinate : x.possibleMove(chess,i,j)){
                     if(coordinate[0]==X && coordinate[1]==Y){return true;}
                 }
@@ -434,9 +436,10 @@ public class generalUsed {//这个类是一些静态方法的集合，因为基�
                     }else{
 
                         if(color == Color.RED){
-                            Score += averageScore(virtualChessboard_1) + 2;
+                            Score +=( averageScore(virtualChessboard_1) + 2);
                         }else {
-                            Score -= averageScore(virtualChessboard_1) + 2;
+                            Score -= averageScore(virtualChessboard_1);
+                            Score += 2;
                         }
                     }
                 }
@@ -445,18 +448,17 @@ public class generalUsed {//这个类是一些静态方法的集合，因为基�
                 move(virtualChessboard_1,move);
             }
 
-            int min1 = 0, min2 = 0;
+            int min = 0;
             for(int i=0;i<virtualChessboard_1.length;i++){
                 for(int j=0;j<virtualChessboard_1[i].length;j++){
                     if(virtualChessboard_1[i][j] == null || !virtualChessboard_1[i][j].isTurnOver()) {
                         continue;
                     }
                     if(virtualChessboard_1[i][j].getColor() == color && mayBeEat(virtualChessboard_1,i,j)){
-                        if(virtualChessboard_1[i][j].getScore() + virtualChessboard_1[i][j].getRank() > min1) {
-                            Score += min2;
-                            min2 = min1;
-                            min1 = virtualChessboard_1[i][j].getScore() + virtualChessboard_1[i][j].getRank();
-                            Score -= min1;
+                        if(virtualChessboard_1[i][j].getScore() + virtualChessboard_1[i][j].getRank() > min) {
+                            Score += min;
+                            min = virtualChessboard_1[i][j].getScore() + virtualChessboard_1[i][j].getRank();
+                            Score -= min;
                         }
                     }
                 }
@@ -467,6 +469,10 @@ public class generalUsed {//这个类是一些静态方法的集合，因为基�
                 ans = move;
             }
 
+        }
+
+        if(max == 0){
+            return Selection.highest(virtualChessboard,color);
         }
 
         return ans;
@@ -554,7 +560,7 @@ public class generalUsed {//这个类是一些静态方法的集合，因为基�
                 move(v,move);
             }
 
-            if(mayBeEat(v,xy[0],xy[1])){
+            if(xy[0] != -1 && v[xy[0]][xy[1]].isTurnOver() && mayBeEat(v,xy[0],xy[1])){
                 return false;
             }
         }
@@ -592,6 +598,8 @@ public class generalUsed {//这个类是一些静态方法的集合，因为基�
                 ans[1][0] = xy[0];
                 ans[1][1] = xy[1];
                 move(v,ans);
+            }else{
+                continue;
             }
 
             if(! mayBeEat(v,xy[0],xy[1])){

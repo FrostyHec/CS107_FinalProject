@@ -35,7 +35,7 @@
                                         <Font name="System Bold" size="20.0" />
                                     </font>
                                 </Button>
-                                <Button id="rubbish" alignment="CENTER" layoutY="111.0" mnemonicParsing="false" onAction="#cheatClick" prefHeight="45.0" prefWidth="95.0" text=""/>
+                                <Button id="rubbish" alignment="CENTER" layoutY="111.0" mnemonicParsing="false" onAction="#cheatClick" prefHeight="45.0" prefWidth="95.0" text="" />
                                 <ImageView fx:id="cheatImage" fitHeight="73.0" fitWidth="73.0" layoutX="12.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
                                 <Label fx:id="cheatTitle" alignment="CENTER" layoutY="2.0" prefHeight="25.0" prefWidth="95.0" text="此棋子" />
                             </children>
@@ -63,7 +63,7 @@
             <left>
                 <Pane prefHeight="719.0" prefWidth="95.0" BorderPane.alignment="CENTER">
                     <children>
-                        <Button fx:id="btnRetract" alignment="CENTER" layoutY="681.0" mnemonicParsing="false" onAction="#retractOnClick" prefHeight="45.0" prefWidth="95.0" text="悔棋" >
+                        <Button fx:id="btnRetract" alignment="CENTER" layoutY="681.0" mnemonicParsing="false" onAction="#retractOnClick" prefHeight="45.0" prefWidth="95.0" text="悔棋">
                             <font>
                                 <Font name="System Bold" size="18.0" />
                             </font>
@@ -122,18 +122,36 @@
                 </Pane>
             </top>
         </BorderPane>
-        <Pane fx:id="pausePane" disable="true" prefHeight="830.0" prefWidth="600.0" visible="false">
+        <Pane fx:id="pausePane" disable="true" prefHeight="830.0" prefWidth="600.0">
             <children>
                 <ImageView id="pauseGray" fitHeight="830.0" fitWidth="600.0" pickOnBounds="true" />
-                <Pane fx:id="paneChoose" layoutX="200.0" layoutY="218.0" prefHeight="355.0" prefWidth="200.0">
+                <Pane fx:id="paneChoose" layoutX="200.0" layoutY="218.0" prefHeight="355.0" prefWidth="200.0" visible="false">
                     <children>
                         <Label alignment="CENTER" layoutX="33.0" layoutY="28.0" prefHeight="50.0" prefWidth="125.0" text="游戏已暂停" textFill="WHITE" />
                         <Button fx:id="btnContinue" alignment="CENTER" layoutX="33.0" layoutY="88.0" mnemonicParsing="false" onAction="#btnContinueGame" prefHeight="50.0" prefWidth="125.0" text="继续游戏" />
                         <Button fx:id="btnRemake" alignment="CENTER" layoutX="33.0" layoutY="153.0" mnemonicParsing="false" onAction="#clickRemake" prefHeight="50.0" prefWidth="125.0" text="重新开始" />
                         <Button fx:id="btnQuit" alignment="CENTER" contentDisplay="CENTER" layoutX="33.0" layoutY="216.0" mnemonicParsing="false" onAction="#saveAndExit" prefHeight="50.0" prefWidth="125.0" text="保存并退出" />
-                        <Button fx:id="btnSetup" alignment="CENTER" contentDisplay="TOP" layoutX="33.0" layoutY="279.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="125.0" text="设置" />
+                        <Button fx:id="btnSetup" alignment="CENTER" contentDisplay="TOP" layoutX="33.0" layoutY="279.0" mnemonicParsing="false" onAction="#setUpOnClick" prefHeight="50.0" prefWidth="125.0" text="设置" />
                     </children>
                 </Pane>
+            <AnchorPane fx:id="paneSetUp" layoutX="148.0" layoutY="171.0" prefHeight="450.0" prefWidth="328.0">
+               <children>
+                  <VBox layoutX="61.0" prefHeight="225.0" prefWidth="206.0" spacing="15.0">
+                     <children>
+                        <Label fx:id="lbSetUp" alignment="CENTER" prefHeight="33.0" prefWidth="200.0" text="设置">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lbView" alignment="CENTER" prefHeight="24.0" prefWidth="220.0" text="画面(本盘有效)" />
+                        <Button fx:id="btnVisualEffect" mnemonicParsing="false" onAction="#changeVisualEffect" prefHeight="36.0" prefWidth="245.0" text="行子动画" />
+                        <Button fx:id="btnPromptLabel" mnemonicParsing="false" onAction="#changePromptLabel" prefHeight="36.0" prefWidth="220.0" text="进度提示" />
+                        <Button fx:id="btnScreenShot" mnemonicParsing="false" onAction="#screenShot" prefHeight="36.0" prefWidth="209.0" text="截图" />
+                        <Label fx:id="lbSoundEffect" alignment="CENTER" prefHeight="24.0" prefWidth="267.0" text="音效" />
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
             </children>
         </Pane>
     </children>

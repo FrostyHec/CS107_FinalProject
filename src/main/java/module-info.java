@@ -3,6 +3,8 @@ module com.example.darkchess {
     requires javafx.fxml;
     requires javafx.media;
     requires java.desktop;
+    requires com.sun.jna.platform;
+    requires com.sun.jna;
 
     opens Windows.GameArea to javafx.fxml;
     exports Windows.GameArea;

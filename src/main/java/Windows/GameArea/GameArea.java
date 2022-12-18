@@ -5,11 +5,12 @@ import GameLogic.Color;
 import UserFiles.User;
 import UserFiles.UserManager;
 import Windows.GameArea.Extract.Animation.ChessAnimation;
-import Windows.GameArea.Extract.Animation.PromptAnimation;
+import Windows.GameArea.Extract.Animation.ScreenShotAnimation;
 import Windows.GameArea.Extract.Music.MusicPlayer;
 import Windows.GameArea.Extract.Music.Music.RandomPlayer;
 import Windows.GameArea.Extract.Music.SoundEffect.ClickEffect;
 import Windows.GameArea.Extract.Pursuance;
+import Windows.GameArea.Extract.Screenshot.Screenshot;
 import Windows.SetUp.Settings;
 import Windows.StartMenu.Main;
 import javafx.application.Application;
@@ -18,14 +19,15 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -36,18 +38,25 @@ import units.Play;
 import units.Retract;
 import units.Serialize;
 
-import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.nio.file.*;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.*;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class GameArea {
     public Pane mainPain;
+    public Label lbSetUp;
+    public Label lbView;
+    public Button btnVisualEffect;
+    public Button btnScreenShot;
+    public Label lbSoundEffect;
+    public Button btnPromptLabel;
+    public AnchorPane paneSetUp;
     private String defaultAvatar = "src/main/resources/Windows/images/UserImage/tempUser.png";
     private String defaultComputerAvatar = "src/main/resources/Windows/images/UserImage/ComputerUser.png";
     private boolean isHumanFirst;
@@ -252,7 +261,7 @@ public class GameArea {
 
     public void mainExit() {
         try {
-            Files.deleteIfExists(Path.of(getSavePath()));
+            Files.deleteIfExists(Path.of(getSavePath()));//TODO 播放历史存档
         } catch (Exception e) {
 
         }
@@ -320,6 +329,53 @@ public class GameArea {
                 Transmitter.setWinUser("player2");
             }
         }
+    }
+
+    BufferedImage image;
+
+    public void screenShot(ActionEvent event) {
+        gameStateHandler.escPressed();
+        Chessboard.setDisable(true);
+
+        //TODO 截图
+        new Thread(() -> {
+            try {
+                Thread.sleep(50);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            double x = btnRetract.getScene().getWindow().getX() + 10;
+            double y = btnRetract.getScene().getWindow().getY() + 32;
+            image = Screenshot.capture(x, y, 600, 830);
+            Screenshot.save(image, Screenshot.defaultUrl);
+            ScreenShotAnimation.show(mainPain, 1000);
+        }).start();
+        new Thread(() -> {
+            try {
+                Thread.sleep(1200);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            Platform.runLater(() -> {
+                Chessboard.setDisable(false);
+                gameStateHandler.escPressed();
+            });
+        }).start();
+    }
+
+    public void setUpOnClick(ActionEvent event) {
+        paneChoose.setVisible(false);
+        paneSetUp.setVisible(true);
+    }
+
+    public void changeVisualEffect(ActionEvent event) {
+        settings.visualSettings.setVisualEffect(!settings.visualSettings.isVisualEffect());
+        textHandler.setAllText();
+    }
+
+    public void changePromptLabel(ActionEvent event) {
+        settings.visualSettings.setVisualAlarm(!settings.visualSettings.isVisualAlarm());
+    textHandler.setAllText();
     }
 
     class CheatModel {
@@ -694,7 +750,7 @@ public class GameArea {
 
             private void playMedia(String name) {//以后再考虑播放视频
                 MediaPlayer m = null;
-                m = new MediaPlayer(new Media(forwardPath+name));
+                m = new MediaPlayer(new Media(forwardPath + name));
                 MediaView mv = new MediaView(m);
                 mv.setX(400);
                 mv.setY(400);
@@ -839,6 +895,7 @@ public class GameArea {
         }
 
         public void showPause() {
+            paneChoose.setVisible(true);
             pausePane.setVisible(true);
             pausePane.setDisable(false);
         }
@@ -846,7 +903,7 @@ public class GameArea {
         public void hidePause() {
             pausePane.setVisible(false);
             pausePane.setDisable(true);
-
+            paneSetUp.setVisible(false);
         }
 
         public void refreshDiedChess() {
@@ -965,6 +1022,29 @@ public class GameArea {
             refreshName();
             refreshCheatModel();
             refreshScore();
+            setAllText();
+        }
+
+        private void setAllText() {//TODO 文本名字设置
+
+
+            //暂停-控制面板
+            lbSetUp.setText(t.getString("Pause.setUp"));
+            lbView.setText(t.getString("Pause.SetUp.view"));
+            if (settings.visualSettings.isVisualEffect()) {
+                btnVisualEffect.setText(t.getString("Pause.SetUp.visualEffect.Off"));
+            } else {
+                btnVisualEffect.setText(t.getString("Pause.SetUp.visualEffect.On"));
+
+            }
+            if (settings.visualSettings.isVisualAlarm()) {
+                btnPromptLabel.setText(t.getString("Pause.SetUp.visualAlarm.Off"));
+            } else {
+                btnPromptLabel.setText(t.getString("Pause.SetUp.visualAlarm.On"));
+            }
+            btnScreenShot.setText(t.getString("Pause.SetUp.screenshot"));
+            lbSoundEffect.setText(t.getString("Pause.SetUp.sound"));
+
         }
 
         private void refreshName() {

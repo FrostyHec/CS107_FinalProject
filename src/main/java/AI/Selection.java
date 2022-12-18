@@ -113,6 +113,8 @@ public class Selection {//做剪枝算法的时候可能要用到,也是一堆st
                 if(move[1][0] != -1){
                     return move;
                 }
+            }else if(move.length == 1){
+                return highest(virtualChessboard,color);
             }
         }
 

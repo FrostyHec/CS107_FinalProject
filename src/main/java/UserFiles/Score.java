@@ -44,4 +44,8 @@ public abstract class Score implements Serializable {
     public int getLongestContinueWin() {
         return longestContinueWin;
     }
+
+    public int getNowContinueWin() {
+        return nowContinueWin;
+    }
 }

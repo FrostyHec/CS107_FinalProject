@@ -20,7 +20,7 @@ public class ShowingScore {
         this.winRates = new SimpleStringProperty(generateWinRate(score.getWinRates()));
         this.longestWin = new SimpleStringProperty(String.valueOf(score.getLongestContinueWin()));
         this.playTimes = new SimpleStringProperty(String.valueOf(score.getPlayTimes()));
-        this.nowLongestWin = new SimpleStringProperty(String.valueOf(score.getLongestContinueWin()));
+        this.nowLongestWin = new SimpleStringProperty(String.valueOf(score.getNowContinueWin()));
     }
 
     private String generateWinRate(double winRates) {

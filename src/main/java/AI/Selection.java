@@ -107,7 +107,7 @@ public class Selection {//做剪枝算法的时候可能要用到,也是一堆st
 
         int[][] move;
 
-        if(generalUsed.isGonnaDie(virtualChessboard,color)){
+        if(generalUsed.isGonnaDie(virtualChessboard,color)){//会走一些臭不要脸的棋出来
             move = generalUsed.dyingMove(virtualChessboard,color);
             if(move.length == 2){
                 if(move[1][0] != -1){

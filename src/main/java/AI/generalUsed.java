@@ -232,22 +232,21 @@ public class generalUsed {//这个类是一些静态方法的集合，因为基�
     }
 
     public static boolean mayBeEat(Chess[][] chess,int X,int Y){//在XY处是否可能被吃，注意场上棋子的变化
-        int i = 0;
+
         if(!chess[X][Y].isTurnOver()){//防止出现一些奇怪的情况
             return false;
         }
-        for(Chess[] a :chess){
-            int j=0;
-            for(Chess x : a){
+
+        for(int i=0;i<chess.length;i++){
+            for(int j=0;j<chess[i].length;j++){
+                Chess x = chess[i][j];
                 if(x == null || x.getColor() == chess[X][Y].getColor() || !x.isTurnOver()){
                     continue;
                 }
                 for(int[] coordinate : x.possibleMove(chess,i,j)){
                     if(coordinate[0]==X && coordinate[1]==Y){return true;}
                 }
-                j++;
             }
-            i++;
         }
         return false;
     }
@@ -448,6 +447,10 @@ public class generalUsed {//这个类是一些静态方法的集合，因为基�
                 move(virtualChessboard_1,move);
             }
 
+            if(Score < 0){
+                continue;
+            }
+
             int min = 0;
             for(int i=0;i<virtualChessboard_1.length;i++){
                 for(int j=0;j<virtualChessboard_1[i].length;j++){
@@ -464,7 +467,7 @@ public class generalUsed {//这个类是一些静态方法的集合，因为基�
                 }
             }
 
-            if(Score > max){
+            if(Score >= max){
                 max = Score;
                 ans = move;
             }
@@ -518,24 +521,27 @@ public class generalUsed {//这个类是一些静态方法的集合，因为基�
                 move(virtualChessboard_1,move);
             }
 
-            int min1 = 0, min2 = 0;
+            if(Score < 0){
+                continue;
+            }
+
+            int min = 0;
             for(int i=0;i<virtualChessboard_1.length;i++){
                 for(int j=0;j<virtualChessboard_1[i].length;j++){
                     if(virtualChessboard_1[i][j] == null || !virtualChessboard_1[i][j].isTurnOver()) {
                         continue;
                     }
                     if(virtualChessboard_1[i][j].getColor() == color && mayBeEat(virtualChessboard_1,i,j)){
-                        if(virtualChessboard_1[i][j].getScore() + virtualChessboard_1[i][j].getRank() > min1) {
-                            Score += min2;
-                            min2 = min1;
-                            min1 = virtualChessboard_1[i][j].getScore() + virtualChessboard_1[i][j].getRank();
-                            Score -= min1;
+                        if(virtualChessboard_1[i][j].getScore() + virtualChessboard_1[i][j].getRank() > min) {
+                            Score += min;
+                            min = virtualChessboard_1[i][j].getScore() + virtualChessboard_1[i][j].getRank();
+                            Score -= min;
                         }
                     }
                 }
             }
 
-            if(Score > max){
+            if(Score >= max){
                 max = Score;
                 ans = move;
             }

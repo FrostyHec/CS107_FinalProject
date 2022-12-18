@@ -33,7 +33,7 @@ public class AI extends Player {
         }else if(difficulty == 2){//两步最佳：新增逃跑机制，不容易掉入陷阱
             ArrayList<int[][]> moves = generalUsed.enhancedCanClick(super.getColor(),chess);
             Chess[][] virtualChessBoard = generalUsed.virtualChessBoard(chess);//此处新开了一个棋盘
-            move = Selection.bestTwice(virtualChessBoard,getColor(),moves);
+            move = Selection.bestTwice(virtualChessBoard,super.getColor(),moves);
             return move;
         }
 

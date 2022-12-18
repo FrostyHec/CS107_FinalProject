@@ -89,6 +89,10 @@ public class generalUsed {//这个类是一些静态方法的集合，因为基�
             eCanClick.remove(i);
         }
 
+        if(eCanClick.size() == 0){
+            eCanClick = canClick(color,chess);
+        }
+
         return eCanClick;
     }
 
@@ -615,6 +619,26 @@ public class generalUsed {//这个类是一些静态方法的集合，因为基�
 
 
         return ans;
+    }
+
+    public static int[] getRemainingScore(Chess[][] chess,Color color){
+        int[] remainingScore = new int[2];
+
+        remainingScore[0] = 95;
+        remainingScore[1] = 95;
+
+        for(Chess[] c : chess){
+            for(Chess x : c){
+                if(x != null){
+                    if(x.getColor() == color)
+                        remainingScore[0] -= x.getScore();
+                    else
+                        remainingScore[1] -= x.getScore();
+                }
+            }
+        }
+
+        return remainingScore;
     }
 
 }

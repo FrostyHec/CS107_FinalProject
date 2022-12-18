@@ -42,7 +42,7 @@ public class Selection {//做剪枝算法的时候可能要用到,也是一堆st
             }
         }
         if(!is)
-            move[0][0] = -1;//实际上表示没有能吃的棋
+            move[0][0] = move[0][1] = -1;//实际上表示没有能吃的棋
         return move;
     }
 
@@ -110,7 +110,7 @@ public class Selection {//做剪枝算法的时候可能要用到,也是一堆st
         if(generalUsed.isGonnaDie(virtualChessboard,color)){//会走一些臭不要脸的棋出来
             move = generalUsed.dyingMove(virtualChessboard,color);
             if(move.length == 2){
-                if(move[1][0] != -1){
+                if(move[0][0] != -1 && move[1][1] != -1){
                     return move;
                 }
             }else if(move.length == 1){
@@ -167,5 +167,106 @@ public class Selection {//做剪枝算法的时候可能要用到,也是一堆st
                 is = true;
         }
         return is;
+    }
+
+    private static int move(Chess[][] chessboard,int[][]move){
+        if(move.length==1 && !chessboard[move[0][0]][move[0][1]].isTurnOver()){
+            chessboard[move[0][0]][move[0][1]].TurnOver();
+            return 0;
+        }else if(move.length == 2 && chessboard[move[1][0]][move[1][1]] != null){
+            int score = chessboard[move[1][0]][move[1][1]].getScore();
+            chessboard[move[1][0]][move[1][1]] = chessboard[move[0][0]][move[0][1]];
+            chessboard[move[0][0]][move[0][1]] = null;
+            return score;
+        }
+        return 0;
+    }
+
+
+    public static int[][] highLevelAI(Chess[][] chessboard,Color color,int step){
+
+        int[] rs = generalUsed.getRemainingScore(chessboard,color);
+        ArrayList<int[][]> canClick = generalUsed.enhancedCanClick(color,chessboard);
+        int max = -100;
+        int[][] move = highest(chessboard,color);
+
+        for(int[][] xy : canClick) {
+            Chess[][] virtualChessboard = generalUsed.virtualChessBoard(chessboard);
+            int Score = 0;
+            Score += move(virtualChessboard,xy);
+            int temp;
+            if((temp = minMax(virtualChessboard,color,1,Score,rs[0],rs[1],step))!=-100){
+                Score += temp;
+            }
+
+            if(Score > max){
+                max = Score;
+                move = xy;
+            }
+        }
+
+        return move;
+    }
+
+    //剪枝算法(minMax)
+    public static int minMax(Chess[][] chessboard,Color color,int step,int Score,
+                                 int remainingScore1,int remainingScore2,int quitStep){
+
+        //todo 还需要优化
+        //炮盲打的时候两边都是正收益
+        //濒死状态不会玩
+
+        //这玩意前面还要再套一个返回int[][]的
+        //remainingScore的第一个指的是己方，第二个指的是对方
+        //color始终指的是ai的颜色
+        //每次递归都要++step
+
+        int[][] move = new int[0][0];
+        int ans = -100;
+
+        if(step <= quitStep ) {
+            if (step % 2 == 0) {
+
+                ArrayList<int[][]> canClick = generalUsed.enhancedCanClick(color,chessboard);
+                for(int[][] xy : canClick){
+                    Chess[][] virtualChessboard = generalUsed.virtualChessBoard(chessboard);
+                    int virtualScore = 0;
+                    virtualScore += move(virtualChessboard,xy);
+                    int temp;
+                    if((temp = minMax(virtualChessboard,color,++step,virtualScore + Score,remainingScore1,remainingScore2,quitStep))!=-100){
+                        virtualScore += temp;
+                    }
+
+                    if(virtualScore > ans){
+                        ans = virtualScore;
+                    }
+
+                }
+
+
+
+            } else {
+                ans = 100;
+
+                ArrayList<int[][]> canClick = generalUsed.enhancedCanClick(generalUsed.oppositeColor(color),chessboard);
+                for(int[][] xy : canClick){
+                    Chess[][] virtualChessboard = generalUsed.virtualChessBoard(chessboard);
+                    int virtualScore = 0;
+                    virtualScore -= move(virtualChessboard,xy);
+                    int temp;
+                    if((temp = minMax(virtualChessboard,color,++step,virtualScore + Score,remainingScore1,remainingScore2,quitStep))!=-100){
+                        virtualScore += temp;
+                    }
+
+                    if(virtualScore < ans){
+                        ans = virtualScore;
+                    }
+
+                }
+
+            }
+        }
+
+        return ans;
     }
 }

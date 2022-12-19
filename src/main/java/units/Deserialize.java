@@ -48,10 +48,6 @@ public class Deserialize {//未经测试
             throw new Exception("104");
         }
 
-        if(game.getPlayer1().getScore() == 100){
-            throw new Exception("105");
-        }
-
         String s = game.chessToString();
         game.setBack();
         if(!s.equals(Retract.trace(game).chessToString())){

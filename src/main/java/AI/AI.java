@@ -45,7 +45,7 @@ public class AI extends Player {
         //据何俞均说，枚举六步不会太慢，但是要合理表达估价函数
         //但因为我的代码比较冗长，不一定能枚举六步
         if(difficulty > 2 && difficulty <= 6){
-            move = Selection.highLevelAI(virtualChessBoard,super.getColor(),difficulty);
+            move = Selection.highLevelAI(virtualChessBoard,super.getColor(),difficulty*3);
             return move;
         }
 

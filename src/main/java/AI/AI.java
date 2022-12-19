@@ -33,7 +33,7 @@ public class AI extends Player {
         }else if(difficulty == 2){//两步最佳：新增逃跑机制，不容易掉入陷阱
             ArrayList<int[][]> moves = generalUsed.enhancedCanClick(super.getColor(),chess);
             Chess[][] virtualChessBoard = generalUsed.virtualChessBoard(chess);//此处新开了一个棋盘
-            move = Selection.bestTwice(virtualChessBoard,getColor(),moves);
+            move = Selection.bestTwice(virtualChessBoard,super.getColor(),moves);
             return move;
         }
 
@@ -45,8 +45,7 @@ public class AI extends Player {
         //据何俞均说，枚举六步不会太慢，但是要合理表达估价函数
         //但因为我的代码比较冗长，不一定能枚举六步
         if(difficulty > 2 && difficulty <= 6){
-            ans = enumerationAlgorithm(virtualChessBoard,moves);
-            move = generalUsed.randomClick(ans);
+            move = Selection.highLevelAI(virtualChessBoard,super.getColor(),difficulty);
             return move;
         }
 

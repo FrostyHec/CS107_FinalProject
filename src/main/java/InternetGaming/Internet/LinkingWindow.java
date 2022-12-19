@@ -12,6 +12,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.InetAddress;
 
 public class LinkingWindow {
     public Pane paneLinkingWindow;
@@ -41,7 +42,7 @@ public class LinkingWindow {
             linkingMessage.setText("创建失败！请检查您的输入是否正确");
             return;
         } catch (Exception e) {
-            linkingMessage.setText("创建失败！端口号大于1000为宜，请更换端口号尝试");
+            linkingMessage.setText("创建失败！端口号范围应在1-65535且尽量大于1000\n，请更换端口号尝试");
             return;
         }
         linkingMessage.setText("服务器创建成功！");
@@ -51,7 +52,7 @@ public class LinkingWindow {
                 Thread.sleep(500);
                 Platform.runLater(() -> {
                     try {
-                        startLink("127.0.0.1", port);
+                        startLink(InetAddress.getLocalHost().getHostAddress(), port);
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
@@ -78,10 +79,16 @@ public class LinkingWindow {
         Transmitter.client = c;
         linkingMessage.setText("连接成功！");
         new Thread(() -> {
+            try {
+                Thread.sleep(200);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("PreparingWindow.fxml"));
             Platform.runLater(() -> {
                 try {
                     ((Stage) portField.getScene().getWindow()).setScene(new Scene(fxmlLoader.load()));
+                    Transmitter.preparingWindow.setIPAndPort(ip,port);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -89,5 +96,6 @@ public class LinkingWindow {
         }).start();
 
     }
+
 
 }

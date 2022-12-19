@@ -2,6 +2,8 @@ package InternetGaming.Internet;
 
 import GameLogic.Game;
 import InternetGaming.Internet.Message.*;
+import UserFiles.User;
+import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Window;
 
@@ -14,10 +16,6 @@ public class Client extends ClientData {
 
     public Client(MessageHandler m) {
         super(m);
-    }
-
-    public Client(String name, MessageHandler m, PlayerType playerTurns) {
-        super(name, m, playerTurns);
     }
 
     public static Socket connect(String host, int port) throws IOException {
@@ -93,7 +91,7 @@ public class Client extends ClientData {
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
-            Transmitter.preparingWindow.refresh(totalClient);
+            Platform.runLater(()->Transmitter.preparingWindow.refresh(totalClient));
         }
     }
 

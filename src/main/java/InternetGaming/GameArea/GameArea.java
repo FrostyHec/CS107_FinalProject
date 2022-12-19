@@ -22,6 +22,8 @@ public class GameArea extends Windows.GameArea.GameArea {
     private PlayerType winner;
 
     private void banAnimation(){
+        btnCheat.setVisible(false);
+        btnRetract.setVisible(false);
         settings.visualSettings.setVisualEffect(false);
     }
 

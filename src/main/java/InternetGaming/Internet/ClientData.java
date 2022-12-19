@@ -12,14 +12,16 @@ public class ClientData implements Serializable {
     protected PlayerType playerType;
 
     protected File avatar;//TODO 头像
+
     public ClientData(MessageHandler m) {
         this.m = m;
     }
 
-    public ClientData(String name, MessageHandler m, PlayerType playerTurns) {
+    public ClientData(String name, Object avatar, MessageHandler m, PlayerType playerTurns) {
         this.name = name;
         this.m = m;
         this.playerType = playerTurns;
+
     }
 
 
@@ -42,7 +44,8 @@ public class ClientData implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-    public File getAvatar(){
+
+    public File getAvatar() {
         return avatar;
     }
 }

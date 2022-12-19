@@ -1,5 +1,6 @@
 package InternetGaming.Internet;
 
+import GameLogic.Game;
 import InternetGaming.Internet.Message.*;
 
 import java.io.*;
@@ -8,6 +9,8 @@ import java.net.Socket;
 import java.util.*;
 
 public class Server extends Thread {
+    private String defaultAvatar = "src/main/resources/Windows/images/UserImage/tempUser.png";
+
     private ServerSocket server;
     private List<ClientData> clientList = new ArrayList<>();
     private List<Thread> parsers = new ArrayList<>();
@@ -59,6 +62,13 @@ public class Server extends Thread {
 
         @Override
         public void parse(String message) {
+            Object avatar = null;
+            avatar = new File(defaultAvatar);//TODO 大无语子
+//            try {
+//                avatar= m.hear();
+//            } catch (Exception e) {
+//                avatar= new File(defaultAvatar);
+//            }
             PlayerType p;
             if (clientList.size() == 0) {//TODO 初代版本默认服主是先手，后面再改
                 p = PlayerType.FirstHand;
@@ -69,7 +79,7 @@ public class Server extends Thread {
             }
             set(p);
             synchronized (this) {//添加用户优先锁定
-                clientList.add(new ClientData(message, m, p));
+                clientList.add(new ClientData(message, avatar, m, p));
             }
             for (ClientData cd : clientList) {
                 System.out.println("广播：当前玩家" + cd.name + cd.playerType);
@@ -92,18 +102,23 @@ public class Server extends Thread {
         public void set(PlayerType p) {
             m.send(MessageType.PlayerSetting, p.toString());//消息分为两部分，一部分为消息类型，一部分为消息内容
         }
+
+        public void checkAbleToStart() {
+            if (clientList.size() < 2) {
+                return;
+            }
+            if (!(clientList.get(0).getPlayerTurns().equals(PlayerType.FirstHand) &&
+                    clientList.get(1).getPlayerTurns().equals(PlayerType.SecondHand))) {
+                throw new RuntimeException();
+            }
+            clientList.get(0).getM().send(MessageType.StartGame, StartGameType.Permit.toString());
+            if (isGameStart) {
+                m.send(MessageType.StartGame, StartGameType.Start.toString());
+                FlushChessBoard.flushTarget(m);
+            }
+        }
     }
 
-    public void checkAbleToStart() {
-        if (clientList.size() < 2) {
-            return;
-        }
-        if (!(clientList.get(0).getPlayerTurns().equals(PlayerType.FirstHand) &&
-                clientList.get(1).getPlayerTurns().equals(PlayerType.SecondHand))) {
-            throw new RuntimeException();
-        }
-        clientList.get(0).getM().send(MessageType.StartGame, StartGameType.Permit.toString());
-    }
 
     public void playerExit(MessageHandler m) {
         for (ClientData c : clientList) {
@@ -180,7 +195,6 @@ public class Server extends Thread {
                     default -> {
                         throw new RuntimeException();
                     }
-
                 }
             }
         }
@@ -188,6 +202,7 @@ public class Server extends Thread {
 
     class FlushChessBoard implements Parser {
         MessageHandler m;
+        static Object tempGame = new Game();
 
         public FlushChessBoard(MessageHandler m) {
             this.m = m;
@@ -202,11 +217,17 @@ public class Server extends Thread {
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
+            tempGame = o;
             for (ClientData c : clientList) {
                 MessageHandler m = c.getM();
                 m.send(MessageType.ChessBoardRefresh, "");
                 m.sendObj(o);
             }
+        }
+
+        public static void flushTarget(MessageHandler m) {
+            m.send(MessageType.ChessBoardRefresh,"");
+            m.sendObj(tempGame);
         }
     }
 

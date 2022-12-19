@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
@@ -8,6 +9,53 @@
 
 <AnchorPane fx:id="preparingPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="InternetGaming.Internet.PreparingWindow">
    <children>
-      <Button fx:id="btnStartGame" layoutX="259.0" layoutY="299.0" mnemonicParsing="false" onAction="#startGameClick" text="开始游戏" />
+      <VBox layoutX="37.0" layoutY="59.0" prefHeight="236.0" prefWidth="149.0" spacing="25.0">
+         <children>
+            <Label fx:id="lbStatus" alignment="CENTER" prefHeight="44.0" prefWidth="178.0" text="等待游戏开始">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <VBox prefHeight="48.0" prefWidth="166.0">
+               <children>
+                  <Label fx:id="lbIP" alignment="CENTER" prefHeight="24.0" prefWidth="174.0" text="当前服务器IP" />
+                  <Label fx:id="lbIPField" alignment="CENTER" prefHeight="24.0" prefWidth="160.0" text="114.514.19.19" />
+               </children>
+            </VBox>
+            <VBox prefHeight="46.0" prefWidth="136.0">
+               <children>
+                  <Label fx:id="lbPort" alignment="CENTER" prefHeight="24.0" prefWidth="172.0" text="监听端口" />
+                  <Label fx:id="lbPortField" alignment="CENTER" prefHeight="24.0" prefWidth="168.0" text="893" />
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+      <AnchorPane layoutX="233.0" layoutY="50.0" prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <VBox prefHeight="236.0" prefWidth="266.0" spacing="15.0">
+               <children>
+                  <HBox prefHeight="36.0" prefWidth="100.0">
+                     <children>
+                        <Label fx:id="lbFirst" prefHeight="24.0" prefWidth="72.0" text="先手：" />
+                        <Label fx:id="lbFirstName" prefHeight="24.0" prefWidth="202.0" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="27.0" prefWidth="266.0">
+                     <children>
+                        <Label fx:id="lbSecond" prefHeight="24.0" prefWidth="83.0" text="后手：" />
+                        <Label fx:id="lbSecondName" prefHeight="24.0" prefWidth="225.0" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="16.0" prefWidth="266.0">
+                     <children>
+                        <Label fx:id="lbView" alignment="CENTER" prefHeight="24.0" prefWidth="773.0" text="观众" />
+                     </children>
+                  </HBox>
+                  <Label fx:id="lbViewerName" prefHeight="97.0" prefWidth="266.0" />
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+      <Button fx:id="btnStartGame" layoutX="88.0" layoutY="318.0" mnemonicParsing="false" onAction="#startGameClick" prefHeight="36.0" prefWidth="424.0" text="开始游戏" />
    </children>
 </AnchorPane>

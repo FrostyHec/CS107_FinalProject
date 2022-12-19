@@ -2,6 +2,7 @@ package InternetGaming.Internet.Message;
 
 import java.io.*;
 import java.net.Socket;
+import java.nio.file.Files;
 
 public class MessageHandler {
     private InputStream inputStream;
@@ -11,6 +12,8 @@ public class MessageHandler {
     private ObjectInputStream objReader;
     private PrintWriter writer;
     private Socket client;
+    private DataOutputStream dataWriter;
+    private DataInputStream dataReader;
 
     public MessageHandler(Socket client, HandlerType handlerType) {
         this.client = client;
@@ -32,6 +35,7 @@ public class MessageHandler {
             inputStream = client.getInputStream();
             objReader = new ObjectInputStream(inputStream);
             reader = new BufferedReader(new InputStreamReader(inputStream));
+            dataReader = new DataInputStream(inputStream);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -43,6 +47,7 @@ public class MessageHandler {
             outputStream = client.getOutputStream();
             objWriter = new ObjectOutputStream(outputStream);
             writer = new PrintWriter(outputStream);
+            dataWriter = new DataOutputStream(client.getOutputStream());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -54,18 +59,19 @@ public class MessageHandler {
         writer.flush();
     }
 
+    //Don't use sendObj, it will create mountains of problem.
     public void sendObj(Object o) {
-            try {
-                Thread.sleep(400);//TODO 多睡会，少粘包
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-            try {
-                objWriter.writeObject(o);
-                objWriter.flush();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+        try {
+            Thread.sleep(100);//TODO 多睡会，少粘包
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            objWriter.writeObject(o);
+            objWriter.flush();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 
@@ -80,6 +86,7 @@ public class MessageHandler {
         }
     }
 
+
     public Object hearObj() throws Exception {
         //Thread.sleep(20);
         Object o = null;
@@ -92,13 +99,63 @@ public class MessageHandler {
         }
         return o;
     }
-    public void close(){
+
+    public void close() {
         try {
+            writer.close();
+            reader.close();
+            dataWriter.close();
+
             objWriter.close();
             objReader.close();
             client.close();
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Deprecated
+    public Object hearObjInByte() throws IOException {
+//        //文件名和长度
+//        ObjectOutputStream foStream =  new ObjectOutputStream(outputStream);
+//
+//        //开始接收文件
+//        byte[] bytes = new byte[1024];
+//        int length = 0;
+//        while ((length = dataReader.read(bytes, 0, bytes.length)) != -1) {
+//            foStream.write(bytes, 0, length);
+//            foStream.flush();
+//        }
+//        dataReader.close();
+        return null;
+    }
+
+    @Deprecated
+    public void sendObjInByte(Object o) throws Exception {
+//        ByteArrayOutputStream byt=new ByteArrayOutputStream();
+//        ObjectOutputStream obj=new ObjectOutputStream(byt);
+//        obj.writeObject(o);
+//        dataWriter.writeLong(o.length());
+//        dataWriter.flush();
+//        //开始传输文件
+//        byte[] bytes = new byte[1024];
+//        int length = 0;
+//        while ((length = byt.read(bytes, 0, bytes.length)) != -1) {
+//            dataWriter.write(bytes, 0, length);
+//            dataWriter.flush();
+//        }
+//        System.out.println("字节流传输成功");
+//        fileIn.close();
+    }
+
+    @Deprecated
+    public void sendByte(Object o) throws IOException {
+//        ByteArrayOutputStream byt=new ByteArrayOutputStream();
+//
+//        ObjectOutputStream obj=new ObjectOutputStream(byt);
+//
+//        obj.writeObject(o);
+//        byte[] bytes=byt.toByteArray();
+
     }
 }

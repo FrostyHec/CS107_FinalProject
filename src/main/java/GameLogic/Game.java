@@ -1,9 +1,13 @@
 package GameLogic;
 
+import java.io.Serial;
 import java.time.*;
 import java.util.*;
 
 public class Game implements java.io.Serializable,Cloneable{
+
+    @Serial
+    private static final long serialVersionUID = 3264786578157766L;
 
     private final LocalDateTime startTime = LocalDateTime.now();
     private  LocalDateTime latestTime;

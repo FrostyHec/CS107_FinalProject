@@ -1131,6 +1131,7 @@ public class GameArea {
             music = new RandomPlayer(null, "Classical");
             threadMusic = new Thread(music);
             threadMusic.start();
+            isPlayingBGM=true;
         }
 
         public void pauseBGM() {

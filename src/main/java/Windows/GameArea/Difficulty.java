@@ -4,9 +4,9 @@ public enum Difficulty {
     Zero("难度0", 0),
     One("难度1", 1),
     Two("难度2", 2),
-    Three("难度2", 2),
-    Four("难度2", 2),
-    Five("难度2", 2);
+    Three("难度3", 3),
+    Four("难度4", 4),
+    Five("难度5", 5);
 
     private String name;
     private int value;

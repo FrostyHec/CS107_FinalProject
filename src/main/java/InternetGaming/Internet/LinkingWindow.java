@@ -48,7 +48,7 @@ public class LinkingWindow {
 //        startLink("127.0.0.1", port);
         new Thread(() -> {
             try {
-                Thread.sleep(1000);
+                Thread.sleep(500);
                 Platform.runLater(() -> {
                     try {
                         startLink("127.0.0.1", port);

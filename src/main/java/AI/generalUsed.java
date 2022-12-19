@@ -2,9 +2,10 @@ package AI;
 
 import GameLogic.*;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class generalUsed {//这个类是一些静态方法的集合，因为基本上AI都要用到，所以拿出来放一起
+public class generalUsed{//这个类是一些静态方法的集合，因为基本上AI都要用到，所以拿出来放一起
 
     public static int[][] randomClick(ArrayList<int[][]> canClick) throws Exception{
         if(canClick.size() == 0){

@@ -16,10 +16,10 @@ public abstract class MusicPlayer implements Runnable {
     String forwardPath = "src/main/resources/Windows/Music/";
     protected String filePath;//音乐包路径
     protected List<Media> playingMusicList;//在播放列表的音乐
-
     protected List<Media> totalMusic = new ArrayList<>();//总音乐列表
     protected Pursuance pursuance;
     protected MediaPlayer nowMedia;
+    protected List<MusicInfo> musicInfoList = new ArrayList<>();
 
     public MusicPlayer(Pursuance pursuance, String filePath) {
         this.pursuance = pursuance;
@@ -33,6 +33,18 @@ public abstract class MusicPlayer implements Runnable {
             generateMusicList(pursuance);
         }
         playMediaTracks(playingMusicList);
+    }
+
+    public List<MusicInfo> getNowMusicInfoList() {
+        List<MusicInfo> ml = new ArrayList<>();
+        for (Media m : playingMusicList) {
+            for (MusicInfo mi : musicInfoList) {
+                if (mi.media.equals(m)) {
+                    ml.add(mi);
+                }
+            }
+        }
+        return ml;
     }
 
     public abstract void generateMusicList(Pursuance pursuance);
@@ -55,7 +67,10 @@ public abstract class MusicPlayer implements Runnable {
                         @Override
                         public FileVisitResult visitFile(Path path, BasicFileAttributes attrs) {
                             try {
-                                totalMusic.add(new Media(path.toUri().toString()));
+                                String sPath = path.toUri().toString();
+                                Media toPlay = new Media(sPath);
+                                totalMusic.add(toPlay);
+                                generateMusicInfo(getName(sPath), toPlay);
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -66,6 +81,25 @@ public abstract class MusicPlayer implements Runnable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void generateMusicInfo(String name, Media m) {
+        MusicInfo mi = new MusicInfo();
+        mi.media = m;
+        mi.secs = getSeconds(m);
+        mi.musicName = name;
+        musicInfoList.add(mi);
+    }
+
+    private String getName(String path) {//生成文件名
+        StringBuilder sb = new StringBuilder(path);
+        int f = sb.lastIndexOf(".");
+        int t = sb.lastIndexOf("/");
+        return sb.substring(t + 1, f);
+    }
+
+    private int getSeconds(Media m) {
+        return 1;//TODO 生成时间
     }
 
     public void stop() {

@@ -134,22 +134,31 @@
                         <Button fx:id="btnSetup" alignment="CENTER" contentDisplay="TOP" layoutX="33.0" layoutY="279.0" mnemonicParsing="false" onAction="#setUpOnClick" prefHeight="50.0" prefWidth="125.0" text="设置" />
                     </children>
                 </Pane>
-            <AnchorPane fx:id="paneSetUp" layoutX="148.0" layoutY="171.0" prefHeight="450.0" prefWidth="328.0">
+            <AnchorPane fx:id="paneSetUp" layoutX="136.0" layoutY="114.0" prefHeight="538.0" prefWidth="328.0">
                <children>
-                  <VBox layoutX="61.0" prefHeight="225.0" prefWidth="206.0" spacing="15.0">
+                  <VBox layoutX="61.0" prefHeight="290.0" prefWidth="206.0" spacing="15.0">
                      <children>
-                        <Label fx:id="lbSetUp" alignment="CENTER" prefHeight="33.0" prefWidth="200.0" text="设置">
+                        <Label fx:id="lbSetUp" alignment="CENTER" prefHeight="33.0" prefWidth="200.0" text="设置" textFill="WHITE">
                            <font>
                               <Font size="22.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lbView" alignment="CENTER" prefHeight="24.0" prefWidth="220.0" text="画面(本盘有效)" />
-                        <Button fx:id="btnVisualEffect" mnemonicParsing="false" onAction="#changeVisualEffect" prefHeight="36.0" prefWidth="245.0" text="行子动画" />
-                        <Button fx:id="btnPromptLabel" mnemonicParsing="false" onAction="#changePromptLabel" prefHeight="36.0" prefWidth="220.0" text="进度提示" />
-                        <Button fx:id="btnScreenShot" mnemonicParsing="false" onAction="#screenShot" prefHeight="36.0" prefWidth="209.0" text="截图" />
-                        <Label fx:id="lbSoundEffect" alignment="CENTER" prefHeight="24.0" prefWidth="267.0" text="音效" />
+                        <Label fx:id="lbView" alignment="CENTER" prefHeight="24.0" prefWidth="220.0" text="画面(本盘有效)" textFill="WHITE" />
+                        <Button fx:id="btnVisualEffect" alignment="CENTER" mnemonicParsing="false" onAction="#changeVisualEffect" prefHeight="40.0" prefWidth="245.0" text="行子动画" />
+                        <Button fx:id="btnPromptLabel" alignment="CENTER" mnemonicParsing="false" onAction="#changePromptLabel" prefHeight="40.0" prefWidth="220.0" text="进度提示" />
+                        <Button fx:id="btnScreenShot" alignment="CENTER" mnemonicParsing="false" onAction="#screenShot" prefHeight="40.0" prefWidth="209.0" text="截图" />
+                        <Label fx:id="lbSoundEffect" alignment="CENTER" prefHeight="24.0" prefWidth="267.0" text="音效" textFill="WHITE" />
                      </children>
                   </VBox>
+                  <TableView fx:id="tbMusicList" layoutX="14.0" layoutY="290.0" prefHeight="201.0" prefWidth="305.0">
+                    <columns>
+                      <TableColumn fx:id="clIndex" prefWidth="54.0" text="编号" />
+                      <TableColumn fx:id="clName" prefWidth="164.0" text="名字" />
+                        <TableColumn fx:id="clTimeLength" prefWidth="86.0" text="时长" />
+                    </columns>
+                  </TableView>
+                  <Button fx:id="btnPlay" layoutX="14.0" layoutY="502.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="148.0" text="播放" />
+                  <Button fx:id="btnNext" layoutX="167.0" layoutY="502.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="148.0" text="下一首" />
                </children>
             </AnchorPane>
             </children>

@@ -6,22 +6,27 @@ import UserFiles.User;
 import UserFiles.UserManager;
 import Windows.GameArea.Extract.Animation.ChessAnimation;
 import Windows.GameArea.Extract.Animation.ScreenShotAnimation;
+import Windows.GameArea.Extract.Music.MusicInfo;
 import Windows.GameArea.Extract.Music.MusicPlayer;
 import Windows.GameArea.Extract.Music.Music.RandomPlayer;
+import Windows.GameArea.Extract.Music.ShowingMusic;
 import Windows.GameArea.Extract.Music.SoundEffect.ClickEffect;
 import Windows.GameArea.Extract.Pursuance;
 import Windows.GameArea.Extract.Screenshot.Screenshot;
 import Windows.SetUp.Settings;
 import Windows.StartMenu.Main;
-import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -46,7 +51,6 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.*;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class GameArea {
     public Pane mainPain;
@@ -57,6 +61,12 @@ public class GameArea {
     public Label lbSoundEffect;
     public Button btnPromptLabel;
     public AnchorPane paneSetUp;
+    public TableColumn clIndex;
+    public TableColumn clName;
+    public Button btnPlay;
+    public Button btnNext;
+    public TableColumn clTimeLength;
+    public TableView tbMusicList;
     private String defaultAvatar = "src/main/resources/Windows/images/UserImage/tempUser.png";
     private String defaultComputerAvatar = "src/main/resources/Windows/images/UserImage/ComputerUser.png";
     private boolean isHumanFirst;
@@ -375,7 +385,7 @@ public class GameArea {
 
     public void changePromptLabel(ActionEvent event) {
         settings.visualSettings.setVisualAlarm(!settings.visualSettings.isVisualAlarm());
-    textHandler.setAllText();
+        textHandler.setAllText();
     }
 
     class CheatModel {
@@ -898,6 +908,7 @@ public class GameArea {
             paneChoose.setVisible(true);
             pausePane.setVisible(true);
             pausePane.setDisable(false);
+            generateMusicList();
         }
 
         public void hidePause() {
@@ -1002,6 +1013,18 @@ public class GameArea {
 //                node.relocate(newX+165,newY+125);
 //            });
 //            n.setOnMouseDragReleased(GameArea.this::chessMove);
+        }
+
+        public void generateMusicList() {
+            ObservableList<ShowingMusic> data = FXCollections.observableArrayList();
+            clIndex.setCellValueFactory(new PropertyValueFactory<>("index"));
+            clName.setCellValueFactory(new PropertyValueFactory<>("musicName"));
+            clTimeLength.setCellValueFactory(new PropertyValueFactory<>("length"));
+            List<MusicInfo> l = soundsHandler.music.getNowMusicInfoList();
+            for (int i = 0; i < l.size(); i++) {
+                data.add(new ShowingMusic(i + 1, l.get(i)));
+            }
+            tbMusicList.setItems(data);
         }
     }
 

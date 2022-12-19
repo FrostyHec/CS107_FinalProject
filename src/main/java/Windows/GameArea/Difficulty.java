@@ -3,7 +3,11 @@ package Windows.GameArea;
 public enum Difficulty {
     Zero("难度0", 0),
     One("难度1", 1),
-    Two("难度2", 2);
+    Two("难度2", 2),
+    Three("难度2", 2),
+    Four("难度2", 2),
+    Five("难度2", 2);
+
     private String name;
     private int value;
 

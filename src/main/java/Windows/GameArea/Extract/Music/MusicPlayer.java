@@ -111,4 +111,9 @@ public abstract class MusicPlayer implements Runnable {
         playingMusicList.add(totalMusic.get(index));
         run();
     }
+    protected void next(List<Media> mediaList){
+        mediaList.remove(0);
+    }
+    public abstract void next();
+    public abstract void addMusic(Pursuance pursuance);
 }

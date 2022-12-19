@@ -151,6 +151,7 @@ public class GameArea {
         textHandler.initialize();
         gameStateHandler.initialize();
         timeHandler.totalInvoke();
+        soundsHandler.initialize();
     }
 
     protected void setTransmitter() {
@@ -908,7 +909,7 @@ public class GameArea {
             paneChoose.setVisible(true);
             pausePane.setVisible(true);
             pausePane.setDisable(false);
-            generateMusicList();
+            refreshMusicList();
         }
 
         public void hidePause() {
@@ -1015,7 +1016,7 @@ public class GameArea {
 //            n.setOnMouseDragReleased(GameArea.this::chessMove);
         }
 
-        public void generateMusicList() {
+        public void refreshMusicList() {
             ObservableList<ShowingMusic> data = FXCollections.observableArrayList();
             clIndex.setCellValueFactory(new PropertyValueFactory<>("index"));
             clName.setCellValueFactory(new PropertyValueFactory<>("musicName"));
@@ -1091,6 +1092,15 @@ public class GameArea {
             cheatTitle.setText(t.getString("CheatModel.title"));
         }
 
+        private void refreshMusicPlayingType() {
+            if (soundsHandler.isPlayingBGM) {
+                btnPlay.setText(t.getString("Pause.SetUp.sound.off"));
+            } else {
+                btnPlay.setText(t.getString("Pause.SetUp.sound.on"));
+            }
+            btnNext.setText(t.getString("Pause.SetUp.sound.next"));
+        }
+
         public void refreshGameState() {
             switch (gameState) {
                 case FirstHandChoose -> labelGameState.setText(t.getString("GameState.FirstHandChoose"));
@@ -1114,6 +1124,9 @@ public class GameArea {
         private Thread threadMusic;
         private MusicPlayer music;
 
+        public boolean isPlayingBGM;
+        private boolean canPlayBGM;
+
         public void generateBGM() {
             music = new RandomPlayer(null, "Classical");
             threadMusic = new Thread(music);
@@ -1121,11 +1134,17 @@ public class GameArea {
         }
 
         public void pauseBGM() {
-            music.stop();
+            if (isPlayingBGM) {
+                music.stop();
+                isPlayingBGM = false;
+            }
         }
 
         public void continueBGM() {
-            music.continuePlay();
+            if (canPlayBGM&&!isPlayingBGM) {
+                music.continuePlay();
+                isPlayingBGM=true;
+            }
         }
 
         public void gameEnd() {
@@ -1134,6 +1153,30 @@ public class GameArea {
 
         public void clickEffect(Pursuance pursuance) {
             new ClickEffect(pursuance, "Effect/Click").run();
+        }
+
+        public void initialize() {
+            btnPlay.setOnAction((e) -> changeMusicType());
+            btnNext.setOnAction((e) -> nextMusic());
+            canPlayBGM = settings.soundSettings.isMusicPlay();
+        }
+
+        private void changeMusicType() {
+            if(isPlayingBGM){
+                canPlayBGM=false;//后面不播了
+                music.stop();
+            }else {//default:没在播
+                if(!canPlayBGM){
+                    canPlayBGM=true;
+                }
+                music.continuePlay();
+            }
+            textHandler.refreshMusicPlayingType();
+        }
+
+        private void nextMusic() {
+            music.next();
+            graphicHandler.refreshMusicList();
         }
     }
 

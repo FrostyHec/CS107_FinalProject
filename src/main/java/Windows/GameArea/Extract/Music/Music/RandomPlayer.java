@@ -17,7 +17,16 @@ public class RandomPlayer extends MusicPlayer {
     }
 
     @Override
+    public void run() {//默认循环播放
+        super.run();
+        middleGenerate();
+    }
+
+    @Override
     public void generateMusicList(Pursuance pursuance) {
+        playingMusicList = randomMusicList();
+    }
+    private List<Media> randomMusicList(){
         List<Media> temp = new ArrayList<>(totalMusic);
         List<Media> result = new ArrayList<>();
         while (temp.size() > 0) {
@@ -25,6 +34,21 @@ public class RandomPlayer extends MusicPlayer {
             result.add(temp.get(i));
             temp.remove(i);
         }
-        playingMusicList = result;
+        return result;
+    }
+
+    @Override
+    public void next() {
+        next(playingMusicList);
+        middleGenerate();
+    }
+    private void middleGenerate(){//音乐列表小于一半时续加
+        if (playingMusicList.size() <totalMusic.size()/2) {
+            addMusic(pursuance);
+        }
+    }
+    @Override
+    public void addMusic(Pursuance pursuance){
+        playingMusicList.addAll(randomMusicList());
     }
 }

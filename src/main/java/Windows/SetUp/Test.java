@@ -16,6 +16,9 @@ public class Test {
         settings.visualSettings.setLanguage(Locale.getDefault());
         settings.visualSettings.setVisualEffect(false);
         settings.visualSettings.setSkinName(SkinList.Default);
+        //
+        settings.soundSettings.setMusicPlay(true);
+        settings.soundSettings.setBagType(SoundType.Classic);
         try(ObjectOutputStream out=new ObjectOutputStream(new FileOutputStream("src/main/resources/Settings/Settings.ser")))
         {
             out.writeObject(settings);

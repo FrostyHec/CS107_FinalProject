@@ -229,7 +229,7 @@ public class Selection {//做剪枝算法的时候可能要用到,也是一堆st
 
                     //剪枝
                     for(int j=0;j<x;j++){
-                        if(virtualScore > others[i]){
+                        if(virtualScore > others[j]){
                             return virtualScore;
                         }
                     }
@@ -268,7 +268,7 @@ public class Selection {//做剪枝算法的时候可能要用到,也是一堆st
 
                     //剪枝
                     for(int j=0;j<x;j++){
-                        if(virtualScore < others[i]){
+                        if(virtualScore < others[j]){
                             return virtualScore;
                         }
                     }

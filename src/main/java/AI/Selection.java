@@ -149,9 +149,15 @@ public class Selection {//做剪枝算法的时候可能要用到,也是一堆st
         }else if(move.length == 2 && chessboard[move[1][0]][move[1][1]] != null){
             int score;
             if(chessboard[move[1][0]][move[1][1]].getColor() != chessboard[move[0][0]][move[0][1]].getColor()){
-                score = chessboard[move[1][0]][move[1][1]].getScore();
+                score = chessboard[move[1][0]][move[1][1]].getScore() + chessboard[move[1][0]][move[1][1]].getRank();
+                if(chessboard[move[1][0]][move[1][1]].getRank() == 2){
+                    score += 4;
+                }
             }else {
-                score = -chessboard[move[1][0]][move[1][1]].getScore();
+                score = -chessboard[move[1][0]][move[1][1]].getScore() - chessboard[move[1][0]][move[1][1]].getRank();
+                if(chessboard[move[1][0]][move[1][1]].getRank() == 2){
+                    score -= 4;
+                }
             }
             chessboard[move[1][0]][move[1][1]] = chessboard[move[0][0]][move[0][1]];
             chessboard[move[0][0]][move[0][1]] = null;
@@ -163,7 +169,7 @@ public class Selection {//做剪枝算法的时候可能要用到,也是一堆st
 
     public static int[][] highLevelAI(Chess[][] chessboard,Color color,int step){
         int[] rs = generalUsed.getRemainingScore(chessboard,color);
-        ArrayList<int[][]> canClick = generalUsed.enhancedCanClick(color,chessboard);
+        ArrayList<int[][]> canClick = generalUsed.canClick(color,chessboard);
         int max = -100;
         int[][] move = highest(chessboard,color);
         int[] other = new int[canClick.size()];
@@ -244,7 +250,7 @@ public class Selection {//做剪枝算法的时候可能要用到,也是一堆st
             } else {
                 ans = 100;
 
-                ArrayList<int[][]> canClick = generalUsed.enhancedCanClick(generalUsed.oppositeColor(color),chessboard);
+                ArrayList<int[][]> canClick = generalUsed.canClick(generalUsed.oppositeColor(color),chessboard);
                 int[] other = new int[canClick.size()];
 
                 int i=0;

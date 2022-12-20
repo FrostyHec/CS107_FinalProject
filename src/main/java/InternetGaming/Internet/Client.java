@@ -29,10 +29,11 @@ public class Client extends ClientData {
     }
 
     public void start() {
-        parser= new MessageParse();
+        parser = new MessageParse();
         parser.start();
     }
-    public void close(){
+
+    public void close() {
         parser.interrupt();
         m.close();
     }
@@ -46,10 +47,18 @@ public class Client extends ClientData {
                 try {
                     args = m.hear();
                 } catch (Exception e) {
-                    throw new RuntimeException("Server is closed unexpectedly!");
+                    new GameOver().illegalExit();
+                   return;
+                    //throw new RuntimeException("Server is closed unexpectedly!");
                 }
                 System.out.println(args[0]);
-                switch (MessageType.valueOf(args[0])) {
+                MessageType type;
+                try {
+                    type = MessageType.valueOf(args[0]);
+                } catch (Exception e) {//游戏结束了
+                    return;
+                }
+                switch (type) {
                     case PlayerSetting -> {
                         new SetPlayer().parse(args[1]);
                     }
@@ -91,7 +100,7 @@ public class Client extends ClientData {
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
-            Platform.runLater(()->Transmitter.preparingWindow.refresh(totalClient));
+            Platform.runLater(() -> Transmitter.preparingWindow.refresh(totalClient));
         }
     }
 
@@ -102,7 +111,7 @@ public class Client extends ClientData {
         public void parse(String message) {
             switch (StartGameType.valueOf(message)) {
                 case Permit -> {
-                    Transmitter.preparingWindow.ableToStartGame();
+                    Platform.runLater(() -> Transmitter.preparingWindow.ableToStartGame());
                 }
                 case Start -> {
                     Transmitter.preparingWindow.startGame();
@@ -125,11 +134,14 @@ public class Client extends ClientData {
         }
     }
 
-    class GameOver implements Parser{
+    class GameOver implements Parser {
 
         @Override
         public void parse(String message) {
             Platform.runLater(() -> Transmitter.gameArea.searchWinner(message));
+        }
+        public void illegalExit(){
+            Platform.runLater(() -> Transmitter.gameArea.illegalExit());
         }
     }
 }

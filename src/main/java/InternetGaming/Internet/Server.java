@@ -47,7 +47,9 @@ public class Server extends Thread {
                     t.start();
                     parsers.add(t);
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    if(e.getMessage().equals("Socket is closed")){
+                        break;
+                    }
                 }
             }
         }

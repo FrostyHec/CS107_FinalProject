@@ -136,7 +136,7 @@ public class ContinueGame {
                 case "105" -> {
                     showAlert("ERROR!",
                             "ERROR CODE: 105",
-                            "需要附上从初始棋盘-当前棋盘的行棋步骤，如果过程中有一处有误，则需要报出错误");
+                            "行棋步骤发生错误！");
                 }
                 default -> {
                     showAlert("ERROR!",
@@ -161,7 +161,10 @@ public class ContinueGame {
 
     private void loadGame(File file, String name) {
         loadGame(file);
-        Transmitter.setGameSaveName(name);
+        try{
+        Transmitter.setGameSaveName(name);}catch (NullPointerException e){
+            return;
+        }
     }
 
     @SuppressWarnings("RedundantLabeledSwitchRuleCodeBlock")

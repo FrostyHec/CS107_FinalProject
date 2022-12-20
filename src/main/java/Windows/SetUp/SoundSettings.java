@@ -8,7 +8,7 @@ public class SoundSettings implements Serializable {
     private boolean isMusicPlay;
     private SoundType bagType;
 
-
+private boolean isEffectPlay;
     public boolean isMusicPlay() {
         return isMusicPlay;
     }
@@ -24,5 +24,13 @@ public class SoundSettings implements Serializable {
 
     public void setBagType(SoundType bagType) {
         this.bagType = bagType;
+    }
+
+    public boolean isEffectPlay() {
+        return isEffectPlay;
+    }
+
+    public void setEffectPlay(boolean effectPlay) {
+        isEffectPlay = effectPlay;
     }
 }

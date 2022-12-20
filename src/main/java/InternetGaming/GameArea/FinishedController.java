@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
@@ -15,6 +16,7 @@ import java.io.IOException;
 
 public class FinishedController extends Windows.GameArea.FinishedController {
     public Button btnReGame;
+    public Label lbIllegalExit;
 
     public FinishedController() {
         Transmitter.finishedController = this;
@@ -40,8 +42,8 @@ public class FinishedController extends Windows.GameArea.FinishedController {
         });
     }
 
-    @Override
-    public void gotoMain(ActionEvent event) {
+   // @Override
+    public void gotoMain2(ActionEvent event) {
         ((Stage) btnReGame.getScene().getWindow()).close();
     }
 
@@ -61,5 +63,8 @@ public class FinishedController extends Windows.GameArea.FinishedController {
             throw new RuntimeException(e);
         }
         setDetailedInfo();
+    }
+    public void illegalExit(){
+        lbIllegalExit.setText(t.getString("GameArea.IllegalExit"));
     }
 }

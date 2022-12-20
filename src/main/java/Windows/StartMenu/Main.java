@@ -2,6 +2,7 @@ package Windows.StartMenu;
 
 import UserFiles.UserManager;
 import Windows.SetUp.Settings;
+import Windows.SetUp.Test;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -25,6 +26,12 @@ public class Main extends Application {
         stage.setResizable(false);
         //加载fxml
         settings = Settings.read(Settings.url);
+        if(settings==null){
+            Test.main(null);
+        }
+        settings = Settings.read(Settings.url);
+        //自动生成设置
+
         Application.setUserAgentStylesheet(getClass().getResource(settings.visualSettings.getSkin()).toExternalForm());
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("StartMenu.fxml"));
         stage.setScene(new Scene(fxmlLoader.load(), 600, 400));

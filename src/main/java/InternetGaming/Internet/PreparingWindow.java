@@ -117,6 +117,7 @@ public class PreparingWindow {
 
         public void ableToStartGame() {
             btnStartGame.setVisible(true);
+            lbStatus.setText(t.getString("Status.waitStart"));//给你写死
         }
 
         public void refreshState() {

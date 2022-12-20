@@ -42,6 +42,12 @@ public class SettingController {
     public Label lbPVP;
     public Label lbPVE;
     public RadioButton btnStartPromptLabel;
+    public RadioButton btnStartFast;
+    public RadioButton btnPlayBGM;
+    public ChoiceBox<String> cbMusicBag;
+    public Label lbMusicBag;
+    public RadioButton btnPlaySoundEffect;
+    public Label lbSoundEffect;
     private Settings settings;
     public Button btnSound;
     public RadioButton btnPVPCanRetract;
@@ -95,7 +101,8 @@ public class SettingController {
     }
 
     public void toDefault() {
-
+        Test.main(null);
+        cancel(null);
     }
 
     public void cancel(ActionEvent event) {
@@ -170,7 +177,11 @@ public class SettingController {
         }
 
         private void playMakerList() {
-            //TODO 制作成员名单
+            Alert a=new Alert(Alert.AlertType.INFORMATION);
+            a.setTitle("制作名单");
+            a.setHeaderText("制作名单");
+            a.setContentText("组员：祝超、黄政东\n贡献比：50：50\n 用时5周");
+            a.showAndWait();
         }
 
         private void cleanAllData() {//TODO 测试这个模块
@@ -237,6 +248,7 @@ public class SettingController {
             settings.gameSettings.setPVECanRetract(btnPVECanRetract.isSelected());
             settings.gameSettings.setPVPCanCheat(btnPVPCanCheat.isSelected());
             settings.gameSettings.setPVPCanRetract(btnPVPCanRetract.isSelected());
+            settings.gameSettings.setFastModeOpen(btnStartFast.isSelected());
         }
 
         @Override
@@ -248,12 +260,13 @@ public class SettingController {
             btnPVECanCheat.setText(t.getString("Game.cheat"));
             btnPVPCanCheat.setText(t.getString("Game.cheat"));
             btnNewUser.setText(t.getString("Game.newUser"));
+            btnStartFast.setText(t.getString("Game.FastMode"));
 
             btnPVECanCheat.setSelected(settings.gameSettings.isPVECanCheat());
             btnPVECanRetract.setSelected(settings.gameSettings.isPVECanRetract());
             btnPVPCanCheat.setSelected(settings.gameSettings.isPVPCanCheat());
             btnPVPCanRetract.setSelected(settings.gameSettings.isPVPCanRetract());
-
+            btnStartFast.setSelected(settings.gameSettings.isFastModeOpen());
             btnNewUser.setOnAction(e -> {
                 welcomeNewUser();
             });
@@ -317,12 +330,23 @@ public class SettingController {
 
         @Override
         public void save() {
-
+            settings.soundSettings.setMusicPlay(btnPlayBGM.isSelected());
+            settings.soundSettings.setEffectPlay(btnPlaySoundEffect.isSelected());
+            settings.soundSettings.setBagType(SoundType.getSoundType(cbMusicBag.getValue()));
         }
 
         @Override
         public void initialize() {
-
+            lbSoundEffect.setText(t.getString("Sound.Title"));
+            btnPlayBGM.setText(t.getString("Sound.PlayBGM"));
+            btnPlaySoundEffect.setText(t.getString("Sound.PlaySoundEffect"));
+            lbMusicBag.setText(t.getString("Sound.MusicBag"));
+            btnPlayBGM.setSelected(settings.soundSettings.isMusicPlay());
+            btnPlaySoundEffect.setSelected(settings.soundSettings.isEffectPlay());
+            cbMusicBag.setValue(settings.soundSettings.getBagType().getName());
+            for (SoundType st : SoundType.values()) {
+                cbMusicBag.getItems().add(st.getName());
+            }
         }
     }
 }

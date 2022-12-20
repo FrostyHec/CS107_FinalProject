@@ -1,9 +1,9 @@
 package InternetGaming.GameArea;
 
 
+import InternetGaming.Internet.Transmitter;
 import Windows.StartMenu.Main;
 import Windows.StartMenu.StartMenu;
-import Windows.Transmitter;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -31,11 +31,7 @@ public class MainGame extends Application {
         stage.setScene(new Scene(fxmlLoader.load()));
         stage.show();//close request在controller里
         stage.setOnCloseRequest(event -> {
-            try {
-                new Main().start(new Stage());
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
+            Transmitter.gameArea.mainExit();
         });
     }
 

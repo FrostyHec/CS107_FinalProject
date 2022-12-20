@@ -11,6 +11,8 @@ import InternetGaming.Internet.Transmitter;
 import UserFiles.User;
 import Windows.GameArea.ClickResult;
 import Windows.GameArea.GameState;
+import Windows.StartMenu.Main;
+import javafx.fxml.FXML;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
@@ -31,9 +33,13 @@ public class GameArea extends Windows.GameArea.GameArea {
         super();
         setType(Transmitter.playerType);
         System.out.println(type);
+
+    }
+    @FXML@Override
+    public void initialize(){
+        super.initialize();
         banAnimation();
     }
-
     public void setType(PlayerType type) {
         this.type = type;
     }
@@ -110,6 +116,10 @@ public class GameArea extends Windows.GameArea.GameArea {
 
     @Override
     protected void setScore() {
+        if(winner==null){
+            return;
+            //游戏没有结束，强行退出
+        }
         if (type == PlayerType.Viewer) {
             return;
         }
@@ -125,6 +135,11 @@ public class GameArea extends Windows.GameArea.GameArea {
             Transmitter.serverMain.closeSever();
         }
         Transmitter.refreshAll();
+        try {
+            new Main().start(new Stage());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         super.mainExit();
     }
 
@@ -141,6 +156,7 @@ public class GameArea extends Windows.GameArea.GameArea {
             }
         }
     }
+   // public void illegalExit()
 
     private void showWinner(ClientData cd) {
         Stage s2 = new Stage();
@@ -149,6 +165,11 @@ public class GameArea extends Windows.GameArea.GameArea {
         timeHandler.totalEnd();
         new FinishedController().show(s2);
         Transmitter.finishedController.setWinner(cd);
+    }
+
+    public void illegalExit() {
+        showWinner(Transmitter.client.getTotalClient()[1]);//只能服务器关掉的时候赢
+        Transmitter.finishedController.illegalExit();
     }
 
     protected class ChessMove extends Windows.GameArea.GameArea.ChessMove {

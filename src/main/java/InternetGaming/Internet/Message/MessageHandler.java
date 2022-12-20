@@ -1,5 +1,7 @@
 package InternetGaming.Internet.Message;
 
+import Windows.SetUp.Settings;
+
 import java.io.*;
 import java.net.Socket;
 import java.nio.file.Files;
@@ -15,6 +17,7 @@ public class MessageHandler {
     private DataOutputStream dataWriter;
     private DataInputStream dataReader;
 
+    private boolean isFastModeStart= Settings.read(Settings.url).gameSettings.isFastModeOpen();
     public MessageHandler(Socket client, HandlerType handlerType) {
         this.client = client;
         switch (handlerType) {
@@ -61,8 +64,12 @@ public class MessageHandler {
 
     //Don't use sendObj, it will create mountains of problem.
     public void sendObj(Object o) {
+        int sleepTime=600;
+        if(isFastModeStart){
+            sleepTime=100;
+        }
         try {
-            Thread.sleep(100);//TODO 多睡会，少粘包
+            Thread.sleep(sleepTime);//TODO 多睡会，少粘包
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }

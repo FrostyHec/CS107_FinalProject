@@ -10,6 +10,7 @@ import Windows.GameArea.Extract.Music.MusicInfo;
 import Windows.GameArea.Extract.Music.MusicPlayer;
 import Windows.GameArea.Extract.Music.Music.RandomPlayer;
 import Windows.GameArea.Extract.Music.ShowingMusic;
+import Windows.GameArea.Extract.Music.SoundEffect.Click;
 import Windows.GameArea.Extract.Music.SoundEffect.ClickEffect;
 import Windows.GameArea.Extract.Pursuance;
 import Windows.GameArea.Extract.Screenshot.Screenshot;
@@ -295,7 +296,10 @@ public class GameArea {
     }
 
     private void forceExit() {
-        soundsHandler.gameEnd();
+        try{
+        soundsHandler.gameEnd();}catch (Exception e){
+
+        }//TODO RUBBISH CODE
         ((Stage) Chessboard.getScene().getWindow()).close();
         try {
             new Main().start(new Stage());
@@ -541,6 +545,7 @@ public class GameArea {
                 case Player2Win -> winnerExists(game.getPlayer2());
                 case Finished -> {
                     graphicHandler.playMoveAnimation();
+                    soundsHandler.clickEffect(Click.Finished);
                     if (game instanceof aiMode) {
                         aiMove();//move完会自己调用棋盘刷新
                     }
@@ -550,6 +555,7 @@ public class GameArea {
                     showPossibleMove(row, column);
                     graphicHandler.chessMoveWithMouse(row, column);
                     needRefresh = false;
+                    soundsHandler.clickEffect(Click.Continue);
                 }
                 case UnknownError -> {
                     //textHandler.showAlert(Alert.AlertType.ERROR, "Wrong Happened!", "null", "ClickResult is Missing");
@@ -1129,9 +1135,12 @@ public class GameArea {
 
         public void generateBGM() {
             music = new RandomPlayer(null, "Classical");
-            threadMusic = new Thread(music);
-            threadMusic.start();
-            isPlayingBGM=true;
+            canPlayBGM = settings.soundSettings.isMusicPlay();
+            if (canPlayBGM) {
+                threadMusic = new Thread(music);
+                threadMusic.start();
+                isPlayingBGM = true;
+            }
         }
 
         public void pauseBGM() {
@@ -1142,9 +1151,9 @@ public class GameArea {
         }
 
         public void continueBGM() {
-            if (canPlayBGM&&!isPlayingBGM) {
+            if (canPlayBGM && !isPlayingBGM) {
                 music.continuePlay();
-                isPlayingBGM=true;
+                isPlayingBGM = true;
             }
         }
 
@@ -1153,7 +1162,9 @@ public class GameArea {
         }
 
         public void clickEffect(Pursuance pursuance) {
-            new ClickEffect(pursuance, "Effect/Click").run();
+            if (settings.soundSettings.isEffectPlay()) {
+                new ClickEffect(pursuance, "Effect/Click").run();
+            }
         }
 
         public void initialize() {
@@ -1163,14 +1174,16 @@ public class GameArea {
         }
 
         private void changeMusicType() {
-            if(isPlayingBGM){
-                canPlayBGM=false;//后面不播了
+            if (isPlayingBGM) {
+                canPlayBGM = false;//后面不播了
+                isPlayingBGM = false;
                 music.stop();
-            }else {//default:没在播
-                if(!canPlayBGM){
-                    canPlayBGM=true;
+            } else {//default:没在播
+                if (!canPlayBGM) {
+                    canPlayBGM = true;
                 }
                 music.continuePlay();
+                isPlayingBGM = true;
             }
             textHandler.refreshMusicPlayingType();
         }

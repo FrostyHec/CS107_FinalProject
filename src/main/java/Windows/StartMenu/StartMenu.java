@@ -14,6 +14,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
@@ -28,25 +29,46 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ResourceBundle;
 
 public class StartMenu {
     public Pane paneStartMenu;
     public ImageView avatarPic;
     public Label userName;
     public Label toolTipper;
+    public Button btnInter;
+    public Button btnNewGame;
+    public Button btnCOntinueGame;
+    public Button btnSwitch;
+    public Button btnRankList;
+    public Button btnSetUp;
+    public Button btnQuiz;
     private String defaultAvatar = "src/main/resources/Windows/images/UserImage/tempUser.png";
 
     private Settings settings;
-
+    private ResourceBundle t;
 
     public StartMenu() {
         settings = Settings.read(Settings.url);
+        t = ResourceBundle.getBundle("Language/StartMenuLanguage", settings.visualSettings.getLanguage());
+
     }
 
     @FXML
     public void initialize() throws Exception {
         generateUserInfo();
         setToolTip();
+        setText();
+    }
+
+    private void setText() {
+        btnSwitch.setText(t.getString("Switch"));
+        btnInter.setText(t.getString("Intel"));
+        btnQuiz.setText(t.getString("Exit"));
+        btnSetUp.setText(t.getString("SetUp"));
+        btnNewGame.setText(t.getString("New"));
+        btnCOntinueGame.setText(t.getString("Continue"));
+        btnRankList.setText(t.getString("Rank"));
     }
 
     private void setToolTip() {

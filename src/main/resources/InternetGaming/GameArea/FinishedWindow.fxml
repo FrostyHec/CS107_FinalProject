@@ -7,13 +7,12 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
 <AnchorPane prefHeight="200.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="InternetGaming.GameArea.FinishedController">
    <children>
-      <ImageView fx:id="imgAvatar" fitHeight="100.0" fitWidth="100.0" layoutX="22.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imgAvatar" fitHeight="100.0" fitWidth="100.0" layoutX="22.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true" />
       <Label fx:id="lbGameOver" alignment="CENTER" layoutX="142.0" layoutY="14.0" prefHeight="24.0" prefWidth="112.0" text="游戏结束" />
-      <Button layoutX="46.0" layoutY="145.0" mnemonicParsing="false" onAction="#gotoMain" text="返回菜单" />
-      <Button fx:id="btnReGame" layoutX="158.0" layoutY="145.0" mnemonicParsing="false" onAction="#playAgain" text="再来一把" />
+      <Button layoutX="46.0" layoutY="150.0" mnemonicParsing="false" onAction="#gotoMain2" text="返回菜单" />
+      <Button fx:id="btnReGame" layoutX="158.0" layoutY="150.0" mnemonicParsing="false" onAction="#playAgain" text="再来一把" />
       <VBox layoutX="141.0" layoutY="44.0" prefHeight="94.0" prefWidth="131.0" spacing="5.0">
          <children>
             <Label fx:id="lbWinner" alignment="CENTER" prefHeight="8.0" prefWidth="112.0" text="玩家1 赢了！" />
@@ -21,5 +20,6 @@
             <Label fx:id="lbUsedTime" prefHeight="24.0" prefWidth="112.0" text="用时：33分钟" />
          </children>
       </VBox>
+      <Label fx:id="lbIllegalExit" alignment="CENTER" layoutX="1.0" layoutY="14.0" prefHeight="24.0" prefWidth="142.0" />
    </children>
 </AnchorPane>

@@ -4,8 +4,8 @@
 }
 .button{
 -fx-border-width: 3;
--fx-border-color: rgba(152, 168, 212, .55);
--fx-background-color: rgba(135, 121, 84, .95);
+-fx-border-color: rgba(172, 178, 192, .55);
+-fx-background-color: rgba(105, 101, 84, .95);
 -fx-text-fill: black;
 }
 .root {

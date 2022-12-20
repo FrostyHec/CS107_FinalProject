@@ -3,7 +3,7 @@ package Windows.SetUp;
 import java.io.Serializable;
 
 public class GameSettings implements Serializable {
-    private boolean isPVECanCheat,isPVECanRetract,isPVPCanCheat,isPVPCanRetract;
+    private boolean isPVECanCheat,isPVECanRetract,isPVPCanCheat,isPVPCanRetract,isFastModeOpen;
 
     public boolean isPVECanCheat() {
         return isPVECanCheat;
@@ -35,5 +35,13 @@ public class GameSettings implements Serializable {
 
     public void setPVPCanRetract(boolean PVPCanRetract) {
         isPVPCanRetract = PVPCanRetract;
+    }
+
+    public boolean isFastModeOpen() {
+        return isFastModeOpen;
+    }
+
+    public void setFastModeOpen(boolean fastModeOpen) {
+        isFastModeOpen = fastModeOpen;
     }
 }

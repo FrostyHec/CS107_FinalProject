@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+fx:controller="InternetGaming.Internet.LinkingWindow">
+   <children>
+      <Label alignment="CENTER" layoutX="111.0" layoutY="105.0" prefHeight="36.0" prefWidth="187.0" text="请填写连接端口" />
+      <TextField fx:id="portField" alignment="CENTER" layoutX="335.0" layoutY="105.0" prefHeight="36.0" prefWidth="139.0" />
+      <Button layoutX="125.0" layoutY="164.0" mnemonicParsing="false" onAction="#startCreate" prefHeight="36.0" prefWidth="346.0" text="创建服务器" />
+      <Label fx:id="linkingMessage" alignment="CENTER" layoutX="122.0" layoutY="218.0" prefHeight="36.0" prefWidth="346.0" />
+      <Label fx:id="localIPtext" layoutX="125.0" layoutY="270.0" prefHeight="44.0" prefWidth="346.0" />
+   </children>
+</Pane>

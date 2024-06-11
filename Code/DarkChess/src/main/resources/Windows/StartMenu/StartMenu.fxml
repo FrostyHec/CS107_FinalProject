@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane fx:id="paneStartMenu" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Windows.StartMenu.StartMenu">
+   <children>
+      <Button alignment="CENTER" layoutX="60.0" layoutY="265.0" mnemonicParsing="false" onAction="#startLinkingPage" prefHeight="36.0" prefWidth="120.0" text="联机对战" />
+      <Button alignment="CENTER" layoutX="60.0" layoutY="134.0" mnemonicParsing="false" onAction="#startNextPage" prefHeight="36.0" prefWidth="120.0" text="新游戏" />
+      <Button alignment="CENTER" layoutX="60.0" layoutY="198.0" mnemonicParsing="false" onAction="#continueGame" prefHeight="36.0" prefWidth="120.0" text="继续游戏" />
+      <Pane layoutX="406.0" layoutY="14.0" prefHeight="36.0" prefWidth="180.0">
+         <children>
+            <ImageView fx:id="avatarPic" fitHeight="50.0" fitWidth="50.0" layoutX="-17.0" layoutY="-3.0" onMouseClicked="#changeAvatar" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="userName" contentDisplay="CENTER" layoutX="42.0" prefHeight="36.0" prefWidth="65.0" text="名字" />
+            <Button alignment="CENTER" layoutX="113.0" mnemonicParsing="false" onAction="#changeUser" prefHeight="30.0" prefWidth="61.0" text="切换" />
+            <Label fx:id="toolTipper" layoutX="-17.0" layoutY="-3.0" onMouseClicked="#changeAvatar" prefHeight="50.0" prefWidth="50.0" />
+         </children>
+      </Pane>
+      <Button alignment="CENTER" layoutX="424.0" layoutY="134.0" mnemonicParsing="false" onAction="#openRankList" prefHeight="36.0" prefWidth="120.0" text="积分榜" />
+      <Button alignment="CENTER" layoutX="424.0" layoutY="198.0" mnemonicParsing="false" onAction="#openSetUp" prefHeight="36.0" prefWidth="120.0" text="设置" />
+      <Button alignment="CENTER" layoutX="424.0" layoutY="265.0" mnemonicParsing="false" onAction="#exitGame" prefHeight="36.0" prefWidth="120.0" text="退出游戏" />
+      <Pane id="Title" layoutX="200.0" layoutY="81.0" prefHeight="270.0" prefWidth="200.0" />
+   </children>
+</Pane>

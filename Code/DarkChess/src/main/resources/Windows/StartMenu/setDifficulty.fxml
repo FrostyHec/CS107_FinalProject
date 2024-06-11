@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Windows.StartMenu.SelectDifficulty">
+   <children>
+      <VBox layoutX="417.0" layoutY="152.0" prefHeight="96.0" prefWidth="129.0" spacing="30.0">
+         <children>
+            <RadioButton fx:id="humanFirst" mnemonicParsing="false" prefHeight="24.0" prefWidth="123.0" text="人类先手" />
+            <RadioButton fx:id="aiFirst" mnemonicParsing="false" prefHeight="24.0" prefWidth="123.0" text="电脑先手" />
+         </children>
+      </VBox>
+      <ChoiceBox fx:id="choiceBox" layoutX="150.0" layoutY="164.0" prefWidth="150.0"/>
+      <Button layoutX="150.0" layoutY="269.0" mnemonicParsing="false" onAction="#startAIGame" prefHeight="36.0" prefWidth="150.0" text="开始游戏" />
+   </children>
+</AnchorPane>

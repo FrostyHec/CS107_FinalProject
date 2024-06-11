@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="pane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Windows.StartMenu.StartNextPage">
+   <children>
+      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="124.0" layoutY="264.0" mnemonicParsing="false" onAction="#localPvE" prefHeight="36.0" prefWidth="120.0" text="人机对战" />
+      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="349.0" layoutY="264.0" mnemonicParsing="false" onAction="#localPvP" prefHeight="36.0" prefWidth="120.0" text="本地对战" />
+      <Label alignment="CENTER" layoutX="61.0" layoutY="98.0" prefHeight="93.0" prefWidth="478.0" text="选择游戏模式" textFill="WHITE">
+         <font>
+            <Font size="72.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

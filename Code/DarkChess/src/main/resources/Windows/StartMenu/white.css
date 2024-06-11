@@ -1,0 +1,20 @@
+.button:hover {
+     -fx-background-color: rgba(152, 168, 212, .55);
+     -fx-text-fill: white;
+}
+.button{
+-fx-border-width: 3;
+-fx-border-color: rgba(152, 168, 212, .55);
+-fx-background-color: rgba(135, 121, 84, .95);
+-fx-text-fill: black;
+}
+.root {
+-fx-background-color: rgb(192,192,192);
+-fx-background-size: 100% 100%;
+//-fx-background-image: url(../images/BackGround/Back.png);
+}
+#Title{
+-fx-background-size: 100% 100%;
+-fx-background-image: url(../images/BackGround/Title2.png);
+}
+

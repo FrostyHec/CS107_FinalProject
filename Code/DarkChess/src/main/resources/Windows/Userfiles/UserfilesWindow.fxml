@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Windows.Userfiles.UserfilesWindow">
+    <children>
+        <TableView fx:id="dataTable" layoutX="15.0" layoutY="13.0" prefHeight="312.0" prefWidth="570.0">
+            <columns>
+                <TableColumn fx:id="Uid" prefWidth="62.0" text="UID" />
+                <TableColumn fx:id="UserName" prefWidth="148.0" text="用户名" />
+                <TableColumn fx:id="PlayTime" prefWidth="115.0" text="游戏时长" />
+                <TableColumn fx:id="playTimes" prefWidth="100.0" text="游戏次数" />
+                <TableColumn fx:id="CreateTime" prefWidth="145.0" text="创建时间" />
+            </columns>
+        </TableView>
+        <Button layoutX="14.0" layoutY="332.0" mnemonicParsing="false" onAction="#exitWindow" prefHeight="36.0" prefWidth="81.0" text="返回" />
+        <Button layoutX="546.0" layoutY="332.0" mnemonicParsing="false" onAction="#addUser" prefHeight="36.0" prefWidth="44.0" text="+" />
+        <Button fx:id="btnDelete" layoutX="364.0" layoutY="332.0" mnemonicParsing="false" onAction="#deleteUser" prefHeight="36.0" prefWidth="81.0" text="删除" />
+        <Button fx:id="btnSwitch" layoutX="455.0" layoutY="332.0" mnemonicParsing="false" onAction="#switchUser" prefHeight="36.0" prefWidth="81.0" text="切换" />
+      <Button fx:id="btnRename" layoutX="105.0" layoutY="332.0" mnemonicParsing="false" onAction="#renameUser" prefHeight="36.0" prefWidth="81.0" text="重命名" />
+    </children>
+</Pane>

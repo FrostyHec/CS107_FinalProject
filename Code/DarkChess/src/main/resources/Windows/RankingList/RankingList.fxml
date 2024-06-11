@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Windows.RankingList.RankingListController">
+   <children>
+      <TableView fx:id="dataTable" layoutX="14.0" layoutY="58.0" prefHeight="328.0" prefWidth="460.0">
+        <columns>
+            <TableColumn fx:id="playKind" prefWidth="100.0" text="游戏类型" />
+          <TableColumn fx:id="playTimes" prefWidth="100.0" text="比赛把数" />
+          <TableColumn fx:id="winRates" minWidth="0.0" prefWidth="60.0" text="胜率" />
+            <TableColumn fx:id="longestWin" minWidth="0.0" prefWidth="100.0" text="最长连胜" />
+            <TableColumn fx:id="nowLongestWin" minWidth="0.0" prefWidth="100.0" text="当前连胜" />
+        </columns>
+      </TableView>
+      <Label alignment="CENTER" layoutX="72.0" layoutY="14.0" prefHeight="36.0" prefWidth="345.0" text="游戏记录">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <VBox layoutX="486.0" layoutY="14.0" prefHeight="378.0" prefWidth="100.0" spacing="3.0">
+         <children>
+            <ImageView fx:id="avatar" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="lbUserName" alignment="CENTER" prefHeight="24.0" prefWidth="100.0" text="龙志" />
+            <Label fx:id="lbGameTime" alignment="CENTER" prefHeight="24.0" prefWidth="100.0" text="游戏时长">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="numGameTime" alignment="CENTER" prefHeight="24.0" prefWidth="100.0" text="357时44分">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="numGameFrequency" alignment="CENTER" prefHeight="24.0" prefWidth="100.0" text="114514次">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" prefHeight="15.0" prefWidth="100.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbAlreadyPlay" alignment="CENTER" prefHeight="24.0" prefWidth="100.0" text="已经游戏">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="numAlreadyPlay" alignment="CENTER" prefHeight="24.0" prefWidth="100.0" text="114514天">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbFrom" alignment="CENTER" prefHeight="24.0" prefWidth="100.0" text="自">
+               <font>
+                  <Font name="System Italic" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="numCreateTime" alignment="CENTER" prefHeight="20.0" prefWidth="100.0" text="2022.11.11" textOverrun="CLIP">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <Button fx:id="btnBack" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#backClick" text="返回主界面" />
+   </children>
+</AnchorPane>

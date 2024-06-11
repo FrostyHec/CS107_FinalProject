@@ -168,3 +168,10 @@
 {"ts":1718102283725,"action":"IDE_DEACTIVATED"}
 {"ts":1718102345397,"action":"IDE_ACTIVATED"}
 {"ts":1718102366380,"action":"IDE_DEACTIVATED"}
+{"ts":1718102420612,"action":"IDE_ACTIVATED"}
+{"ts":1718102422217,"action":"IDE_DEACTIVATED"}
+{"ts":1718102534880,"action":"IDE_ACTIVATED"}
+{"ts":1718102534888,"action":"FILE_CLOSED","file":"/README.md","tags":{"FILE_LINE_OF_CODE":"3"}}
+{"ts":1718102534888,"action":"FILE_OPENED","file":"/.gitignore","tags":{"FILE_LINE_OF_CODE":"38"}}
+{"ts":1718102546677,"action":"IDE_DEACTIVATED"}
+{"ts":1718102546807,"action":"PROJECT_CLOSED","tags":{"PROJECT_NAME":"DarkChess_CS109_Project"}}

@@ -175,3 +175,10 @@
 {"ts":1718102534888,"action":"FILE_OPENED","file":"/.gitignore","tags":{"FILE_LINE_OF_CODE":"38"}}
 {"ts":1718102546677,"action":"IDE_DEACTIVATED"}
 {"ts":1718102546807,"action":"PROJECT_CLOSED","tags":{"PROJECT_NAME":"DarkChess_CS109_Project"}}
+{"ts":1718102653206,"action":"FILE_OPENED","file":"/.gitignore","tags":{"FILE_LINE_OF_CODE":"38"}}
+{"ts":1718102653032,"action":"PROJECT_OPENED","tags":{"PROJECT_NAME":"DarkChess_CS109_Project"}}
+{"ts":1718102653826,"action":"IDE_DEACTIVATED"}
+{"ts":1718102666066,"action":"IDE_ACTIVATED"}
+{"ts":1718102666689,"action":"IDE_DEACTIVATED"}
+{"ts":1718102667069,"action":"IDE_ACTIVATED"}
+{"ts":1718102668299,"action":"IDE_DEACTIVATED"}

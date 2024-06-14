@@ -1,0 +1,2 @@
+BTW: The styles, language and musicbag can be extended by adding resources. If you want to make the surface look nicer, hear your favourate music or using different language, you can just change the image of chess/background, add music into "Classical" or "War" bag, and translate the words in the properties file. 
+Wish you have a good time. (The one to add music is simplest).

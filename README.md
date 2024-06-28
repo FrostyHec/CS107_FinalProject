@@ -23,7 +23,9 @@ For instructions, please refer to [User Guide](Publication/UserGuide.md)
 得分 / Score : 110/100 (10 bonus)
 
 **Enjoy the game!**
+
 ![img.png](Publication%2FPic%2Fimg.png)
+
 </div>
 
 ## Project Introduction
@@ -128,13 +130,13 @@ DarkChess
 - 2022.12.19 - 2022.12.20 截图功能实现、多语言包、音乐包与皮肤包扩充、音乐播放器完成调试、EXE打包、答辩资料准备
 - 2022.12.20 提前答辩(答辩前五分钟还在代码冲刺(x))
 
-累计代码：Java+Fxml+Css总计约9300行
+累计代码：Java+Fxml+Css+资源文本总计约8000行
 ![Java+Fxml+Css approach to 9300lines.png](Docs%2Fdeveloping%2FJava%2BFxml%2BCss%20approach%20to%209300lines.png)
 
 Commit: 263次
 ![263 commits.png](Docs%2Fdeveloping%2F263%20commits.png)
 
-### 问题与总结
+### 技术总结
 
 [TODO]
 
@@ -142,14 +144,13 @@ Commit: 263次
 
 应该是第一次从零开始实现了包含了这么多功能的项目，十分感谢我的搭档[@Super](https://github.com/redhecker)能够一起完成这个项目。
 
+没想到五周时间能做出这么多东西（虽然其实很多工作都是在中后期开始一天实现的一个功能（（
+
+Reference的往年评分标准非常详细，基本上就给project实现什么需求指定了一个方向 (感觉明确需求反而可能是开发过程中最重要的一环，
+project有这个参考挺省事的((x
+
 虽然最后的成品还有很多不足，但是我们会继续努力，希望能够在未来的项目中做得更好。希望您能够在这个游戏中度过愉快的时光！
 
 —— Frosty
-
-Finally finished in 2022.12.20 last about 5 week.
-
-This's our JavaA final project finished in 5 weeks. Since we are just the freshmen to programming and lack of the
-methods of Software Engineering also time, it's now a half-finished demo but can run most of the functions. We will
-continue to improve our skills and ability. Hope you can enjoy your time in this game!
 
 
